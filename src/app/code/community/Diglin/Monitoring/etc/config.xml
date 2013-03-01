@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Diglin_Monitoring>
+            <version>1.0.0</version>
+        </Diglin_Monitoring>
+    </modules>
+
+    <default>
+    </default>
+
+    <global>
+        <blocks>
+            <monitoring>
+                <class>Diglin_Monitoring_Block</class>
+            </monitoring>
+        </blocks>
+
+        <helpers>
+            <monitoring>
+                <class>Diglin_Monitoring_Helper</class>
+            </monitoring>
+        </helpers>
+    </global>
+
+    <admin>
+        <routers>
+            <monitoring>
+                <use>admin</use>
+                <args>
+                    <module>Diglin_Monitoring</module>
+                    <frontName>monitoring</frontName>
+                </args>
+            </monitoring>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <layout>
+            <updates>
+                <monitoring>
+                    <file>monitoring.xml</file>
+                </monitoring>
+            </updates>
+        </layout>
+    </adminhtml>
+</config>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <monitoring_overview_index>
+        <reference name="head">
+            <action method="addCss"><name>monitoring/apc.css</name></action>
+        </reference>
+    </monitoring_overview_index>
+</layout>

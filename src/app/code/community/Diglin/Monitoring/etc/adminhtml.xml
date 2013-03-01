@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <tools>
+                    <children>
+                        <monitoring translate="title" module="monitoring">
+                            <title>Monitoring</title>
+                            <sort_order>10</sort_order>
+                            <action>monitoring/overview</action>
+                        </monitoring>
+                    </children>
+                </tools>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <monitoring>
+                        <children>
+                            <subscription translate="title" module="subscription">
+                                <title>Subscription</title>
+                                <children>
+                                    <overview translate="title" module="subscription">
+                                        <title>Overview</title>
+                                    </overview>
+                                    <overview_old translate="title" module="subscription">
+                                        <title>Overview (Old view)</title>
+                                    </overview_old>
+                                    <period translate="title" module="subscription">
+                                        <title>Periods</title>
+                                    </period>
+                                    <alert translate="title" module="subscription">
+                                        <title>Alerts</title>
+                                    </alert>
+                                </children>
+                            </subscription>
+                        </children>
+                    </monitoring>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
