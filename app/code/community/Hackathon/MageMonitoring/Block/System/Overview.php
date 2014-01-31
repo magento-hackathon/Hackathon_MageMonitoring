@@ -1,4 +1,5 @@
 <?php
+
 class Hackathon_MageMonitoring_Block_System_Overview extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
