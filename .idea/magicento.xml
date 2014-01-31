@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MagicentoSettings">
+    <option name="pathToMage" value="$PROJECT_DIR$/../../hosts/brentford/app/Mage.php" />
+    <option name="pathToMage" value="$PROJECT_DIR$/../../hosts/brentford/app/Mage.php" />
+    <option name="pathToPhp" value="" />
+    <option name="urlToMagento" value="" />
+    <option name="packages" value="" />
+    <option name="themes" value="" />
+    <option name="projectClosedCorrectly" value="false" />
+    <option name="basicAuthUsername" value="" />
+    <option name="basicAuthPassword" value="" />
+  </component>
+</project>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <tools>
+                    <children>
+                        <magemonitoring translate="title" module="magemonitoring">
+                            <title>Monitoring</title>
+                            <sort_order>10</sort_order>
+                            <action>monitoring/overview</action>
+                        </magemonitoring>
+                    </children>
+                </tools>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <tools>
+                        <children>
+                            <magemonitoring translate="label" module="magemonitoring">
+                                <title>Magento Monitoring</title>
+                            </magemonitoring>
+                        </children>
+                    </tools>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

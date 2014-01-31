@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <modules>
-        <Diglin_Monitoring>
+        <Hackathon_Magemagemonitoring>
             <version>1.0.0</version>
-        </Diglin_Monitoring>
+        </Hackathon_Magemagemonitoring>
     </modules>
 
     <default>
@@ -11,36 +11,36 @@
 
     <global>
         <blocks>
-            <monitoring>
-                <class>Diglin_Monitoring_Block</class>
-            </monitoring>
+            <magemonitoring>
+                <class>Hackathon_MageMonitoring_Block</class>
+            </magemonitoring>
         </blocks>
 
         <helpers>
-            <monitoring>
-                <class>Diglin_Monitoring_Helper</class>
-            </monitoring>
+            <magemonitoring>
+                <class>Hackathon_MageMonitoring_Helper</class>
+            </magemonitoring>
         </helpers>
     </global>
 
     <admin>
         <routers>
-            <monitoring>
+            <magemonitoring>
                 <use>admin</use>
                 <args>
-                    <module>Diglin_Monitoring</module>
+                    <module>Hackathon_MageMonitoring</module>
                     <frontName>monitoring</frontName>
                 </args>
-            </monitoring>
+            </magemonitoring>
         </routers>
     </admin>
     
     <adminhtml>
         <layout>
             <updates>
-                <monitoring>
+                <magemonitoring>
                     <file>monitoring.xml</file>
-                </monitoring>
+                </magemonitoring>
             </updates>
         </layout>
     </adminhtml>

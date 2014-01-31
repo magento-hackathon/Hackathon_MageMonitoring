@@ -1,5 +1,5 @@
 <?php
-class Diglin_Monitoring_Block_System_Overview_Read_Tabs_Php extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php extends Mage_Adminhtml_Block_Abstract
 {
     protected function _toHtml()
     {

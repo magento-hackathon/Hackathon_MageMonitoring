@@ -1,10 +1,10 @@
 <?php
-class Diglin_Monitoring_Block_System_Overview_Read_Form extends Mage_Adminhtml_Block_Widget_Form
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * Init Form Block
      *
-     * @return Rissip_Subscription_Block_Adminhtml_Subscription_Item_Form
+     * @return Mage_Adminhtml_Block_Widget_Form
      */
     protected function _prepareForm()
     {
