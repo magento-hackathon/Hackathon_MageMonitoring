@@ -25,16 +25,16 @@
 
     <admin>
         <routers>
-            <magemonitoring>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Hackathon_MageMonitoring</module>
-                    <frontName>monitoring</frontName>
+                    <modules>
+                        <magemonitoring before="Mage_Adminhtml">Hackathon_MageMonitoring_Adminhtml</magemonitoring>
+                    </modules>
                 </args>
-            </magemonitoring>
+            </adminhtml>
         </routers>
     </admin>
-    
+
     <adminhtml>
         <layout>
             <updates>
