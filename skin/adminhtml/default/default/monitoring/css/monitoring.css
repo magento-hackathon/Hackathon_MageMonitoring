@@ -1,0 +1,73 @@
+.monitoring-section-title {
+    color: #325F8A;
+    text-transform: capitalize;
+    font-size: 16px;
+}
+
+.monitoring-data-container {
+    border-radius: 3px;
+    width: 80%;
+    border: 1px solid #CCDFCE;
+}
+
+.md-item {
+    border-bottom: 1px solid #CCDFCE;
+    min-width: 500px;
+    height: 24px;
+    line-height: 24px;
+}
+
+.md-item:first-child {
+    border-top: none;
+}
+
+.md-item:last-child {
+    border-bottom: none;
+}
+
+.md-item-success {
+    background-color: #E1FCE4;
+}
+
+.md-item-warning {
+    background-color: #FCFAD9;
+}
+
+.md-item-error {
+    background-color: #FAEBE7;
+}
+
+.md-icon {
+    width: 15px;
+    height: 24px;
+    margin-left: 10px;
+    background: transparent url(../images/statuses.png) no-repeat;
+    float: left;
+    display: block;
+    line-height: 24px;
+}
+
+.md-icon-info {
+    background-position: 0 4px;
+}
+
+.md-icon-succes {
+    background-position: -15px 4px;
+}
+
+.md-icon-warning {
+    background-position: -29px 4px;
+}
+
+.md-icon-error {
+    background-position: -44px 4px;
+}
+
+.md-item-title,
+.md-item-value {
+    font-weight: bold;
+    float: left;
+    padding-left: 10px;
+    width: 40%;
+}
+

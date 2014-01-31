@@ -2,7 +2,8 @@
 <layout>
     <magemonitoring_overview_index>
         <reference name="head">
-            <action method="addCss"><name>monitoring/apc.css</name></action>
+            <action method="addCss"><name>monitoring/css/apc.css</name></action>
+            <action method="addCss"><name>monitoring/css/monitoring.css</name></action>
         </reference>
     </magemonitoring_overview_index>
 </layout>
