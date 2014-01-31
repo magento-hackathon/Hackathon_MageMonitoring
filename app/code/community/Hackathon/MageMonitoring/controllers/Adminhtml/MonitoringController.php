@@ -1,6 +1,6 @@
 <?php
 
-class Hackathon_MageMonitoring_OverviewController extends Mage_Adminhtml_Controller_Action
+class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Adminhtml_Controller_Action
 {
     public function indexAction()
     {
