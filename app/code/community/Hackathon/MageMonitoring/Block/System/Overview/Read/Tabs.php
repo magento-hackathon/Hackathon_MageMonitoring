@@ -1,4 +1,5 @@
 <?php
+
 class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
 {
     public function __construct()
@@ -22,6 +23,12 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs extends Mage_Admi
                 'title'   => $this->__('PHP information'),
                 'content' => $this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs_php')->toHtml(),
         ));
+
+        $this->addTab('rewrites_section', array(
+            'label'   => $this->__('Rewrites'),
+            'title'   => $this->__('Rewrites'),
+            'content' => $this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs_rewrites')->toHtml(),
+        ));
         
         $this->addTab('apc_section', array(
                 'label'   => $this->__('APC information'),
@@ -31,4 +38,5 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs extends Mage_Admi
         
         return parent::_beforeToHtml();
     }
+
 }
