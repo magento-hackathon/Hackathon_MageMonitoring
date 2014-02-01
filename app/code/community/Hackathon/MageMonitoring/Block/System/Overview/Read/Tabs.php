@@ -44,7 +44,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
         );
 
         $this->addTab(
-            'apc_section', array(
+            'cachestats_section', array(
                 'label'   => $this->__('Cache Statistics'),
                 'title'   => $this->__('Cache Statistics'),
                 'content' => $this->getLayout()->createBlock(
