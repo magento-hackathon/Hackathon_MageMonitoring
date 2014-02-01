@@ -1,6 +1,13 @@
 <?php
 class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMonitoring_Model_CacheStats {
 
+    private $_opCacheStats;
+
+    public function __construct()
+    {
+        $this->_opCacheStats = apc_cache_info();
+    }
+
     public function getId() {
         $o = array();
         preg_match("/.+_(.+)\z/", __CLASS__, $o);
@@ -8,7 +15,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
     }
 
     public function getName() {
-        return 'APCU';
+        return 'APC User Cache';
     }
 
     public function getVersion() {
@@ -27,25 +34,22 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
     }
 
     public function getMemoryUsed() {
-        $stats = apc_cache_info();
-        if (isset($stats['mem_size'])) {
-            return $stats['mem_size'];
+        if (isset($this->_opCacheStats['mem_size'])) {
+            return $this->_opCacheStats['mem_size'];
         }
         return 0;
     }
 
     public function getCacheHits() {
-        $stats = apc_cache_info();
-        if (isset($stats['nhits'])) {
-            return $stats['nhits'];
+        if (isset($this->_opCacheStats['nhits'])) {
+            return $this->_opCacheStats['nhits'];
         }
         return 0;
     }
 
     public function getCacheMisses() {
-        $stats = apc_cache_info();
-        if (isset($stats['nmisses'])) {
-            return $stats['nmisses'];
+        if (isset($this->_opCacheStats['nmisses'])) {
+            return $this->_opCacheStats['nmisses'];
         }
         return 0;
     }

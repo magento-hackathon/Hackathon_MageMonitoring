@@ -2,6 +2,7 @@
 class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_MageMonitoring_Model_CacheStats {
 
     private $_memCachePool;
+    private $_memCacheStats;
 
     public function __construct()
     {
@@ -9,6 +10,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
             if ($this->_memCachePool == null && class_exists('Memcache', false)) {
                 $this->_memCachePool = new Memcache;
                 $this->_memCachePool->addServer('127.0.0.1', 11211);
+                $this->_memCacheStats = $this->_memCachePool->getStats();
             }
         } catch (Exception $e) {
             Mage::logException($e);
@@ -37,33 +39,29 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
     }
 
     public function getMemoryMax() {
-        $stats = $this->_memCachePool->getStats();
-        if (isset($stats['limit_maxbytes'])) {
-            return $stats['limit_maxbytes'];
+        if (isset($this->_memCacheStats['limit_maxbytes'])) {
+            return $this->_memCacheStats['limit_maxbytes'];
         }
         return 'ERR';
     }
 
     public function getMemoryUsed() {
-            $stats = $this->_memCachePool->getStats();
-        if (isset($stats['bytes'])) {
-            return $stats['bytes'];
+        if (isset($this->_memCacheStats['bytes'])) {
+            return $this->_memCacheStats['bytes'];
         }
         return 0;
     }
 
     public function getCacheHits() {
-            $stats = $this->_memCachePool->getStats();
-        if (isset($stats['get_hits'])) {
-            return $stats['get_hits'];
+        if (isset($this->_memCacheStats['get_hits'])) {
+            return $this->_memCacheStats['get_hits'];
         }
         return 0;
     }
 
     public function getCacheMisses() {
-        $stats = $this->_memCachePool->getStats();
-        if (isset($stats['get_misses'])) {
-            return $stats['get_misses'];
+        if (isset($this->_memCacheStats['get_misses'])) {
+            return $this->_memCacheStats['get_misses'];
         }
         return 0;
     }
