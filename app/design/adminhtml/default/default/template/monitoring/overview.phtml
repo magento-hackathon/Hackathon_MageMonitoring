@@ -45,20 +45,23 @@
         <div class="md-item-title"><?php echo $this->__('Server Gateway Interface') ?></div>
         <div class="md-item-value"><?php $this->_getValue('GATEWAY_INTERFACE') ?></div>
     </div>
-    <?php if (!is_null($memInfo = $this->getMemoryInfo())) : ?>
+
+    <?php if (!is_null($memInfo = $this->getMemoryInfo())): ?>
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('Server Memory') ?></div>
         <div class="md-item-value"><?php echo $memInfo; ?></div>
     </div>
     <?php endif; ?>
-    <?php if (!is_null($memInfo = $this->getCpuInfo())) : ?>
+
+    <?php if (!is_null($memInfo = $this->getCpuInfo())): ?>
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('Server CPU') ?></div>
         <div class="md-item-value"><?php echo $memInfo; ?></div>
     </div>
     <?php endif; ?>
+
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('Server Admin') ?></div>
@@ -75,7 +78,8 @@
         <div class="md-item-value"><?php echo $this->getOsInfo() ?></div>
     </div>
 </div>
-    <h3 class="monitoring-section-title">Magento information</h3>
+
+<h3 class="monitoring-section-title">Magento information</h3>
 <div class="monitoring-data-container">
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>

@@ -1,13 +1,14 @@
 <?php
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
+    extends Mage_Adminhtml_Block_Abstract
 {
     protected $_serverInfo = null;
     protected $_mageInfo = null;
 
     protected function _construct()
     {
-        $this->setTemplate('monitoring/main.phtml');
+        $this->setTemplate('monitoring/overview.phtml');
         return parent::_construct();
     }
 
