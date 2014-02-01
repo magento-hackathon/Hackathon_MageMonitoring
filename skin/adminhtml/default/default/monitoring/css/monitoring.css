@@ -38,7 +38,7 @@
 }
 
 .md-icon {
-    width: 15px;
+    width: 16px;
     height: 24px;
     margin-left: 10px;
     background: transparent url(../images/statuses.png) no-repeat;
@@ -48,19 +48,19 @@
 }
 
 .md-icon-info {
-    background-position: 0 4px;
+    background-position: -51px 4px;
 }
 
 .md-icon-succes {
-    background-position: -15px 4px;
+    background-position: 0 4px;
 }
 
 .md-icon-warning {
-    background-position: -29px 4px;
+    background-position: -34px 4px;
 }
 
 .md-icon-error {
-    background-position: -44px 4px;
+    background-position: -17px 4px;
 }
 
 .md-item-title,
