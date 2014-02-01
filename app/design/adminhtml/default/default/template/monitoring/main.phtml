@@ -46,11 +46,18 @@
         <div class="md-item-value"><?php $this->_getValue('GATEWAY_INTERFACE') ?></div>
     </div>
     <?php if (!is_null($memInfo = $this->getMemoryInfo())) : ?>
-        <div class="md-item md-item-info">
-            <div class="md-icon md-icon-info"></div>
-            <div class="md-item-title"><?php echo $this->__('Server Memory') ?></div>
-            <div class="md-item-value"><?php echo $memInfo; ?></div>
-        </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Server Memory') ?></div>
+        <div class="md-item-value"><?php echo $memInfo; ?></div>
+    </div>
+    <?php endif; ?>
+    <?php if (!is_null($memInfo = $this->getCpuInfo())) : ?>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Server CPU') ?></div>
+        <div class="md-item-value"><?php echo $memInfo; ?></div>
+    </div>
     <?php endif; ?>
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>

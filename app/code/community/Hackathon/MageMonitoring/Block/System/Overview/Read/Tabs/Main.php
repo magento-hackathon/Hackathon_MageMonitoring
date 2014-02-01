@@ -71,6 +71,51 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
     }
 
     /**
+     * Returns server's CPU information. Supposed to be working only on LINUX servers
+     *
+     * @return null|string
+     */
+    public function getCpuInfo()
+    {
+        $cpuInfo = '';
+        $fh = fopen('/proc/cpuinfo', 'r');
+        while ($line = fgets($fh)) {
+            if (stristr($line, 'model name')) {
+                $cpuInfo = $line;
+                break;
+            }
+        }
+
+        if (!empty($cpuInfo)) {
+            return $cpuInfo;
+        } else {
+            return $this->_getBsdCpuInfo();
+        }
+    }
+
+    /**
+     * Returns server's cpu information on BSD servers
+     *
+     * @return null|string
+     */
+    protected function _getBsdCpuInfo()
+    {
+        $cpuInfo = exec("sysctl -a | egrep -i 'hw.model'");
+
+        if (!empty($cpuInfo)) {
+
+            /* If OSX is being used on server - we need a bit another way */
+            if (stristr($cpuInfo, 'Mac')) {
+                $cpuInfo = exec('sysctl -n machdep.cpu.brand_string');
+            }
+
+            return str_ireplace('hw.model = ', '', $cpuInfo);
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Returns OS information
      *
      * @return string
