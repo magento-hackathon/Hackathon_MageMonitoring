@@ -56,5 +56,10 @@ foreach ($activeCaches as $cache) {
         </div>
         </div>
     </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('<?php echo strtolower($cache->getName()); ?>');
+        //]]>
+    </script>
 </div>
 <?php } ?>

@@ -27,6 +27,11 @@ $rewrites = $this->getRewritesList();
             <?php endforeach; ?>
         </div>
     </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('blocks_rewrites_list');
+        //]]>
+    </script>
     <?php endif; ?>
     <?php if (!empty($rewrites['helpers'])): ?>
         <div class="entry-edit-head collapseable">
@@ -45,6 +50,11 @@ $rewrites = $this->getRewritesList();
                 <?php endforeach; ?>
             </div>
         </fieldset>
+        <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('helpers_rewrites_list');
+        //]]>
+        </script>
     <?php endif; ?>
     <?php if (!empty($rewrites['models'])): ?>
         <div class="entry-edit-head collapseable">
@@ -63,5 +73,10 @@ $rewrites = $this->getRewritesList();
                 <?php endforeach; ?>
             </div>
         </fieldset>
+        <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('models_rewrites_list');
+        //]]>
+        </script>
     <?php endif; ?>
 <?php endif; ?>
