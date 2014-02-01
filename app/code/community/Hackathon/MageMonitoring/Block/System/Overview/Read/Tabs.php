@@ -42,13 +42,13 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
                 )->toHtml(),
             )
         );
-        
+
         $this->addTab(
             'apc_section', array(
-                'label'   => $this->__('APC Information'),
-                'title'   => $this->__('APC Information'),
+                'label'   => $this->__('Cache Statistics'),
+                'title'   => $this->__('Cache Statistics'),
                 'content' => $this->getLayout()->createBlock(
-                    'magemonitoring/system_overview_read_tabs_apc'
+                    'magemonitoring/system_overview_read_tabs_cacheStats'
                 )->toHtml(),
             )
         );
@@ -62,7 +62,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
                 )->toHtml(),
             )
         );
-        
+
         return parent::_beforeToHtml();
     }
 
