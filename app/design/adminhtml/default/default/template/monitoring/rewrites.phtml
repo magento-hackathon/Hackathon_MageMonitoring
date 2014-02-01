@@ -1,14 +1,15 @@
 <?php
 
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Rewrites */
-$rewritesList = $this->getRewritesInfo();
-
+$rewrites = $this->getRewritesInfo();
 ?>
 
-<?php if ($rewritesList === false): ?>
-    <?php echo $this->__('This instance does not have any rewrites defined, hurray for the clean implementation!') ?>
+<?php if ($rewrites === false): ?>
+    <h4 class="monitoring-section-title">
+        <?php echo $this->__('Modules configurations do not have rewrites defined') ?>
+    </h4>
 <?php else: ?>
-    <?php if (!empty($rewritesList['blocks'])): ?>
+    <?php if (!empty($rewrites['blocks'])): ?>
     <div class="entry-edit-head collapseable">
         <a class="open" id="blocks_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('blocks_rewrites_list'); return false;">
             <?php echo $this->__('Blocks Rewrites') ?>
@@ -16,11 +17,11 @@ $rewritesList = $this->getRewritesInfo();
     </div>
     <fieldset id="blocks_rewrites_list" class="collapseable">
         <div class="monitoring-data-container">
-            <?php foreach ($rewritesList['blocks'] as $node => $rewriteInfo): ?>
-            <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
-                <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
+            <?php foreach ($rewrites['blocks'] as $node => $class): ?>
+            <div class="md-item md-item-info">
+                <div class="md-icon md-icon-info"></div>
                 <div class="md-item-title"><?php echo $node ?></div>
-                <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
+                <div class="md-item-value"><?php echo $class ?></div>
             </div>
             <?php endforeach; ?>
         </div>
@@ -31,7 +32,7 @@ $rewritesList = $this->getRewritesInfo();
         //]]>
     </script>
     <?php endif; ?>
-    <?php if (!empty($rewritesList['helpers'])): ?>
+    <?php if (!empty($rewrites['helpers'])): ?>
         <div class="entry-edit-head collapseable">
             <a class="open" id="helpers_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('helpers_rewrites_list'); return false;">
                 <?php echo $this->__('Helpers Rewrites') ?>
@@ -39,11 +40,11 @@ $rewritesList = $this->getRewritesInfo();
         </div>
         <fieldset id="helpers_rewrites_list" class="collapseable">
             <div class="monitoring-data-container">
-                <?php foreach ($rewritesList['helpers'] as $node => $rewriteInfo): ?>
-                    <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
-                        <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
+                <?php foreach ($rewrites['helpers'] as $node => $class): ?>
+                    <div class="md-item md-item-info">
+                        <div class="md-icon md-icon-info"></div>
                         <div class="md-item-title"><?php echo $node ?></div>
-                        <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
+                        <div class="md-item-value"><?php echo $class ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -54,7 +55,7 @@ $rewritesList = $this->getRewritesInfo();
         //]]>
         </script>
     <?php endif; ?>
-    <?php if (!empty($rewritesList['models'])): ?>
+    <?php if (!empty($rewrites['models'])): ?>
         <div class="entry-edit-head collapseable">
             <a class="open" id="models_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('models_rewrites_list'); return false;">
                 <?php echo $this->__('Models Rewrites') ?>
@@ -62,11 +63,11 @@ $rewritesList = $this->getRewritesInfo();
         </div>
         <fieldset id="models_rewrites_list" class="collapseable">
             <div class="monitoring-data-container">
-                <?php foreach ($rewritesList['models'] as $node => $rewriteInfo): ?>
-                    <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
-                        <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
+                <?php foreach ($rewrites['models'] as $node => $class): ?>
+                    <div class="md-item md-item-info">
+                        <div class="md-icon md-icon-info"></div>
                         <div class="md-item-title"><?php echo $node ?></div>
-                        <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
+                        <div class="md-item-value"><?php echo implode(', ', array_values($class)) ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>

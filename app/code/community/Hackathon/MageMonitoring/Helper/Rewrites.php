@@ -97,7 +97,7 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
             }
         }
 
-        // $rewrites = array_merge($rewrites, $this->_loadLocalAutoloaderRewrites());
+        $rewrites = array_merge($rewrites, $this->_loadLocalAutoloaderRewrites());
 
         if (empty($rewrites['blocks']) && empty($rewrites['models']) && empty($rewrites['helpers'])) {
             return false;
@@ -177,14 +177,12 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
 
         foreach ($folders as $vendorPrefix => $folder) {
             if (is_dir($folder)) {
-                $finder = new Finder();
-                $finder
-                    ->files()
-                    ->ignoreUnreadableDirs(true)
-                    ->followLinks()
-                    ->in($folder);
-                foreach ($finder as $file) {
-                    $classFile = trim(str_replace($folder, '', $file->getPathname()), '/');
+                $directory = new RecursiveDirectoryIterator($folder);
+                $iterator = new RecursiveIteratorIterator($directory);
+                $files = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
+
+                foreach ($files as $file) {
+                    $classFile = trim(str_replace($folder, '', realpath($file[0])), '/');
                     $className = $vendorPrefix
                         . '_'
                         . str_replace(DIRECTORY_SEPARATOR, '_', $classFile);
@@ -193,7 +191,6 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
                 }
             }
         }
-
         return $return;
     }
 
