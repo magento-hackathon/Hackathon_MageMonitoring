@@ -52,7 +52,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
                     $cache->flushCache();
                 }
 
-                $this->_getSession()->addSuccess($this->__('Caches %s flushed with success', $cacheId));
+                $this->_getSession()->addSuccess($this->__('Cache %s flushed with success', $cacheId));
             } catch (Exception $e) {
                 Mage::logException($e);
                 $this->_getSession()->addError($e->__toString());

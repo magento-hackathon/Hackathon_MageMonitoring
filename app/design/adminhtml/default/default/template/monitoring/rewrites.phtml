@@ -17,7 +17,7 @@ $rewritesList = $this->getRewritesInfo();
     <fieldset id="blocks_rewrites_list" class="collapseable">
         <div class="monitoring-data-container">
             <?php foreach ($rewritesList['blocks'] as $node => $rewriteInfo): ?>
-            <div class="md-item md-item-info">
+            <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
                 <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
                 <div class="md-item-title"><?php echo $node ?></div>
                 <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
@@ -40,7 +40,7 @@ $rewritesList = $this->getRewritesInfo();
         <fieldset id="helpers_rewrites_list" class="collapseable">
             <div class="monitoring-data-container">
                 <?php foreach ($rewritesList['helpers'] as $node => $rewriteInfo): ?>
-                    <div class="md-item md-item-info">
+                    <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
                         <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
                         <div class="md-item-title"><?php echo $node ?></div>
                         <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
@@ -63,7 +63,7 @@ $rewritesList = $this->getRewritesInfo();
         <fieldset id="models_rewrites_list" class="collapseable">
             <div class="monitoring-data-container">
                 <?php foreach ($rewritesList['models'] as $node => $rewriteInfo): ?>
-                    <div class="md-item md-item-info">
+                    <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
                         <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
                         <div class="md-item-title"><?php echo $node ?></div>
                         <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
