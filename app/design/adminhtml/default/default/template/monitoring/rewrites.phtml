@@ -1,15 +1,14 @@
 <?php
 
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Rewrites */
-$rewrites = $this->getRewritesInfo();
+$rewritesList = $this->getRewritesInfo();
+
 ?>
 
-<?php if ($rewrites === false): ?>
-    <h4 class="monitoring-section-title">
-        <?php echo $this->__('Modules configurations do not have rewrites defined') ?>
-    </h4>
+<?php if ($rewritesList === false): ?>
+    <?php echo $this->__('This instance does not have any rewrites defined, hurray for the clean implementation!') ?>
 <?php else: ?>
-    <?php if (!empty($rewrites['blocks'])): ?>
+    <?php if (!empty($rewritesList['blocks'])): ?>
     <div class="entry-edit-head collapseable">
         <a class="open" id="blocks_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('blocks_rewrites_list'); return false;">
             <?php echo $this->__('Blocks Rewrites') ?>
@@ -17,11 +16,11 @@ $rewrites = $this->getRewritesInfo();
     </div>
     <fieldset id="blocks_rewrites_list" class="collapseable">
         <div class="monitoring-data-container">
-            <?php foreach ($rewrites['blocks'] as $node => $class): ?>
-            <div class="md-item md-item-info">
-                <div class="md-icon md-icon-info"></div>
+            <?php foreach ($rewritesList['blocks'] as $node => $rewriteInfo): ?>
+            <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
+                <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
                 <div class="md-item-title"><?php echo $node ?></div>
-                <div class="md-item-value"><?php echo $class ?></div>
+                <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
             </div>
             <?php endforeach; ?>
         </div>
@@ -32,7 +31,7 @@ $rewrites = $this->getRewritesInfo();
         //]]>
     </script>
     <?php endif; ?>
-    <?php if (!empty($rewrites['helpers'])): ?>
+    <?php if (!empty($rewritesList['helpers'])): ?>
         <div class="entry-edit-head collapseable">
             <a class="open" id="helpers_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('helpers_rewrites_list'); return false;">
                 <?php echo $this->__('Helpers Rewrites') ?>
@@ -40,11 +39,11 @@ $rewrites = $this->getRewritesInfo();
         </div>
         <fieldset id="helpers_rewrites_list" class="collapseable">
             <div class="monitoring-data-container">
-                <?php foreach ($rewrites['helpers'] as $node => $class): ?>
-                    <div class="md-item md-item-info">
-                        <div class="md-icon md-icon-info"></div>
+                <?php foreach ($rewritesList['helpers'] as $node => $rewriteInfo): ?>
+                    <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
+                        <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
                         <div class="md-item-title"><?php echo $node ?></div>
-                        <div class="md-item-value"><?php echo $class ?></div>
+                        <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -55,7 +54,7 @@ $rewrites = $this->getRewritesInfo();
         //]]>
         </script>
     <?php endif; ?>
-    <?php if (!empty($rewrites['models'])): ?>
+    <?php if (!empty($rewritesList['models'])): ?>
         <div class="entry-edit-head collapseable">
             <a class="open" id="models_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('models_rewrites_list'); return false;">
                 <?php echo $this->__('Models Rewrites') ?>
@@ -63,11 +62,11 @@ $rewrites = $this->getRewritesInfo();
         </div>
         <fieldset id="models_rewrites_list" class="collapseable">
             <div class="monitoring-data-container">
-                <?php foreach ($rewrites['models'] as $node => $class): ?>
-                    <div class="md-item md-item-info">
-                        <div class="md-icon md-icon-info"></div>
+                <?php foreach ($rewritesList['models'] as $node => $rewriteInfo): ?>
+                    <div class="md-item md-item-<?php echo $this->getIconType($rewriteInfo) ?>">
+                        <div class="md-icon md-icon-<?php echo $this->getIconType($rewriteInfo) ?>"></div>
                         <div class="md-item-title"><?php echo $node ?></div>
-                        <div class="md-item-value"><?php echo implode(', ', array_values($class)) ?></div>
+                        <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -76,6 +75,28 @@ $rewrites = $this->getRewritesInfo();
         //<![CDATA[
         Fieldset.toggleCollapse('models_rewrites_list');
         //]]>
+        </script>
+    <?php endif; ?>
+    <?php if (!empty($rewritesList['autoload'])): ?>
+        <div class="entry-edit-head collapseable">
+            <a class="open" id="local_overrides_list-head" href="#" onclick="Fieldset.toggleCollapse('local_overrides_list'); return false;">
+                <?php echo $this->__('Local Pool Overrides') ?>
+            </a>
+        </div>
+        <fieldset id="models_rewrites_list" class="collapseable">
+            <div class="monitoring-data-container">
+                <?php foreach ($rewritesList['autoload'] as $node => $rewriteInfo): ?>
+                    <div class="md-item md-item-warning">
+                        <div class="md-icon md-icon-warning"></div>
+                        <div class="md-item-value"><?php echo implode(', ', array_values($rewriteInfo['classes'])) ?></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </fieldset>
+        <script type="text/javascript">
+            //<![CDATA[
+            Fieldset.toggleCollapse('local_overrides_list');
+            //]]>
         </script>
     <?php endif; ?>
 <?php endif; ?>

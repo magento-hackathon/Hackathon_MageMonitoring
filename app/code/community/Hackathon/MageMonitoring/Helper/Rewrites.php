@@ -187,7 +187,7 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
                         . '_'
                         . str_replace(DIRECTORY_SEPARATOR, '_', $classFile);
                     $className = substr($className, 0, -4); // replace .php extension
-                    $return['autoload: ' . $vendorPrefix][$className][] = $className;
+                    $return['autoload'][$className]['classes'][] = $className;
                 }
             }
         }
