@@ -97,6 +97,8 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
             }
         }
 
+        // $rewrites = array_merge($rewrites, $this->_loadLocalAutoloaderRewrites());
+
         if (empty($rewrites['blocks']) && empty($rewrites['models']) && empty($rewrites['helpers'])) {
             return false;
         }
@@ -161,10 +163,10 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
      *
      * @return array
      */
-    protected function loadLocalAutoloaderRewrites()
+    protected function _loadLocalAutoloaderRewrites()
     {
         $return = array();
-        $localCodeFolder = \Mage::getBaseDir('code') . '/local';
+        $localCodeFolder = Mage::getBaseDir('code') . '/local';
 
         $folders = array(
             'Mage'       => $localCodeFolder . '/Mage',
