@@ -35,8 +35,8 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
 
         $this->addTab(
             'rewrites_section', array(
-                'label'   => $this->__('Rewrites'),
-                'title'   => $this->__('Rewrites'),
+                'label'   => $this->__('Class Rewrites'),
+                'title'   => $this->__('Class Rewrites'),
                 'content' => $this->getLayout()->createBlock(
                     'magemonitoring/system_overview_read_tabs_rewrites'
                 )->toHtml(),
