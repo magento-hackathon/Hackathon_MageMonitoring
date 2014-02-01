@@ -101,7 +101,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
     public function getExtensionsCheck()
     {
         $check = array();
-        foreach($this->_extensions as $extension) {
+        foreach ($this->_extensions as $extension) {
             $check[] = array(
                 'label' => $extension,
                 'installed' => (extension_loaded($extension)) ? $this->__('enabled') : $this->__('disabled'),

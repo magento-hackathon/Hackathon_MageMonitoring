@@ -1,6 +1,7 @@
 <?php
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs extends Mage_Adminhtml_Block_Widget_Tabs
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
+    extends Mage_Adminhtml_Block_Widget_Tabs
 {
     public function __construct()
     {
@@ -12,35 +13,55 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs extends Mage_Admi
 
     protected function _beforeToHtml()
     {
-        $this->addTab('main_section', array(
-                'label'   => $this->__('Main information'),
-                'title'   => $this->__('Main information'),
-                'content' => $this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs_main')->toHtml(),
-        ));
+        $this->addTab(
+            'main_section', array(
+                'label'   => $this->__('System Overview'),
+                'title'   => $this->__('System Overview'),
+                'content' => $this->getLayout()->createBlock(
+                    'magemonitoring/system_overview_read_tabs_overview'
+                )->toHtml(),
+            )
+        );
 
-        $this->addTab('php_section', array(
-                'label'   => $this->__('PHP information'),
-                'title'   => $this->__('PHP information'),
-                'content' => $this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs_php')->toHtml(),
-        ));
+        $this->addTab(
+            'php_section', array(
+                'label'   => $this->__('PHP Information'),
+                'title'   => $this->__('PHP Information'),
+                'content' => $this->getLayout()->createBlock(
+                    'magemonitoring/system_overview_read_tabs_php'
+                )->toHtml(),
+            )
+        );
 
-        $this->addTab('rewrites_section', array(
-            'label'   => $this->__('Rewrites'),
-            'title'   => $this->__('Rewrites'),
-            'content' => $this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs_rewrites')->toHtml(),
-        ));
+        $this->addTab(
+            'rewrites_section', array(
+                'label'   => $this->__('Rewrites'),
+                'title'   => $this->__('Rewrites'),
+                'content' => $this->getLayout()->createBlock(
+                    'magemonitoring/system_overview_read_tabs_rewrites'
+                )->toHtml(),
+            )
+        );
         
-        $this->addTab('apc_section', array(
-                'label'   => $this->__('APC information'),
-                'title'   => $this->__('APC information'),
-                'content' => $this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs_apc')->toHtml(),
-        ));
+        $this->addTab(
+            'apc_section', array(
+                'label'   => $this->__('APC Information'),
+                'title'   => $this->__('APC Information'),
+                'content' => $this->getLayout()->createBlock(
+                    'magemonitoring/system_overview_read_tabs_apc'
+                )->toHtml(),
+            )
+        );
 
-        $this->addTab('example_section', array(
-            'label'   => $this->__('Example'),
-            'title'   => $this->__('Example'),
-            'content' => $this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs_example')->toHtml(),
-        ));
+        $this->addTab(
+            'example_section', array(
+                'label'   => $this->__('Example'),
+                'title'   => $this->__('Example'),
+                'content' => $this->getLayout()->createBlock(
+                    'magemonitoring/system_overview_read_tabs_example'
+                )->toHtml(),
+            )
+        );
         
         return parent::_beforeToHtml();
     }
