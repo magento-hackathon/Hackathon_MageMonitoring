@@ -15,6 +15,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
      * Returns requested parameter's value from the $_SERVER variable
      *
      * @param string $value
+     *
      * @return string
      */
     public function getServerInfo($value)
@@ -59,6 +60,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
 
     /**
      * Returns memory size. Alternative way
+     *
      * @return string|null
      */
     public function _getTopMemoryInfo()
