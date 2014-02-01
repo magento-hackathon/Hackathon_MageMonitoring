@@ -27,6 +27,12 @@
 
 class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
 {
+    protected $_rewriteTypes = array(
+        'blocks',
+        'helpers',
+        'models',
+    );
+
     /**
      * Return all rewrites
      *
