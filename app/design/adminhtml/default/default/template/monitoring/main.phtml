@@ -1,0 +1,75 @@
+<?php
+/**
+ * Atwix
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+
+ * @author      rogyar@gmail.com
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main
+ */
+?>
+
+<h3 class="monitoring-section-title">Main information</h3>
+<div class="monitoring-data-container">
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Host Name') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('HTTP_HOST') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Server Software') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('SERVER_SOFTWARE') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Server IP Address') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('SERVER_ADDR') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Server Port') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('SERVER_PORT') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Server Gateway Interface') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('GATEWAY_INTERFACE') ?></div>
+    </div>
+    <?php if (!is_null($memInfo = $this->getMemoryInfo())) : ?>
+        <div class="md-item md-item-info">
+            <div class="md-icon md-icon-info"></div>
+            <div class="md-item-title"><?php echo $this->__('Server Memory') ?></div>
+            <div class="md-item-value"><?php echo $memInfo; ?></div>
+        </div>
+    <?php endif; ?>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Server Admin') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('SERVER_ADMIN') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Accept Encoding') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('HTTP_ACCEPT_ENCODING') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Magento Root Path') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('DOCUMENT_ROOT') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('OS Information') ?></div>
+        <div class="md-item-value"><?php echo $this->getOsInfo() ?></div>
+    </div>
+</div>
