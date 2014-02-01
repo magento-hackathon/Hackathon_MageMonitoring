@@ -18,8 +18,11 @@
  */
 ?>
 
-<h3 class="monitoring-section-title">Server information</h3>
-<div class="monitoring-data-container">
+<div class="entry-edit-head collapseable">
+    <a class="open" id="main_server_information-head" href="#" onclick="Fieldset.toggleCollapse('main_server_information'); return false;">Server Information</a>
+</div>
+<fieldset id="main_server_information" class="collapseable">
+    <div class="monitoring-data-container">
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('Host Name') ?></div>
@@ -75,8 +78,12 @@
         <div class="md-item-value"><?php echo $this->getOsInfo() ?></div>
     </div>
 </div>
-    <h3 class="monitoring-section-title">Magento information</h3>
-<div class="monitoring-data-container">
+</fieldset>
+<div class="entry-edit-head collapseable">
+    <a class="open" id="main_magento_information-head" href="#" onclick="Fieldset.toggleCollapse('main_magento_information'); return false;">Magento Information</a>
+</div>
+<fieldset id="main_magento_information" class="collapseable">
+    <div class="monitoring-data-container">
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('Magento Version') ?></div>
@@ -108,3 +115,4 @@
         <div class="md-item-value"><?php echo $this->getMagentoInfo('online_visitors') ?></div>
     </div>
 </div>
+</fieldset>
