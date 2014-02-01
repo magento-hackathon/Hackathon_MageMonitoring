@@ -71,11 +71,6 @@
     </div>
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Magento Root Path') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('DOCUMENT_ROOT') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('OS Information') ?></div>
         <div class="md-item-value"><?php echo $this->getOsInfo() ?></div>
     </div>
@@ -86,5 +81,30 @@
         <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('Magento Version') ?></div>
         <div class="md-item-value"><?php echo $this->getMagentoInfo('version') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Magento Root Path') ?></div>
+        <div class="md-item-value"><?php $this->_getValue('DOCUMENT_ROOT') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Total Products Count') ?></div>
+        <div class="md-item-value"><?php echo $this->getMagentoInfo('products_count') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Total Customers Count') ?></div>
+        <div class="md-item-value"><?php echo $this->getMagentoInfo('customers_count') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Total Orders Count') ?></div>
+        <div class="md-item-value"><?php echo $this->getMagentoInfo('orders_count') ?></div>
+    </div>
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Current Online Visitors') ?></div>
+        <div class="md-item-value"><?php echo $this->getMagentoInfo('online_visitors') ?></div>
     </div>
 </div>

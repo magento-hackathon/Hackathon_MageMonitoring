@@ -109,6 +109,10 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
                 $mageVersion .= $this->__(' Enterprise Edition');
             }
             $this->_mageInfo['version'] = $mageVersion;
+            $statInfo = $this->getMagentoStatInfo();
+            if (!is_null($statInfo)) {
+                $this->_mageInfo = array_merge($this->_mageInfo, $statInfo);
+            }
         }
 
         return $this->_mageInfo[$value];
@@ -158,4 +162,18 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
        echo $this->getServerInfo($value);
     }
 
+    public function getMagentoStatInfo()
+    {
+        try {
+            $statInfo['products_count'] = Mage::getModel('catalog/product')->getCollection()->getSize();
+            $statInfo['orders_count'] = Mage::getModel('sales/order')->getCollection()->getSize();
+            $statInfo['customers_count'] = Mage::getModel('customer/customer')->getCollection()->getSize();
+            $statInfo['online_visitors'] = Mage::getModel('log/visitor_online')->getCollection()->getSize();
+        } catch (Exception $e) {
+            Mage::logException($e);
+            return null;
+        }
+
+        return $statInfo;
+    }
 }
