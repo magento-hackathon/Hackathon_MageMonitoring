@@ -101,6 +101,12 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
         }
     }
 
+    /**
+     * Returns requested Magento information
+     *
+     * @param $value
+     * @return mixed
+     */
     public function getMagentoInfo($value)
     {
         if (is_null($this->_mageInfo)) {
@@ -165,6 +171,11 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
        echo $this->getServerInfo($value);
     }
 
+    /**
+     * Collects some useful (and not) statistic information from Magento
+     *
+     * @return array|null
+     */
     public function getMagentoStatInfo()
     {
         try {
