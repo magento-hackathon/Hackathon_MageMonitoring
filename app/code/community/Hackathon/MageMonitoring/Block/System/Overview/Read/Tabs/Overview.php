@@ -1,13 +1,14 @@
 <?php
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
+    extends Mage_Adminhtml_Block_Abstract
 {
     protected $_serverInfo = null;
     protected $_mageInfo = null;
 
     protected function _construct()
     {
-        $this->setTemplate('monitoring/main.phtml');
+        $this->setTemplate('monitoring/overview.phtml');
         return parent::_construct();
     }
 
@@ -15,6 +16,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
      * Returns requested parameter's value from the $_SERVER variable
      *
      * @param string $value
+     *
      * @return string
      */
     public function getServerInfo($value)
@@ -59,6 +61,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
 
     /**
      * Returns memory size. Alternative way
+     *
      * @return string|null
      */
     public function _getTopMemoryInfo()
@@ -98,6 +101,12 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
         }
     }
 
+    /**
+     * Returns requested Magento information
+     *
+     * @param $value
+     * @return mixed
+     */
     public function getMagentoInfo($value)
     {
         if (is_null($this->_mageInfo)) {
@@ -109,6 +118,10 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
                 $mageVersion .= $this->__(' Enterprise Edition');
             }
             $this->_mageInfo['version'] = $mageVersion;
+            $statInfo = $this->getMagentoStatInfo();
+            if (!is_null($statInfo)) {
+                $this->_mageInfo = array_merge($this->_mageInfo, $statInfo);
+            }
         }
 
         return $this->_mageInfo[$value];
@@ -158,4 +171,23 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
        echo $this->getServerInfo($value);
     }
 
+    /**
+     * Collects some useful (and not) statistic information from Magento
+     *
+     * @return array|null
+     */
+    public function getMagentoStatInfo()
+    {
+        try {
+            $statInfo['products_count'] = Mage::getModel('catalog/product')->getCollection()->getSize();
+            $statInfo['orders_count'] = Mage::getModel('sales/order')->getCollection()->getSize();
+            $statInfo['customers_count'] = Mage::getModel('customer/customer')->getCollection()->getSize();
+            $statInfo['online_visitors'] = Mage::getModel('log/visitor_online')->getCollection()->getSize();
+        } catch (Exception $e) {
+            Mage::logException($e);
+            return null;
+        }
+
+        return $statInfo;
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
+    extends Mage_Adminhtml_Block_Abstract
 {
     protected $_template = 'monitoring/php.phtml';
 
@@ -35,6 +36,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php extends Mage_
     );
 
     /**
+     *
      * @return Hackathon_MageMonitoring_Helper_Data|Mage_Core_Block_Abstract
      */
     public function getMonitoringHelper()
@@ -99,7 +101,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php extends Mage_
     public function getExtensionsCheck()
     {
         $check = array();
-        foreach($this->_extensions as $extension) {
+        foreach ($this->_extensions as $extension) {
             $check[] = array(
                 'label' => $extension,
                 'installed' => (extension_loaded($extension)) ? $this->__('enabled') : $this->__('disabled'),
@@ -133,8 +135,11 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php extends Mage_
         return $extensions;
     }
 
+<<<<<<< HEAD
     public function getPhpInfo()
     {
         return $this->getMonitoringHelper()->getPhpInfoArray();
     }
+=======
+>>>>>>> 95e0c98296def85055cf1fd63ae64b9841fdaa85
 }
