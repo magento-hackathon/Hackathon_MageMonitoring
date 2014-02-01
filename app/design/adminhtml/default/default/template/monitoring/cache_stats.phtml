@@ -48,12 +48,17 @@ foreach ($activeCaches as $cache) {
         <div class="md-item md-item-info">
             <div class="md-icon md-icon-info"></div>
             <div class="md-item-title"><?php echo $this->__('Memory') ?></div>
-            <div class="md-item-value"><?php echo $cache->getMemoryUsed() . ' / ' . $cache->getMemoryMax(); ?></div>
+            <div class="md-item-value"><?php echo Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryUsed(), true)
+                                                  . 'M / ' .
+                                                  Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryMax(), true)
+                                                  . 'M'; ?>
+            </div>
         </div>
         <div class="md-item md-item-info">
             <div class="md-icon md-icon-info"></div>
             <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
-            <div class="md-item-value"><?php echo $cache->getCacheHits() . ' / ' . $cache->getCacheMisses(); ?></div>
+            <?php $hitMissRatio = $this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()); ?>
+            <div class="md-item-value"><?php echo $cache->getCacheHits() . ' / ' . $cache->getCacheMisses() . ' - ' . $hitMissRatio . '%'; ?></div>
         </div>
 
         <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want flush this cache') ?>', '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">
