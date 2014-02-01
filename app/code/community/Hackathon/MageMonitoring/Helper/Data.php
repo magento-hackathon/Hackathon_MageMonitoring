@@ -57,7 +57,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
 
         if ($inMegabytes) {
-            $memoryLimit = ($memoryLimit / 1024) / 1024;
+            $memoryLimit = round(($memoryLimit / 1024) / 1024);
         }
 
         return $memoryLimit;
