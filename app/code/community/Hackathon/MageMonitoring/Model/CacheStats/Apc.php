@@ -9,6 +9,13 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc implements Hackathon_MageMon
         return phpversion('apc');
     }
 
+    public function isActive() {
+        if (extension_loaded('apc') && !extension_loaded('apcu') && ini_get('apc.enabled')) {
+            return true;
+        }
+        return false;
+    }
+
     public function getMemoryMax() {
         return ini_get('apc.shm_size');
     }
