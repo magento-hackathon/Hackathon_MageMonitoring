@@ -14,6 +14,16 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
     protected function _beforeToHtml()
     {
         $this->addTab(
+                'cachestats_section', array(
+                        'label'   => $this->__('Cache Statistics'),
+                        'title'   => $this->__('Cache Statistics'),
+                        'content' => $this->getLayout()->createBlock(
+                                'magemonitoring/system_overview_read_tabs_cacheStats'
+                        )->toHtml(),
+                )
+        );
+
+        $this->addTab(
             'main_section', array(
                 'label'   => $this->__('System Overview'),
                 'title'   => $this->__('System Overview'),
@@ -39,16 +49,6 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
                 'title'   => $this->__('Class Rewrites'),
                 'content' => $this->getLayout()->createBlock(
                     'magemonitoring/system_overview_read_tabs_rewrites'
-                )->toHtml(),
-            )
-        );
-
-        $this->addTab(
-            'cachestats_section', array(
-                'label'   => $this->__('Cache Statistics'),
-                'title'   => $this->__('Cache Statistics'),
-                'content' => $this->getLayout()->createBlock(
-                    'magemonitoring/system_overview_read_tabs_cacheStats'
                 )->toHtml(),
             )
         );
