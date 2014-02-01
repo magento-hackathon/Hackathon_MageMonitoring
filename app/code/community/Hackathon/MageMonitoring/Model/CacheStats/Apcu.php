@@ -23,7 +23,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
     }
 
     public function getMemoryMax() {
-        return ini_get('apc.shm_size');
+        return Mage::helper('magemonitoring')->getValueInByte(ini_get('apc.shm_size'));
     }
 
     public function getMemoryUsed() {
@@ -36,18 +36,18 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
 
     public function getCacheHits() {
         $stats = apc_cache_info();
-        if (isset($stats['num_hits'])) {
-            return $stats['num_hits'];
+        if (isset($stats['nhits'])) {
+            return $stats['nhits'];
         }
-        return 'ERR';
+        return 0;
     }
 
     public function getCacheMisses() {
         $stats = apc_cache_info();
-        if (isset($stats['num_misses'])) {
-            return $stats['num_misses'];
+        if (isset($stats['nmisses'])) {
+            return $stats['nmisses'];
         }
-        return 'ERR';
+        return 0;
     }
 
     public function flushCache() {
