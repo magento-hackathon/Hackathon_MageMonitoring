@@ -42,7 +42,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
         if ($fh) {
             while ($line = fgets($fh)) {
                 $pieces = array();
-                if (preg_match('^MemTotal:\s+(\d+)\skB$', $line, $pieces)) {
+                if (preg_match('^MemTotal:\s+(\d+)\skB$^', $line, $pieces)) {
                     $mem = $pieces[1];
                     break;
                 }

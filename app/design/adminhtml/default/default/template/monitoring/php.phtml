@@ -23,6 +23,73 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
+
+/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php */
+
+$version = $this->getPhpVersion();
+$configs = $this->getPhpConfigCheck();
+$extensions = $this->getExtensionsCheck();
+$allExtensions = $this->getAllExtensions();
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head collapseable">
+        <a onclick="Fieldset.toggleCollapse('main_information'); return false;" href="#" id="main_information-head" class=""><?php echo $this->__('PHP Main Information') ?></a>
+    </div>
+    <fieldset id="main_information" class="collapseable">
+        <div class="md-item md-item-<?php echo $version['class'] ?>">
+            <div class="md-icon md-icon-<?php echo $version['class'] ?>"></div>
+            <div class="md-item-title"><?php echo $version['label']; ?></div>
+            <div class="md-item-value"><?php echo $version['installed']; ?></div>
+        </div>
+        <?php foreach ($configs as $config) { ?>
+        <div class="md-item md-item-<?php echo $config['class'] ?>">
+            <div class="md-icon md-icon-<?php echo $config['class'] ?>"></div>
+            <div class="md-item-title"><?php echo $config['label']; ?></div>
+            <div class="md-item-value"><?php echo $config['installed']; ?></div>
+        </div>
+        <?php } ?>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.applyCollapse('main_information');
+        //]]>
+    </script>
+    <div class="entry-edit-head collapseable">
+        <a onclick="Fieldset.toggleCollapse('required_extension'); return false;" href="#" id="required_extension-head" class=""><?php echo $this->__('Required Extensions') ?></a>
+    </div>
+    <fieldset id="required_extension" class="collapseable">
+        <?php foreach ($extensions as $config) { ?>
+            <div class="md-item md-item-<?php echo $config['class'] ?>">
+                <div class="md-icon md-icon-<?php echo $config['class'] ?>"></div>
+                <div class="md-item-title"><?php echo $config['label']; ?></div>
+                <div class="md-item-value"><?php echo $config['installed']; ?></div>
+            </div>
+        <?php } ?>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.applyCollapse('required_extension');
+        //]]>
+    </script>
+    <div class="entry-edit-head collapseable">
+        <a onclick="Fieldset.toggleCollapse('all_extension'); return false;" href="#" id="all_extension-head" class=""><?php echo $this->__('All installed Extensions') ?></a>
+    </div>
+    <fieldset id="all_extension" class="collapseable">
+        <?php foreach ($allExtensions as $config) { ?>
+            <div class="md-item md-item-<?php echo $config['class'] ?>">
+                <div class="md-icon md-icon-<?php echo $config['class'] ?>"></div>
+                <div class="md-item-title"><?php echo $config['label']; ?></div>
+                <div class="md-item-value"><?php echo $config['installed']; ?></div>
+            </div>
+        <?php } ?>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.applyCollapse('all_extension');
+        //]]>
+    </script>
+</div>
+<?php
 //ob_start();
 //phpinfo(1);
 //$phpinfo = ob_get_contents();
