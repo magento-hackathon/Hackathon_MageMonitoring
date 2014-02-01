@@ -4,6 +4,10 @@
         <reference name="head">
             <action method="addCss"><name>monitoring/css/apc.css</name></action>
             <action method="addCss"><name>monitoring/css/monitoring.css</name></action>
+            <!-- did not work
+               <action method="addItem"><type>skinJs</type><script>monitoring/js/Chart.min.js</script></action>
+            -->
+            <action method="addJs"><script>chartjs/Chart.min.js</script></action>
         </reference>
     </adminhtml_monitoring_index>
 </layout>
