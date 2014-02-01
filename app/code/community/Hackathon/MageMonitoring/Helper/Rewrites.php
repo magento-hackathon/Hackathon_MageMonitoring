@@ -19,13 +19,13 @@
  * versions in the future. If you wish to customize Magento for your
  * needs please refer to http://www.magentocommerce.com for more information.
  *
- * @author      Christian Munch
+ * @author      Christian Münch <c.muench@netz98.de>
  * @category    Hackathon
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
+class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
 {
     protected $_rewriteTypes = array(
         'blocks',
@@ -76,7 +76,22 @@ class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
                         if (!isset($rewrites[$type][$groupClassName . '/' . $child->getName()])) {
                             $rewrites[$type][$groupClassName . '/' . $child->getName()] = array();
                         }
-                        $rewrites[$type][$groupClassName . '/' . $child->getName()][] = (string) $child;
+                        $rewrites[$type][$groupClassName . '/' . $child->getName()]['classes'][] = (string) $child;
+                    }
+                }
+            }
+        }
+
+        foreach ($rewrites as $type => $data) {
+            if (count($data) > 0 && is_array($data)) {
+                foreach ($data as $node => $rewriteInfo) {
+                    if (count($rewriteInfo['classes']) > 1) {
+                        if ($this->_isInheritanceConflict($rewriteInfo['classes'])) {
+                            $rewrites[$type][$node]['conflicts'][] = array(
+                                'node' => $node,
+                                'loaded_class' => $this->_getLoadedClass($type, $node)
+                            );
+                        }
                     }
                 }
             }
@@ -88,6 +103,57 @@ class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
 
         return $rewrites;
     }
+
+    /**
+     * Check if rewritten class has inherited the parent class.
+     * If yes we have no conflict. The top class can extend every core class.
+     * So we cannot check this.
+     *
+     * @var array $classes
+     * @return bool
+     */
+    protected function _isInheritanceConflict($classes)
+    {
+        $classes = array_reverse($classes);
+        for ($i = 0; $i < count($classes) - 1; $i++) {
+            try {
+                if (class_exists($classes[$i]) && class_exists($classes[$i + 1])) {
+                    if (!is_a($classes[$i], $classes[$i + 1], true)) {
+                        return true;
+                    }
+                }
+            } catch (Exception $e) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns loaded class by type like models or blocks
+     *
+     * @param string $type       Class Type
+     * @param string $classGroup Class Group Name
+     *
+     * @return string
+     */
+    protected function _getLoadedClass($type, $classGroup)
+    {
+        switch ($type) {
+            case 'blocks':
+                return Mage::getConfig()->getBlockClassName($classGroup);
+
+            case 'helpers':
+                return Mage::getConfig()->getHelperClassName($classGroup);
+
+            default:
+            case 'models':
+                return Mage::getConfig()->getModelClassName($classGroup);
+                break;
+        }
+    }
+
 
     /**
      * Searches for all rewrites over autoloader in "app/code/local" of
