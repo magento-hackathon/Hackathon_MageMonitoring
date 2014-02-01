@@ -10,20 +10,58 @@ $rewrites = $this->getRewritesList();
         <?php echo $this->__('Modules configurations do not have rewrites defined') ?>
     </h4>
 <?php else: ?>
+    <?php if (!empty($rewrites['blocks'])): ?>
     <div class="entry-edit-head collapseable">
-        <a class="open" id="rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('rewrites_list'); return false;">
-            <?php echo $this->__('Rewrites List') ?>
+        <a class="open" id="blocks_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('blocks_rewrites_list'); return false;">
+            <?php echo $this->__('Blocks Rewrites') ?>
         </a>
     </div>
-    <fieldset id="rewrites_list" class="collapseable">
+    <fieldset id="blocks_rewrites_list" class="collapseable">
         <div class="monitoring-data-container">
-
+            <?php foreach ($rewrites['blocks'] as $node => $class): ?>
             <div class="md-item md-item-info">
                 <div class="md-icon md-icon-info"></div>
-                <div class="md-item-title"><?php echo $this->__('Class 1') ?></div>
-                <div class="md-item-value"><?php echo $this->__('Class 2') ?></div>
+                <div class="md-item-title"><?php echo $node ?></div>
+                <div class="md-item-value"><?php echo $class ?></div>
             </div>
-
+            <?php endforeach; ?>
         </div>
     </fieldset>
+    <?php endif; ?>
+    <?php if (!empty($rewrites['helpers'])): ?>
+        <div class="entry-edit-head collapseable">
+            <a class="open" id="helpers_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('helpers_rewrites_list'); return false;">
+                <?php echo $this->__('Helpers Rewrites') ?>
+            </a>
+        </div>
+        <fieldset id="helpers_rewrites_list" class="collapseable">
+            <div class="monitoring-data-container">
+                <?php foreach ($rewrites['helpers'] as $node => $class): ?>
+                    <div class="md-item md-item-info">
+                        <div class="md-icon md-icon-info"></div>
+                        <div class="md-item-title"><?php echo $node ?></div>
+                        <div class="md-item-value"><?php echo $class ?></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </fieldset>
+    <?php endif; ?>
+    <?php if (!empty($rewrites['models'])): ?>
+        <div class="entry-edit-head collapseable">
+            <a class="open" id="models_rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('models_rewrites_list'); return false;">
+                <?php echo $this->__('Models Rewrites') ?>
+            </a>
+        </div>
+        <fieldset id="models_rewrites_list" class="collapseable">
+            <div class="monitoring-data-container">
+                <?php foreach ($rewrites['models'] as $node => $class): ?>
+                    <div class="md-item md-item-info">
+                        <div class="md-icon md-icon-info"></div>
+                        <div class="md-item-title"><?php echo $node ?></div>
+                        <div class="md-item-value"><?php echo implode(', ', array_values($class)) ?></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </fieldset>
+    <?php endif; ?>
 <?php endif; ?>

@@ -26,6 +26,13 @@
                 <entities>
                 </entities>
             </magemonitoring_mysql4>
+            <!-- Fake model rewrite -->
+            <catalog>
+                <rewrite>
+                    <category>Hackathon_MageMonitoring_Model_Category</category>
+                </rewrite>
+            </catalog>
+            <!-- / Fake model rewrite -->
         </models>
 
         <helpers>
