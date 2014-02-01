@@ -1,7 +1,6 @@
 <?php
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
-    extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php extends Mage_Adminhtml_Block_Abstract
 {
     protected $_template = 'monitoring/php.phtml';
 
@@ -21,9 +20,9 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
 
     protected $_config = array(
         'safe_mode' => '0',
-        'memory_limit' => '512', // in MB
-        'post_max_size' => '100', // in MB
-        'upload_max_filesize' => '100', // in MB
+        'memory_limit' => 512, // in MB
+        'post_max_size' => 100, // in MB
+        'upload_max_filesize' => 100, // in MB
         'file_uploads' => '1',
         'sendmail_from' => '',
         'sendmail_path' => '',
@@ -61,7 +60,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
         $version = array(
             'label' => $this->__('Version'),
             'installed' => phpversion(),
-            'recommended' => ($recommended) ? $this->__('5.2.13 - 5.3.24, 5.4.x wtih <a href="%s">Patch</a>', 'http://www.magentocommerce.com/download') : '',
+            'recommended' => ($recommended) ? $this->__('5.2.13 - 5.3.24, 5.4.x wtih <a href="%s">Patch</a>', 'http://www.magentocommerce.com/download') : false,
             'class' => $class
         );
 
@@ -77,7 +76,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
         foreach ($this->_config as $key => $config) {
 
             if (in_array($key, array('memory_limit', 'post_max_size', 'upload_max_filesize'))) {
-                $class = ($this->getMonitoringHelper()->getValueInByte(ini_get($key)) < $config) ? 'warning' : 'success';
+                $class = ((int) $this->getMonitoringHelper()->getValueInByte(ini_get($key), true) < (int) $config) ? 'warning' : 'success';
                 $value = $this->getMonitoringHelper()->getValueInByte(ini_get($key), true) . 'MB';
             } else {
                 $value = ini_get($key);
@@ -87,7 +86,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
             $check[] = array(
                 'label' => $key,
                 'installed' => $value,
-                'recommended' => ($config) ? $config : $this->__('N/A'),
+                'recommended' => ($config && $class == 'warning') ? $config : false,
                 'class' => $class,
             );
         }
@@ -105,7 +104,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
             $check[] = array(
                 'label' => $extension,
                 'installed' => (extension_loaded($extension)) ? $this->__('enabled') : $this->__('disabled'),
-                'recommended' => true,
+                'recommended' => false,
                 'class' => (extension_loaded($extension)) ? 'success' : 'error'
             );
         }
@@ -126,15 +125,18 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
             }
             $extensions[] = array(
                 'label' => $extension,
-                'installed' => $this->__('enabled'),
-                'recommended' => true,
-                'class' => 'success'
+                'installed' => (phpversion($extension)) ? phpversion($extension) : $this->__('enabled'),
+                'recommended' => false,
+                'class' => 'info'
             );
         }
 
         return $extensions;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPhpInfo()
     {
         return $this->getMonitoringHelper()->getPhpInfoArray();

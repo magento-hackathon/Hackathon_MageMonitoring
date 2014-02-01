@@ -12,6 +12,12 @@ class Hackathon_MageMonitoring_Block_System_Overview extends Mage_Adminhtml_Bloc
         
         $this->removeButton('reset');
         $this->removeButton('save');
+
+        $this->addButton('flush_all_cache', array(
+            'label' => $this->__('Flush All Caches'),
+            'onclick' => 'confirmSetLocation(\''. $this->__('Do you really want to flush all caches?') .'\', \'' . $this->getUrl('*/*/flushallcache') .'\')',
+            'class' => 'delete'
+        ));
     }
     
     protected function _prepareLayout()
@@ -19,5 +25,4 @@ class Hackathon_MageMonitoring_Block_System_Overview extends Mage_Adminhtml_Bloc
         $this->getLayout()->getBlock('left')->append($this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs', 'magemonitoring_tabs'));
         return parent::_prepareLayout();
     }
-
 }

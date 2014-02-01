@@ -110,14 +110,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
     public function getMagentoInfo($value)
     {
         if (is_null($this->_mageInfo)) {
-            $mageVersion = Mage::getVersion();
-            $versionInfo = Mage::getVersionInfo();
-            if ($versionInfo['major'] == '1' && $versionInfo['minor'] < 9) {
-                $mageVersion .= $this->__(' Community Edition');
-            } else {
-                $mageVersion .= $this->__(' Enterprise Edition');
-            }
-            $this->_mageInfo['version'] = $mageVersion;
+            $this->_mageInfo['version'] = ' ' . Mage::getEdition() . ' Edition';
             $statInfo = $this->getMagentoStatInfo();
             if (!is_null($statInfo)) {
                 $this->_mageInfo = array_merge($this->_mageInfo, $statInfo);
