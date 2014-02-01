@@ -135,11 +135,9 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php
         return $extensions;
     }
 
-<<<<<<< HEAD
     public function getPhpInfo()
     {
         return $this->getMonitoringHelper()->getPhpInfoArray();
     }
-=======
->>>>>>> 95e0c98296def85055cf1fd63ae64b9841fdaa85
+
 }
