@@ -29,5 +29,31 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data {
 
         return $activeCaches;
     }
+    
+    /**
+     * @param string $value
+     * @param bool $inMegabytes
+     * @return int|string
+     */
+    public function getValueInByte($value, $inMegabytes = false)
+    {
+        $memoryLimit = trim($value);
+
+        $lastMemoryLimitLetter = strtolower(substr($memoryLimit, -1));
+        switch($lastMemoryLimitLetter) {
+            case 'g':
+                $memoryLimit *= 1024;
+            case 'm':
+                $memoryLimit *= 1024;
+            case 'k':
+                $memoryLimit *= 1024;
+        }
+
+        if ($inMegabytes) {
+            $memoryLimit = ($memoryLimit / 1024) / 1024;
+        }
+
+        return $memoryLimit;
+    }
 
 }
