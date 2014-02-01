@@ -13,7 +13,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
 
         // get classes implementing cachestats interface
-        $cacheClasses;
+        $cacheClasses = array();
         $iName = 'Hackathon_MageMonitoring_Model_CacheStats';
         if (interface_exists($iName)) {
             $cacheClasses = array_filter(
@@ -23,7 +23,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
 
         // collect active caches
-        $activeCaches;
+        $activeCaches = array();
         foreach ($cacheClasses as $cache) {
             $c = new $cache();
             if ($c->isActive()) {

@@ -29,7 +29,7 @@
 $activeCaches = Mage::helper('magemonitoring')->getActiveCaches();
 
 if (empty($activeCaches)) {
-    echo $this->__('No active caches found. Consider installing atleast a php opcache.');
+    echo $this->__('No active caches found. Consider installing at least a php opcache.');
 }
 foreach ($activeCaches as $cache) {
 ?>
