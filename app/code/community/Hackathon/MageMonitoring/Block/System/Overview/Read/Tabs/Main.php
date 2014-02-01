@@ -37,16 +37,18 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
      */
     public function getMemoryInfo()
     {
-        $fh = fopen('/proc/meminfo', 'r');
+        $fh = @fopen('/proc/meminfo', 'r');
         $mem = 0;
-        while ($line = fgets($fh)) {
-            $pieces = array();
-            if (preg_match('^MemTotal:\s+(\d+)\skB$', $line, $pieces)) {
-                $mem = $pieces[1];
-                break;
+        if ($fh) {
+            while ($line = fgets($fh)) {
+                $pieces = array();
+                if (preg_match('^MemTotal:\s+(\d+)\skB$', $line, $pieces)) {
+                    $mem = $pieces[1];
+                    break;
+                }
             }
+            fclose($fh);
         }
-        fclose($fh);
         if ($mem > 0) {
             $mem = $mem / 1024;
             return $mem . 'M';
@@ -61,11 +63,11 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
      */
     public function _getTopMemoryInfo()
     {
-        $meminfo = exec('top -l 1 | head -n 10 | grep PhysMem');
-        $meminfo = str_ireplace('PhysMem: ', '', $meminfo);
+        $memInfo = exec('top -l 1 | head -n 10 | grep PhysMem');
+        $memInfo = str_ireplace('PhysMem: ', '', $memInfo);
 
-        if (!empty($meminfo)) {
-            return $meminfo;
+        if (!empty($memInfo)) {
+            return $memInfo;
         } else {
             return null;
         }
@@ -79,11 +81,13 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
     public function getCpuInfo()
     {
         $cpuInfo = '';
-        $fh = fopen('/proc/cpuinfo', 'r');
-        while ($line = fgets($fh)) {
-            if (stristr($line, 'model name')) {
-                $cpuInfo = $line;
-                break;
+        $fh = @fopen('/proc/cpuinfo', 'r');
+        if ($fh) {
+            while ($line = fgets($fh)) {
+                if (stristr($line, 'model name')) {
+                    $cpuInfo = $line;
+                    break;
+                }
             }
         }
 
@@ -153,4 +157,5 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
     {
        echo $this->getServerInfo($value);
     }
+
 }

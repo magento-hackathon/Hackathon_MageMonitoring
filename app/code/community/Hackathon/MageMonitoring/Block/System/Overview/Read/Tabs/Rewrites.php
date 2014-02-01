@@ -5,7 +5,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Rewrites
 {
     protected function _toHtml()
     {
-
+        return 'Rewrites here';
     }
 
 }
