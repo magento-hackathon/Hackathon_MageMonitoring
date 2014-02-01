@@ -1,0 +1,29 @@
+<?php
+
+/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Rewrites */
+$rewrites = $this->getRewritesList();
+
+?>
+
+<?php if ($rewrites === false): ?>
+    <h4 class="monitoring-section-title">
+        <?php echo $this->__('Modules configurations do not have rewrites defined') ?>
+    </h4>
+<?php else: ?>
+    <div class="entry-edit-head collapseable">
+        <a class="open" id="rewrites_list-head" href="#" onclick="Fieldset.toggleCollapse('rewrites_list'); return false;">
+            <?php echo $this->__('Rewrites List') ?>
+        </a>
+    </div>
+    <fieldset id="rewrites_list" class="collapseable">
+        <div class="monitoring-data-container">
+
+            <div class="md-item md-item-info">
+                <div class="md-icon md-icon-info"></div>
+                <div class="md-item-title"><?php echo $this->__('Class 1') ?></div>
+                <div class="md-item-value"><?php echo $this->__('Class 2') ?></div>
+            </div>
+
+        </div>
+    </fieldset>
+<?php endif; ?>

@@ -5,9 +5,9 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Rewrites
 {
     protected $_template = 'monitoring/rewrites.phtml';
 
-    protected function _toHtml()
+    public function getRewritesList()
     {
-        return 'Rewrites here';
+        return Mage::getModel('magemonitoring/rewrites')->getRewrites();
     }
 
 }

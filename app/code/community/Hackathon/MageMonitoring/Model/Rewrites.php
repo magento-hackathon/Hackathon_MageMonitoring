@@ -27,18 +27,12 @@
 
 class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
 {
-    protected $_rewriteTypes = array(
-        'blocks',
-        'helpers',
-        'models',
-    );
-
     /**
      * Return all rewrites
      *
      * @return array
      */
-    public function loadRewrites()
+    public function getRewrites()
     {
         $rewrites = array(
             'blocks',
@@ -46,8 +40,11 @@ class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
             'helpers',
         );
 
+        /* @var $_magentoConfig Mage_Core_Model_Config */
+        $_magentoConfig = Mage::getConfig();
+
         // Load config of each module because modules can overwrite config each other. Global config is already merged
-        $modules = $this->getNode('modules')->children();
+        $modules = $_magentoConfig->getNode('modules')->children();
         foreach ($modules as $moduleName => $moduleData) {
             // Check only active modules
             if (!$moduleData->is('active')) {
@@ -55,8 +52,8 @@ class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
             }
 
             // Load config of module
-            $configXmlFile = $this->getModuleDir('etc', $moduleName) . DIRECTORY_SEPARATOR . 'config.xml';
-            if (! file_exists($configXmlFile)) {
+            $configXmlFile = $_magentoConfig->getModuleDir('etc', $moduleName) . DIRECTORY_SEPARATOR . 'config.xml';
+            if (!file_exists($configXmlFile)) {
                 continue;
             }
 
@@ -77,6 +74,10 @@ class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
                     }
                 }
             }
+        }
+
+        if (empty($rewrites['blocks']) && empty($rewrites['models']) && empty($rewrites['helpers'])) {
+            return false;
         }
 
         return $rewrites;

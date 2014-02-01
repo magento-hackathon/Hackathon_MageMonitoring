@@ -19,7 +19,9 @@
 ?>
 
 <div class="entry-edit-head collapseable">
-    <a class="open" id="main_server_information-head" href="#" onclick="Fieldset.toggleCollapse('main_server_information'); return false;">Server Information</a>
+    <a class="open" id="main_server_information-head" href="#" onclick="Fieldset.toggleCollapse('main_server_information'); return false;">
+        <?php echo $this->__('Server Information') ?>
+    </a>
 </div>
 <fieldset id="main_server_information" class="collapseable">
     <div class="monitoring-data-container">
