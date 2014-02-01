@@ -16,6 +16,18 @@
             </magemonitoring>
         </blocks>
 
+        <models>
+            <magemonitoring>
+                <class>Hackathon_MageMonitoring_Model</class>
+                <resourceModel>cachereset_mysql4</resourceModel>
+            </magemonitoring>
+            <magemonitoring_mysql4>
+                <class>Hackathon_MageMonitoring_Model_Mysql4</class>
+                <entities>
+                </entities>
+            </magemonitoring_mysql4>
+        </models>
+
         <helpers>
             <magemonitoring>
                 <class>Hackathon_MageMonitoring_Helper</class>
@@ -25,16 +37,16 @@
 
     <admin>
         <routers>
-            <magemonitoring>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>Hackathon_MageMonitoring</module>
-                    <frontName>monitoring</frontName>
+                    <modules>
+                        <magemonitoring before="Mage_Adminhtml">Hackathon_MageMonitoring_Adminhtml</magemonitoring>
+                    </modules>
                 </args>
-            </magemonitoring>
+            </adminhtml>
         </routers>
     </admin>
-    
+
     <adminhtml>
         <layout>
             <updates>

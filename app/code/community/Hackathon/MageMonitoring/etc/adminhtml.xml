@@ -8,7 +8,7 @@
                         <magemonitoring translate="title" module="magemonitoring">
                             <title>Monitoring</title>
                             <sort_order>10</sort_order>
-                            <action>monitoring/overview</action>
+                            <action>adminhtml/monitoring</action>
                         </magemonitoring>
                     </children>
                 </tools>
