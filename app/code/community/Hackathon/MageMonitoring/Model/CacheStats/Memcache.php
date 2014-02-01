@@ -15,6 +15,12 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         }
     }
 
+    public function getId() {
+        $o = array();
+        preg_match("/.+_(.+)\z/", __CLASS__, $o);
+        return strtolower($o[1]);
+    }
+
     public function getName() {
         return 'Memcache';
     }

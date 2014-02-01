@@ -3,6 +3,13 @@
 interface Hackathon_MageMonitoring_Model_CacheStats
 {
     /**
+     * Returns id string, last part of classname in lower case to avoid possible conflicts.
+     *
+     * @return string
+     */
+    public function getId();
+
+    /**
      * Returns cache name.
      *
      * @return string

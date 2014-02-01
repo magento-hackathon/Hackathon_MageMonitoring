@@ -35,9 +35,9 @@ foreach ($activeCaches as $cache) {
 ?>
 <div class="entry-edit">
     <div class="entry-edit-head collapseable">
-        <a onclick="Fieldset.toggleCollapse('<?php echo strtolower($cache->getName()); ?>'); return false;" href="#" id="<?php echo strtolower($cache->getName()); ?>-head" class=""><?php echo $cache->getName(); ?></a>
+        <a onclick="Fieldset.toggleCollapse('<?php echo $cache->getId(); ?>'); return false;" href="#" id="<?php echo $cache->getId(); ?>-head" class=""><?php echo $cache->getName(); ?></a>
     </div>
-    <fieldset id="<?php echo strtolower($cache->getName()); ?>" class="collapseable">
+    <fieldset id="<?php echo $cache->getId(); ?>" class="collapseable">
         <div class="monitoring-data-container">
         <div class="md-item md-item-info">
             <div class="md-icon md-icon-info"></div>
@@ -58,7 +58,7 @@ foreach ($activeCaches as $cache) {
     </fieldset>
     <script type="text/javascript">
         //<![CDATA[
-        Fieldset.toggleCollapse('<?php echo strtolower($cache->getName()); ?>');
+        Fieldset.toggleCollapse('<?php echo $cache->getId(); ?>');
         //]]>
     </script>
 </div>

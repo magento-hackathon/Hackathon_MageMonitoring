@@ -1,6 +1,12 @@
 <?php
 class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMonitoring_Model_CacheStats {
 
+    public function getId() {
+        $o = array();
+        preg_match("/.+_(.+)\z/", __CLASS__, $o);
+        return strtolower($o[1]);
+    }
+
     public function getName() {
         return 'APCU';
     }
