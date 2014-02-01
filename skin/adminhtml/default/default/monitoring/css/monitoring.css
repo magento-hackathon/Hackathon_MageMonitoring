@@ -13,8 +13,7 @@
 .md-item {
     border-bottom: 1px solid #CCDFCE;
     min-width: 500px;
-    height: 24px;
-    line-height: 24px;
+    min-height: 24px;
 }
 
 .md-item:first-child {
@@ -42,9 +41,9 @@
     height: 24px;
     margin-left: 10px;
     background: transparent url(../images/statuses.png) no-repeat;
-    float: left;
-    display: block;
+    display: inline-block;
     line-height: 24px;
+    vertical-align: top;
 }
 
 .md-icon-info {
@@ -66,8 +65,9 @@
 .md-item-title,
 .md-item-value {
     font-weight: bold;
-    float: left;
-    padding-left: 10px;
+    display: inline-block;
     width: 40%;
+    vertical-align: top;
+    padding: 3px 0 0 10px;
 }
 
