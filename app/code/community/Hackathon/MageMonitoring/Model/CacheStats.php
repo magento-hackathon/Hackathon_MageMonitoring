@@ -8,11 +8,17 @@ interface Hackathon_MageMonitoring_Model_CacheStats {
      */
     public function getName();
     /**
-     * Returns version information of cache.
+     * Returns version string.
      *
      * @return string
      */
     public function getVersion();
+    /**
+     * Returns true if the cache is currently active.
+     *
+     * @return bool
+     */
+    public function isActive();
     /**
      * Returns maximum cache size in bytes, return false if not implemented
      *
