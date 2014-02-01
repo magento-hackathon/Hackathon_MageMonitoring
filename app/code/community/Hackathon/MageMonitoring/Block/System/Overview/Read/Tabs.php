@@ -53,15 +53,15 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
             )
         );
 
-        $this->addTab(
-            'example_section', array(
-                'label'   => $this->__('Example'),
-                'title'   => $this->__('Example'),
-                'content' => $this->getLayout()->createBlock(
-                    'magemonitoring/system_overview_read_tabs_example'
-                )->toHtml(),
-            )
-        );
+//        $this->addTab(
+//            'example_section', array(
+//                'label'   => $this->__('Example'),
+//                'title'   => $this->__('Example'),
+//                'content' => $this->getLayout()->createBlock(
+//                    'magemonitoring/system_overview_read_tabs_example'
+//                )->toHtml(),
+//            )
+//        );
 
         return parent::_beforeToHtml();
     }

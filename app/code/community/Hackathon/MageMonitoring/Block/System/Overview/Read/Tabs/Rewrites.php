@@ -12,7 +12,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Rewrites
      */
     public function getRewritesInfo()
     {
-        $rewrites = Mage::getModel('magemonitoring/rewrites')->getRewrites();
+        $rewrites = Mage::helper('magemonitoring/rewrites')->getRewrites();
 
         return $rewrites;
     }

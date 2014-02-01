@@ -37,6 +37,7 @@ foreach ($activeCaches as $cache) {
     <div class="entry-edit-head collapseable">
         <a onclick="Fieldset.toggleCollapse('<?php echo $cache->getId(); ?>'); return false;" href="#" id="<?php echo $cache->getId(); ?>-head" class=""><?php echo $cache->getName(); ?></a>
     </div>
+
     <fieldset id="<?php echo $cache->getId(); ?>" class="collapseable">
         <div class="monitoring-data-container">
         <div class="md-item md-item-info">
@@ -54,6 +55,11 @@ foreach ($activeCaches as $cache) {
             <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
             <div class="md-item-value"><?php echo $cache->getCacheHits() . ' / ' . $cache->getCacheMisses(); ?></div>
         </div>
+
+        <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want flush this cache') ?>', '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">
+            <span><span><?php echo $this->__('Flush cache %s', $cache->getNAme()); ?></span></span>
+        </button>
+        <div class="clear"></div>
         </div>
     </fieldset>
     <script type="text/javascript">

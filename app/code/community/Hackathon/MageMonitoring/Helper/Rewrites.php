@@ -25,7 +25,7 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
+class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
 {
     protected $_rewriteTypes = array(
         'blocks',
@@ -133,23 +133,24 @@ class Hackathon_MageMonitoring_Model_Rewrites extends Mage_Core_Model_Config
     /**
      * Returns loaded class by type like models or blocks
      *
-     * @param string $type
-     * @param string $class
+     * @param string $type       Class Type
+     * @param string $classGroup Class Group Name
+     *
      * @return string
      */
-    protected function _getLoadedClass($type, $node)
+    protected function _getLoadedClass($type, $classGroup)
     {
         switch ($type) {
-        case 'blocks':
-            return Mage::getConfig()->getBlockClassName($node);
+            case 'blocks':
+                return Mage::getConfig()->getBlockClassName($classGroup);
 
-        case 'helpers':
-            return Mage::getConfig()->getHelperClassName($node);
+            case 'helpers':
+                return Mage::getConfig()->getHelperClassName($classGroup);
 
-        default:
-        case 'models':
-            return Mage::getConfig()->getModelClassName($node);
-            break;
+            default:
+            case 'models':
+                return Mage::getConfig()->getModelClassName($classGroup);
+                break;
         }
     }
 
