@@ -3,6 +3,7 @@
 class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage_Adminhtml_Block_Abstract
 {
     protected $_serverInfo = null;
+    protected $_mageInfo = null;
 
     protected function _construct()
     {
@@ -91,6 +92,22 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Main extends Mage
         } else {
             return $this->_getBsdCpuInfo();
         }
+    }
+
+    public function getMagentoInfo($value)
+    {
+        if (is_null($this->_mageInfo)) {
+            $mageVersion = Mage::getVersion();
+            $versionInfo = Mage::getVersionInfo();
+            if ($versionInfo['major'] == '1' && $versionInfo['minor'] < 9) {
+                $mageVersion .= $this->__(' Community Edition');
+            } else {
+                $mageVersion .= $this->__(' Enterprise Edition');
+            }
+            $this->_mageInfo['version'] = $mageVersion;
+        }
+
+        return $this->_mageInfo[$value];
     }
 
     /**

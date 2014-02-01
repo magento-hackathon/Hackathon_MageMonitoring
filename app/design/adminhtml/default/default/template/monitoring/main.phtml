@@ -18,7 +18,7 @@
  */
 ?>
 
-<h3 class="monitoring-section-title">Main information</h3>
+<h3 class="monitoring-section-title">Server information</h3>
 <div class="monitoring-data-container">
     <div class="md-item md-item-info">
         <div class="md-icon md-icon-info"></div>
@@ -78,5 +78,13 @@
         <div class="md-icon md-icon-info"></div>
         <div class="md-item-title"><?php echo $this->__('OS Information') ?></div>
         <div class="md-item-value"><?php echo $this->getOsInfo() ?></div>
+    </div>
+</div>
+    <h3 class="monitoring-section-title">Magento information</h3>
+<div class="monitoring-data-container">
+    <div class="md-item md-item-info">
+        <div class="md-icon md-icon-info"></div>
+        <div class="md-item-title"><?php echo $this->__('Magento Version') ?></div>
+        <div class="md-item-value"><?php echo $this->getMagentoInfo('version') ?></div>
     </div>
 </div>
