@@ -34,24 +34,29 @@ $allExtensions = $this->getAllExtensions();
 <div class="entry-edit">
     <div class="entry-edit-head collapseable">
         <a onclick="Fieldset.toggleCollapse('main_information'); return false;" href="#" id="main_information-head" class=""><?php echo $this->__('PHP Main Information') ?></a>
+        <input type="hidden" id="main_information-state" value="0" />
     </div>
     <fieldset id="main_information" class="collapseable">
-        <div class="md-item md-item-<?php echo $version['class'] ?>">
-            <div class="md-icon md-icon-<?php echo $version['class'] ?>"></div>
-            <div class="md-item-title"><?php echo $version['label']; ?></div>
-            <div class="md-item-value"><?php echo $version['installed']; ?></div>
+        <div class="monitoring-data-container">
+            <div class="md-item md-item-<?php echo $version['class'] ?>">
+                <div class="md-icon md-icon-<?php echo $version['class'] ?>"></div>
+                <div class="md-item-title"><?php echo $version['label']; ?></div>
+                <div class="md-item-value"><?php echo $version['installed']; ?></div>
+            </div>
         </div>
         <?php foreach ($configs as $config) { ?>
-        <div class="md-item md-item-<?php echo $config['class'] ?>">
-            <div class="md-icon md-icon-<?php echo $config['class'] ?>"></div>
-            <div class="md-item-title"><?php echo $config['label']; ?></div>
-            <div class="md-item-value"><?php echo $config['installed']; ?></div>
+        <div class="monitoring-data-container">
+            <div class="md-item md-item-<?php echo $config['class'] ?>">
+                <div class="md-icon md-icon-<?php echo $config['class'] ?>"></div>
+                <div class="md-item-title"><?php echo $config['label']; ?></div>
+                <div class="md-item-value"><?php echo $config['installed']; ?></div>
+            </div>
         </div>
         <?php } ?>
     </fieldset>
     <script type="text/javascript">
         //<![CDATA[
-        Fieldset.applyCollapse('main_information');
+        Fieldset.toggleCollapse('main_information');
         //]]>
     </script>
     <div class="entry-edit-head collapseable">
@@ -59,11 +64,13 @@ $allExtensions = $this->getAllExtensions();
     </div>
     <fieldset id="required_extension" class="collapseable">
         <?php foreach ($extensions as $config) { ?>
+        <div class="monitoring-data-container">
             <div class="md-item md-item-<?php echo $config['class'] ?>">
                 <div class="md-icon md-icon-<?php echo $config['class'] ?>"></div>
                 <div class="md-item-title"><?php echo $config['label']; ?></div>
                 <div class="md-item-value"><?php echo $config['installed']; ?></div>
             </div>
+        </div>
         <?php } ?>
     </fieldset>
     <script type="text/javascript">
@@ -76,11 +83,13 @@ $allExtensions = $this->getAllExtensions();
     </div>
     <fieldset id="all_extension" class="collapseable">
         <?php foreach ($allExtensions as $config) { ?>
+        <div class="monitoring-data-container">
             <div class="md-item md-item-<?php echo $config['class'] ?>">
                 <div class="md-icon md-icon-<?php echo $config['class'] ?>"></div>
                 <div class="md-item-title"><?php echo $config['label']; ?></div>
                 <div class="md-item-value"><?php echo $config['installed']; ?></div>
             </div>
+        </div>
         <?php } ?>
     </fieldset>
     <script type="text/javascript">
@@ -88,19 +97,25 @@ $allExtensions = $this->getAllExtensions();
         Fieldset.applyCollapse('all_extension');
         //]]>
     </script>
+    <div class="entry-edit-head collapseable">
+        <a onclick="Fieldset.toggleCollapse('php_info'); return false;" href="#" id="php_info-head" class=""><?php echo $this->__('PHP Info') ?></a>
+    </div>
+    <fieldset id="php_info" class="collapseable">
+    <?php foreach ($this->getPhpInfo() as $title => $configs) { ?>
+        <h1><?php echo $title ?></h1>
+        <div class="monitoring-data-container">
+        <?php if (is_array($configs)): ?>
+            <?php foreach ($configs as $key => $config) { ?>
+                <div class="md-item-title"><strong><?php echo $key ?>:</strong></div>
+                <div class="md-item-value"><?php echo implode(' (new) - ', (array) $config); ?></div>
+            <?php } ?>
+        <?php endif; ?>
+        </div>
+    <?php } ?>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.applyCollapse('php_info');
+        //]]>
+    </script>
 </div>
-<?php
-//ob_start();
-//phpinfo(1);
-//$phpinfo = ob_get_contents();
-//ob_end_clean();
-//
-//preg_match_all('#<body[^>]*>(.*)</body>#siU', $phpinfo, $output);
-//$output = preg_replace('#<table#', '<table class="adminlist" align="center"', $output[1][0]);
-//$output = preg_replace('#(\w),(\w)#', '\1, \2', $output);
-//$output = preg_replace('#border="0" cellpadding="3" width="600"#', 'border="1" cellspacing="1" cellpadding="4" width="95%"', $output);
-//$output = preg_replace('#<hr />#', '', $output);
-//$output = str_replace('<div class="center">', '', $output);
-//$output = str_replace('</div>', '', $output);
-//
-//echo $output;
