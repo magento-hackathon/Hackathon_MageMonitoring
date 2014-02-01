@@ -1,6 +1,7 @@
 <?php
-interface Hackathon_MageMonitoring_Model_CacheStats {
 
+interface Hackathon_MageMonitoring_Model_CacheStats
+{
     /**
      * Returns cache name.
      *
