@@ -52,16 +52,17 @@ foreach ($activeCaches as $cache) {
                                                   . 'M / ' .
                                                   Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryMax(), true)
                                                   . 'M'; ?>
-                <?php if ($cache->getMemoryUsed() != 'ERR' && $cache->getMemoryMax() != 'ERR' &&
-                    $cache->getMemoryUsed() > 0 && $cache->getMemoryMax() > 0) { ?>
+            </div>
+            <div class="md-item-chart">
+                <?php if ($cache->getMemoryMax() > 0) { ?>
 
-                    <canvas id="<?php echo $cache->getId(); ?>_mem_chart" width="150" height="150"></canvas>
+                    <canvas id="<?php echo $cache->getId(); ?>_mem_chart" width="76" height="76"></canvas>
                     <script type="text/javascript">
                         //<![CDATA[
                          var ctx = document.getElementById("<?php echo $cache->getId(); ?>_mem_chart").getContext("2d");
                          var data = [
                                         {
-                                           value: <?php echo $cache->getMemoryMax()-$cache->getMemoryUsed(); ?> ,
+                                           value: <?php echo (int)$cache->getMemoryMax()-(int)$cache->getMemoryUsed(); ?> ,
                                            color:"#00F000"
                                         },
                                         {
@@ -79,15 +80,15 @@ foreach ($activeCaches as $cache) {
             <div class="md-icon md-icon-info"></div>
             <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
             <?php $hitMissRatio = $this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()); ?>
-            <div class="md-item-value"><?php echo $cache->getCacheHits() . ' / ' . $cache->getCacheMisses() . ' - ' . $hitMissRatio . '%'; ?>
-
-                <?php if ($cache->getCacheHits() != 'ERR' && $cache->getCacheMisses() != 'ERR' &&
-                    $cache->getCacheHits() > 0 && $cache->getCacheMisses() > 0) { ?>
-
-                    <canvas id="<?php echo $cache->getId(); ?>_chart" width="150" height="150"></canvas>
+            <div class="md-item-value"><?php echo $cache->getCacheHits() .
+                                                  ' / ' . $cache->getCacheMisses() .
+                                                  ' - ' . $hitMissRatio . '%'; ?>
+            </div>
+            <div class="md-item-chart">
+                    <canvas id="<?php echo $cache->getId(); ?>_hitmiss_chart" width="76" height="76"></canvas>
                     <script type="text/javascript">
                         //<![CDATA[
-                         var ctx = document.getElementById("<?php echo $cache->getId(); ?>_chart").getContext("2d");
+                         var ctx = document.getElementById("<?php echo $cache->getId(); ?>_hitmiss_chart").getContext("2d");
                          var data = [
                                         {
                                            value: <?php echo $cache->getCacheHits(); ?> ,
@@ -98,15 +99,15 @@ foreach ($activeCaches as $cache) {
                                            color : "#F00000"
                                         }
                                     ];
-                         var <?php echo $cache->getId(); ?>Chart = new Chart(ctx).Pie(data);
+                         var <?php echo $cache->getId(); ?>HitMissChart = new Chart(ctx).Pie(data);
                         //]]>
                     </script>
-                <?php } ?>
             </div>
         </div>
 
-        <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want flush this cache') ?>', '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">
-            <span><span><?php echo $this->__('Flush cache %s', $cache->getNAme()); ?></span></span>
+        <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want to flush the ' . $cache->getName() . ' cache?') ?>',
+                                                                                        '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">
+            <span><span><?php echo $this->__('Flush %s', $cache->getName()); ?></span></span>
         </button>
         <div class="clear"></div>
         </div>
