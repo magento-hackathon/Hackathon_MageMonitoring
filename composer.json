@@ -1,0 +1,24 @@
+{
+    "name":"hackathon/hackathon_magemonitoring",
+    "type":"magento-module",
+    "license":"none",
+    "homepage":"https://github.com/magento-hackathon/Hackathon_MageMonitoring.git",
+    "description":"Magento Monitoring Module to get information about the current installation",
+    "authors":[
+        {
+            "name":"diglin",
+        },
+        {
+            "name":"Zifius",
+        },
+        {
+            "name":"edannenberg",
+        }
+        {
+            "name":"Gribnik",
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*",
+    }
+}
