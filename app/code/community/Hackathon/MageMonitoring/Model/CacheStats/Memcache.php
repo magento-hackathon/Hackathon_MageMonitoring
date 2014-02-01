@@ -6,7 +6,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
     public function __construct()
     {
         try {
-            if ($this->_memCachePool == null) {
+            if ($this->_memCachePool == null && class_exists('Memcache', false)) {
                 $this->_memCachePool = new Memcache;
                 $this->_memCachePool->addServer('127.0.0.1', 11211);
             }

@@ -2,7 +2,7 @@
 
 class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
-    public function getActiveCaches()
+    public function getActiveCaches($cacheName = null)
     {
         // @todo: add caching mechanism (core_config_data with rescan button in backend?)
 
@@ -26,7 +26,9 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         $activeCaches = array();
         foreach ($cacheClasses as $cache) {
             $c = new $cache();
-            if ($c->isActive()) {
+            if ($c->isActive() && !is_null($cacheName) && strtolower($cacheName) == strtolower($c->getName())) {
+                return $c;
+            } else if ($c->isActive()) {
                 $activeCaches[] = $c;
             }
         }
