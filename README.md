@@ -10,9 +10,16 @@ The module gathers information of the current Magento installation:
 - OS / Server / Memory Information / Magento version vs available
 - PHP version and some important configuration values vs recommended
 - Modules installed and their version number
-- Cache statistics (APC, Memcache, ...)
+- Cache statistics with option to flush each cache (APC, APCU, Memcache, ZendOpcache)
+- Magento debug/exception logs
 - Check for class and template file rewrites
 
+### How to add a new cache
+
+- Have a look at the interface class Hackathon_MageMonitoring_Model_CacheStats
+- Implement the interface
+- Drop the class into Model/CacheStats
+- You are done. Pull requests welcome. ;)
 
 ### Core Contributors
 
