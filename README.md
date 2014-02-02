@@ -14,6 +14,10 @@ The module gathers information of the current Magento installation:
 - Magento debug/exception logs
 - Check for class and template file rewrites
 
+### Usage
+
+Go to the menu System > Tools > Monitoring
+
 Installation Instructions
 -------------------------
 
