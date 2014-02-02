@@ -1,0 +1,31 @@
+<?php
+
+/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Modules */
+$modules = $this->getModulesList();
+
+?>
+<?php //if (is_array($modules)) :?>
+<div class="entry-edit">
+    <div class="entry-edit-head collapseable">
+        <a class="open" id="modules_list-head" href="#" onclick="Fieldset.toggleCollapse('modules_list'); return false;">
+            <?php echo $this->__('Modules') ?>
+        </a>
+    </div>
+    <fieldset id="modules_list" class="collapseable">
+        <div class="monitoring-data-container">
+            <?php foreach ($modules as $key => $module) { ?>
+            <div class="md-item md-item-info">
+                <div class="md-icon md-icon-info"></div>
+                <div class="md-item-title"><?php echo $key ?></div>
+                <div class="md-item-value"><?php echo $module->version ?></div>
+            </div>
+            <?php }; ?>
+        </div>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('modules_list');
+        //]]>
+    </script>
+</div>
+<?php // endif; ?>
