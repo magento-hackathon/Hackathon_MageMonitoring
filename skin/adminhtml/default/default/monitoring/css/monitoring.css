@@ -67,11 +67,20 @@ h4.monitoring-section-title {
 }
 
 .md-item-title,
-.md-item-value {
+.md-item-value,
+.md-item-chart {
     font-weight: bold;
     display: inline-block;
-    width: 40%;
+    width: 45%;
     vertical-align: top;
     padding: 3px 0 0 10px;
 }
 
+.md-item-chart {
+    width: 5%;
+}
+
+.f-right {
+    margin: 3px;
+}
+}

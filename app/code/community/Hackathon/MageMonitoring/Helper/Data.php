@@ -1,4 +1,27 @@
 <?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Hackathon
+ * @package     Hackathon_MageMonitoring
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 
 class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
@@ -114,6 +137,60 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
 
         return $pi;
+    }
+
+    /**
+     * tail -n in php, kindly lifted from https://gist.github.com/lorenzos/1711e81a9162320fde20
+     *
+     * @param string $filepath
+     * @param int $lines
+     * @param bool $adaptive use adaptive buffersize for seeking, if false use static buffersize of 4096
+     *
+     * @return string
+     */
+    function tailFile($filepath, $lines = 1, $adaptive = true) {
+        // Open file
+        $f = @fopen($filepath, "rb");
+        if ($f === false) return false;
+
+        // Sets buffer size
+        if (!$adaptive) $buffer = 4096;
+        else $buffer = ($lines < 2 ? 64 : ($lines < 10 ? 512 : 4096));
+
+        // Jump to last character
+        fseek($f, -1, SEEK_END);
+
+        // Read it and adjust line number if necessary
+        // (Otherwise the result would be wrong if file doesn't end with a blank line)
+        if (fread($f, 1) != "\n") $lines -= 1;
+
+        // Start reading
+        $output = '';
+        $chunk = '';
+
+        // While we would like more
+        while (ftell($f) > 0 && $lines >= 0) {
+            // Figure out how far back we should jump
+            $seek = min(ftell($f), $buffer);
+            // Do the jump (backwards, relative to where we are)
+            fseek($f, -$seek, SEEK_CUR);
+            // Read a chunk and prepend it to our output
+            $output = ($chunk = fread($f, $seek)) . $output;
+            // Jump back to where we started reading
+            fseek($f, -mb_strlen($chunk, '8bit'), SEEK_CUR);
+            // Decrease our line counter
+            $lines -= substr_count($chunk, "\n");
+        }
+
+        // While we have too many lines
+        // (Because of buffer size we might have read too many)
+        while ($lines++ < 0) {
+            // Find first newline and remove all text before that
+            $output = substr($output, strpos($output, "\n") + 1);
+        }
+        // Close file and return
+        fclose($f);
+        return trim($output);
     }
 
 }

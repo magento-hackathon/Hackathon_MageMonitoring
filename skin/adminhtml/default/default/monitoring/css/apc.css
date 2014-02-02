@@ -146,7 +146,7 @@ div.graph table td { padding:0.2em 1em 0.4em 1em; }
 
 div.div1,div.div2 { margin-bottom:1em; width:35em; }
 div.div3 { position:absolute; left:40em; top:1em; width:580px; }
-//div.div3 { position:absolute; left:37em; top:1em; right:1em; }
+/*div.div3 { position:absolute; left:37em; top:1em; right:1em; }*/
 
 div.sorting { margin:1.5em 0em 1.5em 2em }
 .center { text-align:center }

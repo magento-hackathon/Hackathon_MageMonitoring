@@ -3,3 +3,4 @@ app/etc/modules/Hackathon_MageMonitoring.xml app/etc/modules/Hackathon_MageMonit
 app/design/adminhtml/default/default/layout/monitoring.xml app/design/adminhtml/default/default/layout/monitoring.xml
 app/design/adminhtml/default/default/template/monitoring app/design/adminhtml/default/default/template/monitoring
 skin/adminhtml/default/default/monitoring skin/adminhtml/default/default/monitoring
+js/chartjs/Chart.min.js js/chartjs/Chart.min.js

@@ -23,13 +23,21 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Modules
-    extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Logs extends Mage_Adminhtml_Block_Abstract
 {
-    protected $_template = 'monitoring/modules.phtml';
-
-    public function getModulesList()
+    protected function _construct()
     {
-        return (array) Mage::getConfig()->getModuleConfig();
+        $this->setTemplate('monitoring/logs.phtml');
+        return parent::_construct();
+    }
+
+    public function getDebugLog($lines=30) {
+        $debugLogName = Mage::getStoreConfig('dev/log/file');
+        return Mage::helper('magemonitoring')->tailFile('var/log/'.$debugLogName, $lines);
+    }
+
+    public function getExceptionLog($lines=30) {
+        $exLogName = Mage::getStoreConfig('dev/log/exception_file');
+        return Mage::helper('magemonitoring')->tailFile('var/log/'.$exLogName, $lines);
     }
 }
