@@ -58,7 +58,7 @@ Uninstallation
 --------------
 * Remove all extension files from your Magento installation
 * Via modman: `modman remove Hackathon_MageMonitoring`
-" Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring`
+* Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring`
 
 ### How to add a new cache
 
