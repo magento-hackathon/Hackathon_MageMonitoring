@@ -1,9 +1,9 @@
 {
-    "name":"hackathon/hackathon_magemonitoring",
+    "name":"magento-hackathon/hackathon_magemonitoring",
     "type":"magento-module",
     "license":"none",
     "homepage":"https://github.com/magento-hackathon/Hackathon_MageMonitoring.git",
-    "description":"Magento Monitoring Module to get information about the current installation",
+    "description":"Magento Monitoring Module to get information about the current installation (Server,Cache,PHP,Rewrites,Logs,...)",
     "authors":[
         {
             "name":"diglin",

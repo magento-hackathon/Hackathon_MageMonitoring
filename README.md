@@ -1,7 +1,7 @@
 MageMonitoring
 ==============
 
-Work in progress Magento Module to get a health status of Magento Configuration (Server, PHP, APC, ...)
+Magento Extension to get health of your Magento installation (Server, PHP, APC, Logs, Rewrites, Modules version installed ...)
 
 ### Features
 
@@ -13,6 +13,52 @@ The module gathers information of the current Magento installation:
 - Cache statistics with option to flush each cache (APC, APCU, Memcache, ZendOpcache)
 - Magento debug/exception logs
 - Check for class and template file rewrites
+
+Installation Instructions
+-------------------------
+
+### Via modman
+
+- Install [modman](https://github.com/colinmollenhour/modman)
+- Use the command from your Magento installation folder: `modman clone https://github.com/magento-hackathon/Hackathon_MageMonitoring/`
+
+### Via composer
+- Install [composer](http://getcomposer.org/download/)
+- Install [Magento Composer](https://github.com/magento-hackathon/magento-composer-installer)
+- Create a composer.json into your project like the following sample:
+
+```json
+{
+    ...
+    "require": {
+        "magento-hackathon/hackathon_magemonitoring":"*"
+    },
+    "repositories": [
+	    {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ],
+    "extra":{
+        "magento-root-dir": "./"
+    }
+}
+```
+
+- Then from your `composer.json` folder: `php composer.phar install` or `composer install`
+
+### Manually
+- You can copy the files from the folders of this repository to the same folders of your installation
+
+
+### Installation in ALL CASES
+* Clear the cache, logout from the admin panel and then login again.
+
+Uninstallation
+--------------
+* Remove all extension files from your Magento installation
+* Via modman: `modman remove Hackathon_MageMonitoring`
+" Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring`
 
 ### How to add a new cache
 
@@ -29,6 +75,6 @@ The module gathers information of the current Magento installation:
 - [Yaroslav Rogoza](https://github.com/Gribnik)
 - [Nick Kravchuk](https://github.com/nickua)
 
-### Current Status of Project
+### Status of Project
 
-In progress
+STABLE
