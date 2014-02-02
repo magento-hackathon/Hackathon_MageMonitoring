@@ -8,9 +8,17 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
     {
         try {
             if ($this->_memCachePool == null && class_exists('Memcache', false)) {
-                $this->_memCachePool = new Memcache;
-                $this->_memCachePool->addServer('127.0.0.1', 11211);
-                $this->_memCacheStats = $this->_memCachePool->getStats();
+                $localXml = simplexml_load_file('app/etc/local.xml', null, LIBXML_NOCDATA);
+
+                if ($xr = $localXml->xpath('//cache/memcached/servers/server')) {
+                    $this->_memCachePool = new Memcache;
+                    foreach ($xr as $server) {
+                        $host = (string)$server->host;
+                        $port = (string)$server->port;
+                        $this->_memCachePool->addServer($host, $port);
+                    }
+                    $this->_memCacheStats = $this->_memCachePool->getStats();
+                }
             }
         } catch (Exception $e) {
             Mage::logException($e);
@@ -42,7 +50,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         if (isset($this->_memCacheStats['limit_maxbytes'])) {
             return $this->_memCacheStats['limit_maxbytes'];
         }
-        return 'ERR';
+        return 0;
     }
 
     public function getMemoryUsed() {
