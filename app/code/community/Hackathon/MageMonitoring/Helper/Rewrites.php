@@ -98,7 +98,9 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
 
         $rewrites = array_merge($rewrites, $this->_loadLocalAutoloaderRewrites());
 
-        if (empty($rewrites['blocks']) && empty($rewrites['models']) && empty($rewrites['helpers'])) {
+        if (empty($rewrites['blocks']) && empty($rewrites['models'])
+            && empty($rewrites['helpers']) && empty($rewrites['autoload'])
+        ) {
             return false;
         }
 
