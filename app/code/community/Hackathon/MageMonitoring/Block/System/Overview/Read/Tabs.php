@@ -24,11 +24,21 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
         );
 
         $this->addTab(
-            'main_section', array(
-                'label'   => $this->__('System Overview'),
-                'title'   => $this->__('System Overview'),
+                'main_section', array(
+                        'label'   => $this->__('System Overview'),
+                        'title'   => $this->__('System Overview'),
+                        'content' => $this->getLayout()->createBlock(
+                                'magemonitoring/system_overview_read_tabs_overview'
+                        )->toHtml(),
+                )
+        );
+
+        $this->addTab(
+            'logs_section', array(
+                'label'   => $this->__('System Logs'),
+                'title'   => $this->__('System Logs'),
                 'content' => $this->getLayout()->createBlock(
-                    'magemonitoring/system_overview_read_tabs_overview'
+                    'magemonitoring/system_overview_read_tabs_logs'
                 )->toHtml(),
             )
         );
