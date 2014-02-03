@@ -23,7 +23,8 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon_MageMonitoring_Model_CacheStats
+class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache extends Hackathon_MageMonitoring_Model_CacheStats_Abstract
+                                                            implements Hackathon_MageMonitoring_Model_CacheStats
 {
 
     private $_opCacheConfig;
@@ -37,18 +38,27 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon
         }
     }
 
-    public function getId()
-    {
-        $o = array();
-        preg_match("/.+_(.+)\z/", __CLASS__, $o);
-        return strtolower($o[1]);
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
+     */
+    public function getId() {
+        return parent::getId(__CLASS__);
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getName()
+     */
     public function getName()
     {
         return 'ZendOpCache';
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getVersion()
+     */
     public function getVersion()
     {
         if (isset($this->_opCacheConfig['version'])) {
@@ -57,6 +67,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon
         return 'ERR';
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::isActive()
+     */
     public function isActive()
     {
         if (extension_loaded('Zend OPcache')) {
@@ -67,6 +81,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon
         return false;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryMax()
+     */
     public function getMemoryMax()
     {
         if (isset($this->_opCacheStats['memory_usage'])) {
@@ -75,6 +93,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryUsed()
+     */
     public function getMemoryUsed()
     {
         if (isset($this->_opCacheStats['memory_usage'])) {
@@ -83,6 +105,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheHits()
+     */
     public function getCacheHits()
     {
         if (isset($this->_opCacheStats['opcache_statistics'])) {
@@ -91,6 +117,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheMisses()
+     */
     public function getCacheMisses()
     {
         if (isset($this->_opCacheStats['opcache_statistics'])) {
@@ -99,8 +129,13 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache implements Hackathon
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::flushCache()
+     */
     public function flushCache()
     {
         return opcache_reset();
     }
+
 }

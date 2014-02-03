@@ -22,7 +22,8 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMonitoring_Model_CacheStats
+class Hackathon_MageMonitoring_Model_CacheStats_Apcu extends Hackathon_MageMonitoring_Model_CacheStats_Abstract
+                                                     implements Hackathon_MageMonitoring_Model_CacheStats
 {
 
     private $_opCacheStats;
@@ -34,23 +35,36 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
         }
     }
 
-    public function getId()
-    {
-        $o = array();
-        preg_match("/.+_(.+)\z/", __CLASS__, $o);
-        return strtolower($o[1]);
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
+     */
+    public function getId() {
+        return parent::getId(__CLASS__);
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getName()
+     */
     public function getName()
     {
         return 'APC User Cache';
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getVersion()
+     */
     public function getVersion()
     {
         return phpversion('apc');
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::isActive()
+     */
     public function isActive()
     {
         if (extension_loaded('apc') && extension_loaded('apcu') && ini_get('apc.enabled')) {
@@ -59,11 +73,19 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
         return false;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryMax()
+     */
     public function getMemoryMax()
     {
         return Mage::helper('magemonitoring')->getValueInByte(ini_get('apc.shm_size'));
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryUsed()
+     */
     public function getMemoryUsed()
     {
         if (isset($this->_opCacheStats['mem_size'])) {
@@ -72,6 +94,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheHits()
+     */
     public function getCacheHits()
     {
         if (isset($this->_opCacheStats['nhits'])) {
@@ -80,6 +106,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheMisses()
+     */
     public function getCacheMisses()
     {
         if (isset($this->_opCacheStats['nmisses'])) {
@@ -88,6 +118,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apcu implements Hackathon_MageMo
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::flushCache()
+     */
     public function flushCache()
     {
         return apc_clear_cache();

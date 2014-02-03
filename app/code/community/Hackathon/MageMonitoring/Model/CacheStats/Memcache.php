@@ -22,7 +22,8 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_MageMonitoring_Model_CacheStats
+class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageMonitoring_Model_CacheStats_Abstract
+                                                         implements Hackathon_MageMonitoring_Model_CacheStats
 {
     private $_memCachePool;
     private $_memCacheStats;
@@ -48,23 +49,36 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         }
     }
 
-    public function getId()
-    {
-        $o = array();
-        preg_match("/.+_(.+)\z/", __CLASS__, $o);
-        return strtolower($o[1]);
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
+     */
+    public function getId() {
+        return parent::getId(__CLASS__);
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getName()
+     */
     public function getName()
     {
         return 'Memcache';
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getVersion()
+     */
     public function getVersion()
     {
         return $this->_memCachePool->getVersion();
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::isActive()
+     */
     public function isActive()
     {
         if ($this->_memCachePool && $this->_memCachePool->getVersion()) {
@@ -73,6 +87,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         return false;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryMax()
+     */
     public function getMemoryMax()
     {
         if (isset($this->_memCacheStats['limit_maxbytes'])) {
@@ -81,6 +99,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryUsed()
+     */
     public function getMemoryUsed()
     {
         if (isset($this->_memCacheStats['bytes'])) {
@@ -89,6 +111,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheHits()
+     */
     public function getCacheHits()
     {
         if (isset($this->_memCacheStats['get_hits'])) {
@@ -97,6 +123,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheMisses()
+     */
     public function getCacheMisses()
     {
         if (isset($this->_memCacheStats['get_misses'])) {
@@ -105,6 +135,10 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::flushCache()
+     */
     public function flushCache()
     {
         $this->_memCachePool->flush();
