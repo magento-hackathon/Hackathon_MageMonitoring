@@ -29,7 +29,7 @@
 $activeCaches = Mage::helper('magemonitoring')->getActiveCaches();
 
 if (empty($activeCaches)) {
-    echo $this->__('No active caches found. Consider installing at least a PHP opcache.');
+    echo '<h4>'.$this->__('No active caches found. Consider installing at least a PHP opcache.').'</h4>';
 }
 foreach ($activeCaches as $cache) {
 ?>
@@ -45,6 +45,7 @@ foreach ($activeCaches as $cache) {
             <div class="md-item-title"><?php echo $this->__('Version') ?></div>
             <div class="md-item-value"><?php echo $cache->getVersion(); ?></div>
         </div>
+        <?php // Memory stats ?>
         <div class="md-item md-item-info">
             <div class="md-icon md-icon-info"></div>
             <div class="md-item-title"><?php echo $this->__('Memory') ?></div>
@@ -54,28 +55,10 @@ foreach ($activeCaches as $cache) {
                                                   . 'M'; ?>
             </div>
             <div class="md-item-chart">
-                <?php if ($cache->getMemoryMax() > 0) { ?>
-
-                    <canvas id="<?php echo $cache->getId(); ?>_mem_chart" width="76" height="76"></canvas>
-                    <script type="text/javascript">
-                        //<![CDATA[
-                         var ctx = document.getElementById("<?php echo $cache->getId(); ?>_mem_chart").getContext("2d");
-                         var data = [
-                                        {
-                                           value: <?php echo (int)$cache->getMemoryMax()-(int)$cache->getMemoryUsed(); ?> ,
-                                           color:"#00F000"
-                                        },
-                                        {
-                                           value : <?php echo $cache->getMemoryUsed(); ?>,
-                                           color : "#F00000"
-                                        }
-                                    ];
-                         var <?php echo $cache->getId(); ?>MemChart = new Chart(ctx).Pie(data);
-                        //]]>
-                    </script>
-                <?php } ?>
+                <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($this->getMemoryChartData($cache))->toHtml(); ?>
             </div>
         </div>
+        <?php // Hit/Miss stats ?>
         <div class="md-item md-item-info">
             <div class="md-icon md-icon-info"></div>
             <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
@@ -85,25 +68,26 @@ foreach ($activeCaches as $cache) {
                                                   ' - ' . $hitMissRatio . '%'; ?>
             </div>
             <div class="md-item-chart">
-                    <canvas id="<?php echo $cache->getId(); ?>_hitmiss_chart" width="76" height="76"></canvas>
-                    <script type="text/javascript">
-                        //<![CDATA[
-                         var ctx = document.getElementById("<?php echo $cache->getId(); ?>_hitmiss_chart").getContext("2d");
-                         var data = [
-                                        {
-                                           value: <?php echo $cache->getCacheHits(); ?> ,
-                                           color:"#00F000"
-                                        },
-                                        {
-                                           value : <?php echo $cache->getCacheMisses(); ?>,
-                                           color : "#F00000"
-                                        }
-                                    ];
-                         var <?php echo $cache->getId(); ?>HitMissChart = new Chart(ctx).Pie(data);
-                        //]]>
-                    </script>
+                <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($this->getHitMissChartData($cache))->toHtml(); ?>
             </div>
         </div>
+        <?php // Any custom stats ?>
+        <?php if ($customStats = $cache->getCustomStats()) {
+                  foreach ($customStats as $stats) {
+         ?>
+           <div class="md-item md-item-<?php echo $stats['css_class'];?>">
+               <div class="md-icon md-icon-<?php echo $stats['css_class'];?>"></div>
+               <div class="md-item-title"><?php echo $this->__($stats['label']) ?></div>
+               <div class="md-item-value"><?php echo $stats['value'];?></div>
+               <?php if (isset($stats['chart']) && is_array($stats['chart'])) {?>
+               <div class="md-item-<?php echo ((int)$stats['chart']['canvas_width'] <= 76) ? 'chart' : 'value'; ?>">
+                    <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($stats['chart'])->toHtml(); ?>
+               </div>
+               <?php } ?>
+           </div>
+        <?php
+                }
+            } ?>
 
         <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want to flush the ' . $cache->getName() . ' cache?') ?>',
                                                                                         '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">

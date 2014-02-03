@@ -31,6 +31,51 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extend
         return parent::_construct();
     }
 
+    /**
+     * Returns memory chart data as array, feeds Hackathon_MageMonitoring_Block_Chart.
+     *
+     * @param Hackathon_MageMonitoring_Model_CacheStats $cache
+     * @return array
+     */
+    public function getMemoryChartData($cache) {
+        $free = (int)$cache->getMemoryMax()-(int)$cache->getMemoryUsed();
+        $used = $cache->getMemoryUsed();
+        return array( 'chart_id' => $cache->getId().'_chart_memory',
+                      'chart_type' => 'Pie',
+                      'canvas_width' => 76,
+                      'canvas_height' => 76,
+                      'chart_data' => array(array('value' => $free, 'color' => '#00f000'),
+                                            array('value' => $used, 'color' => '#f00000')
+                                            )
+                    );
+    }
+
+    /**
+     * Returns hit/miss chart data as array, feeds Hackathon_MageMonitoring_Block_Chart.
+     *
+     * @param Hackathon_MageMonitoring_Model_CacheStats $cache
+     * @return array
+     */
+    public function getHitMissChartData($cache) {
+        $hits = $cache->getCacheHits();
+        $misses = $cache->getCacheMisses();
+        return array( 'chart_id' => $cache->getId().'_chart_hitmiss',
+                      'chart_type' => 'Pie',
+                      'canvas_width' => 76,
+                      'canvas_height' => 76,
+                      'chart_data' => array(array('value' => $hits, 'color' => '#00f000'),
+                                            array('value' => $misses, 'color' => '#f00000')
+                                            )
+                    );
+    }
+
+    /**
+     * Returns hit/miss percentage.
+     *
+     * @param int $hits
+     * @param int $misses
+     * @return number
+     */
     public function getHitRatio($hits, $misses) {
         $total = $misses+$hits;
         if ($total != 0) {
@@ -39,4 +84,5 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extend
             return 0;
         }
     }
+
 }
