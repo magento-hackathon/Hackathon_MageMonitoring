@@ -133,7 +133,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
     public function getMagentoInfo($value)
     {
         if (is_null($this->_mageInfo)) {
-            $this->_mageInfo['version'] = ' ' . Mage::getEdition() . ' Edition';
+            $this->_mageInfo['version'] = Mage::getVersion() . ' ' . Mage::getEdition() . ' Edition';
             $statInfo = $this->getMagentoStatInfo();
             if (!is_null($statInfo)) {
                 $this->_mageInfo = array_merge($this->_mageInfo, $statInfo);
