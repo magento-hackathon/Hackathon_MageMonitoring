@@ -46,8 +46,8 @@ foreach ($activeCaches as $cache) {
             <div class="md-item-value"><?php echo $cache->getVersion(); ?></div>
         </div>
         <?php // Memory stats ?>
-        <div class="md-item md-item-info">
-            <div class="md-icon md-icon-info"></div>
+        <div class="md-item md-item-<?php echo $this->getMemoryCssId($cache); ?>">
+            <div class="md-icon md-icon-<?php echo $this->getMemoryCssId($cache); ?>"></div>
             <div class="md-item-title"><?php echo $this->__('Memory') ?></div>
             <div class="md-item-value"><?php echo Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryUsed(), true)
                                                   . 'M / ' .
@@ -59,8 +59,8 @@ foreach ($activeCaches as $cache) {
             </div>
         </div>
         <?php // Hit/Miss stats ?>
-        <div class="md-item md-item-info">
-            <div class="md-icon md-icon-info"></div>
+        <div class="md-item md-item-<?php echo $this->getHitMissCssId($cache); ?>">
+            <div class="md-icon md-icon-<?php echo $this->getHitMissCssId($cache); ?>"></div>
             <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
             <?php $hitMissRatio = $this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()); ?>
             <div class="md-item-value"><?php echo $cache->getCacheHits() .

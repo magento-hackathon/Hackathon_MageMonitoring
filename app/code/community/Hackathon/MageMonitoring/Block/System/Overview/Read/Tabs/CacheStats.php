@@ -51,6 +51,27 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extend
     }
 
     /**
+     * Returns css class id for memory stats.
+     *
+     * @param Hackathon_MageMonitoring_Model_CacheStats $cache
+     * @return string
+     */
+    public function getMemoryCssId($cache) {
+        $freeMemRatio = 100 - round($cache->getMemoryUsed()*100/$cache->getMemoryMax());
+        $id = 'info';
+        switch ($freeMemRatio) {
+            case 0:
+            case $freeMemRatio <= 10:
+                $id = 'error';
+                break;
+            case $freeMemRatio <= 25:
+                $id = 'warning';
+                break;
+        }
+        return $id;
+    }
+
+    /**
      * Returns hit/miss chart data as array, feeds Hackathon_MageMonitoring_Block_Chart.
      *
      * @param Hackathon_MageMonitoring_Model_CacheStats $cache
@@ -67,6 +88,27 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extend
                                             array('value' => $misses, 'color' => '#f00000')
                                             )
                     );
+    }
+
+    /**
+     * Returns css class id for hit/miss stats.
+     *
+     * @param Hackathon_MageMonitoring_Model_CacheStats $cache
+     * @return string
+     */
+    public function getHitMissCssId($cache) {
+        $hitMissRatio = round($this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()));
+        $id = 'info';
+        switch ($hitMissRatio) {
+            case 0:
+            case $hitMissRatio <= 50:
+                $id = 'error';
+                break;
+            case $hitMissRatio <= 75:
+                $id = 'warning';
+                break;
+        }
+        return $id;
     }
 
     /**
