@@ -1,0 +1,41 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Hackathon
+ * @package     Hackathon_MageMonitoring
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/* @var $this Hackathon_MageMonitoring_Block_Chart */
+?>
+<canvas id="<?php echo $this->getChartId(); ?>"
+        width="<?php echo $this->getCanvasWidth(); ?>"
+        height="<?php echo $this->getCanvasHeight(); ?>">
+</canvas>
+<script type="text/javascript">
+    //<![CDATA[
+    document.observe('dom:loaded', function(){
+        var ctx = document.getElementById("<?php echo $this->getChartId(); ?>").getContext("2d");
+        var data = <?php echo $this->getChartData(); ?>;
+        var options = <?php echo $this->getChartOptions(); ?>;
+        var <?php echo $this->getChartId(); ?>Chart = new Chart(ctx).<?php echo $this->getChartType() ?>(data, options);
+    });
+    //]]>
+</script>
