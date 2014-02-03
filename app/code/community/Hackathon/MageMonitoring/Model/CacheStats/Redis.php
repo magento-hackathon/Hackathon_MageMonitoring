@@ -40,8 +40,6 @@ class Hackathon_MageMonitoring_Model_CacheStats_Redis implements Hackathon_MageM
 
                     $this->_redisClient = new Credis_Client($server, $port);
                     $this->_redisInfo = $this->_redisClient->__call('info', array());
-
-                    Mage::log($this->_redisInfo);
                 }
             }
 
