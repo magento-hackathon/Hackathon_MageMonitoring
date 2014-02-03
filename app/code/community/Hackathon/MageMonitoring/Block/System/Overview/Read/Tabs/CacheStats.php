@@ -58,7 +58,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extend
      */
     public function getMemoryCssId($cache) {
         $freeMemRatio = 100 - round($cache->getMemoryUsed()*100/$cache->getMemoryMax());
-        $id = 'info';
+        $id = 'success';
         switch ($freeMemRatio) {
             case 0:
             case $freeMemRatio <= 10:
@@ -98,7 +98,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extend
      */
     public function getHitMissCssId($cache) {
         $hitMissRatio = round($this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()));
-        $id = 'info';
+        $id = 'success';
         switch ($hitMissRatio) {
             case 0:
             case $hitMissRatio <= 50:
