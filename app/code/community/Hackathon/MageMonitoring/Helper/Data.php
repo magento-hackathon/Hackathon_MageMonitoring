@@ -25,6 +25,12 @@
 
 class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
+    /**
+     * Returns array with implementations of Hackathon_MageMonitoring_Model_CacheStats that return isActive() == true.
+     *
+     * @param string $cacheId
+     * @return array
+     */
     public function getActiveCaches($cacheId = null)
     {
         // @todo: add caching mechanism (core_config_data with rescan button in backend?)
