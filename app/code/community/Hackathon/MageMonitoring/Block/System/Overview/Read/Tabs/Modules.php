@@ -30,6 +30,20 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Modules
 
     public function getModulesList()
     {
-        return (array) Mage::getConfig()->getModuleConfig();
+        $modules = array('core' => array(), 'community' => array(), 'local' => array());
+        foreach ((array)Mage::getConfig()->getModuleConfig() as $key => $module) {
+                switch ($module->codePool) {
+                    case 'community':
+                        $modules['community'][$key] = $module;
+                        break;
+                    case 'local':
+                        $modules['local'][$key] = $module;
+                        break;
+                    default:
+                        $modules['core'][$key] = $module;
+                    break;
+                }
+            }
+        return $modules;
     }
 }
