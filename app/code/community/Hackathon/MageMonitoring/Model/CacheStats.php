@@ -31,7 +31,6 @@ interface Hackathon_MageMonitoring_Model_CacheStats
      * @return string
      */
     public function getId();
-
     /**
      * Returns cache name.
      *
@@ -51,29 +50,52 @@ interface Hackathon_MageMonitoring_Model_CacheStats
      */
     public function isActive();
     /**
-     * Returns maximum cache size in bytes, return false if not implemented
+     * Returns maximum cache size in bytes or false if not implemented.
      *
      * @return int
      */
     public function getMemoryMax();
     /**
-     * Returns used cache size in bytes, return false if not implemented
+     * Returns used cache size in bytes or false if not implemented.
      *
      * @return int
      */
     public function getMemoryUsed();
     /**
-     * Returns cache hit count, return false if not implemented
+     * Returns cache hit count or false if not implemented.
      *
      * @return int
      */
     public function getCacheHits();
     /**
-     * Returns cache miss count, return false if not implemented
+     * Returns cache miss count or false if not implemented.
      *
      * @return int
      */
     public function getCacheMisses();
+    /**
+     * Returns array of custom statistics for frontend display or false.
+     *
+     * Format of return array:
+     * array (array ( 'css_class' => 'info|success|warning|error',
+     *                 'label' => $label,
+     *                 'value' => $value
+     *                 'chart' => false|array (see below),
+     *        ...
+     *        )
+     *
+     * Format of chart array:
+     * array('chart_id' => 'unique_id',
+     *         'chart_type' => 'Bar|Doughnut|Line|Pie|PolarArea|Radar',
+     *         'canvas_width' => width in pixel as int,
+     *         'canvas_height' => height in pixel as int,
+     *         'chart_data' => array that matches chart type data structure spec at http://www.chartjs.org/docs/,
+     *         'chart_options' => array that matches chart type chart options spec at http://www.chartjs.org/docs/,
+     *         )
+     *
+     * @return false|array
+     */
+    public function getCustomStats();
     /**
      * Whooosh!
      *

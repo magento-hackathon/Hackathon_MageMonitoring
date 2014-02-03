@@ -43,7 +43,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache extends Hackathon_Ma
      * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
      */
     public function getId() {
-        return parent::getId(__CLASS__);
+        return $this->getClassId(__CLASS__);
     }
 
     /**
@@ -127,6 +127,14 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache extends Hackathon_Ma
             return $this->_opCacheStats['opcache_statistics']['misses'];
         }
         return 0;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCustomStats()
+     */
+    public function getCustomStats() {
+        return false;
     }
 
     /**

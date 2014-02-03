@@ -39,7 +39,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonito
      * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
      */
     public function getId() {
-        return parent::getId(__CLASS__);
+        return $this->getClassId(__CLASS__);
     }
 
     /**
@@ -115,6 +115,14 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonito
             return $this->_opCacheStats['num_misses'];
         }
         return 0;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::getCustomStats()
+     */
+    public function getCustomStats() {
+        return false;
     }
 
     /**

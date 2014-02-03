@@ -32,7 +32,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Abstract
      *
      * @return string
      */
-    public function getId($className)
+    public function getClassId($className)
     {
         $o = array();
         preg_match("/.+_(.+)\z/", $className, $o);
