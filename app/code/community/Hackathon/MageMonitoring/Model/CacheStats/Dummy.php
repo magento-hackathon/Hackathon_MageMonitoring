@@ -81,7 +81,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Dummy extends Hackathon_MageMoni
      */
     public function getMemoryUsed()
     {
-        return 512*1024*1024;
+        return 957*1024*1024;
     }
 
     /**
@@ -107,7 +107,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Dummy extends Hackathon_MageMoni
      * @see Hackathon_MageMonitoring_Model_CacheStats::getCustomStats()
      */
     public function getCustomStats() {
-        return array(array('css_class' => 'error',
+        return array(array('css_class' => 'warning',
                            'label' => 'Very Important Stat with a line chart',
                            'value' => '303 / 2048M',
                            'chart' => array('chart_id' => $this->getId().'_very_imp',
