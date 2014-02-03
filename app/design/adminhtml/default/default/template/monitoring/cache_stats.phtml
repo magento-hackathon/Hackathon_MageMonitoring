@@ -98,7 +98,7 @@ foreach ($activeCaches as $cache) {
     </fieldset>
     <script type="text/javascript">
         //<![CDATA[
-        Fieldset.toggleCollapse('<?php echo $cache->getId(); ?>');
+        Fieldset.<?php echo $cache->displayCollapsed() ? 'apply' : 'toggle'; ?>Collapse('<?php echo $cache->getId(); ?>');
         //]]>
     </script>
 </div>

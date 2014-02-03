@@ -39,4 +39,12 @@ class Hackathon_MageMonitoring_Model_CacheStats_Abstract
         return strtolower($o[1]);
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::displayCollapsed()
+     */
+    public function displayCollapsed() {
+        return false;
+    }
+
 }

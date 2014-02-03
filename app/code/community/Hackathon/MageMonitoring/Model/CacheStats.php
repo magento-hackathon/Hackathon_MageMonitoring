@@ -97,6 +97,12 @@ interface Hackathon_MageMonitoring_Model_CacheStats
      */
     public function getCustomStats();
     /**
+     * Returns init state for collapseable the plugin is displayed in.
+     *
+     * return bool
+     */
+    public function displayCollapsed();
+    /**
      * Whooosh!
      *
      * @return bool

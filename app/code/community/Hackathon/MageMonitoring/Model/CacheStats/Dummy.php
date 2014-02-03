@@ -147,6 +147,14 @@ class Hackathon_MageMonitoring_Model_CacheStats_Dummy extends Hackathon_MageMoni
 
     /**
      * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::displayCollapsed()
+     */
+    public function displayCollapsed() {
+        return true;
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_CacheStats::flushCache()
      */
     public function flushCache()
