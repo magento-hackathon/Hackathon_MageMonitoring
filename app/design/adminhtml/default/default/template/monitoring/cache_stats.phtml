@@ -40,12 +40,15 @@ foreach ($activeCaches as $cache) {
 
     <fieldset id="<?php echo $cache->getId(); ?>" class="collapseable">
         <div class="monitoring-data-container">
+        <?php if ($cache->getVersion()) { ?>
         <div class="md-item md-item-info">
             <div class="md-icon md-icon-info"></div>
             <div class="md-item-title"><?php echo $this->__('Version') ?></div>
             <div class="md-item-value"><?php echo $cache->getVersion(); ?></div>
         </div>
+        <?php } // endif version ?>
         <?php // Memory stats ?>
+        <?php if ($cache->getMemoryMax() && $cache->getMemoryUsed()) { ?>
         <div class="md-item md-item-<?php echo $this->getMemoryCssId($cache); ?>">
             <div class="md-icon md-icon-<?php echo $this->getMemoryCssId($cache); ?>"></div>
             <div class="md-item-title"><?php echo $this->__('Memory') ?></div>
@@ -58,7 +61,9 @@ foreach ($activeCaches as $cache) {
                 <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($this->getMemoryChartData($cache))->toHtml(); ?>
             </div>
         </div>
+        <?php } // endif memory ?>
         <?php // Hit/Miss stats ?>
+        <?php if ($cache->getCacheHits() && $cache->getCacheMisses()) { ?>
         <div class="md-item md-item-<?php echo $this->getHitMissCssId($cache); ?>">
             <div class="md-icon md-icon-<?php echo $this->getHitMissCssId($cache); ?>"></div>
             <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
@@ -71,6 +76,7 @@ foreach ($activeCaches as $cache) {
                 <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($this->getHitMissChartData($cache))->toHtml(); ?>
             </div>
         </div>
+        <?php } // endif hit/miss ?>
         <?php // Any custom stats ?>
         <?php if ($customStats = $cache->getCustomStats()) {
                   foreach ($customStats as $stats) {
@@ -86,14 +92,16 @@ foreach ($activeCaches as $cache) {
                <?php } ?>
            </div>
         <?php
-                }
-            } ?>
-
+                } // end foreach custom stats
+            } // endif custom stats ?>
+        <?php // Flush cache button ?>
+        <?php if ($cache->hasFlushCache()) { ?>
         <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want to flush the ' . $cache->getName() . ' cache?') ?>',
                                                                                         '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">
             <span><span><?php echo $this->__('Flush %s', $cache->getName()); ?></span></span>
         </button>
         <div class="clear"></div>
+        <?php } ?>
         </div>
     </fieldset>
     <script type="text/javascript">
