@@ -47,4 +47,12 @@ class Hackathon_MageMonitoring_Model_CacheStats_Abstract
         return false;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_CacheStats::hasFlushCache()
+     */
+    public function hasFlushCache() {
+        return true;
+    }
+
 }

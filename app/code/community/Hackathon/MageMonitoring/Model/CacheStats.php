@@ -103,6 +103,12 @@ interface Hackathon_MageMonitoring_Model_CacheStats
      */
     public function displayCollapsed();
     /**
+     * Returns true if this cache provides a flushCache implementation.
+     *
+     * @return bool
+     */
+    public function hasFlushCache();
+    /**
      * Whooosh!
      *
      * @return bool
