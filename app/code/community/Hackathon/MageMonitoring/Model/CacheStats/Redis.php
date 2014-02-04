@@ -30,17 +30,14 @@ class Hackathon_MageMonitoring_Model_CacheStats_Redis implements Hackathon_MageM
     public function __construct()
     {
         try {
-            $localXml = simplexml_load_file('app/etc/local.xml', null, LIBXML_NOCDATA);
-            $cacheBackend = $localXml->xpath('//cache/backend');
+            $cacheConfig = Mage::getConfig()->getNode('global/cache')->asArray();
 
-            if ((string)$cacheBackend[0] == 'Cm_Cache_Backend_Redis') {
-                if ($backendOptions = $localXml->xpath('//cache/backend_options')) {
-                    $server = (string)$backendOptions[0]->server;
-                    $port   = (int)$backendOptions[0]->port;
+            if ($cacheConfig['backend'] == 'Cm_Cache_Backend_Redis') {
+                $server = $cacheConfig['backend_options']['server'];
+                $port   = $cacheConfig['backend_options']['port'];
 
-                    $this->_redisClient = new Credis_Client($server, $port);
-                    $this->_redisInfo = $this->_redisClient->__call('info', array());
-                }
+                $this->_redisClient = new Credis_Client($server, $port);
+                $this->_redisInfo = $this->_redisClient->__call('info', array());
             }
 
         } catch (Exception $e) {
@@ -50,7 +47,9 @@ class Hackathon_MageMonitoring_Model_CacheStats_Redis implements Hackathon_MageM
 
     public function getId()
     {
-        return $this->_redisInfo['process_id'];
+        $o = array();
+        preg_match("/.+_(.+)\z/", __CLASS__, $o);
+        return strtolower($o[1]);
     }
 
     public function getName()
