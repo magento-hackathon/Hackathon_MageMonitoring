@@ -32,18 +32,22 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
     {
         try {
             if ($this->_memCachePool == null && class_exists('Memcache', false)) {
-                $localXml = simplexml_load_file('app/etc/local.xml', null, LIBXML_NOCDATA);
 
-                if ($xr = $localXml->xpath('//cache/memcached/servers/server')) {
+                $cacheConfig = Mage::getConfig()->getNode('global/cache')->asArray();
+
+                if ( $cacheConfig['backend'] == 'memcached' ) {
                     $this->_memCachePool = new Memcache;
-                    foreach ($xr as $server) {
-                        $host = (string)$server->host;
-                        $port = (string)$server->port;
+
+                    foreach( $cacheConfig['memcached']['servers'] as $server ) {
+                        $host = (string)$server['host'];
+                        $port = (string)$server['port'];
                         $this->_memCachePool->addServer($host, $port);
                     }
+
                     $this->_memCacheStats = $this->_memCachePool->getStats();
                 }
             }
+
         } catch (Exception $e) {
             Mage::logException($e);
         }
