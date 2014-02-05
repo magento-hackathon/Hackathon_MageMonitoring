@@ -42,6 +42,23 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->renderLayout();
     }
 
+    // ajax refresh
+    public function refreshWidgetAction() {
+        $response = "ERR";
+        if ($id = $this->getRequest()->getParam('widgetId', null)) {
+            $widget = new $id();
+            $response = $this->getLayout()->createBlock('core/template')
+                ->setTemplate('monitoring/widget/body.phtml')
+                ->setData('output', $widget->getOutput())
+                ->setData('buttons', $widget->getButtons())
+                ->toHtml();
+        }
+        $this->getResponse()
+             ->clearHeaders()
+             ->setHeader('Content-Type', 'application/json')
+             ->setBody($response);
+    }
+
     public function flushAllCacheAction()
     {
         try {

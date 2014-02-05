@@ -1,49 +1,72 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Hackathon
+ * @package     Hackathon_MageMonitoring
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/* @var $this Hackathon_MageMonitoring_Block_Widget */
+?>
 <div class="entry-edit">
     <div class="entry-edit-head collapseable">
-        <a
-            onclick="Fieldset.toggleCollapse('<?php echo $this->getWidgetId(); ?>'); return false;"
+        <a title="Toggle Widget.."
+            onclick="toggleWithLoad<?php echo $this->getWidgetId(); ?>(); return false;"
             href="#" id="<?php echo $this->getWidgetId(); ?>-head"
-            class=""><?php echo $this->getName(); ?>
+            class="widget-collapse"><?php echo $this->getName(); ?>
         </a>
+        <a title="Refresh Widget.." onclick="refresh<?php echo $this->getWidgetId(); ?>(); return false;" href="#" class="md-icon-refresh md-icon" id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
+        <a title="Settings.." onclick="alert('not implemented')" href="#" class="md-icon-conf md-icon"></a>
     </div>
-    <fieldset id="<?php echo $this->getWidgetId(); ?>"
-        class="collapseable">
+    <fieldset id="<?php echo $this->getWidgetId(); ?>" class="collapseable">
         <div class="monitoring-data-container">
-            <?php // render rows ?>
-            <?php if ($output = $this->getOutput()) {
-                foreach ($output as $row) {
-         ?>
-            <div class="md-item md-item-<?php echo $row['css_id'];?>">
-                <div
-                    class="md-icon md-icon-<?php echo $row['css_id'];?>"></div>
-                <div class="md-item-title">
-                    <?php echo $this->__($row['label']) ?>
-                </div>
-                <div class="md-item-value">
-                    <?php echo $row['value'];?>
-                </div>
-                <?php if (isset($row['chart']) && is_array($row['chart'])) {?>
-                <div
-                    class="md-item-<?php echo ((int)$row['chart']['canvas_width'] <= 76) ? 'chart' : 'value'; ?>">
-                    <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($row['chart'])->toHtml(); ?>
-                </div>
-                <?php } ?>
-            </div>
-            <?php
-                } // end foreach rows
-            } // endif rows ?>
-            <?php // buttons ?>
-            <?php if ($buttons = $this->getButtons()) {
-                foreach ($buttons as $button) {
-                    echo $button->toHtml();
-                 } ?>
-            <div class="clear"></div>
-            <?php } //endif buttons ?>
+        <?php
+            // only render output if wigdet is not in collapsed state
+            if (!$this->displayCollapsed()) {
+                echo $this->getLayout()->createBlock('core/template')
+                        ->setTemplate('monitoring/widget/body.phtml')
+                        ->setData('output', $this->getOutput())
+                        ->setData('buttons', $this->getButtons())
+                        ->toHtml();
+                }
+        ?>
         </div>
     </fieldset>
     <script type="text/javascript">
         //<![CDATA[
+        function toggleWithLoad<?php echo $this->getWidgetId(); ?>() {
+            if (!$('<?php echo $this->getWidgetId(); ?>').firstDescendant().firstDescendant()) {
+                refresh<?php echo $this->getWidgetId(); ?>();
+            }
+            ($('refresh-<?php echo $this->getWidgetId(); ?>').toggleClassName('widget-invis'));
+            Fieldset.toggleCollapse('<?php echo $this->getWidgetId(); ?>');
+        };
+        function refresh<?php echo $this->getWidgetId(); ?>() {
+            var url = '<?php echo $this->getUrl('*/*/refreshWidget') ?>';
+               new Ajax.Updater($('<?php echo $this->getWidgetId(); ?>').firstDescendant(), url,
+                       { evalScripts: true,
+                         parameters: { widgetId: '<?php echo $this->getWidgetId(); ?>' }
+               });
+        };
         Fieldset.<?php echo $this->displayCollapsed() ? 'apply' : 'toggle'; ?>Collapse('<?php echo $this->getWidgetId(); ?>');
+        $('refresh-<?php echo $this->getWidgetId(); ?>').addClassName('<?php echo $this->displayCollapsed() ? 'widget-invis' : '' ?> ');
         //]]>
     </script>
 </div>

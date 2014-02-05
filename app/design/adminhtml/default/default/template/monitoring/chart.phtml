@@ -31,11 +31,9 @@
 </canvas>
 <script type="text/javascript">
     //<![CDATA[
-    document.observe('dom:loaded', function(){
         var ctx = document.getElementById("<?php echo $this->getChartId(); ?>").getContext("2d");
         var data = <?php echo $this->getChartData(); ?>;
         var options = <?php echo $this->getChartOptions(); ?>;
-        var <?php echo $this->getChartId(); ?>Chart = new Chart(ctx).<?php echo $this->getChartType() ?>(data, options);
-    });
+        window.<?php echo $this->getChartId(); ?>Chart = new Chart(ctx).<?php echo $this->getChartType() ?>(data, options);
     //]]>
 </script>

@@ -83,4 +83,27 @@ h4.monitoring-section-title {
 .f-right {
     margin: 3px;
 }
+
+.widget-collapse {
+    margin-top: 3px;
+    display: inline-block !important;
+    width: 96%;
+}
+
+.md-icon-conf {
+    background: transparent url(../images/statuses.png) no-repeat !important;
+    background-position: -51px 4px !important;
+    display: inline-block !important;
+}
+
+.md-icon-refresh {
+    background: transparent url(../images/statuses.png) no-repeat !important;
+    background-position: -34px 4px !important;
+    display: inline-block !important;
+}
+
+.widget-invis {
+    display: none !important;
+}
+
 }
