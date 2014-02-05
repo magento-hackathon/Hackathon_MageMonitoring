@@ -35,7 +35,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
 
                 $cacheConfig = Mage::getConfig()->getNode('global/cache')->asArray();
 
-                if (strtolower($cacheConfig['backend']) == 'memcached' || strtolower($cacheConfig['slow_backend']) == 'memcached') {
+                if ((array_key_exists('backend', $cacheConfig) && strtolower($cacheConfig['backend']) == 'memcached') ||
+                    (array_key_exists('slow_backend', $cacheConfig) && strtolower($cacheConfig['slow_backend']) == 'memcached')) {
                     $this->_memCachePool = new Memcache;
 
                     foreach( $cacheConfig['memcached']['servers'] as $server ) {

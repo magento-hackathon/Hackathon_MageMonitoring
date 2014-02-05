@@ -32,7 +32,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     {
         try {
             $cacheConfig = Mage::getConfig()->getNode('global/cache')->asArray();
-            if ($cacheConfig['backend'] == 'Cm_Cache_Backend_Redis') {
+            if (array_key_exists('backend', $cacheConfig) && $cacheConfig['backend'] == 'Cm_Cache_Backend_Redis') {
                 $server = $cacheConfig['backend_options']['server'];
                 $port   = $cacheConfig['backend_options']['port'];
 
