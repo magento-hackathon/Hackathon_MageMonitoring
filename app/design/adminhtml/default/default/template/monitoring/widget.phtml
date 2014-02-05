@@ -1,0 +1,49 @@
+<div class="entry-edit">
+    <div class="entry-edit-head collapseable">
+        <a
+            onclick="Fieldset.toggleCollapse('<?php echo $this->getWidgetId(); ?>'); return false;"
+            href="#" id="<?php echo $this->getWidgetId(); ?>-head"
+            class=""><?php echo $this->getName(); ?>
+        </a>
+    </div>
+    <fieldset id="<?php echo $this->getWidgetId(); ?>"
+        class="collapseable">
+        <div class="monitoring-data-container">
+            <?php // render rows ?>
+            <?php if ($output = $this->getOutput()) {
+                foreach ($output as $row) {
+         ?>
+            <div class="md-item md-item-<?php echo $row['css_id'];?>">
+                <div
+                    class="md-icon md-icon-<?php echo $row['css_id'];?>"></div>
+                <div class="md-item-title">
+                    <?php echo $this->__($row['label']) ?>
+                </div>
+                <div class="md-item-value">
+                    <?php echo $row['value'];?>
+                </div>
+                <?php if (isset($row['chart']) && is_array($row['chart'])) {?>
+                <div
+                    class="md-item-<?php echo ((int)$row['chart']['canvas_width'] <= 76) ? 'chart' : 'value'; ?>">
+                    <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($row['chart'])->toHtml(); ?>
+                </div>
+                <?php } ?>
+            </div>
+            <?php
+                } // end foreach rows
+            } // endif rows ?>
+            <?php // buttons ?>
+            <?php if ($buttons = $this->getButtons()) {
+                foreach ($buttons as $button) {
+                    echo $button->toHtml();
+                 } ?>
+            <div class="clear"></div>
+            <?php } //endif buttons ?>
+        </div>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.<?php echo $this->displayCollapsed() ? 'apply' : 'toggle'; ?>Collapse('<?php echo $this->getWidgetId(); ?>');
+        //]]>
+    </script>
+</div>
