@@ -13,6 +13,7 @@ The module gathers information of the current Magento installation:
 - Cache statistics with option to flush each cache (APC, APCU, Memcache, ZendOpcache)
 - Magento debug/exception logs
 - Check for class and template file rewrites
+- Custom site widgets can be added from other modules via observer
 
 ### Usage
 
@@ -64,12 +65,21 @@ Uninstallation
 * Via modman: `modman remove Hackathon_MageMonitoring`
 * Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring`
 
-### How to add a new cache
+### How to add a new cache widget
 
-- Have a look at the interface class Hackathon_MageMonitoring_Model_CacheStats
-- Implement the interface
-- Drop the class into Model/CacheStats
+- Clone develop branch
+- Have a look at the interface class Hackathon_MageMonitoring_Model_Widget_CacheStat
+- Implement the interface, extend from Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract to take care of boilerplate
+- For extra values have a look at Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy::getOutput()
+- Drop the class into Model/Widget/CacheStat
 - You are done. Pull requests welcome. ;)
+
+### How to add a custom widget from another module
+
+- In your module add an observer that subscribes to magemonitoring_collect_widgets_cachestat/dashboard event.
+  See config.xml of this module.
+- Now follow the same procedure as for adding a new cache widget, exchange CacheStat with Dashboard as needed
+- Drop the impl class into the folder your observer publishes.
 
 ### Core Contributors
 
