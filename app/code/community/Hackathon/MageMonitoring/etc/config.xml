@@ -26,9 +26,9 @@
 -->
 <config>
     <modules>
-        <Hackathon_Magemagemonitoring>
+        <Hackathon_MageMonitoring>
             <version>1.0.0</version>
-        </Hackathon_Magemagemonitoring>
+        </Hackathon_MageMonitoring>
     </modules>
 
     <default>
