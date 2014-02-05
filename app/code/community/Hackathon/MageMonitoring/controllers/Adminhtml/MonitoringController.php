@@ -45,10 +45,10 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     public function flushAllCacheAction()
     {
         try {
-            $caches = Mage::helper('magemonitoring')->getActiveCaches();
+            $caches = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat');
 
             foreach ($caches as $cache) {
-                if ($cache instanceof Hackathon_MageMonitoring_Model_CacheStats) {
+                if ($cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
                     $cache->flushCache();
                 }
             }
@@ -70,8 +70,8 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         if ($cacheId) {
             try {
 
-                $cache = Mage::helper('magemonitoring')->getActiveCaches($cacheId);
-                if (!empty($cache) && $cache instanceof Hackathon_MageMonitoring_Model_CacheStats) {
+                $cache = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat', $cacheId);
+                if (!empty($cache) && $cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
                     $cache->flushCache();
                 }
 

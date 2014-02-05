@@ -41,7 +41,7 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
         if ($this->_widgetModel instanceof Hackathon_MageMonitoring_Model_Widget) {
             return $this->_widgetModel;
         } else {
-            throw new Exception ('Use setWidget() before using getters.');
+            throw new Exception ('Use setWidget() before using any getter.');
         }
     }
 

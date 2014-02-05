@@ -23,12 +23,37 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extends Mage_Adminhtml_Block_Abstract
+interface Hackathon_MageMonitoring_Model_Widget_CacheStat extends Hackathon_MageMonitoring_Model_Widget
 {
-    protected function _construct()
-    {
-        $this->setTemplate('monitoring/cache_stats.phtml');
-        return parent::_construct();
-    }
+    /**
+     * Returns maximum cache size in bytes or false if not implemented.
+     *
+     * @return int
+     */
+    public function getMemoryMax();
+    /**
+     * Returns used cache size in bytes or false if not implemented.
+     *
+     * @return int
+     */
+    public function getMemoryUsed();
+    /**
+     * Returns cache hit count or false if not implemented.
+     *
+     * @return int
+     */
+    public function getCacheHits();
+    /**
+     * Returns cache miss count or false if not implemented.
+     *
+     * @return int
+     */
+    public function getCacheMisses();
+    /**
+     * Whooosh!
+     *
+     * @return bool
+     */
+    public function flushCache();
 
 }

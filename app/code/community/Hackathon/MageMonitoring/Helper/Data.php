@@ -25,44 +25,48 @@
 
 class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
+
     /**
-     * Returns array with implementations of Hackathon_MageMonitoring_Model_CacheStats that return isActive() == true.
+     * Returns array with implementations of $baseInterface+$type that return isActive() == true.
      *
-     * @param string $cacheId
+     * @param string $widgetId
      * @return array
      */
-    public function getActiveCaches($cacheId = null)
+    public function getActiveWidgets($type='Dashboard', $widgetId = null, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
     {
         // @todo: add caching mechanism (core_config_data with rescan button in backend?)
 
-        // load all classes in Model/CacheStats
-        $implFolder = Mage::getModuleDir(null, 'Hackathon_MageMonitoring') . DS . 'Model' . DS . 'CacheStats';
-        foreach (array_filter(glob($implFolder."/*"), 'is_file') as $f) {
-            require_once $f;
-        }
-
-        // get classes implementing cachestats interface
-        $cacheClasses = array();
-        $iName = 'Hackathon_MageMonitoring_Model_CacheStats';
-        if (interface_exists($iName)) {
-            $cacheClasses = array_filter(
-                get_declared_classes(),
-                create_function('$className', "return in_array(\"$iName\", class_implements(\"\$className\"));")
-            );
-        }
-
-        // collect active caches
-        $activeCaches = array();
-        foreach ($cacheClasses as $cache) {
-            $c = new $cache();
-            if ($c->isActive() && !is_null($cacheId) && $cacheId == $c->getId()) {
-                return $c;
-            } else if ($c->isActive()) {
-                $activeCaches[] = $c;
+        $classFolders = array();
+        Mage::dispatchEvent('magemonitoring_collect_widgets_'.strtolower($type), array('widget_folder' => &$classFolders));
+        // load all classes in subscribed folders
+        foreach ($classFolders as $path) {
+            foreach (array_filter(glob($path."/*"), 'is_file') as $f) {
+                require_once $f;
             }
         }
 
-        return $activeCaches;
+        // get classes implementing widget interface
+        $widgetClasses = array();
+        $iName = $baseInterface.'_'.$type;
+        if (interface_exists($iName)) {
+            $widgetClasses = array_filter(
+                    get_declared_classes(),
+                    create_function('$className', "return in_array(\"$iName\", class_implements(\"\$className\"));")
+            );
+        }
+
+        // collect active widgets
+        $activeWidgets = array();
+        foreach ($widgetClasses as $widget) {
+            $w = new $widget();
+            if ($w->isActive() && !is_null($widgetId) && $widgetId == $w->getId()) {
+                return $w;
+            } else if ($w->isActive()) {
+                $activeWidgets[] = $w;
+            }
+        }
+
+        return $activeWidgets;
     }
 
     /**

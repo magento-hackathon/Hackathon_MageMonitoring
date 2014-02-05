@@ -26,88 +26,13 @@
 
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats */
 
-$activeCaches = Mage::helper('magemonitoring')->getActiveCaches();
+$activeCaches = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat');
 
 if (empty($activeCaches)) {
     echo '<h4>'.$this->__('No active caches found. Consider installing at least a PHP opcache.').'</h4>';
 }
 foreach ($activeCaches as $cache) {
+    echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')->setWidget($cache)->toHtml();
+}
 ?>
-<div class="entry-edit">
-    <div class="entry-edit-head collapseable">
-        <a onclick="Fieldset.toggleCollapse('<?php echo $cache->getId(); ?>'); return false;" href="#" id="<?php echo $cache->getId(); ?>-head" class=""><?php echo $cache->getName(); ?></a>
-    </div>
 
-    <fieldset id="<?php echo $cache->getId(); ?>" class="collapseable">
-        <div class="monitoring-data-container">
-        <?php if ($cache->getVersion()) { ?>
-        <div class="md-item md-item-info">
-            <div class="md-icon md-icon-info"></div>
-            <div class="md-item-title"><?php echo $this->__('Version') ?></div>
-            <div class="md-item-value"><?php echo $cache->getVersion(); ?></div>
-        </div>
-        <?php } // endif version ?>
-        <?php // Memory stats ?>
-        <?php if ($cache->getMemoryMax() && $cache->getMemoryUsed()) { ?>
-        <div class="md-item md-item-<?php echo $this->getMemoryCssId($cache); ?>">
-            <div class="md-icon md-icon-<?php echo $this->getMemoryCssId($cache); ?>"></div>
-            <div class="md-item-title"><?php echo $this->__('Memory') ?></div>
-            <div class="md-item-value"><?php echo Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryUsed(), true)
-                                                  . 'M / ' .
-                                                  Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryMax(), true)
-                                                  . 'M'; ?>
-            </div>
-            <div class="md-item-chart">
-                <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($this->getMemoryChartData($cache))->toHtml(); ?>
-            </div>
-        </div>
-        <?php } // endif memory ?>
-        <?php // Hit/Miss stats ?>
-        <?php if ($cache->getCacheHits() && $cache->getCacheMisses()) { ?>
-        <div class="md-item md-item-<?php echo $this->getHitMissCssId($cache); ?>">
-            <div class="md-icon md-icon-<?php echo $this->getHitMissCssId($cache); ?>"></div>
-            <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
-            <?php $hitMissRatio = $this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()); ?>
-            <div class="md-item-value"><?php echo $cache->getCacheHits() .
-                                                  ' / ' . $cache->getCacheMisses() .
-                                                  ' - ' . $hitMissRatio . '%'; ?>
-            </div>
-            <div class="md-item-chart">
-                <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($this->getHitMissChartData($cache))->toHtml(); ?>
-            </div>
-        </div>
-        <?php } // endif hit/miss ?>
-        <?php // Any custom stats ?>
-        <?php if ($customStats = $cache->getCustomStats()) {
-                  foreach ($customStats as $stats) {
-         ?>
-           <div class="md-item md-item-<?php echo $stats['css_class'];?>">
-               <div class="md-icon md-icon-<?php echo $stats['css_class'];?>"></div>
-               <div class="md-item-title"><?php echo $this->__($stats['label']) ?></div>
-               <div class="md-item-value"><?php echo $stats['value'];?></div>
-               <?php if (isset($stats['chart']) && is_array($stats['chart'])) {?>
-               <div class="md-item-<?php echo ((int)$stats['chart']['canvas_width'] <= 76) ? 'chart' : 'value'; ?>">
-                    <?php echo Mage::app()->getLayout()->createBlock('magemonitoring/chart')->setData($stats['chart'])->toHtml(); ?>
-               </div>
-               <?php } ?>
-           </div>
-        <?php
-                } // end foreach custom stats
-            } // endif custom stats ?>
-        <?php // Flush cache button ?>
-        <?php if ($cache->hasFlushCache()) { ?>
-        <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want to flush the ' . $cache->getName() . ' cache?') ?>',
-                                                                                        '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">
-            <span><span><?php echo $this->__('Flush %s', $cache->getName()); ?></span></span>
-        </button>
-        <div class="clear"></div>
-        <?php } ?>
-        </div>
-    </fieldset>
-    <script type="text/javascript">
-        //<![CDATA[
-        Fieldset.<?php echo $cache->displayCollapsed() ? 'apply' : 'toggle'; ?>Collapse('<?php echo $cache->getId(); ?>');
-        //]]>
-    </script>
-</div>
-<?php } ?>
