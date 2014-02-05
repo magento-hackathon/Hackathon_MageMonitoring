@@ -22,8 +22,8 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageMonitoring_Model_CacheStats_Abstract
-                                                         implements Hackathon_MageMonitoring_Model_CacheStats
+class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+                                                               implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_memCachePool;
     private $_memCacheStats;
@@ -55,7 +55,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
+     * @see Hackathon_MageMonitoring_Model_Widget::getId()
      */
     public function getId() {
         return $this->getClassId(__CLASS__);
@@ -63,7 +63,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getName()
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -72,7 +72,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getVersion()
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -81,7 +81,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::isActive()
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -93,7 +93,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryMax()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
      */
     public function getMemoryMax()
     {
@@ -105,7 +105,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryUsed()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryUsed()
      */
     public function getMemoryUsed()
     {
@@ -117,7 +117,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheHits()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheHits()
      */
     public function getCacheHits()
     {
@@ -129,7 +129,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheMisses()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheMisses()
      */
     public function getCacheMisses()
     {
@@ -141,15 +141,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache extends Hackathon_MageM
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCustomStats()
-     */
-    public function getCustomStats() {
-        return false;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::flushCache()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::flushCache()
      */
     public function flushCache()
     {

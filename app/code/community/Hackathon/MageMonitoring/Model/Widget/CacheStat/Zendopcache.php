@@ -23,10 +23,9 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache extends Hackathon_MageMonitoring_Model_CacheStats_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_CacheStats
+class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+                                                                  implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
-
     private $_opCacheConfig;
     private $_opCacheStats;
 
@@ -127,14 +126,6 @@ class Hackathon_MageMonitoring_Model_CacheStats_Zendopcache extends Hackathon_Ma
             return $this->_opCacheStats['opcache_statistics']['misses'];
         }
         return 0;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCustomStats()
-     */
-    public function getCustomStats() {
-        return false;
     }
 
     /**

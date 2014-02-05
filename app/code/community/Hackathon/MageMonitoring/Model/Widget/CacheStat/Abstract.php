@@ -24,6 +24,27 @@
  */
 class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon_MageMonitoring_Model_Widget_Abstract
 {
+    /**
+     * Default output for cachestat widgets.
+     *
+     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     */
+    public function getOutput() {
+        $this->addRow('info', 'Version', $this->getVersion());
+
+        $this->addRow($this->getMemoryCssId($this),
+                'Memory',
+                $this->getFormatedMemoryValue($this),
+                $this->getMemoryChartData($this));
+
+        $this->addRow($this->getHitMissCssId($this),
+                'Hit/Miss Ratio',
+                $this->getFormatedHitMissValue($this),
+                $this->getHitMissChartData($this));
+
+        $this->addFlushButton($this);
+        return $this->_output;
+    }
 
     /**
      * Returns memory chart data as array, feeds Hackathon_MageMonitoring_Block_Chart.
@@ -97,7 +118,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      */
     public function getHitMissCssId($cache) {
         $hitMissRatio = round($this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()));
-        return $this->getCssIdByThreshold($freeMemRatio, 50, 75);
+        return $this->getCssIdByThreshold($hitMissRatio, 50, 75);
     }
 
     /**

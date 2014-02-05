@@ -22,21 +22,21 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonitoring_Model_CacheStats_Abstract
-                                                    implements Hackathon_MageMonitoring_Model_CacheStats
+class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+                                                           implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_opCacheStats;
 
     public function __construct()
     {
-        if (extension_loaded('apc') && !extension_loaded('apcu')) {
+        if (extension_loaded('apc') && extension_loaded('apcu')) {
             $this->_opCacheStats = apc_cache_info();
         }
     }
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
+     * @see Hackathon_MageMonitoring_Model_Widget::getId()
      */
     public function getId() {
         return $this->getClassId(__CLASS__);
@@ -44,16 +44,16 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonito
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getName()
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
-        return 'APC';
+        return 'APC User Cache';
     }
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getVersion()
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -62,11 +62,11 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonito
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::isActive()
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
-        if (extension_loaded('apc') && !extension_loaded('apcu') && ini_get('apc.enabled')) {
+        if (extension_loaded('apc') && extension_loaded('apcu') && ini_get('apc.enabled')) {
             return true;
         }
         return false;
@@ -74,7 +74,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonito
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryMax()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
      */
     public function getMemoryMax()
     {
@@ -83,7 +83,7 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonito
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryUsed()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryUsed()
      */
     public function getMemoryUsed()
     {
@@ -95,44 +95,35 @@ class Hackathon_MageMonitoring_Model_CacheStats_Apc extends Hackathon_MageMonito
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheHits()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheHits()
      */
     public function getCacheHits()
     {
-        if (isset($this->_opCacheStats['num_hits'])) {
-            return $this->_opCacheStats['num_hits'];
+        if (isset($this->_opCacheStats['nhits'])) {
+            return $this->_opCacheStats['nhits'];
         }
         return 0;
     }
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheMisses()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheMisses()
      */
     public function getCacheMisses()
     {
-        if (isset($this->_opCacheStats['num_misses'])) {
-            return $this->_opCacheStats['num_misses'];
+        if (isset($this->_opCacheStats['nmisses'])) {
+            return $this->_opCacheStats['nmisses'];
         }
         return 0;
     }
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCustomStats()
-     */
-    public function getCustomStats() {
-        return false;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::flushCache()
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::flushCache()
      */
     public function flushCache()
     {
-        apc_clear_cache();
-        apc_clear_cache('user');
-        return true;
+        return apc_clear_cache();
     }
+
 }
