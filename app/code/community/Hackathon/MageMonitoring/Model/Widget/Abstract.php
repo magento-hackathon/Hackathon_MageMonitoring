@@ -24,19 +24,22 @@
  */
 class Hackathon_MageMonitoring_Model_Widget_Abstract
 {
+    // define config keys
+    const CONFIG_START_COLLAPSED = 'collapsed';
+    const CONFIG_PRE_KEY = 'widgets/';
+
     protected $_output = array();
     protected $_buttons = array();
+    protected $_config = array();
 
     /**
-     * Returns last part of $className in lowercase.
-     *
-     * @param string $className
+     * Returns unique widget id.
      *
      * @return string
      */
-    protected function getClassId($className)
+    public function getId()
     {
-        return $className;
+        return get_called_class();
     }
 
     /**
@@ -126,7 +129,90 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
      */
     public function displayCollapsed() {
-        return false;
+        return $this->getConfig(self::CONFIG_START_COLLAPSED);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     */
+    public function initConfig() {
+        $this->addConfig(self::CONFIG_START_COLLAPSED, 'Do not render widget on pageload?', 0, 'checkbox', false);
+        return $this->_config;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getConfig()
+     */
+    public function getConfig($config_key = null, $valueOnly = true) {
+        if (empty($this->_config)) {
+            $this->_config = $this->initConfig();
+        }
+        if ($config_key) {
+            if ($valueOnly) {
+                return $this->_config[$config_key]['value'];
+            } else {
+                return $this->_config[$config_key];
+            }
+        }
+        return $this->_config;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::addConfig()
+     */
+    public function addConfig($config_key, $label, $defaultValue, $inputType="text", $required=false, $tooltip=null ) {
+        $this->_config[$config_key] = array('label' => $label,
+                                            'value' => $defaultValue,
+                                            'type' => $inputType,
+                                            'required' => $required,
+                                            'tooltip' => $tooltip
+                                           );
+        return $this;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
+     */
+    public function loadConfig() {
+
+        foreach ($this->getConfig() as $key => $conf) {
+            if ($value = Mage::getStoreConfig(self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId().'_'.$key)))) {
+                $this->_config[$key]['value'] = $value;
+            }
+        }
+        return $this->_config;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::saveConfig()
+     */
+    public function saveConfig($post) {
+        foreach ($this->getConfig() as $key => $conf) {
+            $c = Mage::getModel('core/config');
+            $value = '';
+            if (array_key_exists($key, $post)) {
+                $value = $post[$key];
+            }
+            $c->saveConfig(self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId().'_'.$key)), $value, 'default', 0);
+        }
+        return $this;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::deleteConfig()
+     */
+    public function deleteConfig() {
+        foreach ($this->getConfig() as $key => $conf) {
+            $c = Mage::getModel('core/config');
+            $c->deleteConfig(self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId().'_'.$key)), 'default', 0);
+        }
+        return $this;
     }
 
 }

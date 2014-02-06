@@ -33,7 +33,9 @@
             class="widget-collapse"><?php echo $this->getName(); ?>
         </a>
         <a title="Refresh Widget.." onclick="refresh<?php echo $this->getWidgetId(); ?>(); return false;" href="#" class="md-icon-refresh md-icon" id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
-        <a title="Settings.." onclick="alert('not implemented')" href="#" class="md-icon-conf md-icon"></a>
+        <?php if ($this->getConfig()) { ?>
+            <a title="Settings.." onclick="openConf<?php echo $this->getWidgetId(); ?>();" href="#" class="md-icon-conf md-icon"></a>
+        <?php } ?>
     </div>
     <fieldset id="<?php echo $this->getWidgetId(); ?>" class="collapseable">
         <div class="monitoring-data-container">
@@ -65,6 +67,10 @@
                          parameters: { widgetId: '<?php echo $this->getWidgetId(); ?>' }
                });
         };
+        function openConf<?php echo $this->getWidgetId(); ?>() {
+            var url = '<?php echo Mage::getSingleton('adminhtml/url')->getUrl('*/*/getWidgetConf', array('widgetId' => $this->getWidgetId())); ?>';
+            Modalbox.show(url, {title: '<?php echo $this->getName();?>', width: 600}); return false;
+        }
         Fieldset.<?php echo $this->displayCollapsed() ? 'apply' : 'toggle'; ?>Collapse('<?php echo $this->getWidgetId(); ?>');
         $('refresh-<?php echo $this->getWidgetId(); ?>').addClassName('<?php echo $this->displayCollapsed() ? 'widget-invis' : '' ?> ');
         //]]>

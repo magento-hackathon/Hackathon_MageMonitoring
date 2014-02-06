@@ -85,25 +85,46 @@ h4.monitoring-section-title {
 }
 
 .widget-collapse {
-    margin-top: 3px;
+    #margin-top: 3px;
     display: inline-block !important;
     width: 96%;
 }
+.md-icon-conf,
+.md-icon-refresh {
+    display: inline-block !important;
+    height: 15px;
+    line-height: 15px;
+    margin-left: 0px;
+}
 
 .md-icon-conf {
-    background: transparent url(../images/statuses.png) no-repeat !important;
-    background-position: -51px 4px !important;
-    display: inline-block !important;
+    background: url('../../images/fam_help.gif') no-repeat !important;
+    margin-top: 2px;
 }
 
 .md-icon-refresh {
-    background: transparent url(../images/statuses.png) no-repeat !important;
-    background-position: -34px 4px !important;
-    display: inline-block !important;
+    background: url('../../images/btn_show-hide_icon.gif') no-repeat !important;
+    padding-left: 3px;
+    margin-top: 3px;
 }
 
 .widget-invis {
     display: none !important;
+}
+
+.mh-form-label {
+    width: 200px;
+    display: inline-block;
+}
+
+.mh-form-input {
+    margin-bottom: 5px;
+}
+
+.mh-form-button {
+    margin-top: 15px;
+    margin-left: 10px;
+    float: right;
 }
 
 }

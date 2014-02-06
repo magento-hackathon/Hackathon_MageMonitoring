@@ -47,6 +47,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $response = "ERR";
         if ($id = $this->getRequest()->getParam('widgetId', null)) {
             $widget = new $id();
+            $widget->loadConfig();
             $response = $this->getLayout()->createBlock('core/template')
                 ->setTemplate('monitoring/widget/body.phtml')
                 ->setData('output', $widget->getOutput())
@@ -57,6 +58,44 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
              ->clearHeaders()
              ->setHeader('Content-Type', 'application/json')
              ->setBody($response);
+    }
+
+    // get widget config html
+    public function getWidgetConfAction() {
+        $response = "ERR";
+        if ($id = $this->getRequest()->getParam('widgetId', null)) {
+            $widget = new $id();
+            $widget->loadConfig();
+            $response = $this->getLayout()->createBlock('core/template')
+                                                    ->setTemplate('monitoring/widget/config.phtml')
+                                                    ->setData('widget', $widget)
+                                                    ->toHtml();
+        }
+        $this->getResponse()->setBody($response);
+    }
+
+    // save widget config
+    public function saveWidgetConfAction() {
+        $response = "ERR";
+        if ($id = $this->getRequest()->getParam('widgetId')) {
+            $widget = new $id();
+            $post = $this->getRequest()->getPost();
+            unset($post['form_key']);
+            $widget->saveConfig($post);
+            $response = 'Settings saved for '.$widget->getName().' Reload the page or widget.';
+        }
+        $this->getResponse()->setBody($response);
+    }
+
+    // delete widget config
+    public function resetWidgetConfAction() {
+        $response = "ERR";
+        if ($id = $this->getRequest()->getParam('widgetId')) {
+            $widget = new $id();
+            $widget->deleteConfig();
+            $response = 'Deleted config for ' . $widget->getName();
+        }
+        $this->getResponse()->setBody($response);
     }
 
     public function flushAllCacheAction()
