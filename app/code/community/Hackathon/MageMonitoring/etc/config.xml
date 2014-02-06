@@ -66,8 +66,8 @@
                 <observers>
                   <magemonitoring>
                     <type>singleton</type>
-                    <class>Hackathon_MageMonitoring_Model_Observer</class>
-                    <method>addCacheStatFolder</method>
+                    <class>Model/Widget/CacheStat</class>
+                    <method>nope</method>
                   </magemonitoring>
                 </observers>
               </magemonitoring_collect_widgets_cachestat>
@@ -75,8 +75,8 @@
                 <observers>
                   <magemonitoring>
                     <type>singleton</type>
-                    <class>Hackathon_MageMonitoring_Model_Observer</class>
-                    <method>addDashboardFolder</method>
+                    <class>Model/Widget/Dashboard</class>
+                    <method>nope</method>
                   </magemonitoring>
                 </observers>
               </magemonitoring_collect_widgets_dashboard>

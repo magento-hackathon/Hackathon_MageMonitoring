@@ -37,7 +37,16 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         // @todo: add caching mechanism (core_config_data with rescan button in backend?)
 
         $classFolders = array();
-        Mage::dispatchEvent('magemonitoring_collect_widgets_'.strtolower($type), array('widget_folder' => &$classFolders));
+
+        // collect subscribed widget folders
+        $eventConf = Mage::getConfig()->getEventConfig('global', 'magemonitoring_collect_widgets_'.strtolower($type));
+        foreach ($eventConf->observers->children() as $module => $conf) {
+            $o = array();
+            if (preg_match("/([a-zA-Z]+_[a-zA-Z]+)/", get_class(Mage::helper($module)), $o)) {
+                $classFolders[] = Mage::getModuleDir(null, $o[1]) . DS . $conf->class;
+            }
+        }
+
         // load all classes in subscribed folders
         foreach ($classFolders as $path) {
             foreach (array_filter(glob($path."/*"), 'is_file') as $f) {
