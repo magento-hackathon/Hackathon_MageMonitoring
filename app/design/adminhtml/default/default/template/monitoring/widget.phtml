@@ -32,10 +32,12 @@
             href="#" id="<?php echo $this->getWidgetId(); ?>-head"
             class="widget-collapse"><?php echo $this->getName(); ?>
         </a>
-        <a title="Refresh Widget.." onclick="refresh<?php echo $this->getWidgetId(); ?>(); return false;" href="#" class="md-icon-refresh md-icon" id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
-        <?php if ($this->getConfig()) { ?>
-            <a title="Settings.." onclick="openConf<?php echo $this->getWidgetId(); ?>();" href="#" class="md-icon-conf md-icon"></a>
-        <?php } ?>
+        <div class="md-additional-controls">
+            <a title="Refresh Widget.." onclick="refresh<?php echo $this->getWidgetId(); ?>(); return false;" href="#" class="md-icon-refresh md-icon" id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
+            <?php if ($this->getConfig()) { ?>
+                <a title="Settings.." onclick="openConf<?php echo $this->getWidgetId(); ?>();" href="#" class="md-icon-conf md-icon"></a>
+            <?php } ?>
+        </div>
     </div>
     <fieldset id="<?php echo $this->getWidgetId(); ?>" class="collapseable">
         <div class="monitoring-data-container">
