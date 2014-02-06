@@ -172,7 +172,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
                          'Flush '.$this->getName(),
                          '*/*/flushcache',
                          array('cache' => $this->getId()),
-                         'Do you really want to flush ' . $this->getName(),
+                         'Do you really want to flush ' . $this->getName() .'?',
                          'delete f-right');
         return $this;
     }

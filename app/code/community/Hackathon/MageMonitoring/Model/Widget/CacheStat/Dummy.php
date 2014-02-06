@@ -32,14 +32,6 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
-     */
-    public function getId() {
-        return $this->getClassId(__CLASS__);
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model::getName()
      */
     public function getName()
@@ -103,6 +95,15 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
 
     /**
      * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     */
+    public function initConfig() {
+        // override abstract as we do not want any user interaction for this widget
+        return array();
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput() {
@@ -133,6 +134,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
      * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
      */
     public function displayCollapsed() {
+        // always display this widget collapsed, content will be ajaxed once the widget is opened
         return true;
     }
 

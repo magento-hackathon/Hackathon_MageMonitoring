@@ -39,14 +39,6 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackat
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getId()
-     */
-    public function getId() {
-        return $this->getClassId(__CLASS__);
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_CacheStats::getName()
      */
     public function getName()

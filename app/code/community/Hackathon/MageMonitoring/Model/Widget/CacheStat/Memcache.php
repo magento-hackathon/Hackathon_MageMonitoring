@@ -56,14 +56,6 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::getId()
-     */
-    public function getId() {
-        return $this->getClassId(__CLASS__);
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
