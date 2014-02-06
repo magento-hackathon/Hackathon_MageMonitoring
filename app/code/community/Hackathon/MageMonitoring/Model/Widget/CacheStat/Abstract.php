@@ -106,7 +106,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @return string
      */
     public function getMemoryCssId($cache) {
-        $freeMemRatio = 100 - round($cache->getMemoryUsed()*100/$cache->getMemoryMax());
+        $freeMemRatio = 0;
+        if ($cache->getMemoryMax() > 0) {
+            $freeMemRatio = 100 - round($cache->getMemoryUsed()*100/$cache->getMemoryMax());
+        }
         return $this->getCssIdByThreshold($freeMemRatio, 10, 25);
     }
 

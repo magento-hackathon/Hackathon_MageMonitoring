@@ -63,7 +63,7 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
      */
     public function isActive()
     {
-        return true;
+        return false;
     }
 
     /**

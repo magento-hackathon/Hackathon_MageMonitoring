@@ -37,13 +37,13 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
     protected function _beforeToHtml()
     {
         $this->addTab(
-                'dashboard_section', array(
-                        'label' => $this->__('Dashboard'),
-                        'title' => $this->__('Dashboard'),
-                        'content' => $this->getLayout()->createBlock(
-                                'magemonitoring/system_overview_read_tabs_dashboard'
-                        )->toHtml(),
-                )
+            'dashboard_section', array(
+                    'label' => $this->__('Dashboard'),
+                    'title' => $this->__('Dashboard'),
+                    'content' => $this->getLayout()->createBlock(
+                            'magemonitoring/system_overview_read_tabs_dashboard'
+                    )->toHtml(),
+            )
         );
 
         $this->addTab(
@@ -87,7 +87,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
         );
 
         $this->addTab(
-            'example_section', array(
+            'modules_section', array(
                 'label' => $this->__('Modules Installed'),
                 'title' => $this->__('Modules Installed'),
                 'content' => $this->getLayout()->createBlock(

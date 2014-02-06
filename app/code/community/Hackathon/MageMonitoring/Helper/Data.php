@@ -96,6 +96,9 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         return $memoryLimit;
     }
 
+    /**
+     * @return array|mixed
+     */
     public function getPhpInfoArray()
     {
         try {
