@@ -86,7 +86,11 @@ h4.monitoring-section-title {
 
 .widget-collapse {
     display: inline-block !important;
-    width: 96%;
+    width: 100%;
+}
+
+.entry-edit-head.md-relative {
+    position: relative;
 }
 
 .md-additional-controls {
@@ -95,24 +99,25 @@ h4.monitoring-section-title {
     -moz-box-sizing: content-box;
     padding-left: 2px;
     width: 40px;
+    position: absolute;
+    right: 30px;
+    z-index: 156;
 }
 
-.entry-edit-head a.md-icon {
+.md-additional-controls a.md-icon {
     background: transparent url('../images/control_icons.png') no-repeat;
     display: inline-block !important;
-    /*height: 19px;*/
-    /*line-height: 19px;*/
     vertical-align: middle;
     margin-top: -2px;
     margin-left: 0;
 }
 
-.entry-edit-head a.md-icon-conf {
+.md-additional-controls a.md-icon-conf {
     background-position: -19px 0;
     height: 16px;
 }
 
-.entry-edit-head a.md-icon-refresh {
+.md-additional-controls a.md-icon-refresh {
     background-position: 0 -2px;
     height: 13px;
     width: 19px;
