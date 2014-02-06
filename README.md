@@ -121,6 +121,7 @@ TODO:
  The icon already gets a class 'widget-invis' added/removed when the collapsable gets toggled but does not work anymore with latest css changes.
 - Check css/frontend for any further quirks
 - Refactor monitoring controller, move ajax stuff into seperate AjaxController?
+- Refactor widget/config.phtml. Tooltip display not working for example. It's in pretty basic shape in general, go grazy. ^^
 - Create some widgets for dashboard. =) A widget that displays certain edge checks would be nice.
  For example, shop had xx user registrations today, but only x placed an order.
 
