@@ -106,17 +106,24 @@ Use case example:
 You want to monitor a sql query specific to a magento site:
 
 - Create new class in Model/Widget/Dashboard/Myquery.php thats extends from Widget_Abstract and implements Widget
-- Implement getOutput(), getName(), getVersion(), isActive()
+- Implement getOutput(), getName(), getVersion(), isActive() see Dummy widgets for examples
 - Done. :)
 
 TODO:
 
 - Support generic callback mechanism, ie widget adds a custom button and wants method x getting called when the user clicks on the button
  Should be fairly easy to implement, just add generic callback handler to controller that calls passed methodname on the widget.
-- Magento Permissions per widget, generic if possible - nice to have for next release but not needed
-- Magento Permissions per tab, nice to have for next release but not needed
 - Javascript in widget.phtml and sub templates could use some refactoring, probably better to create generic functions that take the widgetId as parameter
-- Check css/frontend for quirks, the modal for widget config is pretty basic.
+- Change collapseable refresh/config icons to something that matches magento theme.
+- Make icon display more dynamic, check the dummy widget on cache tab to see what i mean (space between refresh and close icon)
+- Refresh icon should not display if widget is in collapsed state. The icon already gets a class 'widget-invis' added/removed when the collapsable gets toggled but does not work anymore with latest css changes.
+- Check css/frontend for any further quirks
 - Create some widgets for dashboard. =) A widget that displays certain edge checks would be nice. For example, shop had xx user registrations today, but only x placed an order.
+
+NICETOHAVE:
+
+- Magento Permissions per widget, generic if possible
+- Magento Permissions per tab
+
 
 Just create an issue with the task if you want to do one of the above.

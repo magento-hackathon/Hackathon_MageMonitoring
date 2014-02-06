@@ -96,7 +96,7 @@ interface Hackathon_MageMonitoring_Model_Widget
      * array ('config_key' => array('type' => $inputType, // 'text' or 'checkbox' for now
      *                              'required' => true|false,
      *                              'label' => $label,
-     *                              'default' => $value,
+     *                              'value' => $value,
      *                              'tooltip' => $tooltipMsg),
      *        ...)
      *
