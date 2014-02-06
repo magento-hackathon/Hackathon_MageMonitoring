@@ -65,21 +65,25 @@ Uninstallation
 * Via modman: `modman remove Hackathon_MageMonitoring`
 * Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring`
 
-### How to add a new cache widget
+### How to add a new widget
 
 - Clone develop branch
-- Have a look at the interface class Hackathon_MageMonitoring_Model_Widget_CacheStat
-- Implement the interface, extend from Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract to take care of boilerplate
-- For extra values have a look at Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy::getOutput()
-- Drop the class into Model/Widget/CacheStat
+- Have a look at the base interface class Hackathon_MageMonitoring_Model_Widget
+- Create a new class in Model/Widget/$Tab/Mywidget.php
+- Extend from the nearest Abstract class to take care of boilerplate, example: cache widget => extend from Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+- Implement the remaining methods of corresponding child interface, example: cache widget => implement Hackathon_MageMonitoring_Model_Widget_CacheStat
+- Override isActive() if your widget depends on certain conditions.
+- Override initConfig() if your widget wants to use custom user parameters. See dashboard dummy widget for details.
 - You are done. Pull requests welcome. ;)
 
-### How to add a custom widget from another module
+Have a look at the dummy widgets for more detailed usage.
 
-- In your module add an observer that subscribes to magemonitoring_collect_widgets_cachestat/dashboard event.
-  See config.xml of this module.
-- Now follow the same procedure as for adding a new cache widget, exchange CacheStat with Dashboard as needed
-- Drop the impl class into the folder your observer publishes.
+### How to add a new widget from another module
+
+- In your module config add an observer that subscribes to magemonitoring_collect_widgets_$tab event.
+ You do not need an actual observer class, declaration in config.xml is enough. See config.xml of this module for details.
+- Now follow the same procedure as for adding a new widget, except for repo cloning part.
+- Drop the new widget class into the folder your observer config publishes.
 
 ### Core Contributors
 
@@ -105,8 +109,8 @@ Use case example:
 
 You want to monitor a sql query specific to a magento site:
 
-- Create new class in Model/Widget/Dashboard/Myquery.php thats extends from Widget_Abstract and implements Widget
-- Implement getOutput(), getName(), getVersion(), isActive() see Dummy widgets for examples
+- Create new class in Model/Widget/Dashboard/Myquery.php thats extends from Widget_Abstract and implements Widget_Dashboard
+- Implement getOutput(), getName(), getVersion() see Dummy widgets for exampless
 - Done. :)
 
 TODO:
