@@ -27,17 +27,9 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
                                                             implements Hackathon_MageMonitoring_Model_Widget_Dashboard
 {
 
-    public function __construct()
-    {
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::getId()
-     */
-    public function getId() {
-        return $this->getClassId(__CLASS__);
-    }
+    const CONFIG_PIE_COLOR_ONE = 'pie_color_one';
+    const CONFIG_PIE_COLOR_TWO = 'pie_color_two';
+    const CONFIG_PIE_COLOR_THREE = 'pie_color_three';
 
     /**
      * (non-PHPdoc)
@@ -68,6 +60,22 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
 
     /**
      * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     */
+    public function initConfig() {
+        // we want the default config for persistent collapseable state ..
+        parent::initConfig();
+
+        // ...and add 3 text fields with tooltip to that
+        $this->addConfig(self::CONFIG_PIE_COLOR_ONE, 'Pie Color 1:', '#f00000', 'text', false, 'A wild tooltip appears.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_TWO, 'Pie Color 2:', '#0000f0', 'text', false, 'Another wild tooltip appears.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_THREE, 'Pie Color 3:', '#00f000', 'text', false, 'Yep, here too.');
+
+        return $this->_config;
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput() {
@@ -94,14 +102,14 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
         $this->addRow('warning', 'Very Important Stat with a line chart and 2 data sets', '303 / 2048M', $chart);
 
         // prepare a pie chart
-        $chartDataPie = array(array('value' => 34, 'color' => '#ff0000'),
-                              array('value' => 12, 'color' => '#00ff00'),
-                              array('value' => 42, 'color' => '#0000ff')
+        $chartDataPie = array(array('value' => 34, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_ONE)),
+                              array('value' => 12, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_TWO)),
+                              array('value' => 42, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_THREE))
                              );
         $chart = $this->createChartArray($this->getId().'_another_imp', $chartDataPie);
 
         // add row with pie chart
-        $this->addRow('warning', 'Another Important Stat with a 3 pieces pie chart', 'I like pie.', $chart);
+        $this->addRow('warning', 'Another Important Stat with a 3 pieces pie chart, colors can be changed by user', 'I like pie.', $chart);
 
         $chart = $this->createChartArray($this->getId().'_orders', $chartData, 'Radar', 300, 300);
 

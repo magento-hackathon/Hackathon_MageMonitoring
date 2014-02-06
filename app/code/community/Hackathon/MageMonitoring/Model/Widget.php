@@ -84,4 +84,58 @@ interface Hackathon_MageMonitoring_Model_Widget
      * @return array|false
      */
     public function getButtons();
+    /**
+     * Returns array with default config data for this widget or false if not implemented.
+     *
+     * Implementing this method enables you to add custom entries for user configuration.
+     *
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     * Data is saved to core_config_data with path = 'widgets/' + $widgetClassName '/' + $config/key
+     *
+     * Format of return array:
+     * array ('config_key' => array('type' => $inputType, // 'text' or 'checkbox' for now
+     *                              'required' => true|false,
+     *                              'label' => $label,
+     *                              'default' => $value,
+     *                              'tooltip' => $tooltipMsg),
+     *        ...)
+     *
+     * @return array|false
+     */
+    public function initConfig();
+    /**
+     * Returns current config data of this widget.
+     *
+     * Returned array has same structure as initConfig()
+     *
+     * @return array|false
+     */
+    public function getConfig($key=null, $valueOnly=null);
+    /**
+     * Loads and returns the widget config via desired persistance layer. Never called if getConfig() returns false.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     *
+     * Returned array has same structure as initConfig()
+     *
+     * @return array|false
+     */
+    public function loadConfig();
+    /**
+     * Saves the widget config via desired persistance layer. Never called if getConfig() returns false.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     *
+     * Format of input array:
+     * array('config_key' => $newValue, ...)
+     *
+     * @return bool
+     */
+    public function saveConfig($array);
+    /**
+     * Deletes the widget config via desired persistance layer. Never called if getConfig() returns false.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     *
+     * @return bool
+     */
+    public function deleteConfig();
+
 }

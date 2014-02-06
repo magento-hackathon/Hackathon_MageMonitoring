@@ -1,0 +1,33 @@
+<?php
+$widget = $this->getWidget();
+$postUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/saveWidgetConf', array('widgetId' => $widget->getId()));
+$resetUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/resetWidgetConf', array('widgetId' => $widget->getId()));
+?>
+<div>
+<h4>Widget Configuration</h4>
+<form action="#" method="get" id="form_widget_config" onsubmit="return false;">
+    <?php
+    foreach ($this->getWidget()->loadConfig() as $k => $c) {?>
+    <fieldset>
+        <label class="mh-form-label"><?php echo $c['label']; ?></label>
+        <?php switch ($c['type']) {
+            case 'text':
+            ?>
+                <input class="mh-form-input" type="text" name="<?php echo $k; ?>" value="<?php echo $c['value']; ?>" />
+                <?php
+                break;
+            case 'checkbox':
+            ?>
+                <input class="mh-form-input" type="checkbox" name="<?php echo $k; ?>" <?php echo $c['value'] ? 'checked' : ''; ?>/>
+                <?php
+                break;
+            } ?>
+            <legend><?php echo $c['tooltip']; ?></legend>
+    </fieldset>
+    <?php } ?>
+    <input type="submit" value="Save Config" class="mh-form-button"
+            onclick="Modalbox.show('<?php echo $postUrl; ?>', {title: 'Saving Config..', params: Form.serialize('form_widget_config'), method: 'post' }); return false;">
+    <input type="button" value="Reset Config" class="mh-form-button"
+            onclick="Modalbox.show('<?php echo $resetUrl ?>', {width: 460, title: 'Saving Config..'}); return false;" />
+</form>
+</div>

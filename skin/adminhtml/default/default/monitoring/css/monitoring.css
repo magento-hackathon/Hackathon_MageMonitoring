@@ -85,25 +85,61 @@ h4.monitoring-section-title {
 }
 
 .widget-collapse {
-    margin-top: 3px;
     display: inline-block !important;
-    width: 96%;
+    width: 100%;
 }
 
-.md-icon-conf {
-    background: transparent url(../images/statuses.png) no-repeat !important;
-    background-position: -51px 4px !important;
-    display: inline-block !important;
+.entry-edit-head.md-relative {
+    position: relative;
 }
 
-.md-icon-refresh {
-    background: transparent url(../images/statuses.png) no-repeat !important;
-    background-position: -34px 4px !important;
+.md-additional-controls {
+    display: inline-block;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    padding-left: 2px;
+    width: 40px;
+    position: absolute;
+    right: 30px;
+    z-index: 156;
+}
+
+.md-additional-controls a.md-icon {
+    background: transparent url('../images/control_icons.png') no-repeat;
     display: inline-block !important;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-left: 0;
+}
+
+.md-additional-controls a.md-icon-conf {
+    background-position: -19px 0;
+    height: 16px;
+}
+
+.md-additional-controls a.md-icon-refresh {
+    background-position: 0 -2px;
+    height: 13px;
+    width: 19px;
 }
 
 .widget-invis {
     display: none !important;
+}
+
+.mh-form-label {
+    width: 200px;
+    display: inline-block;
+}
+
+.mh-form-input {
+    margin-bottom: 5px;
+}
+
+.mh-form-button {
+    margin-top: 15px;
+    margin-left: 10px;
+    float: right;
 }
 
 }
