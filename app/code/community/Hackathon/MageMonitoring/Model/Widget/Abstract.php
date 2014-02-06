@@ -33,13 +33,22 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     protected $_config = array();
 
     /**
-     * Returns unique widget id.
+     * Returns unique widget id. You really don't want to override is. ;)
      *
      * @return string
      */
     public function getId()
     {
         return get_called_class();
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
+    public function isActive()
+    {
+        return true;
     }
 
     /**

@@ -51,15 +51,6 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
-     */
-    public function isActive()
-    {
-        return true;
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig() {
