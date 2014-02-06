@@ -91,4 +91,32 @@ Uninstallation
 
 ### Status of Project
 
-STABLE
+So a lot happened here in the dev branch, what changed:
+
+- We now have generic widgets in place, the prev. CacheStats interface was bit to specific for other use cases.
+ Check Widget interface in model folder.
+- Other modules can subscribe their widgets to any tab in this module. (currently only dashboard/cachestat, but could be easily all tabs if we want)
+ Good for site/module specific widgets.
+- Widgets now have generic ajax refresh.
+- Widgets that have a collapsed init state will not render their output until opened. Good for widgets that are resource heavy.
+- Widgets support generic configuration mechanism for user interaction. Frontend users can edit default collapseable state per widget now.
+
+Use case example:
+
+You want to monitor a sql query specific to a magento site:
+
+- Create new class in Model/Widget/Dashboard/Myquery.php thats extends from Widget_Abstract and implements Widget
+- Implement getOutput(), getName(), getVersion(), isActive()
+- Done. :)
+
+TODO:
+
+- Support generic callback mechanism, ie widget adds a custom button and wants method x getting called when the user clicks on the button
+ Should be fairly easy to implement, just add generic callback handler to controller that calls passed methodname on the widget.
+- Magento Permissions per widget, generic if possible - nice to have for next release but not needed
+- Magento Permissions per tab, nice to have for next release but not needed
+- Javascript in widget.phtml and sub templates could use some refactoring, probably better to create generic functions that take the widgetId as parameter
+- Check css/frontend for quirks, the modal for widget config is pretty basic.
+- Create some widgets for dashboard. =) A widget that displays certain edge checks would be nice. For example, shop had xx user registrations today, but only x placed an order.
+
+Just create an issue with the task if you want to do one of the above.
