@@ -98,9 +98,9 @@ h4.monitoring-section-title {
     box-sizing: content-box;
     -moz-box-sizing: content-box;
     padding-left: 2px;
-    width: 40px;
+    /*width: 40px;*/
     position: absolute;
-    right: 30px;
+    right: 29px;
     z-index: 156;
 }
 
@@ -118,9 +118,8 @@ h4.monitoring-section-title {
 }
 
 .md-additional-controls a.md-icon-refresh {
-    background-position: 0 -2px;
-    height: 13px;
-    width: 19px;
+    background-position: 0 0;
+    height: 16px;
 }
 
 .widget-invis {
