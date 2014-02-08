@@ -23,14 +23,38 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
-    extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Model_Widget_Log_Exception extends Hackathon_MageMonitoring_Model_Widget_Log_Abstract
+                                                          implements Hackathon_MageMonitoring_Model_Widget_Log
 {
+    protected $_DEF_LOG_LINES = 60;
+    protected $_DEF_DISPLAY_PRIO = 20;
 
-    protected function _construct()
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
+    public function getName()
     {
-        $this->setTemplate('monitoring/overview.phtml');
-        return parent::_construct();
+        return 'Magento Exception Log';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
+    public function getVersion()
+    {
+        return '1.0';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     */
+    public function getOutput()
+    {
+        $this->addLogRow('error', Mage::getStoreConfig('dev/log/exception_file'));
+        return $this->_output;
     }
 
 }

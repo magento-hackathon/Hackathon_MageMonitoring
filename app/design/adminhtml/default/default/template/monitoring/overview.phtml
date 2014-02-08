@@ -24,118 +24,13 @@
  */
 
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview */
+
+$activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets('System');
+
+if (empty($activeWidgets)) {
+    echo '<h4>'.$this->__('No active logging widgets found. :(').'</h4>';
+}
+foreach ($activeWidgets as $widget) {
+    echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')->setWidget($widget)->toHtml();
+}
 ?>
-
-<div class="entry-edit-head collapseable">
-    <a class="open" id="main_server_information-head" href="#" onclick="Fieldset.toggleCollapse('main_server_information'); return false;">
-        <?php echo $this->__('Server Information') ?>
-    </a>
-</div>
-<fieldset id="main_server_information" class="collapseable">
-    <div class="monitoring-data-container">
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Host Name') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('HTTP_HOST') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Server Software') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('SERVER_SOFTWARE') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Server IP Address') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('SERVER_ADDR') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Server Port') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('SERVER_PORT') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Server Gateway Interface') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('GATEWAY_INTERFACE') ?></div>
-    </div>
-
-    <?php if (!is_null($memInfo = $this->getMemoryInfo())): ?>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Server Memory') ?></div>
-        <div class="md-item-value"><?php echo $memInfo; ?></div>
-    </div>
-    <?php endif; ?>
-
-    <?php if (!is_null($memInfo = $this->getCpuInfo())): ?>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Server CPU') ?></div>
-        <div class="md-item-value"><?php echo $memInfo; ?></div>
-    </div>
-    <?php endif; ?>
-
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Server Admin') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('SERVER_ADMIN') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Accept Encoding') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('HTTP_ACCEPT_ENCODING') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('OS Information') ?></div>
-        <div class="md-item-value"><?php echo $this->getOsInfo() ?></div>
-    </div>
-</div>
-</fieldset>
-<script type="text/javascript">
-    //<![CDATA[
-    Fieldset.toggleCollapse('main_server_information');
-    //]]>
-</script>
-<div class="entry-edit-head collapseable">
-    <a class="open" id="main_magento_information-head" href="#" onclick="Fieldset.toggleCollapse('main_magento_information'); return false;">Magento Information</a>
-</div>
-<fieldset id="main_magento_information" class="collapseable">
-    <div class="monitoring-data-container">
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Magento Version') ?></div>
-        <div class="md-item-value"><?php echo $this->getMagentoInfo('version') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Magento Root Path') ?></div>
-        <div class="md-item-value"><?php $this->_getValue('DOCUMENT_ROOT') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Total Products Count') ?></div>
-        <div class="md-item-value"><?php echo $this->getMagentoInfo('products_count') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Total Customers Count') ?></div>
-        <div class="md-item-value"><?php echo $this->getMagentoInfo('customers_count') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Total Orders Count') ?></div>
-        <div class="md-item-value"><?php echo $this->getMagentoInfo('orders_count') ?></div>
-    </div>
-    <div class="md-item md-item-info">
-        <div class="md-icon md-icon-info"></div>
-        <div class="md-item-title"><?php echo $this->__('Current Online Visitors') ?></div>
-        <div class="md-item-value"><?php echo $this->getMagentoInfo('online_visitors') ?></div>
-    </div>
-</div>
-</fieldset>
-<script type="text/javascript">
-    //<![CDATA[
-    Fieldset.toggleCollapse('main_magento_information');
-    //]]>
-</script>
