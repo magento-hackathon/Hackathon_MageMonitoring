@@ -27,6 +27,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     // define config keys
     const CONFIG_START_COLLAPSED = 'collapsed';
     const CONFIG_PRE_KEY = 'widgets/';
+    const CALLBACK = 'cb:';
 
     protected $_output = array();
     protected $_buttons = array();
@@ -94,15 +95,15 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     protected function getOnClick($controller_action, $url_params = null, $confirm_message = null) {
         $onClick = '';
         // check if this is an ajax call with callback
-        if (!strncmp($controller_action, 'cb:', strlen('cb:'))) {
-            $callback = substr($controller_action, strlen('cb:'));
+        if (!strncmp($controller_action, self::CALLBACK, strlen(self::CALLBACK))) {
+            $callback = substr($controller_action, strlen(self::CALLBACK));
             $widgetId = $this->getId();
             $widgetName = $this->getName();
-            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/execCallback', $this->getId());
+            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $this->getId());
             $refreshUrl = 'null';
             // check if refresh flag is set
             if (isset($url_params['refreshAfter']) && $url_params['refreshAfter']) {
-                $refreshUrl = '\''.Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $this->getId()).'\'';
+                $refreshUrl = '\''.Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/refreshWidget', $this->getId()).'\'';
             }
             // add callback js
             $onClick .= "execWidgetCallback('$widgetId', '$widgetName', '$callback', '$callbackUrl', $refreshUrl);";

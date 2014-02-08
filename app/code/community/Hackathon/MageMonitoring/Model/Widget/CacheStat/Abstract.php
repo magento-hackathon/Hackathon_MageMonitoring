@@ -170,8 +170,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
     public function addFlushButton($cache) {
         $this->addButton('flush'.$this->getId(),
                          'Flush '.$this->getName(),
-                         '*/*/flushcache',
-                         array('cache' => $this->getId()),
+                         self::CALLBACK.'flushCache',
+                         array('widgetId' => $this->getId(), 'refreshAfter' => true),
                          'Do you really want to flush ' . $this->getName() .'?',
                          'delete f-right');
         return $this;

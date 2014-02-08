@@ -121,7 +121,7 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
         // add a button that will execute helloCallback() when clicked. callback method needs to be in this class.
         // we want the widget to refresh itself after the call is done
         // and a confirm dialog before clicking
-        $this->addButton($this->getId().'_bone', 'click me!' , 'cb:helloCallback', array('refreshAfter' => true), 'Long running operation! You sure?');
+        $this->addButton($this->getId().'_bone', 'click me!' , self::CALLBACK.'helloCallback', array('refreshAfter' => true), 'Long running operation! You sure?');
 
         // just a normal button that links to a standard magento route
         $this->addButton($this->getId().'_btwo', 'dont click me!' , '*/*/qwerty', null, 'Last chance!');
