@@ -70,7 +70,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      *
      * @return $this
      */
-    public function addButton($button_id, $label, $controller_action, $url_params = null, $confirm_message=null, $css_class='info') {
+    public function addButton($button_id, $label, $controller_action, $url_params = null, $confirm_message=null, $css_class='f-right') {
         $b = Mage::app()->getLayout()->createBlock('adminhtml/widget_button');
         $b->setId($button_id);
         $b->setLabel($label);
@@ -91,7 +91,27 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      *
      * @return string
      */
-    protected function getOnClick($controller_action, $url_params = null, $confirm_message=null) {
+    protected function getOnClick($controller_action, $url_params = null, $confirm_message = null) {
+        $onClick = '';
+        // check if this is an ajax call with callback
+        if (!strncmp($controller_action, 'cb:', strlen('cb:'))) {
+            $callback = substr($controller_action, strlen('cb:'));
+            $widgetId = $this->getId();
+            $widgetName = $this->getName();
+            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/execCallback', $this->getId());
+            $refreshUrl = 'null';
+            // check if refresh flag is set
+            if (isset($url_params['refreshAfter']) && $url_params['refreshAfter']) {
+                $refreshUrl = '\''.Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $this->getId()).'\'';
+            }
+            // add callback js
+            $onClick .= "execWidgetCallback('$widgetId', '$widgetName', '$callback', '$callbackUrl', $refreshUrl);";
+            // add confirm dialog?
+            if ($confirm_message) {
+                $onClick = "var r=confirm('$confirm_message'); if (r==true) {" . $onClick . "}";
+            }
+            return $onClick;
+        }
         $url = Mage::getSingleton('adminhtml/url')->getUrl($controller_action, $url_params);
         if ($confirm_message) {
             $onClick = "confirmSetLocation('$confirm_message','$url')";

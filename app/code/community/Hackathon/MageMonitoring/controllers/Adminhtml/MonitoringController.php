@@ -45,9 +45,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     // ajax refresh
     public function refreshWidgetAction() {
         $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId', null)) {
-            $widget = new $id();
-            $widget->loadConfig();
+        if ($widget = $this->_getWidgetFromRequest(true)) {
             $response = $this->getLayout()->createBlock('core/template')
                 ->setTemplate('monitoring/widget/body.phtml')
                 ->setData('output', $widget->getOutput())
@@ -63,13 +61,11 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     // get widget config html
     public function getWidgetConfAction() {
         $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId', null)) {
-            $widget = new $id();
-            $widget->loadConfig();
+        if ($widget = $this->_getWidgetFromRequest(true)) {
             $response = $this->getLayout()->createBlock('core/template')
-                                                    ->setTemplate('monitoring/widget/config.phtml')
-                                                    ->setData('widget', $widget)
-                                                    ->toHtml();
+                ->setTemplate('monitoring/widget/config.phtml')
+                ->setData('widget', $widget)
+                ->toHtml();
         }
         $this->getResponse()->setBody($response);
     }
@@ -77,8 +73,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     // save widget config
     public function saveWidgetConfAction() {
         $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId')) {
-            $widget = new $id();
+        if ($widget = $this->_getWidgetFromRequest()) {
             $post = $this->getRequest()->getPost();
             unset($post['form_key']);
             $widget->saveConfig($post);
@@ -90,10 +85,27 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     // delete widget config
     public function resetWidgetConfAction() {
         $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId')) {
-            $widget = new $id();
+        if ($widget = $this->_getWidgetFromRequest()) {
             $widget->deleteConfig();
             $response = 'Deleted config for ' . $widget->getName();
+        }
+        $this->getResponse()->setBody($response);
+    }
+
+    // execute callback on widget
+    public function execCallbackAction() {
+        $response = "ERR";
+        if ($widget = $this->_getWidgetFromRequest(true)) {
+            if ($cbMethod = $this->getRequest()->getParam('cb')) {
+                if (method_exists($widget, $cbMethod)) {
+                    try {
+                        $response = $widget->$cbMethod();
+                    } catch (Exception $e) {
+                        $response = $e->getMessage();
+                        Mage::logException($e);
+                    }
+                }
+            }
         }
         $this->getResponse()->setBody($response);
     }
@@ -112,7 +124,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
             $this->_getSession()->addSuccess($this->__('All caches flushed with success'));
 
         } catch (Exception $e) {
-            MAge::logException($e);
+            Mage::logException($e);
             $this->_getSession()->addError($e->__toString());
         }
 
@@ -125,7 +137,6 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
 
         if ($cacheId) {
             try {
-
                 $cache = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat', $cacheId);
                 if (!empty($cache) && $cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
                     $cache->flushCache();
@@ -139,6 +150,26 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         }
 
         return $this->_redirect('*/*/index');
+    }
+
+    /**
+     * Returns widget instance if widgetId is found in current request params.
+     *
+     * @param bool $loadConfig
+     *
+     * @return Hackathon_MageMonitoring_Model_Widget|false
+     */
+    private function _getWidgetFromRequest($loadConfig = false) {
+        if ($id = $this->getRequest()->getParam('widgetId')) {
+            $widget = new $id();
+            if ($widget instanceof Hackathon_MageMonitoring_Model_Widget && $widget->isActive()) {
+                if ($loadConfig) {
+                    $widget->loadConfig();
+                }
+                return $widget;
+            }
+        }
+        return false;
     }
 
 }

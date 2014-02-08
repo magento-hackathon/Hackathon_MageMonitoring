@@ -66,6 +66,17 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
     }
 
     /**
+     * Example for a custom callback method. Do some work and return string or any html.
+     *
+     * @return string
+     */
+    public function helloCallback () {
+        // hard work
+        sleep(3);
+        return 'Pleased to inform you that the operation was indeed a great success! <br/> Now let me refresh that widget for you..';
+    }
+
+    /**
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
@@ -107,9 +118,13 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
         // add row with radar chart
         $this->addRow('error', 'Orders of the last 6 months in comparsion with previous year.', ' ', $chart);
 
-        // add 2 buttons
-        $this->addButton($this->getId().'_bone', 'click me!' , '*/*/', null, 'Thanks for clicking!', 'f-right');
-        $this->addButton($this->getId().'_btwo', 'dont click me!' , '*/*/qwerty', null, 'Last chance!', 'f-right');
+        // add a button that will execute helloCallback() when clicked. callback method needs to be in this class.
+        // we want the widget to refresh itself after the call is done
+        // and a confirm dialog before clicking
+        $this->addButton($this->getId().'_bone', 'click me!' , 'cb:helloCallback', array('refreshAfter' => true), 'Long running operation! You sure?');
+
+        // just a normal button that links to a standard magento route
+        $this->addButton($this->getId().'_btwo', 'dont click me!' , '*/*/qwerty', null, 'Last chance!');
 
         return $this->_output;
     }

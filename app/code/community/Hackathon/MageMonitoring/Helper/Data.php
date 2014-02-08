@@ -212,4 +212,13 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         return trim($output);
     }
 
+    /**
+     * @param string $controller_action
+     * @param string $widgetId
+     * @return string $url
+     */
+    public function getWidgetUrl($controller_action, $widgetId) {
+        return Mage::getSingleton('adminhtml/url')->getUrl($controller_action, array('widgetId' => $widgetId));
+    }
+
 }

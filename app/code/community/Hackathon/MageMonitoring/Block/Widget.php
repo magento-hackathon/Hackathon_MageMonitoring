@@ -117,4 +117,25 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
         return $this->_getWidget()->getButtons();
     }
 
+    /**
+     * @return string
+     */
+    public function getConfigUrl() {
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/*/getWidgetConf', $this->getWidgetId());
+    }
+
+    /**
+     * @return string
+     */
+    public function getCallbackUrl() {
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/*/execCallback', $this->getWidgetId());
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefreshUrl() {
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $this->getWidgetId());
+    }
+
 }
