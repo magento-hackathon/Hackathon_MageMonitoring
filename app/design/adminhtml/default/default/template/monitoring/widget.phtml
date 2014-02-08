@@ -28,14 +28,20 @@
 <div class="entry-edit">
     <div class="entry-edit-head collapseable md-relative">
         <a title="Toggle Widget.."
-            onclick="toggleWithLoad<?php echo $this->getWidgetId(); ?>(); return false;"
+            onclick="toggleWithLoad('<?php echo $this->getWidgetId(); ?>',
+                                    '<?php echo $this->getRefreshUrl();?>');"
             href="#" id="<?php echo $this->getWidgetId(); ?>-head"
             class="widget-collapse"><?php echo $this->getName(); ?>
         </a>
         <div class="md-additional-controls">
-            <a title="Refresh Widget.." onclick="refresh<?php echo $this->getWidgetId(); ?>(); return false;" href="#" class="md-icon-refresh md-icon" id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
+            <a title="Refresh Widget.." onclick="refreshWidget('<?php echo $this->getWidgetId(); ?>',
+                                                               '<?php echo $this->getRefreshUrl() ?>');"
+                                        href="#" class="md-icon-refresh md-icon"
+                                        id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
             <?php if ($this->getConfig()) { ?>
-                <a title="Settings.." onclick="openConf<?php echo $this->getWidgetId(); ?>();" href="#" class="md-icon-conf md-icon"></a>
+                <a title="Settings.." onclick="openWidgetConf('<?php echo $this->getName(); ?>',
+                                                              '<?php echo $this->getConfigUrl() ?>');"
+                                      href="#" class="md-icon-conf md-icon"></a>
             <?php } ?>
         </div>
     </div>
@@ -55,24 +61,6 @@
     </fieldset>
     <script type="text/javascript">
         //<![CDATA[
-        function toggleWithLoad<?php echo $this->getWidgetId(); ?>() {
-            if (!$('<?php echo $this->getWidgetId(); ?>').firstDescendant().firstDescendant()) {
-                refresh<?php echo $this->getWidgetId(); ?>();
-            }
-            ($('refresh-<?php echo $this->getWidgetId(); ?>').toggleClassName('widget-invis'));
-            Fieldset.toggleCollapse('<?php echo $this->getWidgetId(); ?>');
-        };
-        function refresh<?php echo $this->getWidgetId(); ?>() {
-            var url = '<?php echo $this->getUrl('*/*/refreshWidget') ?>';
-               new Ajax.Updater($('<?php echo $this->getWidgetId(); ?>').firstDescendant(), url,
-                       { evalScripts: true,
-                         parameters: { widgetId: '<?php echo $this->getWidgetId(); ?>' }
-               });
-        };
-        function openConf<?php echo $this->getWidgetId(); ?>() {
-            var url = '<?php echo Mage::getSingleton('adminhtml/url')->getUrl('*/*/getWidgetConf', array('widgetId' => $this->getWidgetId())); ?>';
-            Modalbox.show(url, {title: '<?php echo $this->getName();?>', width: 600}); return false;
-        }
         Fieldset.<?php echo $this->displayCollapsed() ? 'apply' : 'toggle'; ?>Collapse('<?php echo $this->getWidgetId(); ?>');
         $('refresh-<?php echo $this->getWidgetId(); ?>').addClassName('<?php echo $this->displayCollapsed() ? 'widget-invis' : '' ?> ');
         //]]>

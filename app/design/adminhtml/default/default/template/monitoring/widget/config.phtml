@@ -1,7 +1,8 @@
 <?php
 $widget = $this->getWidget();
-$postUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/saveWidgetConf', array('widgetId' => $widget->getId()));
-$resetUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/resetWidgetConf', array('widgetId' => $widget->getId()));
+$postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/saveWidgetConf', $widget->getId());
+$resetUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/resetWidgetConf', $widget->getId());
+$refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $widget->getId());
 ?>
 <div>
 <h4>Widget Configuration</h4>
@@ -26,8 +27,21 @@ $resetUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/resetWidgetConf', a
     </fieldset>
     <?php } ?>
     <input type="submit" value="Save Config" class="mh-form-button"
-            onclick="Modalbox.show('<?php echo $postUrl; ?>', {title: 'Saving Config..', params: Form.serialize('form_widget_config'), method: 'post' }); return false;">
+            onclick="Modalbox.show('<?php echo $postUrl; ?>',
+                                   {title: 'Saving Config..',
+                                   params: Form.serialize('form_widget_config'),
+                                   method: 'post',
+                                   afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                                                         '<?php echo $refreshUrl; ?>') }
+                                  });
+                     return false;">
     <input type="button" value="Reset Config" class="mh-form-button"
-            onclick="Modalbox.show('<?php echo $resetUrl ?>', {width: 460, title: 'Saving Config..'}); return false;" />
+            onclick="Modalbox.show('<?php echo $resetUrl ?>',
+                                   {width: 460,
+                                    title: 'Saving Config..',
+                                    afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                                                          '<?php echo $refreshUrl; ?>') }
+                                  });
+                     return false;" />
 </form>
 </div>
