@@ -56,6 +56,12 @@ interface Hackathon_MageMonitoring_Model_Widget
      */
     public function displayCollapsed();
     /**
+     * Returns display prio of this widget.
+     *
+     * return int
+     */
+    public function getDisplayPrio();
+    /**
      * Returns output data as array.
      *
      * Format of return array:

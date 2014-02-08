@@ -71,10 +71,16 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
             if ($w->isActive() && !is_null($widgetId) && $widgetId == $w->getId()) {
                 return $w;
             } else if ($w->isActive()) {
-                $activeWidgets[] = $w;
+                $w->loadConfig();
+                $prio = 100;
+                if ($w->getDisplayPrio()) {
+                    $prio = $w->getDisplayPrio();
+                }
+                $activeWidgets[$prio.'_'.$w->getId()] = $w;
             }
         }
 
+        ksort($activeWidgets, SORT_NUMERIC);
         return $activeWidgets;
     }
 

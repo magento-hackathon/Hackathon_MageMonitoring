@@ -26,7 +26,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
 {
     // define config keys
     const CONFIG_START_COLLAPSED = 'collapsed';
+    const CONFIG_DISPLAY_PRIO = 'display_prio';
+    // global default values
+    protected $_DEF_START_COLLAPSED = 0;
+    protected $_DEF_DISPLAY_PRIO = 10;
+    // base node for all config keys
     const CONFIG_PRE_KEY = 'widgets/';
+    // callback marker
     const CALLBACK = 'cb:';
 
     protected $_output = array();
@@ -164,10 +170,24 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
 
     /**
      * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
+     */
+    public function getDisplayPrio() {
+        return $this->getConfig(self::CONFIG_DISPLAY_PRIO);
+    }
+
+
+    /**
+     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig() {
-        $this->addConfig(self::CONFIG_START_COLLAPSED, 'Do not render widget on pageload?', 0, 'checkbox', false);
+        $this->addConfig(self::CONFIG_START_COLLAPSED, 'Do not render widget on pageload?',
+                 $this->_DEF_START_COLLAPSED, 'checkbox', false);
+
+        $this->addConfig(self::CONFIG_DISPLAY_PRIO, 'Display priority (0=top):',
+                 $this->_DEF_DISPLAY_PRIO, 'text', false);
+
         return $this->_config;
     }
 
@@ -179,12 +199,14 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         if (empty($this->_config)) {
             $this->_config = $this->initConfig();
         }
-        if ($config_key) {
+        if ($config_key && array_key_exists($config_key, $this->_config)) {
             if ($valueOnly) {
                 return $this->_config[$config_key]['value'];
             } else {
                 return $this->_config[$config_key];
             }
+        } else if ($config_key) {
+            return false;
         }
         return $this->_config;
     }

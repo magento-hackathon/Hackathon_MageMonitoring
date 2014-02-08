@@ -38,7 +38,7 @@ $refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', 
     <input type="button" value="Reset Config" class="mh-form-button"
             onclick="Modalbox.show('<?php echo $resetUrl ?>',
                                    {width: 460,
-                                    title: 'Saving Config..',
+                                    title: 'Delete Config..',
                                     afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
                                                                           '<?php echo $refreshUrl; ?>') }
                                   });

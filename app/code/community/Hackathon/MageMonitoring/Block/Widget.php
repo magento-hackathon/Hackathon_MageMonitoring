@@ -52,7 +52,6 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      */
     public function setWidget($model) {
         if ($model instanceof Hackathon_MageMonitoring_Model_Widget) {
-            $model->loadConfig();
             $this->_widgetModel = $model;
         } else {
             throw new Exception ('Passed model does not implement Hackathon_MageMonitoring_Model_Widget interface.');

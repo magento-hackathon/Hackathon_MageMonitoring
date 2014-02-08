@@ -103,7 +103,7 @@ So a lot happened here in the dev branch, what changed:
  Good for site/module specific widgets.
 - Widgets now have generic ajax refresh.
 - Widgets that have a collapsed init state will not render their output until opened. Good for widgets that are resource heavy.
-- Widgets support generic configuration mechanism for user interaction. Frontend users can edit default collapseable state per widget now.
+- Widgets support generic configuration mechanism for user interaction. Frontend users can edit default collapseable state and display priority per widget now.
 - Widgets have generic callback mechanism for custom buttons
 
 Use case example:
@@ -116,7 +116,6 @@ You want to monitor a sql query specific to a magento site:
 
 TODO:
 
-- Refactor other tabs to use new widget interface where it makes sense? I would say logs and system overview tabs as those might be interesting targets for adding custom widgets.
 - Refresh icon should not display if widget is in collapsed state.
  The icon already gets a class 'widget-invis' added/removed when the collapsable gets toggled but does not work anymore with latest css changes.
 - Create some widgets for dashboard. =) A widget that displays certain edge checks would be nice.
