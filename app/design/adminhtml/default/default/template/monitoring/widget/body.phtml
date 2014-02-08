@@ -31,13 +31,17 @@ if ($output = $this->getOutput()) {
     {
     ?>
 <div class="md-item md-item-<?php echo $row['css_id']; ?>">
-    <div class="md-icon md-icon-<?php echo $row['css_id'];?>"></div>
-    <div class="md-item-title">
-        <?php echo $this->__($row['label']) ?>
-    </div>
-    <div class="md-item-value">
-        <?php echo htmlspecialchars($row['value']);?>
-    </div>
+    <?php if ($row['label'] !== null) { ?>
+            <div class="md-icon md-icon-<?php echo $row['css_id'];?>"></div>
+            <div class="md-item-title">
+                <?php echo $this->__($row['label']) ?>
+            </div>
+            <div class="md-item-value">
+                <?php echo htmlspecialchars($row['value']);?>
+            </div>
+    <?php } else { // freeform output
+            echo $row['value'];
+          } ?>
     <?php if (isset($row['chart']) && is_array($row['chart'])) { ?>
     <div class="md-item-<?php echo ((int)$row['chart']['canvas_width'] <= 76) ? 'chart' : 'value'; ?>">
         <?php echo $this->getLayout()->createBlock('magemonitoring/chart')->setData($row['chart'])->toHtml(); ?>
