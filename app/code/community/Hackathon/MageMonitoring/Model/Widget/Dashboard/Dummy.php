@@ -23,8 +23,9 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_MageMonitoring_Model_Widget_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_Widget_Dashboard
+class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget_Dashboard
 {
 
     const CONFIG_PIE_COLOR_ONE = 'pie_color_one';
@@ -51,9 +52,19 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
 
     /**
      * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
+    public function isActive()
+    {
+        return false;
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
-    public function initConfig() {
+    public function initConfig()
+    {
         // we want the default config for persistent collapseable state ..
         parent::initConfig();
 
@@ -70,17 +81,19 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
      *
      * @return string
      */
-    public function helloCallback () {
+    public function helloCallback ()
+    {
         // hard work
         sleep(3);
-        return 'Pleased to inform you that the operation was indeed a great success! <br/> Now let me refresh that widget for you..';
+        return Mage::helper('monitoring')->__('Pleased to inform you that the operation was indeed a great success! <br/> Now let me refresh that widget for you..');
     }
 
     /**
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
-    public function getOutput() {
+    public function getOutput()
+    {
         // add some data
         $this->addRow('info', 'Simple Info Stat with no chart', '42');
 

@@ -23,7 +23,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-                                                          implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_opCacheStats;
 
@@ -61,6 +61,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc extends Hackathon_Mage
         if (extension_loaded('apc') && !extension_loaded('apcu') && ini_get('apc.enabled')) {
             return true;
         }
+
         return false;
     }
 
@@ -82,6 +83,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc extends Hackathon_Mage
         if (isset($this->_opCacheStats['mem_size'])) {
             return $this->_opCacheStats['mem_size'];
         }
+
         return 0;
     }
 
@@ -94,6 +96,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc extends Hackathon_Mage
         if (isset($this->_opCacheStats['num_hits'])) {
             return $this->_opCacheStats['num_hits'];
         }
+
         return 0;
     }
 
@@ -106,6 +109,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc extends Hackathon_Mage
         if (isset($this->_opCacheStats['num_misses'])) {
             return $this->_opCacheStats['num_misses'];
         }
+
         return 0;
     }
 
@@ -117,6 +121,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc extends Hackathon_Mage
     {
         apc_clear_cache();
         apc_clear_cache('user');
+
         return true;
     }
 }

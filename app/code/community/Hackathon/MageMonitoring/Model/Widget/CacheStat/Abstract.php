@@ -29,20 +29,26 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      *
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
-    public function getOutput() {
+    public function getOutput()
+    {
         $this->addRow('info', 'Version', $this->getVersion());
 
-        $this->addRow($this->getMemoryCssId($this),
-                'Memory',
-                $this->getFormatedMemoryValue($this),
-                $this->getMemoryChartData($this));
+        $this->addRow(
+            $this->getMemoryCssId($this),
+            'Memory',
+            $this->getFormatedMemoryValue($this),
+            $this->getMemoryChartData($this)
+        );
 
-        $this->addRow($this->getHitMissCssId($this),
-                'Hit/Miss Ratio',
-                $this->getFormatedHitMissValue($this),
-                $this->getHitMissChartData($this));
+        $this->addRow(
+            $this->getHitMissCssId($this),
+            'Hit/Miss Ratio',
+            $this->getFormatedHitMissValue($this),
+            $this->getHitMissChartData($this)
+        );
 
         $this->addFlushButton($this);
+
         return $this->_output;
     }
 
@@ -52,13 +58,16 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return array
      */
-    public function getMemoryChartData($cache) {
-        $free = (int)$cache->getMemoryMax()-(int)$cache->getMemoryUsed();
+    public function getMemoryChartData($cache)
+    {
+        $free = (int)$cache->getMemoryMax() - (int)$cache->getMemoryUsed();
         $used = $cache->getMemoryUsed();
-        $chartData = array(array('value' => $free, 'color' => '#00f000'),
-                           array('value' => $used, 'color' => '#f00000')
-                          );
-        return $this->createChartArray($cache->getId().'_chart_memory', $chartData);
+        $chartData = array(
+            array('value' => $free, 'color' => '#00f000'),
+            array('value' => $used, 'color' => '#f00000')
+        );
+
+        return $this->createChartArray($cache->getId() . '_chart_memory', $chartData);
     }
 
     /**
@@ -67,13 +76,16 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return array
      */
-    public function getHitMissChartData($cache) {
+    public function getHitMissChartData($cache)
+    {
         $hits = $cache->getCacheHits();
         $misses = $cache->getCacheMisses();
-        $chartData = array(array('value' => $hits, 'color' => '#00f000'),
-                array('value' => $misses, 'color' => '#f00000')
+        $chartData = array(
+            array('value' => $hits, 'color' => '#00f000'),
+            array('value' => $misses, 'color' => '#f00000')
         );
-        return $this->createChartArray($cache->getId().'_chart_hitmiss', $chartData);
+
+        return $this->createChartArray($cache->getId() . '_chart_hitmiss', $chartData);
     }
 
     /**
@@ -85,7 +97,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param int $warningThresh
      * @return string
      */
-    public function getCssIdByThreshold($value, $errorTresh=0, $warningThresh=0) {
+    public function getCssIdByThreshold($value, $errorTresh = 0, $warningThresh = 0)
+    {
         $id = 'success';
         switch ($value) {
             case 0:
@@ -96,6 +109,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
                 $id = 'warning';
                 break;
         }
+
         return $id;
     }
 
@@ -105,8 +119,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return string
      */
-    public function getMemoryCssId($cache) {
-        $freeMemRatio = 100 - round($cache->getMemoryUsed()*100/$cache->getMemoryMax());
+    public function getMemoryCssId($cache)
+    {
+        $freeMemRatio = 100 - round($cache->getMemoryUsed() * 100 / $cache->getMemoryMax());
+
         return $this->getCssIdByThreshold($freeMemRatio, 10, 25);
     }
 
@@ -116,8 +132,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return string
      */
-    public function getHitMissCssId($cache) {
+    public function getHitMissCssId($cache)
+    {
         $hitMissRatio = round($this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()));
+
         return $this->getCssIdByThreshold($hitMissRatio, 50, 75);
     }
 
@@ -128,10 +146,11 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param int $misses
      * @return number
      */
-    public function getHitRatio($hits, $misses) {
+    public function getHitRatio($hits, $misses)
+    {
         $total = $hits + $misses;
         if ($total != 0) {
-            return round($hits*100/$total,2);
+            return round($hits * 100 / $total, 2);
         } else {
             return 0;
         }
@@ -143,9 +162,11 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return string
      */
-    public function getFormatedMemoryValue($cache) {
+    public function getFormatedMemoryValue($cache)
+    {
         $used = Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryUsed(), true);
         $max = Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryMax(), true);
+
         return $used . 'M / ' . $max . 'M';
     }
 
@@ -155,9 +176,11 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return string
      */
-    public function getFormatedHitMissValue($cache) {
+    public function getFormatedHitMissValue($cache)
+    {
         $hits = $cache->getCacheHits();
         $misses = $cache->getCacheMisses();
+
         return $hits . ' / ' . $misses . ' - ' . $this->getHitRatio($hits, $misses) . '%';
     }
 
@@ -167,13 +190,17 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return $this
      */
-    public function addFlushButton($cache) {
-        $this->addButton('flush'.$this->getId(),
-                         'Flush '.$this->getName(),
-                         self::CALLBACK.'flushCache',
-                         array('widgetId' => $this->getId(), 'refreshAfter' => true),
-                         'Do you really want to flush ' . $this->getName() .'?',
-                         'delete f-right');
+    public function addFlushButton($cache)
+    {
+        $this->addButton(
+            'flush' . $this->getId(),
+            'Flush ' . $this->getName(),
+            self::CALLBACK . 'flushCache',
+            array('widgetId' => $this->getId(), 'refreshAfter' => true),
+            'Do you really want to flush ' . $this->getName() . '?',
+            'delete f-right'
+        );
+
         return $this;
     }
 

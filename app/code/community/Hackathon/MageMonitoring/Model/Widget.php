@@ -114,6 +114,8 @@ interface Hackathon_MageMonitoring_Model_Widget
      *
      * Returned array has same structure as initConfig()
      *
+     * @param string $key
+     * @param bool $valueOnly
      * @return array|false
      */
     public function getConfig($key=null, $valueOnly=null);
@@ -133,6 +135,7 @@ interface Hackathon_MageMonitoring_Model_Widget
      * Format of input array:
      * array('config_key' => $newValue, ...)
      *
+     * @param array $array
      * @return bool
      */
     public function saveConfig($array);

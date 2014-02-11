@@ -23,12 +23,11 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
+    extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * (non-PHPdoc)
@@ -54,7 +53,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
      */
     public function isActive()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -97,7 +96,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
-    public function initConfig() {
+    public function initConfig()
+    {
         // override abstract as we do not want any user interaction for this widget
         return array();
     }
@@ -106,7 +106,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
-    public function getOutput() {
+    public function getOutput()
+    {
         // we want the standard cache widget output..
         parent::getOutput();
 
@@ -133,7 +134,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
      */
-    public function displayCollapsed() {
+    public function displayCollapsed()
+    {
         // always display this widget collapsed, content will be ajaxed once the widget is opened
         return true;
     }

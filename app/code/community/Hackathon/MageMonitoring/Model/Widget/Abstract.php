@@ -27,11 +27,14 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     // define config keys
     const CONFIG_START_COLLAPSED = 'collapsed';
     const CONFIG_DISPLAY_PRIO = 'display_prio';
+
     // global default values
     protected $_DEF_START_COLLAPSED = 0;
     protected $_DEF_DISPLAY_PRIO = 10;
+
     // base node for all config keys
     const CONFIG_PRE_KEY = 'widgets/';
+
     // callback marker
     const CALLBACK = 'cb:';
 
@@ -61,23 +64,43 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     /**
      * Adds a row to output array.
      *
+     * @param string $css_id
+     * @param string $label
+     * @param string $value
+     * @param string $chart
      * @return $this
      */
-    public function addRow($css_id, $label, $value=null, $chart=null) {
-        $this->_output[] = array('css_id' => $css_id,
-                            'label' => $label,
-                            'value' => $value,
-                            'chart' => $chart
-                          );
+    public function addRow($css_id, $label, $value = null, $chart = null)
+    {
+        $this->_output[] = array(
+            'css_id' => $css_id,
+            'label' => $label,
+            'value' => $value,
+            'chart' => $chart
+        );
+
         return $this;
     }
 
     /**
      * Adds a button to button array.
      *
+     * @param string $button_id
+     * @param string $label
+     * @param string $controller_action
+     * @param string $url_params
+     * @param string $confirm_message
+     * @param string $css_class
      * @return $this
      */
-    public function addButton($button_id, $label, $controller_action, $url_params = null, $confirm_message=null, $css_class='f-right') {
+    public function addButton(
+        $button_id,
+        $label,
+        $controller_action,
+        $url_params = null,
+        $confirm_message = null,
+        $css_class = 'f-right'
+    ) {
         $b = Mage::app()->getLayout()->createBlock('adminhtml/widget_button');
         $b->setId($button_id);
         $b->setLabel($label);
@@ -86,6 +109,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         $b->setType('button');
 
         $this->_buttons[] = $b;
+
         return $this;
     }
 
@@ -98,7 +122,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      *
      * @return string
      */
-    protected function getOnClick($controller_action, $url_params = null, $confirm_message = null) {
+    protected function getOnClick($controller_action, $url_params = null, $confirm_message = null)
+    {
         $onClick = '';
         // check if this is an ajax call with callback
         if (!strncmp($controller_action, self::CALLBACK, strlen(self::CALLBACK))) {
@@ -109,7 +134,10 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
             $refreshUrl = 'null';
             // check if refresh flag is set
             if (isset($url_params['refreshAfter']) && $url_params['refreshAfter']) {
-                $refreshUrl = '\''.Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/refreshWidget', $this->getId()).'\'';
+                $refreshUrl = '\'' . Mage::helper('magemonitoring')->getWidgetUrl(
+                        '*/widgetAjax/refreshWidget',
+                        $this->getId()
+                    ) . '\'';
             }
             // add callback js
             $onClick .= "execWidgetCallback('$widgetId', '$widgetName', '$callback', '$callbackUrl', $refreshUrl);";
@@ -117,6 +145,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
             if ($confirm_message) {
                 $onClick = "var r=confirm('$confirm_message'); if (r==true) {" . $onClick . "}";
             }
+
             return $onClick;
         }
         $url = Mage::getSingleton('adminhtml/url')->getUrl($controller_action, $url_params);
@@ -125,6 +154,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         } else {
             $onClick = "setLocation('$url')";
         }
+
         return $onClick;
     }
 
@@ -133,10 +163,12 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      *
      * @return array|false
      */
-    public function getButtons() {
+    public function getButtons()
+    {
         if (empty($this->_buttons)) {
             return false;
         }
+
         return $this->_buttons;
     }
 
@@ -151,20 +183,23 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      *
      * @return array
      */
-    public function createChartArray($canvasId, $chartData, $chartType='Pie', $width=76, $height=76) {
-        return array( 'chart_id' => $canvasId,
-                      'chart_type' => $chartType,
-                      'canvas_width' => $width,
-                      'canvas_height' => $height,
-                      'chart_data' => $chartData
-                    );
+    public function createChartArray($canvasId, $chartData, $chartType = 'Pie', $width = 76, $height = 76)
+    {
+        return array(
+            'chart_id' => $canvasId,
+            'chart_type' => $chartType,
+            'canvas_width' => $width,
+            'canvas_height' => $height,
+            'chart_data' => $chartData
+        );
     }
 
     /**
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
      */
-    public function displayCollapsed() {
+    public function displayCollapsed()
+    {
         return $this->getConfig(self::CONFIG_START_COLLAPSED);
     }
 
@@ -172,7 +207,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
      */
-    public function getDisplayPrio() {
+    public function getDisplayPrio()
+    {
         return $this->getConfig(self::CONFIG_DISPLAY_PRIO);
     }
 
@@ -181,12 +217,23 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
-    public function initConfig() {
-        $this->addConfig(self::CONFIG_START_COLLAPSED, 'Do not render widget on pageload?',
-                 $this->_DEF_START_COLLAPSED, 'checkbox', false);
+    public function initConfig()
+    {
+        $this->addConfig(
+            self::CONFIG_START_COLLAPSED,
+            'Do not render widget on pageload?',
+            $this->_DEF_START_COLLAPSED,
+            'checkbox',
+            false
+        );
 
-        $this->addConfig(self::CONFIG_DISPLAY_PRIO, 'Display priority (0=top):',
-                 $this->_DEF_DISPLAY_PRIO, 'text', false);
+        $this->addConfig(
+            self::CONFIG_DISPLAY_PRIO,
+            'Display priority (0=top):',
+            $this->_DEF_DISPLAY_PRIO,
+            'text',
+            false
+        );
 
         return $this->_config;
     }
@@ -195,7 +242,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getConfig()
      */
-    public function getConfig($config_key = null, $valueOnly = true) {
+    public function getConfig($config_key = null, $valueOnly = true)
+    {
         if (empty($this->_config)) {
             $this->_config = $this->initConfig();
         }
@@ -205,9 +253,12 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
             } else {
                 return $this->_config[$config_key];
             }
-        } else if ($config_key) {
-            return false;
+        } else {
+            if ($config_key) {
+                return false;
+            }
         }
+
         return $this->_config;
     }
 
@@ -215,13 +266,22 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::addConfig()
      */
-    public function addConfig($config_key, $label, $defaultValue, $inputType="text", $required=false, $tooltip=null ) {
-        $this->_config[$config_key] = array('label' => $label,
-                                            'value' => $defaultValue,
-                                            'type' => $inputType,
-                                            'required' => $required,
-                                            'tooltip' => $tooltip
-                                           );
+    public function addConfig(
+        $config_key,
+        $label,
+        $defaultValue,
+        $inputType = "text",
+        $required = false,
+        $tooltip = null
+    ) {
+        $this->_config[$config_key] = array(
+            'label' => $label,
+            'value' => $defaultValue,
+            'type' => $inputType,
+            'required' => $required,
+            'tooltip' => $tooltip
+        );
+
         return $this;
     }
 
@@ -229,13 +289,18 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
      */
-    public function loadConfig() {
+    public function loadConfig()
+    {
 
         foreach ($this->getConfig() as $key => $conf) {
-            if ($value = Mage::getStoreConfig(self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId().'_'.$key)))) {
+            if ($value = Mage::getStoreConfig(
+                self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId() . '_' . $key))
+            )
+            ) {
                 $this->_config[$key]['value'] = $value;
             }
         }
+
         return $this->_config;
     }
 
@@ -243,15 +308,22 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::saveConfig()
      */
-    public function saveConfig($post) {
+    public function saveConfig($post)
+    {
         foreach ($this->getConfig() as $key => $conf) {
             $c = Mage::getModel('core/config');
             $value = '';
             if (array_key_exists($key, $post)) {
                 $value = $post[$key];
             }
-            $c->saveConfig(self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId().'_'.$key)), $value, 'default', 0);
+            $c->saveConfig(
+                self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId() . '_' . $key)),
+                $value,
+                'default',
+                0
+            );
         }
+
         return $this;
     }
 
@@ -259,11 +331,17 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::deleteConfig()
      */
-    public function deleteConfig() {
+    public function deleteConfig()
+    {
         foreach ($this->getConfig() as $key => $conf) {
             $c = Mage::getModel('core/config');
-            $c->deleteConfig(self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId().'_'.$key)), 'default', 0);
+            $c->deleteConfig(
+                self::CONFIG_PRE_KEY . strtolower(str_replace('_', '/', $this->getId() . '_' . $key)),
+                'default',
+                0
+            );
         }
+
         return $this;
     }
 
