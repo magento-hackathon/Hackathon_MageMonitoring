@@ -22,39 +22,15 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-?>
-<div class="entry-edit-head collapseable">
-    <a class="open" id="logs_debug-head" href="#" onclick="Fieldset.toggleCollapse('logs_debug'); return false;">
-        <?php echo $this->__('Magento Debug Log') ?>
-    </a>
-</div>
-<fieldset id="logs_debug" class="collapseable">
-    <div class="monitoring-data-container">
-        <div class="md-item md-item-warning">
-            <div class="md-item-log"><?php echo nl2br($this->getDebugLog()); ?></div>
-        </div>
-    </div>
-</fieldset>
-<script type="text/javascript">
-    //<![CDATA[
-    Fieldset.applyCollapse('logs_debug');
-    //]]>
-</script>
 
-<div class="entry-edit-head collapseable">
-    <a class="open" id="logs_exception-head" href="#" onclick="Fieldset.toggleCollapse('logs_exception'); return false;">
-        <?php echo $this->__('Magento Exception Log') ?>
-    </a>
-</div>
-<fieldset id="logs_exception" class="collapseable">
-    <div class="monitoring-data-container">
-        <div class="md-item md-item-error">
-            <div class="md-item-log"><?php echo nl2br($this->getExceptionLog(60)); ?></div>
-        </div>
-    </div>
-</fieldset>
-<script type="text/javascript">
-    //<![CDATA[
-    Fieldset.toggleCollapse('logs_exception');
-    //]]>
-</script>
+/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Logs */
+
+$activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets('Log');
+
+if (empty($activeWidgets)) {
+    echo '<h4>'.$this->__('No active logging widgets found. :(').'</h4>';
+}
+foreach ($activeWidgets as $widget) {
+    echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')->setWidget($widget)->toHtml();
+}
+?>

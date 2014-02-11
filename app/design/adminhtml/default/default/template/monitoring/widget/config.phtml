@@ -1,0 +1,47 @@
+<?php
+$widget = $this->getWidget();
+$postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/saveWidgetConf', $widget->getId());
+$resetUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/resetWidgetConf', $widget->getId());
+$refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $widget->getId());
+?>
+<div>
+<h4>Widget Configuration</h4>
+<form action="#" method="get" id="form_widget_config" onsubmit="return false;">
+    <?php
+    foreach ($this->getWidget()->loadConfig() as $k => $c) {?>
+    <fieldset>
+        <label class="mh-form-label"><?php echo $c['label']; ?></label>
+        <?php switch ($c['type']) {
+            case 'text':
+            ?>
+                <input class="mh-form-input" type="text" name="<?php echo $k; ?>" value="<?php echo $c['value']; ?>" />
+                <?php
+                break;
+            case 'checkbox':
+            ?>
+                <input class="mh-form-input" type="checkbox" name="<?php echo $k; ?>" <?php echo $c['value'] ? 'checked' : ''; ?>/>
+                <?php
+                break;
+            } ?>
+            <legend><?php echo $c['tooltip']; ?></legend>
+    </fieldset>
+    <?php } ?>
+    <input type="submit" value="Save Config" class="mh-form-button"
+            onclick="Modalbox.show('<?php echo $postUrl; ?>',
+                                   {title: 'Saving Config..',
+                                   params: Form.serialize('form_widget_config'),
+                                   method: 'post',
+                                   afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                                                         '<?php echo $refreshUrl; ?>') }
+                                  });
+                     return false;">
+    <input type="button" value="Reset Config" class="mh-form-button"
+            onclick="Modalbox.show('<?php echo $resetUrl ?>',
+                                   {width: 460,
+                                    title: 'Delete Config..',
+                                    afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                                                          '<?php echo $refreshUrl; ?>') }
+                                  });
+                     return false;" />
+</form>
+</div>

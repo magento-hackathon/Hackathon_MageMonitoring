@@ -4,3 +4,4 @@ app/design/adminhtml/default/default/layout/monitoring.xml app/design/adminhtml/
 app/design/adminhtml/default/default/template/monitoring app/design/adminhtml/default/default/template/monitoring
 skin/adminhtml/default/default/monitoring skin/adminhtml/default/default/monitoring
 js/chartjs/Chart.min.js js/chartjs/Chart.min.js
+js/modal/modalbox.js js/modal/modalbox.js

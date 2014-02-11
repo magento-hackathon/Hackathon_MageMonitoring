@@ -23,27 +23,34 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Modules
-    extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_Chart extends Mage_Core_Block_Template
 {
-    protected $_template = 'monitoring/modules.phtml';
-
-    public function getModulesList()
+    protected function _construct()
     {
-        $modules = array('core' => array(), 'community' => array(), 'local' => array());
-        foreach ((array)Mage::getConfig()->getModuleConfig() as $key => $module) {
-                switch ($module->codePool) {
-                    case 'community':
-                        $modules['community'][$key] = $module;
-                        break;
-                    case 'local':
-                        $modules['local'][$key] = $module;
-                        break;
-                    default:
-                        $modules['core'][$key] = $module;
-                    break;
-                }
-            }
-        return $modules;
+        parent::_construct();
+        $this->setTemplate('monitoring/chart.phtml');
     }
+
+    /**
+     * @return json encoded array
+     */
+    public function getChartData() {
+        $d = $this->getData('chart_data');
+        if (!is_array($d)) {
+            $d = array();
+        }
+        return json_encode($d);
+    }
+
+    /**
+     * @return json encoded array
+     */
+    public function getChartOptions() {
+        $o = $this->getData('chart_options');
+        if (!is_array($o)) {
+            $o = array();
+        }
+        return json_encode($o);
+    }
+
 }

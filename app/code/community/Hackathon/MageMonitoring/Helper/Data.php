@@ -25,38 +25,63 @@
 
 class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
-    public function getActiveCaches($cacheId = null)
+
+    /**
+     * Returns array with implementations of $baseInterface+$type that return isActive() == true.
+     *
+     * @param string $widgetId
+     * @return array
+     */
+    public function getActiveWidgets($type='Dashboard', $widgetId = null, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
     {
         // @todo: add caching mechanism (core_config_data with rescan button in backend?)
 
-        // load all classes in Model/CacheStats
-        $implFolder = Mage::getModuleDir(null, 'Hackathon_MageMonitoring') . DS . 'Model' . DS . 'CacheStats';
-        foreach (array_filter(glob($implFolder."/*"), 'is_file') as $f) {
-            require_once $f;
-        }
+        $classFolders = array();
 
-        // get classes implementing cachestats interface
-        $cacheClasses = array();
-        $iName = 'Hackathon_MageMonitoring_Model_CacheStats';
-        if (interface_exists($iName)) {
-            $cacheClasses = array_filter(
-                get_declared_classes(),
-                create_function('$className', "return in_array(\"$iName\", class_implements(\"\$className\"));")
-            );
-        }
-
-        // collect active caches
-        $activeCaches = array();
-        foreach ($cacheClasses as $cache) {
-            $c = new $cache();
-            if ($c->isActive() && !is_null($cacheId) && $cacheId == $c->getId()) {
-                return $c;
-            } else if ($c->isActive()) {
-                $activeCaches[] = $c;
+        // collect subscribed widget folders
+        $eventConf = Mage::getConfig()->getEventConfig('global', 'magemonitoring_collect_widgets_'.strtolower($type));
+        foreach ($eventConf->observers->children() as $module => $conf) {
+            $o = array();
+            if (preg_match("/([a-zA-Z]+_[a-zA-Z]+)/", get_class(Mage::helper($module)), $o)) {
+                $classFolders[] = Mage::getModuleDir(null, $o[1]) . DS . $conf->class;
             }
         }
 
-        return $activeCaches;
+        // load all classes in subscribed folders
+        foreach ($classFolders as $path) {
+            foreach (array_filter(glob($path."/*"), 'is_file') as $f) {
+                require_once $f;
+            }
+        }
+
+        // get classes implementing widget interface
+        $widgetClasses = array();
+        $iName = $baseInterface.'_'.$type;
+        if (interface_exists($iName)) {
+            $widgetClasses = array_filter(
+                    get_declared_classes(),
+                    create_function('$className', "return in_array(\"$iName\", class_implements(\"\$className\"));")
+            );
+        }
+
+        // collect active widgets
+        $activeWidgets = array();
+        foreach ($widgetClasses as $widget) {
+            $w = new $widget();
+            if ($w->isActive() && !is_null($widgetId) && $widgetId == $w->getId()) {
+                return $w;
+            } else if ($w->isActive()) {
+                $w->loadConfig();
+                $prio = 100;
+                if ($w->getDisplayPrio()) {
+                    $prio = $w->getDisplayPrio();
+                }
+                $activeWidgets[$prio.'_'.$w->getId()] = $w;
+            }
+        }
+
+        ksort($activeWidgets, SORT_NUMERIC);
+        return $activeWidgets;
     }
 
     /**
@@ -191,6 +216,15 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         // Close file and return
         fclose($f);
         return trim($output);
+    }
+
+    /**
+     * @param string $controller_action
+     * @param string $widgetId
+     * @return string $url
+     */
+    public function getWidgetUrl($controller_action, $widgetId) {
+        return Mage::getSingleton('adminhtml/url')->getUrl($controller_action, array('widgetId' => $widgetId));
     }
 
 }
