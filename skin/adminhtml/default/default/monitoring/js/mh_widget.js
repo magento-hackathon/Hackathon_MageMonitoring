@@ -25,7 +25,7 @@ function toggleWithLoad(widgetId, refreshUrl) {
     if (!$(widgetId).firstDescendant().firstDescendant()) {
         refreshWidget(widgetId, refreshUrl);
     }
-    $('refresh-'+widgetId).toggleClassName('widget-invis');
+    $('refresh-'+widgetId).toggleClassName('control-invis');
     Fieldset.toggleCollapse(widgetId);
 };
 

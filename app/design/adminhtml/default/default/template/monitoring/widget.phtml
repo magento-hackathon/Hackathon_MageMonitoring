@@ -36,7 +36,7 @@
         <div class="md-additional-controls">
             <a title="Refresh Widget.." onclick="refreshWidget('<?php echo $this->getWidgetId(); ?>',
                                                                '<?php echo $this->getRefreshUrl() ?>');"
-                                        href="#" class="md-icon-refresh md-icon"
+                                        href="#" class="md-icon-refresh md-icon md-icon-conf"
                                         id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
             <?php if ($this->getConfig()) { ?>
                 <a title="Settings.." onclick="openWidgetConf('<?php echo $this->getName(); ?>',
@@ -62,7 +62,7 @@
     <script type="text/javascript">
         //<![CDATA[
         Fieldset.<?php echo $this->displayCollapsed() ? 'apply' : 'toggle'; ?>Collapse('<?php echo $this->getWidgetId(); ?>');
-        $('refresh-<?php echo $this->getWidgetId(); ?>').addClassName('<?php echo $this->displayCollapsed() ? 'widget-invis' : '' ?> ');
+        $('refresh-<?php echo $this->getWidgetId(); ?>').addClassName('<?php echo $this->displayCollapsed() ? 'control-invis' : '' ?> ');
         //]]>
     </script>
 </div>

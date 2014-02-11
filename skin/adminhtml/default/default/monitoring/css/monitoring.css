@@ -117,13 +117,13 @@ h4.monitoring-section-title {
     height: 16px;
 }
 
+.md-additional-controls a.md-icon-conf.control-invis {
+    display: none !important;
+}
+
 .md-additional-controls a.md-icon-refresh {
     background-position: 0 0;
     height: 16px;
-}
-
-.widget-invis {
-    display: none !important;
 }
 
 .mh-form-label {
@@ -141,4 +141,3 @@ h4.monitoring-section-title {
     float: right;
 }
 
-}
