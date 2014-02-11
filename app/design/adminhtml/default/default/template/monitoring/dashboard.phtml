@@ -23,12 +23,12 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview */
+/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Dashboard */
 
-$activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets('System');
+$activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets('Dashboard');
 
 if (empty($activeWidgets)) {
-    echo '<h4>'.$this->__('No active logging widgets found. :(').'</h4>';
+    echo '<h4>'.$this->__('No active dashboard widgets found. :(').'</h4>';
 }
 foreach ($activeWidgets as $widget) {
     echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')->setWidget($widget)->toHtml();

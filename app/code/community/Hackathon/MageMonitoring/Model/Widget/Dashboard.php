@@ -23,27 +23,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Modules
-    extends Mage_Adminhtml_Block_Abstract
+interface Hackathon_MageMonitoring_Model_Widget_Dashboard extends Hackathon_MageMonitoring_Model_Widget
 {
-    protected $_template = 'monitoring/modules.phtml';
 
-    public function getModulesList()
-    {
-        $modules = array('core' => array(), 'community' => array(), 'local' => array());
-        foreach ((array)Mage::getConfig()->getModuleConfig() as $key => $module) {
-                switch ($module->codePool) {
-                    case 'community':
-                        $modules['community'][$key] = $module;
-                        break;
-                    case 'local':
-                        $modules['local'][$key] = $module;
-                        break;
-                    default:
-                        $modules['core'][$key] = $module;
-                    break;
-                }
-            }
-        return $modules;
-    }
 }

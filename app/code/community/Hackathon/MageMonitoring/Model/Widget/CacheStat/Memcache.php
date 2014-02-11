@@ -22,7 +22,8 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_MageMonitoring_Model_CacheStats
+class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_memCachePool;
     private $_memCacheStats;
@@ -31,83 +32,122 @@ class Hackathon_MageMonitoring_Model_CacheStats_Memcache implements Hackathon_Ma
     {
         try {
             if ($this->_memCachePool == null && class_exists('Memcache', false)) {
-                $localXml = simplexml_load_file('app/etc/local.xml', null, LIBXML_NOCDATA);
 
-                if ($xr = $localXml->xpath('//cache/memcached/servers/server')) {
+                $cacheConfig = Mage::getConfig()->getNode('global/cache')->asArray();
+
+                if ((array_key_exists('backend', $cacheConfig) && strtolower($cacheConfig['backend']) == 'memcached') ||
+                    (array_key_exists('slow_backend', $cacheConfig) && strtolower(
+                            $cacheConfig['slow_backend']
+                        ) == 'memcached')
+                ) {
                     $this->_memCachePool = new Memcache;
-                    foreach ($xr as $server) {
-                        $host = (string)$server->host;
-                        $port = (string)$server->port;
+
+                    foreach ($cacheConfig['memcached']['servers'] as $server) {
+                        $host = (string)$server['host'];
+                        $port = (string)$server['port'];
                         $this->_memCachePool->addServer($host, $port);
                     }
+
                     $this->_memCacheStats = $this->_memCachePool->getStats();
                 }
             }
+
         } catch (Exception $e) {
             Mage::logException($e);
         }
     }
 
-    public function getId()
-    {
-        $o = array();
-        preg_match("/.+_(.+)\z/", __CLASS__, $o);
-        return strtolower($o[1]);
-    }
-
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
     public function getName()
     {
         return 'Memcache';
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
     public function getVersion()
     {
         return $this->_memCachePool->getVersion();
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
     public function isActive()
     {
         if ($this->_memCachePool && $this->_memCachePool->getVersion()) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
+     */
     public function getMemoryMax()
     {
         if (isset($this->_memCacheStats['limit_maxbytes'])) {
             return $this->_memCacheStats['limit_maxbytes'];
         }
+
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryUsed()
+     */
     public function getMemoryUsed()
     {
         if (isset($this->_memCacheStats['bytes'])) {
             return $this->_memCacheStats['bytes'];
         }
+
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheHits()
+     */
     public function getCacheHits()
     {
         if (isset($this->_memCacheStats['get_hits'])) {
             return $this->_memCacheStats['get_hits'];
         }
+
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheMisses()
+     */
     public function getCacheMisses()
     {
         if (isset($this->_memCacheStats['get_misses'])) {
             return $this->_memCacheStats['get_misses'];
         }
+
         return 0;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::flushCache()
+     */
     public function flushCache()
     {
         $this->_memCachePool->flush();
+
         return true;
     }
 

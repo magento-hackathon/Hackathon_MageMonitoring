@@ -23,14 +23,17 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview */
-
-$activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets('System');
-
-if (empty($activeWidgets)) {
-    echo '<h4>'.$this->__('No active logging widgets found. :(').'</h4>';
-}
-foreach ($activeWidgets as $widget) {
-    echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')->setWidget($widget)->toHtml();
-}
+/* @var $this Hackathon_MageMonitoring_Block_Chart */
 ?>
+<canvas id="<?php echo $this->getChartId(); ?>"
+        width="<?php echo $this->getCanvasWidth(); ?>"
+        height="<?php echo $this->getCanvasHeight(); ?>">
+</canvas>
+<script type="text/javascript">
+    //<![CDATA[
+        var ctx = document.getElementById("<?php echo $this->getChartId(); ?>").getContext("2d");
+        var data = <?php echo $this->getChartData(); ?>;
+        var options = <?php echo $this->getChartOptions(); ?>;
+        window.<?php echo $this->getChartId(); ?>Chart = new Chart(ctx).<?php echo $this->getChartType() ?>(data, options);
+    //]]>
+</script>

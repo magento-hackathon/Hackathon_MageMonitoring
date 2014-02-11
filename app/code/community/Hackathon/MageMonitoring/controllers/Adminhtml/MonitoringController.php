@@ -45,10 +45,10 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     public function flushAllCacheAction()
     {
         try {
-            $caches = Mage::helper('magemonitoring')->getActiveCaches();
+            $caches = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat');
 
             foreach ($caches as $cache) {
-                if ($cache instanceof Hackathon_MageMonitoring_Model_CacheStats) {
+                if ($cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
                     $cache->flushCache();
                 }
             }
@@ -56,30 +56,8 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
             $this->_getSession()->addSuccess($this->__('All caches flushed with success'));
 
         } catch (Exception $e) {
-            MAge::logException($e);
+            Mage::logException($e);
             $this->_getSession()->addError($e->__toString());
-        }
-
-        return $this->_redirect('*/*/index');
-    }
-
-    public function flushCacheAction()
-    {
-        $cacheId = (string) $this->getRequest()->getParam('cache');
-
-        if ($cacheId) {
-            try {
-
-                $cache = Mage::helper('magemonitoring')->getActiveCaches($cacheId);
-                if (!empty($cache) && $cache instanceof Hackathon_MageMonitoring_Model_CacheStats) {
-                    $cache->flushCache();
-                }
-
-                $this->_getSession()->addSuccess($this->__('Cache %s flushed with success', $cacheId));
-            } catch (Exception $e) {
-                Mage::logException($e);
-                $this->_getSession()->addError($e->__toString());
-            }
         }
 
         return $this->_redirect('*/*/index');

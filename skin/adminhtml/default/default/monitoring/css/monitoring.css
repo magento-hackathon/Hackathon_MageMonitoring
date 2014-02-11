@@ -83,4 +83,61 @@ h4.monitoring-section-title {
 .f-right {
     margin: 3px;
 }
+
+.widget-collapse {
+    display: inline-block !important;
+    width: 100%;
 }
+
+.entry-edit-head.md-relative {
+    position: relative;
+}
+
+.md-additional-controls {
+    display: inline-block;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    padding-left: 2px;
+    /*width: 40px;*/
+    position: absolute;
+    right: 29px;
+    z-index: 156;
+}
+
+.md-additional-controls a.md-icon {
+    background: transparent url('../images/control_icons.png') no-repeat;
+    display: inline-block !important;
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-left: 0;
+}
+
+.md-additional-controls a.md-icon-conf {
+    background-position: -19px 0;
+    height: 16px;
+}
+
+.md-additional-controls a.md-icon-conf.control-invis {
+    display: none !important;
+}
+
+.md-additional-controls a.md-icon-refresh {
+    background-position: 0 0;
+    height: 16px;
+}
+
+.mh-form-label {
+    width: 200px;
+    display: inline-block;
+}
+
+.mh-form-input {
+    margin-bottom: 5px;
+}
+
+.mh-form-button {
+    margin-top: 15px;
+    margin-left: 10px;
+    float: right;
+}
+

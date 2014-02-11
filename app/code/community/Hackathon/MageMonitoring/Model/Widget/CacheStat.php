@@ -23,53 +23,28 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-interface Hackathon_MageMonitoring_Model_CacheStats
+interface Hackathon_MageMonitoring_Model_Widget_CacheStat extends Hackathon_MageMonitoring_Model_Widget
 {
     /**
-     * Returns id string, last part of classname in lower case to avoid possible conflicts.
-     *
-     * @return string
-     */
-    public function getId();
-
-    /**
-     * Returns cache name.
-     *
-     * @return string
-     */
-    public function getName();
-    /**
-     * Returns version string.
-     *
-     * @return string
-     */
-    public function getVersion();
-    /**
-     * Returns true if the cache is currently active.
-     *
-     * @return bool
-     */
-    public function isActive();
-    /**
-     * Returns maximum cache size in bytes, return false if not implemented
+     * Returns maximum cache size in bytes or false if not implemented.
      *
      * @return int
      */
     public function getMemoryMax();
     /**
-     * Returns used cache size in bytes, return false if not implemented
+     * Returns used cache size in bytes or false if not implemented.
      *
      * @return int
      */
     public function getMemoryUsed();
     /**
-     * Returns cache hit count, return false if not implemented
+     * Returns cache hit count or false if not implemented.
      *
      * @return int
      */
     public function getCacheHits();
     /**
-     * Returns cache miss count, return false if not implemented
+     * Returns cache miss count or false if not implemented.
      *
      * @return int
      */

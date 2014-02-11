@@ -26,19 +26,19 @@
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Modules */
 $modules = $this->getModulesList();
 
+foreach ($modules as $codePool => $poolList) {
 ?>
-<?php //if (is_array($modules)) :?>
 <div class="entry-edit">
     <div class="entry-edit-head collapseable">
-        <a class="open" id="modules_list-head" href="#" onclick="Fieldset.toggleCollapse('modules_list'); return false;">
-            <?php echo $this->__('Modules') ?>
+        <a class="open" id="modules_<?php echo $codePool; ?>_list-head" href="#" onclick="Fieldset.toggleCollapse('modules_<?php echo $codePool; ?>_list'); return false;">
+            <?php echo $this->__('Modules') . ' ' . $codePool; ?>
         </a>
     </div>
-    <fieldset id="modules_list" class="collapseable">
+    <fieldset id="modules_<?php echo $codePool; ?>_list" class="collapseable">
         <div class="monitoring-data-container">
-            <?php foreach ($modules as $key => $module) { ?>
-            <div class="md-item md-item-info">
-                <div class="md-icon md-icon-info"></div>
+            <?php foreach ($poolList as $key => $module) { ?>
+            <div class="md-item md-item-<?php echo $module->is('active') ? 'success' : 'error'; ?>">
+                <div class="md-icon md-icon-<?php echo $module->is('active') ? 'success' : 'error'; ?>"></div>
                 <div class="md-item-title"><?php echo $key ?></div>
                 <div class="md-item-value"><?php echo $module->version ?></div>
             </div>
@@ -47,8 +47,8 @@ $modules = $this->getModulesList();
     </fieldset>
     <script type="text/javascript">
         //<![CDATA[
-        Fieldset.toggleCollapse('modules_list');
+        Fieldset.<?php echo ($codePool == 'core') ? 'apply' : 'toggle'; ?>Collapse('modules_<?php echo $codePool; ?>_list');
         //]]>
     </script>
 </div>
-<?php // endif; ?>
+<?php } // end foreach codePools ?>

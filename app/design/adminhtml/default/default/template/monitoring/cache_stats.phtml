@@ -26,96 +26,13 @@
 
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats */
 
-$activeCaches = Mage::helper('magemonitoring')->getActiveCaches();
+$activeCaches = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat');
 
 if (empty($activeCaches)) {
-    echo $this->__('No active caches found. Consider installing at least a PHP opcache.');
+    echo '<h4>'.$this->__('No active caches found. Consider installing at least a PHP opcache.').'</h4>';
 }
 foreach ($activeCaches as $cache) {
+    echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')->setWidget($cache)->toHtml();
+}
 ?>
-<div class="entry-edit">
-    <div class="entry-edit-head collapseable">
-        <a onclick="Fieldset.toggleCollapse('<?php echo $cache->getId(); ?>'); return false;" href="#" id="<?php echo $cache->getId(); ?>-head" class=""><?php echo $cache->getName(); ?></a>
-    </div>
 
-    <fieldset id="<?php echo $cache->getId(); ?>" class="collapseable">
-        <div class="monitoring-data-container">
-        <div class="md-item md-item-info">
-            <div class="md-icon md-icon-info"></div>
-            <div class="md-item-title"><?php echo $this->__('Version') ?></div>
-            <div class="md-item-value"><?php echo $cache->getVersion(); ?></div>
-        </div>
-        <div class="md-item md-item-info">
-            <div class="md-icon md-icon-info"></div>
-            <div class="md-item-title"><?php echo $this->__('Memory') ?></div>
-            <div class="md-item-value"><?php echo Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryUsed(), true)
-                                                  . 'M / ' .
-                                                  Mage::helper('magemonitoring')->getValueInByte($cache->getMemoryMax(), true)
-                                                  . 'M'; ?>
-            </div>
-            <div class="md-item-chart">
-                <?php if ($cache->getMemoryMax() > 0) { ?>
-
-                    <canvas id="<?php echo $cache->getId(); ?>_mem_chart" width="76" height="76"></canvas>
-                    <script type="text/javascript">
-                        //<![CDATA[
-                         var ctx = document.getElementById("<?php echo $cache->getId(); ?>_mem_chart").getContext("2d");
-                         var data = [
-                                        {
-                                           value: <?php echo (int)$cache->getMemoryMax()-(int)$cache->getMemoryUsed(); ?> ,
-                                           color:"#00F000"
-                                        },
-                                        {
-                                           value : <?php echo $cache->getMemoryUsed(); ?>,
-                                           color : "#F00000"
-                                        }
-                                    ];
-                         var <?php echo $cache->getId(); ?>MemChart = new Chart(ctx).Pie(data);
-                        //]]>
-                    </script>
-                <?php } ?>
-            </div>
-        </div>
-        <div class="md-item md-item-info">
-            <div class="md-icon md-icon-info"></div>
-            <div class="md-item-title"><?php echo $this->__('Hit/Miss Ratio') ?></div>
-            <?php $hitMissRatio = $this->getHitRatio($cache->getCacheHits(), $cache->getCacheMisses()); ?>
-            <div class="md-item-value"><?php echo $cache->getCacheHits() .
-                                                  ' / ' . $cache->getCacheMisses() .
-                                                  ' - ' . $hitMissRatio . '%'; ?>
-            </div>
-            <div class="md-item-chart">
-                    <canvas id="<?php echo $cache->getId(); ?>_hitmiss_chart" width="76" height="76"></canvas>
-                    <script type="text/javascript">
-                        //<![CDATA[
-                         var ctx = document.getElementById("<?php echo $cache->getId(); ?>_hitmiss_chart").getContext("2d");
-                         var data = [
-                                        {
-                                           value: <?php echo $cache->getCacheHits(); ?> ,
-                                           color:"#00F000"
-                                        },
-                                        {
-                                           value : <?php echo $cache->getCacheMisses(); ?>,
-                                           color : "#F00000"
-                                        }
-                                    ];
-                         var <?php echo $cache->getId(); ?>HitMissChart = new Chart(ctx).Pie(data);
-                        //]]>
-                    </script>
-            </div>
-        </div>
-
-        <button type="button" class="f-right button delete" onclick="confirmSetLocation('<?php echo $this->__('Do you really want to flush the ' . $cache->getName() . ' cache?') ?>',
-                                                                                        '<?php echo $this->getUrl('*/*/flushcache', array('cache' => $cache->getId())) ?>')">
-            <span><span><?php echo $this->__('Flush %s', $cache->getName()); ?></span></span>
-        </button>
-        <div class="clear"></div>
-        </div>
-    </fieldset>
-    <script type="text/javascript">
-        //<![CDATA[
-        Fieldset.toggleCollapse('<?php echo $cache->getId(); ?>');
-        //]]>
-    </script>
-</div>
-<?php } ?>
