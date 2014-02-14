@@ -27,7 +27,8 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_CacheStats extend
 {
     protected function _construct()
     {
-        $this->setTemplate('monitoring/cache_stats.phtml');
+        $this->setTemplate('monitoring/widget/list.phtml');
+        $this->setWidgetType('CacheStat');
         return parent::_construct();
     }
 

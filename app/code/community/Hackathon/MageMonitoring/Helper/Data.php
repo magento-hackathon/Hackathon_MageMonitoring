@@ -29,7 +29,9 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     /**
      * Returns array with implementations of $baseInterface+$type that return isActive() == true.
      *
+     * @param string|array $type if type equals '*' all widget sub folders are searched
      * @param string $widgetId
+     * @param string $baseInterface
      * @return array
      */
     public function getActiveWidgets($type='Dashboard', $widgetId = null, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
@@ -37,13 +39,27 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         // @todo: add caching mechanism (core_config_data with rescan button in backend?)
 
         $classFolders = array();
+        $types = array();
+
+        if (!is_array($type) && $type !== '*') {
+            $types[] = $type;
+        } else if ($type == '*') {
+            // collect valid types
+            $c = Mage::getConfig()->getNode('global/widgets/magemonitoring');
+            $c = Mage::getModuleDir(null, 'Hackathon_MageMonitoring').DS.$c->folder;
+            foreach (glob($c."/*", GLOB_ONLYDIR) as $d) {
+                $types[] = basename($d);
+            }
+        }
 
         // collect subscribed widget folders
-        $eventConf = Mage::getConfig()->getEventConfig('global', 'magemonitoring_collect_widgets_'.strtolower($type));
-        foreach ($eventConf->observers->children() as $module => $conf) {
-            $o = array();
-            if (preg_match("/([a-zA-Z]+_[a-zA-Z]+)/", get_class(Mage::helper($module)), $o)) {
-                $classFolders[] = Mage::getModuleDir(null, $o[1]) . DS . $conf->class;
+        foreach ($types as $t) {
+            $widgetConf = Mage::getConfig()->getNode('global/widgets');
+            foreach ($widgetConf->children() as $module => $conf) {
+                $o = array();
+                if (preg_match("/([a-zA-Z]+_[a-zA-Z]+)/", get_class(Mage::helper($module)), $o)) {
+                    $classFolders[] = Mage::getModuleDir(null, $o[1]) . DS . $conf->folder.DS.$t;
+                }
             }
         }
 
@@ -56,7 +72,10 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 
         // get classes implementing widget interface
         $widgetClasses = array();
-        $iName = $baseInterface.'_'.$type;
+        $iName = $baseInterface;
+        if($type !== '*') {
+            $iName .= '_'.$type;
+        }
         if (interface_exists($iName)) {
             $widgetClasses = array_filter(
                     get_declared_classes(),
@@ -225,6 +244,57 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      */
     public function getWidgetUrl($controller_action, $widgetId) {
         return Mage::getSingleton('adminhtml/url')->getUrl($controller_action, array('widgetId' => $widgetId));
+    }
+
+    /**
+     * If $email is valid returns it with default rec. name,
+     * else tries to treat $email as magento trans email code.
+     *
+     * @param string $email
+     * @return array|false
+     */
+    public function validateEmail($email)
+    {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return array('email' => $email, 'name' => 'MageMonitoring');
+        }
+        $name = Mage::getStoreConfig('trans_email/ident_'.$email.'/name');
+        $email = Mage::getStoreConfig('trans_email/ident_'.$email.'/email');
+        if ($name) {
+            return array('email' => $email, 'name' => $name);
+        }
+        return false;
+    }
+
+    /**
+     * Adds $dateString to $fileName, takes care or file extension handling.
+     *
+     * @param string $fileName
+     * @param string $dateString
+     * @return string|false
+     */
+    public function stampFileName($fileName, $dateString) {
+        $p = pathinfo($fileName);
+        $r = false;
+        if (isset($p['filename']) && $p['filename']) {
+            $r = $p['filename'].'-'.$dateString;
+        }
+        if (isset($p['extension']) && $p['extension']) {
+            $r .= '.' . $p['extension'];
+        }
+        return $r;
+    }
+
+    /**
+     * Returns unique config key for widget configs.
+     *
+     * @param string $configKey
+     * @param string $prefix
+     * @param string $className
+     * @return string
+     */
+    public function getConfigKey($configKey, $prefix, $className) {
+        return $prefix . strtolower(str_replace('_', '/', $className . '_' ) . $configKey);
     }
 
 }

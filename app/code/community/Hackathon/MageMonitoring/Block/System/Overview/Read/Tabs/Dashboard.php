@@ -27,7 +27,8 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Dashboard extends
 {
     protected function _construct()
     {
-        $this->setTemplate('monitoring/dashboard.phtml');
+        $this->setTemplate('monitoring/widget/list.phtml');
+        $this->setWidgetType('Dashboard');
         return parent::_construct();
     }
 

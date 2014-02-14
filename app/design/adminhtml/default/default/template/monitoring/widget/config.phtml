@@ -5,10 +5,14 @@ $resetUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/resetWidgetConf', 
 $refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $widget->getId());
 ?>
 <div>
-<h4>Widget Configuration</h4>
 <form action="#" method="get" id="form_widget_config" onsubmit="return false;">
     <?php
-    foreach ($this->getWidget()->loadConfig() as $k => $c) {?>
+    foreach ($this->getWidget()->loadConfig() as $k => $c) {
+        if (is_numeric($k)) { // add a custom header
+            echo '<h4>'.$c['label'].'</h4>';
+            continue;
+        }
+        ?>
     <fieldset>
         <label class="mh-form-label"><?php echo $c['label']; ?></label>
         <?php switch ($c['type']) {

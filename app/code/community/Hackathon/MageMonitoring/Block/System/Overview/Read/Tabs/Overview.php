@@ -29,7 +29,8 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
 
     protected function _construct()
     {
-        $this->setTemplate('monitoring/overview.phtml');
+        $this->setTemplate('monitoring/widget/list.phtml');
+        $this->setWidgetType('System');
         return parent::_construct();
     }
 
