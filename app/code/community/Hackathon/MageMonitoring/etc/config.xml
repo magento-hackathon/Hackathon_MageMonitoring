@@ -60,51 +60,28 @@
             <!-- / Fake model rewrite -->
         </models>
 
-        <events>
-              <!-- publish widget folders -->
-              <magemonitoring_collect_widgets_cachestat>
-                <observers>
-                  <magemonitoring>
-                    <type>singleton</type>
-                    <class>Model/Widget/CacheStat</class>
-                    <method>nope</method>
-                  </magemonitoring>
-                </observers>
-              </magemonitoring_collect_widgets_cachestat>
-              <magemonitoring_collect_widgets_dashboard>
-                <observers>
-                  <magemonitoring>
-                    <type>singleton</type>
-                    <class>Model/Widget/Dashboard</class>
-                    <method>nope</method>
-                  </magemonitoring>
-                </observers>
-              </magemonitoring_collect_widgets_dashboard>
-              <magemonitoring_collect_widgets_system>
-                <observers>
-                  <magemonitoring>
-                    <type>singleton</type>
-                    <class>Model/Widget/System</class>
-                    <method>nope</method>
-                  </magemonitoring>
-                </observers>
-              </magemonitoring_collect_widgets_system>
-              <magemonitoring_collect_widgets_log>
-                <observers>
-                  <magemonitoring>
-                    <type>singleton</type>
-                    <class>Model/Widget/Log</class>
-                    <method>nope</method>
-                  </magemonitoring>
-                </observers>
-              </magemonitoring_collect_widgets_log>
-       </events>
-
         <helpers>
             <magemonitoring>
                 <class>Hackathon_MageMonitoring_Helper</class>
             </magemonitoring>
         </helpers>
+
+        <template>
+            <email>
+                <magemonitoring_watchdog_report module="magemonitoring">
+                    <label>MageMonitoring Watch Dog Reports</label>
+                    <file>magemonitoring_watchdogs.html</file>
+                    <type>html</type>
+                </magemonitoring_watchdog_report>
+            </email>
+        </template>
+
+        <widgets>
+            <magemonitoring>
+                <folder>Model/Widget</folder>
+            </magemonitoring>
+        </widgets>
+
     </global>
 
     <admin>
@@ -128,4 +105,18 @@
             </updates>
         </layout>
     </adminhtml>
+
+    <crontab>
+        <jobs>
+            <magemonitoring_uberdog>
+                <schedule>
+                    <cron_expr>always</cron_expr>
+                </schedule>
+                <run>
+                    <model>magemonitoring/watchDog_uberDog::triggerActiveDogs</model>
+                </run>
+            </magemonitoring_uberdog>
+        </jobs>
+    </crontab>
+
 </config>

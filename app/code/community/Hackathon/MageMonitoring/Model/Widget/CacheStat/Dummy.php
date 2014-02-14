@@ -25,8 +25,12 @@
 
 class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
     extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat, Hackathon_MageMonitoring_Model_WatchDog
 {
+    // override defaults
+    protected $_DEF_START_COLLAPSED = 1;
+    protected $_DEF_WATCHDOG_ACTIVE = 0;
+
     public function __construct() {}
 
     /**
@@ -35,7 +39,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
      */
     public function getName()
     {
-        return 'Dummy Monitoring Widget';
+        return 'Dummy CacheStat Widget';
     }
 
     /**
@@ -53,7 +57,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
      */
     public function isActive()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -94,16 +98,6 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
-     */
-    public function initConfig()
-    {
-        // override abstract as we do not want any user interaction for this widget
-        return array();
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
@@ -132,21 +126,20 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
-     */
-    public function displayCollapsed()
-    {
-        // always display this widget collapsed, content will be ajaxed once the widget is opened
-        return true;
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::flushCache()
      */
     public function flushCache()
     {
         return true;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
+     */
+    public function watch() {
+        $this->addReportRow('warning', 'some label', 'some warning');
+        return $this->_report;
     }
 
 }

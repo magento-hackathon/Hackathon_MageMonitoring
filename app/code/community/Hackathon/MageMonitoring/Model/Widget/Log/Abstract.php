@@ -25,9 +25,12 @@
 class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageMonitoring_Model_Widget_Abstract
 {
     // define config keys
+    const CONFIG_LAST_LOG_ENTRY = 'last_log_entry';
     const CONFIG_LOG_LINES = 'linecount';
     // define global defaults
     protected $_DEF_LOG_LINES = 30;
+
+    protected $_REGEX_LOGSTAMP = "\d{4}(-\d{2}){2}T(\d{2}:){2}\d{2}(\+|-)\d{2}:\d{2}";
 
     /**
      * (non-PHPdoc)
@@ -36,9 +39,9 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageM
     public function initConfig()
     {
         parent::initConfig();
+        $this->addConfigHeader('Log Settings');
         // add config for tail -n param
-        $this->addConfig(self::CONFIG_LOG_LINES, 'Number of lines to tail:',
-                $this->_DEF_LOG_LINES, 'text', false);
+        $this->addConfig(self::CONFIG_LOG_LINES, 'Max. number of lines to tail:', $this->_DEF_LOG_LINES, 'text');
         return $this->_config;
     }
 
@@ -53,10 +56,74 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageM
         $log = Mage::helper('magemonitoring')->tailFile('var/log/'.$fileName,
                 $this->getConfig(self::CONFIG_LOG_LINES));
         if (empty($log)) {
-            $log = 'Log is empty. ^^';
             $errorLevel = 'success';
         }
-        $this->addRow($errorLevel, null, nl2br($log));
+        $this->addRow($errorLevel, null, nl2br(htmlspecialchars($log)));
     }
 
+    /**
+     * Compares last entry in $logIn with last saved timestamp and adds all log entries between
+     * the last logged or whole tail if the last saved timestamp is not found.
+     * Returns false if $logIn is empty or array with added report data.
+     *
+     * @param string $log
+     * @return array|false
+     */
+    protected function watchLog($logIn, $attachmentName)
+    {
+        if (!$logIn) return false;
+
+        $this->loadConfig(self::CONFIG_LAST_LOG_ENTRY);
+
+        $log = $this->extractNewLogEntries($logIn, $this->getConfig(self::CONFIG_LAST_LOG_ENTRY));
+        if (!$log) {
+            $log = $logIn;
+        }
+
+        $lastLog = new DateTime($this->getConfig(self::CONFIG_LAST_LOG_ENTRY));
+        $fileName = Mage::helper('magemonitoring')->stampFileName($attachmentName, $lastLog->format('Y-m-d_H-i'));
+        $value = 'New entries in ' . $attachmentName . '. See attachment: ' . $fileName . ' for details.';
+        $this->addReportRow('error',
+                $this->getConfig(self::CONFIG_LAST_LOG_ENTRY),
+                $value,
+                array(array('filename' => $fileName, 'content' => $log)));
+
+        return $this->_report;
+    }
+
+    /**
+     * Returns log entries with timestamp after $from or false if $from is not found.
+     *
+     * @param string $log
+     * @param string $from
+     * @return string|false
+     */
+    protected function extractNewLogEntries($log, $from)
+    {
+        $regOut = array();
+        // find last time stamp
+        $pattern = '/('.$this->_REGEX_LOGSTAMP.')(?!.*'.$this->_REGEX_LOGSTAMP.')(.+)\z/ms';
+        if (preg_match_all($pattern, $log, $regOut)) {
+            // last time stamp in log
+            $curExcept = $regOut[1][0];
+            $curExceptDate = new DateTime($curExcept);
+            $lastSavedDate = null;
+            if ($from) {
+                $lastSavedDate = new DateTime($from);
+            }
+
+            if ($from == null || $lastSavedDate != $curExceptDate) {
+                $this->saveConfig(array(self::CONFIG_LAST_LOG_ENTRY => array('value' => $curExcept)), true);
+
+                // try to match everything after last logged exception
+                $r = array();
+                $p = '/(!?'.str_replace('+', '\+',$from).').*(('.$this->_REGEX_LOGSTAMP.')(.*?))\z/ms';
+                $logOutput = '';
+                if ($from && preg_match_all($p, $log, $r)) {
+                    return $r[7][0];
+                }
+            }
+        }
+        return false;
+    }
 }

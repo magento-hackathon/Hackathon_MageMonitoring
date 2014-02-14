@@ -1,0 +1,17 @@
+<?php foreach ($this->getReports() as $report) {
+          $widget = $report['widget'];
+?>
+<table>
+    <thead>
+        <tr><th><?php echo $widget->getName()?></th></tr>
+    </thead>
+    <tbody>
+    <?php foreach ($report['output'] as $o) { ?>
+        <tr class="<?php echo $o['css_id']; ?>">
+            <td><?php echo $o['label']?></td>
+            <td><?php echo $o['value']?></td>
+        </tr>
+    <?php } // end foreach ?>
+    </tbody>
+</table>
+<?php } ?>

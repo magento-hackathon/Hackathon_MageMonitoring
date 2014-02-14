@@ -72,6 +72,9 @@ interface Hackathon_MageMonitoring_Model_Widget
      *        ...
      *        )
      *
+     * Setting 'label' = null will skip icon and label output, allowing free form html output via 'value'.
+     * 'css_id' will still be used for background color. Set to info for neutral background.
+     *
      * Format of chart array:
      * array('chart_id' => 'unique_id',
      *         'chart_type' => 'Bar|Doughnut|Line|Pie|PolarArea|Radar',

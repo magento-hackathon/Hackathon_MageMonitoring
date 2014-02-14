@@ -1,0 +1,21 @@
+<h4>Watch Dogs with runtime errors:</h4>
+<?php foreach ($this->getErrors() as $error) {
+          $widget = $error['widget'];
+?>
+<table>
+    <thead>
+        <tr><th><?php echo $widget->getName(); ?></th></tr>
+    </thead>
+<tbody>
+    <tr>
+        <td>Class: <?php echo $widget->getId()?></td>
+    </tr>
+    <tr>
+        <td>Message: <?php echo $error['exception']->getMessage()?></td>
+    </tr>
+    <tr>
+        <td>Trace: <?php echo $error['exception']->getTraceAsString()?></td>
+    </tr>
+    </tbody>
+</table>
+<?php } ?>

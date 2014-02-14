@@ -24,7 +24,8 @@
  */
 
 class Hackathon_MageMonitoring_Model_Widget_Log_Exception extends Hackathon_MageMonitoring_Model_Widget_Log_Abstract
-                                                          implements Hackathon_MageMonitoring_Model_Widget_Log
+                                                          implements Hackathon_MageMonitoring_Model_Widget_Log,
+                                                                     Hackathon_MageMonitoring_Model_WatchDog
 {
     protected $_DEF_LOG_LINES = 60;
     protected $_DEF_DISPLAY_PRIO = 20;
@@ -55,6 +56,20 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Exception extends Hackathon_Mage
     {
         $this->addLogRow('error', Mage::getStoreConfig('dev/log/exception_file'));
         return $this->_output;
+    }
+
+    /**
+     * Reports on new log entries.
+     *
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
+     */
+    public function watch()
+    {
+        $attachmentName = Mage::getStoreConfig('dev/log/exception_file');
+        $widgetOut = $this->getOutput();
+
+        return $this->watchLog($widgetOut[0]['value'], $attachmentName);
     }
 
 }

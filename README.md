@@ -1,7 +1,7 @@
 MageMonitoring
 ==============
 
-Magento Extension to get health of your Magento installation (Server, PHP, APC, Logs, Rewrites, Modules version installed ...)
+Magento Extension to get health of your Magento installation (Server, PHP, Cache, Logs, Rewrites, Modules version installed ...)
 
 ### Features
 
@@ -9,11 +9,12 @@ The module gathers information of the current Magento installation:
 
 - OS / Server / Memory Information / Magento version vs available
 - PHP version and some important configuration values vs recommended
-- Modules installed and their version number
-- Cache statistics with option to flush each cache (APC, APCU, Memcache, ZendOpcache)
+- Modules installed and their version number and status
+- Cache statistics with option to flush each cache or all at once (APC, APCU, Memcache, Redis, ZendOpcache)
 - Magento debug/exception logs
 - Check for class and template file rewrites
-- Custom site widgets can be added from other modules via observer
+- Generic watch dogs with aggregated reports for less spam. Get notified when your log files start moving.
+- Custom site widgets or watch dogs can be added from other modules via config.xml declaration.
 
 ### Usage
 
@@ -73,17 +74,23 @@ Uninstallation
 - Extend from the nearest Abstract class to take care of boilerplate, example: cache widget => extend from Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
 - Implement the remaining methods of corresponding child interface, example: cache widget => implement Hackathon_MageMonitoring_Model_Widget_CacheStat
 - Override isActive() if your widget depends on certain conditions.
-- Override initConfig() if your widget wants to use custom user parameters. See dashboard dummy widget for details.
+- Override initConfig() if your widget wants to use custom user parameters. The dashboard dummy widget has some examples.
 - You are done. Pull requests welcome. ;)
 
-Have a look at the dummy widgets for more detailed usage.
+Have a look at the existing widgets for more detailed usage.
 
-### How to add a new widget from another module
+### How to add a new watch dog
 
-- In your module config add an observer that subscribes to magemonitoring_collect_widgets_$tab event.
- You do not need an actual observer class, declaration in config.xml is enough. See config.xml of this module for details.
-- Now follow the same procedure as for adding a new widget, except for repo cloning part.
-- Drop the new widget class into the folder your observer config publishes.
+- The WatchDog interface is a tiny extension of the Widget interface.
+- It's fine to have a widget class also contain the watch dog implementation.
+- If you (already) extend from Widget_Abstract you only need to implement watch(), with a more specific abstract class it
+becomes even more easier. See Model/Widget/Log/* for details.
+
+### How to add a new widget or watch dog from another module
+
+- In your global module config add a widgets node that declares your widget folder. See config.xml of this module for details.
+- Now follow the same procedure as for adding a new widget or watch dog, except for the repo cloning part.
+- Drop your shiny new class into the folder your config.xml publishes. Compare with folder structure of this module if unsure.
 
 ### Core Contributors
 
@@ -105,21 +112,15 @@ So a lot happened here in the dev branch, what changed:
 - Widgets that have a collapsed init state will not render their output until opened. Good for widgets that are resource heavy.
 - Widgets support generic configuration mechanism for user interaction. Frontend users can edit default collapseable state and display priority per widget now.
 - Widgets have generic callback mechanism for custom buttons
+- Added WatchDog interface, widgets can now provide true monitoring via cron. Aggregated report mails to avoid spam.
 
 Use case example:
 
 You want to monitor a sql query specific to a magento site:
 
-- Create new class in Model/Widget/Dashboard/Myquery.php thats extends from Widget_Abstract and implements Widget_Dashboard
+- Create new class in Model/Widget/System/Myquery.php thats extends from Widget_Abstract and implements Widget_System
 - Implement getOutput(), getName(), getVersion() see Dummy widgets for examples
 - Done. :)
-
-TODO:
-
-- Refresh icon should not display if widget is in collapsed state.
- The icon already gets a class 'widget-invis' added/removed when the collapsable gets toggled but does not work anymore with latest css changes.
-- Create some widgets for dashboard. =) A widget that displays certain edge checks would be nice.
- For example, shop had xx user registrations today, but only x placed an order.
 
 NICETOHAVE:
 

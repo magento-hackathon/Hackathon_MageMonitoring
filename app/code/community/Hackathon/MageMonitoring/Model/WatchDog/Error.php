@@ -23,13 +23,10 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_Widget_Log_Debug extends Hackathon_MageMonitoring_Model_Widget_Log_Abstract
-                                                      implements Hackathon_MageMonitoring_Model_Widget_Log,
-                                                                 Hackathon_MageMonitoring_Model_WatchDog
+class Hackathon_MageMonitoring_Model_WatchDog_Error extends Hackathon_MageMonitoring_Model_Widget_Abstract
+                                                   implements Hackathon_MageMonitoring_Model_WatchDog
 {
-    protected $_DEF_START_COLLAPSED = 1;
-    // watch dog defaults
-    protected $_DEF_WATCHDOG_ACTIVE = false;
+    protected $_DEF_WATCHDOG_CRON = '* * * * *';
 
     /**
      * (non-PHPdoc)
@@ -37,7 +34,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Debug extends Hackathon_MageMoni
      */
     public function getName()
     {
-        return 'Magento Debug Log';
+        return 'Watch Dog Error Test';
     }
 
     /**
@@ -51,25 +48,12 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Debug extends Hackathon_MageMoni
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
-     */
-    public function getOutput()
-    {
-        $this->addLogRow('warning', Mage::getStoreConfig('dev/log/file'));
-        return $this->_output;
-    }
-
-    /**
-     * Reports on new log entries.
-     *
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
      */
     public function watch()
     {
-        $attachmentName = Mage::getStoreConfig('dev/log/file');
-        $widgetOut = $this->getOutput();
-
-        return $this->watchLog($widgetOut[0]['value'], $attachmentName);
+        // throw a wrench
+        throw new Exception ('Watch dog runtime error reporting test.');
     }
+
 }
