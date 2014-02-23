@@ -55,7 +55,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Debug extends Hackathon_MageMoni
      */
     public function getOutput()
     {
-        $this->addLogRow('warning', Mage::getStoreConfig('dev/log/file'));
+        $this->_output[] = $this->newLogBlock('warning', Mage::getStoreConfig('dev/log/file'));
         return $this->_output;
     }
 

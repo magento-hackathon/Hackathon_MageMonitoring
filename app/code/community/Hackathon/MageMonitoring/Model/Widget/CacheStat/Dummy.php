@@ -102,24 +102,33 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
      */
     public function getOutput()
     {
-        // we want the standard cache widget output..
+        // generate default cache widget output..
         parent::getOutput();
 
-        // ..but without flush cache button
-        $this->_buttons = array();
+        // grab generated block so we can play with it
+        $defaultBlock = reset($this->_output);
+
+        // no buttons please.
+        $defaultBlock->setButtons();
 
         // add some more data
-        $this->addRow('info', 'Simple Info Stat with no chart', '42');
+        $defaultBlock->addRow('info', 'Simple Info Stat with no chart', '42');
 
         // prepare a chart
         $chartData = array(array('value' => 34, 'color' => '#ff0000'),
                            array('value' => 12, 'color' => '#00ff00'),
                            array('value' => 42, 'color' => '#0000ff')
                            );
-        $chart = $this->createChartArray($this->getId().'_another_imp', $chartData);
+        $chart = $defaultBlock->newChartArray($this->getId().'_another_imp', $chartData);
 
         // add row with chart
-        $this->addRow('warning', 'Another Important Stat with a 3 pieces pie chart', 'I like pie.', $chart);
+        $defaultBlock->addRow('warning', 'Another Important Stat with a 3 pieces pie chart', 'I like pie.', $chart);
+
+        // add another block to output that just dumps passed string
+        $this->dump('<br/>hello world!<br/>');
+
+        //$block = Mage::app()->getLayout()->createBlock('yourmod/yourblock');
+        //$this->_output[] = $block;
 
         return $this->_output;
     }

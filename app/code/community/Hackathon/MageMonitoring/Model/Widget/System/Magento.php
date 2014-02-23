@@ -52,13 +52,15 @@ class Hackathon_MageMonitoring_Model_Widget_System_Magento extends Hackathon_Mag
      */
     public function getOutput()
     {
-        $this->addRow('info', 'Magento Version', $this->getMagentoInfo('version'));
-        $this->addRow('info', 'Magento Root Path', $this->_getValue('DOCUMENT_ROOT'));
-        $this->addRow('info', 'Total Products Count', $this->getMagentoInfo('products_count'));
-        $this->addRow('info', 'Total Customers Count',$this->getMagentoInfo('customers_count'));
-        $this->addRow('info', 'Total Orders Count', $this->getMagentoInfo('orders_count'));
-        $this->addRow('info', 'Current Online Visitors', $this->getMagentoInfo('online_visitors'));
+        $block = $this->newMonitoringBlock();
+        $block->addRow('info', 'Magento Version', $this->getMagentoInfo('version'));
+        $block->addRow('info', 'Magento Root Path', $this->_getValue('DOCUMENT_ROOT'));
+        $block->addRow('info', 'Total Products Count', $this->getMagentoInfo('products_count'));
+        $block->addRow('info', 'Total Customers Count',$this->getMagentoInfo('customers_count'));
+        $block->addRow('info', 'Total Orders Count', $this->getMagentoInfo('orders_count'));
+        $block->addRow('info', 'Current Online Visitors', $this->getMagentoInfo('online_visitors'));
 
+        $this->_output[] = $block;
         return $this->_output;
     }
 

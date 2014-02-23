@@ -50,24 +50,26 @@ class Hackathon_MageMonitoring_Model_Widget_System_Server extends Hackathon_Mage
      */
     public function getOutput()
     {
-        $this->addRow('info', 'Host Name', $this->_getValue('HTTP_HOST'));
-        $this->addRow('info', 'Server Software', $this->_getValue('SERVER_SOFTWARE'));
-        $this->addRow('info', 'Server IP Address', $this->_getValue('SERVER_ADDR'));
-        $this->addRow('info', 'Server Port', $this->_getValue('SERVER_PORT'));
-        $this->addRow('info', 'Server Gateway Interface', $this->_getValue('GATEWAY_INTERFACE'));
+        $block = $this->newMonitoringBlock();
+        $block->addRow('info', 'Host Name', $this->_getValue('HTTP_HOST'));
+        $block->addRow('info', 'Server Software', $this->_getValue('SERVER_SOFTWARE'));
+        $block->addRow('info', 'Server IP Address', $this->_getValue('SERVER_ADDR'));
+        $block->addRow('info', 'Server Port', $this->_getValue('SERVER_PORT'));
+        $block->addRow('info', 'Server Gateway Interface', $this->_getValue('GATEWAY_INTERFACE'));
 
         if (!is_null($memInfo = $this->getMemoryInfo())) {
-            $this->addRow('info', 'Server Memory', $memInfo);
+            $block->addRow('info', 'Server Memory', $memInfo);
         }
 
         if (!is_null($cpuInfo = $this->getCpuInfo())) {
-            $this->addRow('info', 'Server CPU', $cpuInfo);
+            $block->addRow('info', 'Server CPU', $cpuInfo);
         }
 
-        $this->addRow('info', 'Server Admin', $this->_getValue('SERVER_ADMIN'));
-        $this->addRow('info', 'Accept Encoding', $this->_getValue('HTTP_ACCEPT_ENCODING'));
-        $this->addRow('info', 'OS Information', $this->getOsInfo());
+        $block->addRow('info', 'Server Admin', $this->_getValue('SERVER_ADMIN'));
+        $block->addRow('info', 'Accept Encoding', $this->_getValue('HTTP_ACCEPT_ENCODING'));
+        $block->addRow('info', 'OS Information', $this->getOsInfo());
 
+        $this->_output[] = $block;
         return $this->_output;
     }
 

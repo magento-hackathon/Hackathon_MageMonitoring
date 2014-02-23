@@ -1,9 +1,9 @@
 <?php foreach ($this->getReports() as $report) {
-          $widget = $report['widget'];
+          $dog = $report['watchdog'];
 ?>
 <table>
     <thead>
-        <tr><th><?php echo $widget->getName()?></th></tr>
+        <tr><th><?php echo $dog->getDogName()?></th></tr>
     </thead>
     <tbody>
     <?php foreach ($report['output'] as $o) { ?>

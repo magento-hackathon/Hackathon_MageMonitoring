@@ -73,7 +73,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
             }
             return 'Error, i have no valid email address to send to: '.$email;
         }
-        return 'Error, looks like the test watch dog did not bark.';
+        return 'Error, looks like the test watch dogs did not bark.';
     }
 
     /**
@@ -82,23 +82,25 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
      */
     public function getOutput()
     {
+        $block = $this->newMonitoringBlock();
         $disabled = $this->getConfig(self::CONFIG_DOGS_DISABLED);
         if (!$disabled) {
-            $this->addRow('success', 'Watch Dogs are enabled');
+            $block->addRow('success', 'Watch Dogs are enabled');
         } else {
-            $this->addRow('error', 'All Watch Dogs are disabled', 'Click on the gear icon of this widget to edit.' );
+            $block->addRow('error', 'All Watch Dogs are disabled', 'Click on the gear icon of this widget to edit.' );
         }
 
-        $this->addRow('info', 'Installed Watch Dogs:', 'Schedule:');
+        $block->addRow('info', 'Installed Watch Dogs:', 'Schedule:');
 
         $dogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_WatchDog');
         foreach ($dogs as $d) {
-            $this->addRow( (!$disabled && $d->onDuty()) ? 'success':'error', $d->getName(), $d->getSchedule());
+            $block->addRow( (!$disabled && $d->onDuty()) ? 'success':'error', $d->getDogName(), $d->getSchedule());
         }
 
         // add callback button to launch self test
-        $this->addButton($this->getId().'_test', 'Test Report Mail' , self::CALLBACK.'testCallback', array('refreshAfter' => true));
+        $block->addButton($this, 'test', 'Test Report Mail' , self::CALLBACK.'testCallback', array('refreshAfter' => true));
 
+        $this->_output[] = $block;
         return $this->_output;
     }
 

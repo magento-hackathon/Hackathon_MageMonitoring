@@ -51,14 +51,15 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageM
      * @param string $errorLevel
      * @param string $fileName
      */
-    protected function addLogRow($errorLevel, $fileName)
+    protected function newLogBlock($errorLevel, $fileName)
     {
+        $block = $this->newMonitoringBlock();
         $log = Mage::helper('magemonitoring')->tailFile('var/log/'.$fileName,
                 $this->getConfig(self::CONFIG_LOG_LINES));
         if (empty($log)) {
             $errorLevel = 'success';
         }
-        $this->addRow($errorLevel, null, nl2br(htmlspecialchars($log)));
+        return $block->addRow($errorLevel, null, nl2br(htmlspecialchars($log)));
     }
 
     /**

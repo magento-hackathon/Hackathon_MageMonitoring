@@ -1,14 +1,14 @@
 <h4>Watch Dogs with runtime errors:</h4>
 <?php foreach ($this->getErrors() as $error) {
-          $widget = $error['widget'];
+          $dog = $error['watchdog'];
 ?>
 <table>
     <thead>
-        <tr><th><?php echo $widget->getName(); ?></th></tr>
+        <tr><th><?php echo $dog->getDogName(); ?></th></tr>
     </thead>
 <tbody>
     <tr>
-        <td>Class: <?php echo $widget->getId()?></td>
+        <td>Class: <?php echo $dog->getDogId()?></td>
     </tr>
     <tr>
         <td>Message: <?php echo $error['exception']->getMessage()?></td>

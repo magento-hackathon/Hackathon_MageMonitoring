@@ -44,7 +44,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
         }
 
         $watchDogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_WatchDog');
-        // add test watch dogs that always fire a report and runtime error?
+        // add test watch dogs that always fire a report and a runtime error?
         if (!$skipTestDog) {
             foreach (array('test', 'error') as $m) {
                 $t = Mage::getModel('magemonitoring/watchDog_'.$m);
@@ -60,15 +60,15 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
                 // check watch dog schedules and run watch() if it's time
                 $schedule = Mage::getModel('cron/schedule')->setCronExpr($d->getSchedule());
                 if ($schedule->trySchedule(time()) && $results = $d->watch()) {
-                    $this->_watchDogResults[$mailTo][] = array('widget' => $d, 'output' => $results);
+                    $this->_watchDogResults[$mailTo][] = array('watchdog' => $d, 'output' => $results);
                 }
             } catch (Exception $e) {
                 Mage::logException($e);
-                $this->_exceptionList[$mailTo][] = array('exception' => $e, 'widget' => $d);
+                $this->_exceptionList[$mailTo][] = array('exception' => $e, 'watchdog' => $d);
             }
         }
 
-        if (empty($this->_watchDogResults) || empty($this->_exceptionList)) {
+        if (empty($this->_watchDogResults) && empty($this->_exceptionList)) {
             return false;
         }
 

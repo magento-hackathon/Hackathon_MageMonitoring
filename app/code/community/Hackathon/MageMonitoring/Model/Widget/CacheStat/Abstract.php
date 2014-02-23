@@ -24,6 +24,7 @@
  */
 class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon_MageMonitoring_Model_Widget_Abstract
 {
+
     /**
      * Default output for cachestat widgets.
      *
@@ -31,23 +32,34 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      */
     public function getOutput()
     {
-        $this->addRow('info', 'Version', $this->getVersion());
+        $block = $this->newMonitoringBlock();
+        $block->addRow('info', 'Version', $this->getVersion());
 
-        $this->addRow(
+        $block->addRow(
             $this->getMemoryCssId($this),
             'Memory',
             $this->getFormatedMemoryValue($this),
-            $this->getMemoryChartData($this)
+            $this->getMemoryChartData($this, $block)
         );
 
-        $this->addRow(
+        $block->addRow(
             $this->getHitMissCssId($this),
             'Hit/Miss Ratio',
             $this->getFormatedHitMissValue($this),
-            $this->getHitMissChartData($this)
+            $this->getHitMissChartData($this, $block)
         );
 
-        $this->addFlushButton($this);
+        $block->addButton(
+            $this,
+            'flush',
+            'Flush ' . $this->getName(),
+            self::CALLBACK . 'flushCache',
+            array('widgetId' => $this->getId(), 'refreshAfter' => true),
+            'Do you really want to flush ' . $this->getName() . '?',
+            'delete f-right'
+        );
+
+        $this->_output[] = $block;
 
         return $this->_output;
     }
@@ -58,7 +70,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return array
      */
-    public function getMemoryChartData($cache)
+    public function getMemoryChartData($cache, $block)
     {
         $free = (int)$cache->getMemoryMax() - (int)$cache->getMemoryUsed();
         $used = $cache->getMemoryUsed();
@@ -67,7 +79,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
             array('value' => $used, 'color' => '#f00000')
         );
 
-        return $this->createChartArray($cache->getId() . '_chart_memory', $chartData);
+        return $block->newChartArray($cache->getId() . '_chart_memory', $chartData);
     }
 
     /**
@@ -76,7 +88,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
      * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
      * @return array
      */
-    public function getHitMissChartData($cache)
+    public function getHitMissChartData($cache, $block)
     {
         $hits = $cache->getCacheHits();
         $misses = $cache->getCacheMisses();
@@ -85,7 +97,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
             array('value' => $misses, 'color' => '#f00000')
         );
 
-        return $this->createChartArray($cache->getId() . '_chart_hitmiss', $chartData);
+        return $block->newChartArray($cache->getId() . '_chart_hitmiss', $chartData);
     }
 
     /**
@@ -182,26 +194,6 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
         $misses = $cache->getCacheMisses();
 
         return $hits . ' / ' . $misses . ' - ' . $this->getHitRatio($hits, $misses) . '%';
-    }
-
-    /**
-     * Returns default flush cache button.
-     *
-     * @param Hackathon_MageMonitoring_Model_Widget_CacheStat $cache
-     * @return $this
-     */
-    public function addFlushButton($cache)
-    {
-        $this->addButton(
-            'flush' . $this->getId(),
-            'Flush ' . $this->getName(),
-            self::CALLBACK . 'flushCache',
-            array('widgetId' => $this->getId(), 'refreshAfter' => true),
-            'Do you really want to flush ' . $this->getName() . '?',
-            'delete f-right'
-        );
-
-        return $this;
     }
 
 }

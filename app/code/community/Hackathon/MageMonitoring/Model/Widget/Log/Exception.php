@@ -54,7 +54,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Exception extends Hackathon_Mage
      */
     public function getOutput()
     {
-        $this->addLogRow('error', Mage::getStoreConfig('dev/log/exception_file'));
+        $this->_output[] = $this->newLogBlock('error', Mage::getStoreConfig('dev/log/exception_file'));
         return $this->_output;
     }
 
