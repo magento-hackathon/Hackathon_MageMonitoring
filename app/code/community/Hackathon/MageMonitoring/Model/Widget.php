@@ -26,7 +26,7 @@
 interface Hackathon_MageMonitoring_Model_Widget
 {
     /**
-     * Returns id string, last part of classname in lower case to avoid possible conflicts.
+     * Returns id string, use classname to avoid possible conflicts.
      *
      * @return string
      */
@@ -62,44 +62,19 @@ interface Hackathon_MageMonitoring_Model_Widget
      */
     public function getDisplayPrio();
     /**
-     * Returns output data as array.
-     *
-     * Format of return array:
-     * array (array ( 'css_id' => 'info|success|warning|error',
-     *                 'label' => $label,
-     *                 'value' => $value
-     *                 'chart' => false|array (see below),
-     *        ...
-     *        )
-     *
-     * Setting 'label' = null will skip icon and label output, allowing free form html output via 'value'.
-     * 'css_id' will still be used for background color. Set to info for neutral background.
-     *
-     * Format of chart array:
-     * array('chart_id' => 'unique_id',
-     *         'chart_type' => 'Bar|Doughnut|Line|Pie|PolarArea|Radar',
-     *         'canvas_width' => width in pixel as int,
-     *         'canvas_height' => height in pixel as int,
-     *         'chart_data' => array that matches chart type data structure spec at http://www.chartjs.org/docs/,
-     *         'chart_options' => array that matches chart type chart options spec at http://www.chartjs.org/docs/,
-     *         )
+     * Used to render the widget, returns array of classes that have a ->toHtml() method.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you .
      *
      * @return array
      */
     public function getOutput();
-    /**
-     * Returns button data as array or false if this widget has no buttons.
-     *
-     * @return array|false
-     */
-    public function getButtons();
     /**
      * Returns array with default config data for this widget or false if not implemented.
      *
      * Implementing this method enables you to add custom entries for user configuration.
      *
      * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
-     * Data is saved to core_config_data with path = 'widgets/' + $widgetClassName '/' + $config/key
+     * Data is saved to core_config_data with path = 'widgets/' + $widgetClassName '/' + $config_key
      *
      * Format of return array:
      * array ('config_key' => array('type' => $inputType, // 'text' or 'checkbox' for now

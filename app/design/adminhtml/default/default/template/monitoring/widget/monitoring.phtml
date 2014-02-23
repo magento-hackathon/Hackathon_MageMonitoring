@@ -26,8 +26,8 @@
 /* @var $this Mage_Core_Block_Template */
 ?>
 <?php // render rows
-if ($output = $this->getOutput()) {
-    foreach ($output as $row)
+if ($rows = $this->getRows()) {
+    foreach ($rows as $row)
     {
     ?>
 <div class="md-item md-item-<?php echo $row['css_id']; ?>">

@@ -28,13 +28,14 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
 
     // ajax refresh
     public function refreshWidgetAction() {
-        $response = "ERR";
+        $response = '';
         if ($widget = $this->_getWidgetFromRequest(true)) {
-            $response = $this->getLayout()->createBlock('core/template')
-                ->setTemplate('monitoring/widget/body.phtml')
-                ->setData('output', $widget->getOutput())
-                ->setData('buttons', $widget->getButtons())
-                ->toHtml();
+            foreach ($widget->getOutput() as $blocks) {
+                $response .= $blocks->toHtml();
+            }
+        }
+        if ($response == '') {
+            $response = 'ERR';
         }
         $this->getResponse()
              ->clearHeaders()

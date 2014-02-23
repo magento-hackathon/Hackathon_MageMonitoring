@@ -50,12 +50,8 @@
         <?php
             // only render output if wigdet is not in collapsed state
             if (!$this->displayCollapsed()) {
-                echo $this->getLayout()->createBlock('core/template')
-                        ->setTemplate('monitoring/widget/body.phtml')
-                        ->setData('output', $this->getOutput())
-                        ->setData('buttons', $this->getButtons())
-                        ->toHtml();
-                }
+                echo $this->getChildhtml();
+            }
         ?>
         </div>
     </fieldset>

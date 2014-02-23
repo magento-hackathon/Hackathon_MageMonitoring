@@ -59,7 +59,6 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     const CALLBACK = 'cb:';
 
     protected $_output = array();
-    protected $_buttons = array();
     protected $_config = array();
     protected $_report = array();
 
@@ -83,154 +82,6 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * Add empty or header row to output.
-     *
-     * @param string $label
-     * @param string $background_id
-     */
-    public function addHeaderRow($header = null, $background_id = 'info') {
-        $this->_output[] = array(
-                'css_id' => $background_id,
-                'label' => null,
-                'value' => $header
-        );
-        return $this;
-    }
-
-    /**
-     * Adds a row to output array.
-     *
-     * @param string $css_id
-     * @param string $label
-     * @param string $value
-     * @param string $chart
-     * @return $this
-     */
-    public function addRow($css_id, $label, $value = null, $chart = null)
-    {
-        $this->_output[] = array(
-            'css_id' => $css_id,
-            'label' => $label,
-            'value' => $value,
-            'chart' => $chart
-        );
-
-        return $this;
-    }
-
-    /**
-     * Adds a button to button array.
-     *
-     * @param string $button_id
-     * @param string $label
-     * @param string $controller_action or self::CALLBACK.$callbackMethod
-     * @param array $url_params
-     * @param string $confirm_message
-     * @param string $css_class
-     * @return $this
-     */
-    public function addButton(
-        $button_id,
-        $label,
-        $controller_action,
-        $url_params = null,
-        $confirm_message = null,
-        $css_class = 'f-right'
-    ) {
-        $b = Mage::app()->getLayout()->createBlock('adminhtml/widget_button');
-        $b->setId($button_id);
-        $b->setLabel($label);
-        $b->setOnClick($this->getOnClick($controller_action, $url_params, $confirm_message));
-        $b->setClass($css_class);
-        $b->setType('button');
-
-        $this->_buttons[] = $b;
-
-        return $this;
-    }
-
-    /**
-     * Get onClick data for button display.
-     *
-     * @param string $controller_action
-     * @param string $url_params
-     * @param string $confirm_message
-     *
-     * @return string
-     */
-    protected function getOnClick($controller_action, $url_params = null, $confirm_message = null)
-    {
-        $onClick = '';
-        // check if this is an ajax call with callback
-        if (!strncmp($controller_action, self::CALLBACK, strlen(self::CALLBACK))) {
-            $callback = substr($controller_action, strlen(self::CALLBACK));
-            $widgetId = $this->getId();
-            $widgetName = $this->getName();
-            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $this->getId());
-            $refreshUrl = 'null';
-            // check if refresh flag is set
-            if (isset($url_params['refreshAfter']) && $url_params['refreshAfter']) {
-                $refreshUrl = '\'' . Mage::helper('magemonitoring')->getWidgetUrl(
-                        '*/widgetAjax/refreshWidget',
-                        $this->getId()
-                    ) . '\'';
-            }
-            // add callback js
-            $onClick .= "execWidgetCallback('$widgetId', '$widgetName', '$callback', '$callbackUrl', $refreshUrl);";
-            // add confirm dialog?
-            if ($confirm_message) {
-                $onClick = "var r=confirm('$confirm_message'); if (r==true) {" . $onClick . "}";
-            }
-
-            return $onClick;
-        }
-        $url = Mage::getSingleton('adminhtml/url')->getUrl($controller_action, $url_params);
-        if ($confirm_message) {
-            $onClick = "confirmSetLocation('$confirm_message','$url')";
-        } else {
-            $onClick = "setLocation('$url')";
-        }
-
-        return $onClick;
-    }
-
-    /**
-     * Returns output array.
-     *
-     * @return array|false
-     */
-    public function getButtons()
-    {
-        if (empty($this->_buttons)) {
-            return false;
-        }
-
-        return $this->_buttons;
-    }
-
-    /**
-     * Returns an array that can feed Hackathon_MageMonitoring_Block_Chart.
-     *
-     * @param string $canvasId
-     * @param array $chartData
-     * @param string $chartType
-     * @param int $width
-     * @param int $height
-     *
-     * @return array
-     */
-    public function createChartArray($canvasId, $chartData, $chartType = 'Pie', $width = 76, $height = 76)
-    {
-        return array(
-            'chart_id' => $canvasId,
-            'chart_type' => $chartType,
-            'canvas_width' => $width,
-            'canvas_height' => $height,
-            'chart_data' => $chartData
-        );
-    }
-
-    /**
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
      */
@@ -248,6 +99,23 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         return $this->getConfig(self::CONFIG_DISPLAY_PRIO);
     }
 
+    /**
+     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring
+     */
+    public function newMonitoringBlock() {
+        return Mage::app()->getLayout()->createBlock('magemonitoring/widget_monitoring');
+    }
+
+    /**
+     * Adds $string to output.
+     *
+     * @param string $string
+     * @return Hackathon_MageMonitoring_Model_Widget_Abstract
+     */
+    public function dump($string) {
+        $this->_output[] = Mage::app()->getLayout()->createBlock('magemonitoring/widget_dump')->setOutput($string);
+        return $this;
+    }
 
     /**
      * (non-PHPdoc)
@@ -462,6 +330,24 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_WatchDog::getDogId()
+     */
+    public function getDogId()
+    {
+        return $this->getId();
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_WatchDog::getDogName()
+     */
+    public function getDogName()
+    {
+        return $this->getName();
+    }
+
+    /**
      * @see Hackathon_MageMonitoring_Model_WatchDog::getSchedule()
      * @return string
      */
@@ -491,7 +377,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * @param array $attachments
      * @return void
      */
-    public function addReportRow($css_id, $label, $value, $attachments=null) {
+    public function addReportRow($css_id, $label, $value, $attachments=null)
+    {
         $this->_report[] = array(
                 'css_id' => $css_id,
                 'label' => $label,

@@ -34,10 +34,17 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
         $this->setTemplate('monitoring/widget.phtml');
     }
 
+    protected function _toHtml() {
+        foreach ($this->_getWidget()->getOutput() as $block) {
+            $this->append($block);
+        }
+        return parent::_toHtml();
+    }
+
     /**
      * @param Hackathon_MageMonitoring_Model_Widget $model
      */
-    private function _getWidget() {
+    protected function _getWidget() {
         if ($this->_widgetModel instanceof Hackathon_MageMonitoring_Model_Widget) {
             return $this->_widgetModel;
         } else {
@@ -105,15 +112,6 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
             $this->_output = $this->_getWidget()->getOutput();
         }
         return $this->_output;
-    }
-
-    /**
-     * Returns button array for rendering.
-     *
-     * @return array
-     */
-    public function getButtons() {
-        return $this->_getWidget()->getButtons();
     }
 
     /**

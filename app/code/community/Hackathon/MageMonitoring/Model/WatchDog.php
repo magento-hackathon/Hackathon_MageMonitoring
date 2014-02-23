@@ -26,30 +26,36 @@
 interface Hackathon_MageMonitoring_Model_WatchDog
 {
     /**
-     * Returns id string, last part of classname in lower case to avoid possible conflicts.
+     * Returns id string, use classname to avoid possible conflicts.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return string
      */
-    public function getId();
+    public function getDogId();
     /**
-     * Returns widget name.
+     * Returns watch dog name.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return string
     */
-    public function getName();
+    public function getDogName();
     /**
      * Returns true if this watch dog is active.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
+     *
      * @return bool
      */
     public function onDuty();
     /**
      * Returns string in standard cron format or false.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return false|string
      */
     public function getSchedule();
     /**
      * Method that executes if getSchedule() says it's time. Returns false if there is nothing to report or array with results.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides addReportRow() for convenience.
      *
      * Return format of array:
      * array(array('css_id' => 'info|success|warning|error',
