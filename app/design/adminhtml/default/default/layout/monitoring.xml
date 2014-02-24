@@ -26,6 +26,14 @@
 -->
 <layout>
     <adminhtml_monitoring_index>
+        <update handle="monitoring_css_js" />
+    </adminhtml_monitoring_index>
+
+    <adminhtml_monitoring_config_tabs>
+        <update handle="monitoring_css_js" />
+    </adminhtml_monitoring_config_tabs>
+
+    <monitoring_css_js>
         <reference name="head">
             <action method="addCss"><name>monitoring/css/modalbox.css</name></action>
             <action method="addCss"><name>monitoring/css/monitoring.css</name></action>
@@ -34,5 +42,6 @@
             <action method="addJs"><script>chartjs/Chart.min.js</script></action>
             <action method="addJs"><script>modal/modalbox.js</script></action>
         </reference>
-    </adminhtml_monitoring_index>
+    </monitoring_css_js>
+
 </layout>

@@ -42,10 +42,27 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->renderLayout();
     }
 
+    public function configTabsAction() {
+        $this->loadLayout();
+        $this->_setActiveMenu('system/tools/monitoring');
+        $this->_addBreadcrumb(
+                Mage::helper('magemonitoring')->__('Monitoring'),
+                Mage::helper('magemonitoring')->__('Monitoring')
+        );
+
+        $this->_title('Tab Config');
+
+        $this->_addContent(
+                $this->getLayout()->createBlock('magemonitoring/tab_config', 'magemonitoring_tab_config')
+        );
+        $this->renderLayout();
+    }
+
     public function flushAllCacheAction()
     {
         try {
-            $caches = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat');
+
+            $caches = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_Widget_CacheStat');
 
             foreach ($caches as $cache) {
                 if ($cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {

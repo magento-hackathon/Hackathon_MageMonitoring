@@ -39,7 +39,8 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
     public function triggerActiveDogs($skipTestDog=true)
     {
         $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
-        if (Mage::getStoreConfig(Mage::helper('magemonitoring')->getConfigKey('dogs/disabled', 'widgets/', $id))) {
+        // exit if globally disabled
+        if (Mage::getStoreConfig(Mage::helper('magemonitoring')->getConfigKeyById('dogs/disabled', $id))) {
             return;
         }
 
@@ -77,10 +78,14 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
             $emailTemplate = Mage::getModel('core/email_template')->loadDefault('magemonitoring_watchdog_report');
             // add all attachments
             foreach ($results as $report) {
-                if (array_key_exists('attachments', $report['output'])) {
-                    foreach ($report['output']['attachments'] as $attachment) {
-                        $a = $emailTemplate->getMail()->createAttachment($attachment['content']);
-                        $a->filename = $attachment['filename'];
+                if (array_key_exists('output', $report) && is_array($report['output'])) {
+                    foreach ($report['output'] as $row) {
+                        if (array_key_exists('attachments', $row) && is_array($row['attachments'])) {
+                            foreach ($row['attachments'] as $attachment) {
+                                $a = $emailTemplate->getMail()->createAttachment($attachment['content']);
+                                $a->filename = $attachment['filename'];
+                            }
+                        }
                     }
                 }
             }

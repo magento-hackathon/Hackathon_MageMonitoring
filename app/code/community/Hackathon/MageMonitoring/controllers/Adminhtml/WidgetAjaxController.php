@@ -58,7 +58,7 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     // save widget config
     public function saveWidgetConfAction() {
         $response = "ERR";
-        if ($widget = $this->_getWidgetFromRequest()) {
+        if ($widget = $this->_getWidgetFromRequest(true)) {
             $post = $this->getRequest()->getPost();
             unset($post['form_key']);
             $widget->saveConfig($post);
@@ -113,7 +113,11 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
             $widget = new $id();
             if ($widget instanceof Hackathon_MageMonitoring_Model_Widget && $widget->isActive()) {
                 if ($loadConfig) {
-                    $widget->loadConfig();
+                    $tab = null;
+                    if ($this->getRequest()->getParam('tabId')) {
+                        $tab = $this->getRequest()->getParam('tabId');
+                    }
+                    $widget->loadConfig(null, $tab);
                 }
                 return $widget;
             }

@@ -69,9 +69,9 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy
         parent::initConfig();
 
         // ...and add 3 text fields with tooltip to that
-        $this->addConfig(self::CONFIG_PIE_COLOR_ONE, 'Pie Color 1:', '#f00000', 'text', false, 'A wild tooltip appears.');
-        $this->addConfig(self::CONFIG_PIE_COLOR_TWO, 'Pie Color 2:', '#0000f0', 'text', false, 'Another wild tooltip appears.');
-        $this->addConfig(self::CONFIG_PIE_COLOR_THREE, 'Pie Color 3:', '#00f000', 'text', false, 'Yep, here too.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_ONE, 'Pie Color 1:', '#f00000', 'widget', 'text', false, 'A wild tooltip appears.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_TWO, 'Pie Color 2:', '#0000f0', 'widget', 'text', false, 'Another wild tooltip appears.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_THREE, 'Pie Color 3:', '#00f000','widget', 'text', false, 'Yep, here too.');
 
         return $this->_config;
     }

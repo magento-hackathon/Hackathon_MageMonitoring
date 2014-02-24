@@ -67,9 +67,8 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Debug extends Hackathon_MageMoni
      */
     public function watch()
     {
-        $attachmentName = Mage::getStoreConfig('dev/log/file');
-        $widgetOut = $this->getOutput();
-
-        return $this->watchLog($widgetOut[0]['value'], $attachmentName);
+        $logName = Mage::getStoreConfig('dev/log/file');
+        $log = $this->getLogTail($logName, $this->getConfig(self::CONFIG_LOG_LINES));
+        return $this->watchLog($log, $logName);
     }
 }

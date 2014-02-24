@@ -23,15 +23,23 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
-    extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Widget_Form_Container
 {
-
-    protected function _construct()
+    public function __construct()
     {
-        $this->setTemplate('monitoring/widget/list.phtml');
-        $this->setWidgetType('System');
-        return parent::_construct();
+        parent::__construct();
+        $this->_blockGroup = 'magemonitoring';
+        $this->_controller = 'tab_config';
+        $this->_headerText = $this->__('Mage Monitoring - Tab Configuration');
+        $this->_mode = 'read';
+
+        $this->removeButton('reset');
+        $this->removeButton('save');
     }
 
+    protected function _prepareLayout()
+    {
+        $this->getLayout()->getBlock('left')->append($this->getLayout()->createBlock('magemonitoring/widget_dump')->setOutput('implement me ^^'));
+        return parent::_prepareLayout();
+    }
 }

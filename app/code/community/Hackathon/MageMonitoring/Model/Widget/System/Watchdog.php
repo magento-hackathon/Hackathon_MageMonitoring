@@ -51,8 +51,8 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
     public function initConfig() {
         parent::initConfig();
         $this->addConfigHeader('Global Watch Dog Configuration');
-        $this->addConfig(self::CONFIG_DOGS_DISABLED, 'Disable all dogs?', $this->_DEF_DOGS_DISABLED, 'checkbox');
-        $this->addConfig(self::CONFIG_DOGS_MAILTO, 'Bark reports at: (sales|etc or valid email)', $this->_DEF_DOGS_MAILTO);
+        $this->addConfig(self::CONFIG_DOGS_DISABLED, 'Disable all dogs?', $this->_DEF_DOGS_DISABLED, 'global', 'checkbox');
+        $this->addConfig(self::CONFIG_DOGS_MAILTO, 'Bark reports at: (sales|etc or valid email)', $this->_DEF_DOGS_MAILTO, 'global');
         return $this->_config;
     }
 
@@ -67,7 +67,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
             return 'Error: Watch dogs are globally disabled. Click the gear icon of the watch dog widget to edit.';
         }
         if (Mage::getModel('magemonitoring/watchDog_uberDog')->triggerActiveDogs(false)) {
-            $email = $this->getConfig(self::CONFIG_DOGS_MAILTO, true);
+            $email = $this->getConfig(self::CONFIG_DOGS_MAILTO);
             if ($mailTo = Mage::helper('magemonitoring')->validateEmail($email)) {
                 return 'Dogs barked, report mail has been sent to: '.$mailTo['email'];
             }

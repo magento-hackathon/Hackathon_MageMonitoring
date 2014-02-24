@@ -45,13 +45,13 @@ class Hackathon_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_
             $callback = substr($controller_action, strlen($cbMarker));
             $widgetId = $widget->getId();
             $widgetName = $widget->getName();
-            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $widgetId);
+            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $widget);
             $refreshUrl = 'null';
             // check if refresh flag is set
             if (isset($url_params['refreshAfter']) && $url_params['refreshAfter']) {
                 $refreshUrl = '\'' . Mage::helper('magemonitoring')->getWidgetUrl(
                         '*/widgetAjax/refreshWidget',
-                        $widgetId
+                        $widget
                 ) . '\'';
             }
             // add callback js

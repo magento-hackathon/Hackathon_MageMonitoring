@@ -1,8 +1,8 @@
 <?php
 $widget = $this->getWidget();
-$postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/saveWidgetConf', $widget->getId());
-$resetUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/resetWidgetConf', $widget->getId());
-$refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $widget->getId());
+$postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/saveWidgetConf', $widget);
+$resetUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/resetWidgetConf', $widget);
+$refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $widget);
 ?>
 <div>
 <form action="#" method="get" id="form_widget_config" onsubmit="return false;">

@@ -41,7 +41,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageM
         parent::initConfig();
         $this->addConfigHeader('Log Settings');
         // add config for tail -n param
-        $this->addConfig(self::CONFIG_LOG_LINES, 'Max. number of lines to tail:', $this->_DEF_LOG_LINES, 'text');
+        $this->addConfig(self::CONFIG_LOG_LINES, 'Max. number of lines to tail:', $this->_DEF_LOG_LINES);
         return $this->_config;
     }
 
@@ -54,8 +54,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageM
     protected function newLogBlock($errorLevel, $fileName)
     {
         $block = $this->newMonitoringBlock();
-        $log = Mage::helper('magemonitoring')->tailFile('var/log/'.$fileName,
-                $this->getConfig(self::CONFIG_LOG_LINES));
+        $log = $this->getLogTail($fileName, $this->getConfig(self::CONFIG_LOG_LINES));
         if (empty($log)) {
             $errorLevel = 'success';
         }
@@ -127,4 +126,16 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageM
         }
         return false;
     }
+
+    /**
+     * @param string $fileName
+     * @param int $lines
+     * @param string $path
+     * @return string
+     */
+    protected function getLogTail($fileName, $lines, $path='var/log/')
+    {
+        return Mage::helper('magemonitoring')->tailFile($path.$fileName, $lines);
+    }
+
 }

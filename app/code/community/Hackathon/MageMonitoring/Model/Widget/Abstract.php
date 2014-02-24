@@ -53,11 +53,12 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     protected $_DEF_DOGS_MAILTO = 'general';
 
     // base node for all config keys
-    const CONFIG_PRE_KEY = 'widgets/';
+    const CONFIG_PRE_KEY = 'widgets';
 
     // callback marker
     const CALLBACK = 'cb:';
 
+    protected $_tabId = null;
     protected $_output = array();
     protected $_config = array();
     protected $_report = array();
@@ -129,6 +130,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
             self::CONFIG_START_COLLAPSED,
             'Do not render widget on pageload?',
             $this->_DEF_START_COLLAPSED,
+            'widget',
             'checkbox',
             false
         );
@@ -137,13 +139,15 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
             self::CONFIG_DISPLAY_PRIO,
             'Display priority (0=top):',
             $this->_DEF_DISPLAY_PRIO,
+            'widget',
             'text',
             false
         );
 
         if ($this instanceof Hackathon_MageMonitoring_Model_WatchDog) {
+            // override watch dog default mail_to if global config is found
             $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
-            $confKey = Mage::helper('magemonitoring')->getConfigKey(self::CONFIG_DOGS_MAILTO, self::CONFIG_PRE_KEY, $id);
+            $confKey = Mage::helper('magemonitoring')->getConfigKeyById(self::CONFIG_DOGS_MAILTO, $id);
             $defMail = Mage::getStoreConfig($confKey);
             if (!$defMail) {
                 $defMail = $this->_DEF_DOGS_MAILTO;
@@ -155,6 +159,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_ACTIVE,
                     'Dog is on duty:',
                     $this->_DEF_WATCHDOG_ACTIVE,
+                    'global',
                     'checkbox',
                     false
             );
@@ -162,6 +167,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_CRON,
                     'Schedule:',
                     $this->_DEF_WATCHDOG_CRON,
+                    'global',
                     'text',
                     false
             );
@@ -169,6 +175,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_BARKON,
                     'Minimum bark level (warning|error):',
                     $this->_DEF_WATCHDOG_BARKON,
+                    'global',
                     'text',
                     false
             );
@@ -176,6 +183,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_MAILTO,
                     'Barks at:',
                     $this->_DEF_WATCHDOG_MAILTO,
+                    'global',
                     'text',
                     false
             );
@@ -227,11 +235,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         $config_key,
         $label,
         $value,
-        $inputType = "text",
+        $scope = 'global',
+        $inputType = 'text',
         $required = false,
         $tooltip = null
     ) {
         $this->_config[$config_key] = array(
+            'scope' => $scope,
             'label' => $label,
             'value' => $value,
             'type' => $inputType,
@@ -246,9 +256,10 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
      */
-    public function loadConfig($configKey = null)
+    public function loadConfig($configKey = null, $tabId = null)
     {
         $config = array();
+        $this->_tabId = $tabId;
         if ($configKey) {
             $config[$configKey] = array('value' => null);
         } else {
@@ -256,14 +267,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         }
 
         foreach ($config as $key => $conf) {
-            $ck = Mage::helper('magemonitoring')->getConfigKey($key, self::CONFIG_PRE_KEY, $this->getId());
+            $ck = Mage::helper('magemonitoring')->getConfigKey($key, $this);
             $value = Mage::getStoreConfig($ck);
             if ($value != null)
             {
                 $this->_config[$key]['value'] = $value;
             }
         }
-
         return $this->_config;
     }
 
@@ -301,7 +311,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
             }
             # @todo: batch save
             $c->saveConfig(
-                Mage::helper('magemonitoring')->getConfigKey($key, self::CONFIG_PRE_KEY, $this->getId()),
+                Mage::helper('magemonitoring')->getConfigKey($key, $this),
                 $value,
                 'default',
                 0
@@ -315,12 +325,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::deleteConfig()
      */
-    public function deleteConfig()
+    public function deleteConfig($tabId = null)
     {
+        $this->_tabId = $tabId;
         foreach ($this->getConfig() as $key => $conf) {
             $c = Mage::getModel('core/config');
             $c->deleteConfig(
-                Mage::helper('magemonitoring')->getConfigKey($key, self::CONFIG_PRE_KEY, $this->getId()),
+                Mage::helper('magemonitoring')->getConfigKey($key, $this),
                 'default',
                 0
             );
@@ -386,6 +397,14 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                 'attachments' => $attachments
         );
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTabId()
+    {
+        return $this->_tabId;
     }
 
 }

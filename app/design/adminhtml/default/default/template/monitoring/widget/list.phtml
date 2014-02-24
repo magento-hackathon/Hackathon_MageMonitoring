@@ -25,7 +25,7 @@
 
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_* */
 
-$activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets($this->getWidgetType());
+$activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets($this->getWidgets(), $this->getTabId());
 
 if (empty($activeWidgets)) {
     echo '<h4>'.$this->__('No active widgets found. :(').'</h4>';

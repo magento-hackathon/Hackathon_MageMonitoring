@@ -27,70 +27,55 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
 
     /**
-     * Returns array with implementations of $baseInterface+$type that return isActive() == true.
+     * Returns array with implementations of $baseInterface that return isActive() == true.
      *
-     * @param string|array $type if type equals '*' all widget sub folders are searched
-     * @param string $widgetId
+     * @param string|array $widgetId or array of widgetIds, if widgetId equals '*' all widgets are returned
+     * @param string $tabId config scope, null for global
      * @param string $baseInterface
      * @return array
      */
-    public function getActiveWidgets($type='Dashboard', $widgetId = null, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
+    public function getActiveWidgets($widgetId='*', $tabId=null, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
     {
-        // @todo: add caching mechanism (core_config_data with rescan button in backend?)
-
         $classFolders = array();
-        $types = array();
+        $widgets = array();
 
-        if (!is_array($type) && $type !== '*') {
-            $types[] = $type;
-        } else if ($type == '*') {
-            // collect valid types
-            $c = Mage::getConfig()->getNode('global/widgets/magemonitoring');
-            $c = Mage::getModuleDir(null, 'Hackathon_MageMonitoring').DS.$c->folder;
-            foreach (glob($c."/*", GLOB_ONLYDIR) as $d) {
-                $types[] = basename($d);
-            }
-        }
-
-        // collect subscribed widget folders
-        foreach ($types as $t) {
+        if (!is_array($widgetId) && $widgetId !== '*') {
+            $widgets[] = $widgetId;
+        } else if ($widgetId === '*') {
             $widgetConf = Mage::getConfig()->getNode('global/widgets');
             foreach ($widgetConf->children() as $module => $conf) {
                 $o = array();
                 if (preg_match("/([a-zA-Z]+_[a-zA-Z]+)/", get_class(Mage::helper($module)), $o)) {
-                    $classFolders[] = Mage::getModuleDir(null, $o[1]) . DS . $conf->folder.DS.$t;
+                    $classFolders[] = Mage::getModuleDir(null, $o[1]) . DS . $conf->folder;
                 }
             }
-        }
-
-        // load all classes in subscribed folders
-        foreach ($classFolders as $path) {
-            foreach (array_filter(glob($path."/*"), 'is_file') as $f) {
-                require_once $f;
+            // include all classes in subscribed folders
+            foreach ($classFolders as $path) {
+                $this->requireAll($path);
             }
+            // get classes implementing widget interface
+            if (interface_exists($baseInterface)) {
+                $widgets = array_filter(
+                        get_declared_classes(),
+                        create_function('$className', "return in_array(\"$baseInterface\", class_implements(\"\$className\"));")
+                );
+            }
+        } else {
+            $widgets = $widgetId;
         }
-
-        // get classes implementing widget interface
-        $widgetClasses = array();
-        $iName = $baseInterface;
-        if($type !== '*') {
-            $iName .= '_'.$type;
-        }
-        if (interface_exists($iName)) {
-            $widgetClasses = array_filter(
-                    get_declared_classes(),
-                    create_function('$className', "return in_array(\"$iName\", class_implements(\"\$className\"));")
-            );
-        }
-
         // collect active widgets
         $activeWidgets = array();
-        foreach ($widgetClasses as $widget) {
-            $w = new $widget();
-            if ($w->isActive() && !is_null($widgetId) && $widgetId == $w->getId()) {
+        foreach ($widgets as $widget) {
+            try {
+                $w = new $widget();
+            } catch (Exception $e) {
+                Mage::logException($e);
+                continue;
+            }
+            if ($w->isActive() && $widgetId == $w->getId()) {
                 return $w;
             } else if ($w->isActive()) {
-                $w->loadConfig();
+                $w->loadConfig(null, $tabId);
                 $prio = 100;
                 if ($w->getDisplayPrio()) {
                     $prio = $w->getDisplayPrio();
@@ -101,6 +86,24 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 
         ksort($activeWidgets, SORT_NUMERIC);
         return $activeWidgets;
+    }
+
+    /**
+     * Calls require_once on all files found in $path.
+     *
+     * @param string $path
+     * @param int $maxDepth
+     */
+    public function requireAll($path, $maxDepth=3)
+    {
+        foreach (array_filter(glob($path."/*"), 'is_dir') as $d) {
+            if ($maxDepth > 0) {
+                $this->requireAll($d, --$maxDepth);
+            }
+        }
+        foreach (array_filter(glob($path."/*"), 'is_file') as $f) {
+            require_once $f;
+        }
     }
 
     /**
@@ -239,11 +242,15 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 
     /**
      * @param string $controller_action
-     * @param string $widgetId
+     * @param Hackathon_MageMonitoring_Model_Widget $widget
      * @return string $url
      */
-    public function getWidgetUrl($controller_action, $widgetId) {
-        return Mage::getSingleton('adminhtml/url')->getUrl($controller_action, array('widgetId' => $widgetId));
+    public function getWidgetUrl($controller_action, $widget) {
+        $params = array('widgetId' => $widget->getId());
+        if ($tabId = $widget->getTabId()) {
+            $params['tabId'] = $tabId;
+        }
+        return Mage::getSingleton('adminhtml/url')->getUrl($controller_action, $params);
     }
 
     /**
@@ -289,12 +296,40 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * Returns unique config key for widget configs.
      *
      * @param string $configKey
-     * @param string $prefix
-     * @param string $className
+     * @param Hackathon_MageMonitoring_Model_Widget $widget
      * @return string
      */
-    public function getConfigKey($configKey, $prefix, $className) {
-        return $prefix . strtolower(str_replace('_', '/', $className . '_' ) . $configKey);
+    public function getConfigKey($configKey, $widget) {
+        $conf = $widget->getConfig($configKey, false);
+        $scope = 'global';
+        if (is_array($conf) && array_key_exists ('scope', $conf)) {
+            if ($conf['scope'] === 'widget' && method_exists($widget, 'getTabId') && $widget->getTabId() !== null) {
+                $scope = 'tabs/' . $widget->getTabId();
+            }
+        }
+        $id = null;
+        if (class_implements($widget, 'Hackathon_MageMonitoring_Model_Widget')) {
+            $id = $widget->getId();
+        } elseif (class_implements($widget, 'Hackathon_MageMonitoring_Model_WatchDog')) {
+            $id = $widget->getDogId();
+        } else {
+            throw new Exception("Passed class does not implement Widget or WatchDog interface.");
+        }
+        return $this->getConfigKeyById($configKey, $id, $scope);
+    }
+
+    /**
+     * Returns unique config key for widget configs.
+     *
+     * @param string $configKey
+     * @param string $widgetId
+     * @param string $scope
+     * @return string
+     */
+    public function getConfigKeyById($configKey, $widgetId, $scope='global') {
+        $key = 'magemonitoring/';
+        $prefix = Hackathon_MageMonitoring_Model_Widget_Abstract::CONFIG_PRE_KEY;
+        return $key .= $scope . '/'. $prefix . '/' . $widgetId . '/' . $configKey;
     }
 
 }

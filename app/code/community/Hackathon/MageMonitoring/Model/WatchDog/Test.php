@@ -32,7 +32,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Test extends Hackathon_MageMonitor
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
-    public function getName()
+    public function getDogName()
     {
         return 'Watch Dog Test';
     }

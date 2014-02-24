@@ -66,10 +66,9 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Exception extends Hackathon_Mage
      */
     public function watch()
     {
-        $attachmentName = Mage::getStoreConfig('dev/log/exception_file');
-        $widgetOut = $this->getOutput();
-
-        return $this->watchLog($widgetOut[0]['value'], $attachmentName);
+        $logName = Mage::getStoreConfig('dev/log/exception_file');
+        $log = $this->getLogTail($logName, $this->getConfig(self::CONFIG_LOG_LINES));
+        return $this->watchLog($log, $logName);
     }
 
 }

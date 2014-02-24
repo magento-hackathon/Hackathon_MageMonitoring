@@ -118,21 +118,21 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      * @return string
      */
     public function getConfigUrl() {
-        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/getWidgetConf', $this->getWidgetId());
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/getWidgetConf', $this->_getWidget());
     }
 
     /**
      * @return string
      */
     public function getCallbackUrl() {
-        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $this->getWidgetId());
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $this->_getWidget());
     }
 
     /**
      * @return string
      */
     public function getRefreshUrl() {
-        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/refreshWidget', $this->getWidgetId());
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/refreshWidget', $this->_getWidget());
     }
 
 }

@@ -78,6 +78,7 @@ interface Hackathon_MageMonitoring_Model_Widget
      *
      * Format of return array:
      * array ('config_key' => array('type' => $inputType, // 'text' or 'checkbox' for now
+     *                              'scope' => 'global|widget',
      *                              'required' => true|false,
      *                              'label' => $label,
      *                              'value' => $value,
