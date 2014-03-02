@@ -1,13 +1,18 @@
 <?php
 $widget = $this->getWidget();
-$postUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/saveWidgetConf', array('widgetId' => $widget->getId()));
-$resetUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/resetWidgetConf', array('widgetId' => $widget->getId()));
+$postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/saveWidgetConf', $widget);
+$resetUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/resetWidgetConf', $widget);
+$refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', $widget);
 ?>
 <div>
-<h4>Widget Configuration</h4>
 <form action="#" method="get" id="form_widget_config" onsubmit="return false;">
     <?php
-    foreach ($this->getWidget()->loadConfig() as $k => $c) {?>
+    foreach ($this->getWidget()->loadConfig() as $k => $c) {
+        if (is_numeric($k)) { // add a custom header
+            echo '<h4>'.$c['label'].'</h4>';
+            continue;
+        }
+        ?>
     <fieldset>
         <label class="mh-form-label"><?php echo $c['label']; ?></label>
         <?php switch ($c['type']) {
@@ -26,8 +31,21 @@ $resetUrl = Mage::getSingleton('adminhtml/url')->getUrl('*/*/resetWidgetConf', a
     </fieldset>
     <?php } ?>
     <input type="submit" value="Save Config" class="mh-form-button"
-            onclick="Modalbox.show('<?php echo $postUrl; ?>', {title: 'Saving Config..', params: Form.serialize('form_widget_config'), method: 'post' }); return false;">
+            onclick="Modalbox.show('<?php echo $postUrl; ?>',
+                                   {title: 'Saving Config..',
+                                   params: Form.serialize('form_widget_config'),
+                                   method: 'post',
+                                   afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                                                         '<?php echo $refreshUrl; ?>') }
+                                  });
+                     return false;">
     <input type="button" value="Reset Config" class="mh-form-button"
-            onclick="Modalbox.show('<?php echo $resetUrl ?>', {width: 460, title: 'Saving Config..'}); return false;" />
+            onclick="Modalbox.show('<?php echo $resetUrl ?>',
+                                   {width: 460,
+                                    title: 'Delete Config..',
+                                    afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                                                          '<?php echo $refreshUrl; ?>') }
+                                  });
+                     return false;" />
 </form>
 </div>

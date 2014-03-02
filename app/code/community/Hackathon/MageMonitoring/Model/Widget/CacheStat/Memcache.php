@@ -23,7 +23,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-                                                               implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_memCachePool;
     private $_memCacheStats;
@@ -36,10 +36,13 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
                 $cacheConfig = Mage::getConfig()->getNode('global/cache')->asArray();
 
                 if ((array_key_exists('backend', $cacheConfig) && strtolower($cacheConfig['backend']) == 'memcached') ||
-                    (array_key_exists('slow_backend', $cacheConfig) && strtolower($cacheConfig['slow_backend']) == 'memcached')) {
+                    (array_key_exists('slow_backend', $cacheConfig) && strtolower(
+                            $cacheConfig['slow_backend']
+                        ) == 'memcached')
+                ) {
                     $this->_memCachePool = new Memcache;
 
-                    foreach( $cacheConfig['memcached']['servers'] as $server ) {
+                    foreach ($cacheConfig['memcached']['servers'] as $server) {
                         $host = (string)$server['host'];
                         $port = (string)$server['port'];
                         $this->_memCachePool->addServer($host, $port);
@@ -81,6 +84,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
         if ($this->_memCachePool && $this->_memCachePool->getVersion()) {
             return true;
         }
+
         return false;
     }
 
@@ -93,6 +97,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
         if (isset($this->_memCacheStats['limit_maxbytes'])) {
             return $this->_memCacheStats['limit_maxbytes'];
         }
+
         return 0;
     }
 
@@ -105,6 +110,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
         if (isset($this->_memCacheStats['bytes'])) {
             return $this->_memCacheStats['bytes'];
         }
+
         return 0;
     }
 
@@ -117,6 +123,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
         if (isset($this->_memCacheStats['get_hits'])) {
             return $this->_memCacheStats['get_hits'];
         }
+
         return 0;
     }
 
@@ -129,6 +136,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
         if (isset($this->_memCacheStats['get_misses'])) {
             return $this->_memCacheStats['get_misses'];
         }
+
         return 0;
     }
 
@@ -139,6 +147,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache extends Hackathon
     public function flushCache()
     {
         $this->_memCachePool->flush();
+
         return true;
     }
 

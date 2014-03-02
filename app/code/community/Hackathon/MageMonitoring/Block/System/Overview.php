@@ -32,19 +32,26 @@ class Hackathon_MageMonitoring_Block_System_Overview extends Mage_Adminhtml_Bloc
         $this->_controller = 'system_overview';
         $this->_headerText = $this->__('Mage Monitoring');
         $this->_mode = 'read';
-        
+
         $this->removeButton('reset');
         $this->removeButton('save');
+
+        $this->addButton('tab_config', array(
+                'label' => $this->__('Tab Config'),
+                'onclick' => 'setLocation(\''.$this->getUrl('*/*/configTabs').'\')',
+                'class' => 'config'
+        ));
 
         $this->addButton('flush_all_cache', array(
             'label' => $this->__('Flush All Caches'),
             'onclick' => 'confirmSetLocation(\''. $this->__('Do you really want to flush all caches?') .'\', \'' . $this->getUrl('*/*/flushallcache') .'\')',
             'class' => 'delete'
         ));
+
     }
-    
+
     protected function _prepareLayout()
-    {        
+    {
         $this->getLayout()->getBlock('left')->append($this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs', 'magemonitoring_tabs'));
         return parent::_prepareLayout();
     }

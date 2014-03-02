@@ -23,7 +23,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_redisClient;
     private $_redisInfo;
@@ -34,7 +34,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
             $cacheConfig = Mage::getConfig()->getNode('global/cache')->asArray();
             if (array_key_exists('backend', $cacheConfig) && $cacheConfig['backend'] == 'Cm_Cache_Backend_Redis') {
                 $server = $cacheConfig['backend_options']['server'];
-                $port   = $cacheConfig['backend_options']['port'];
+                $port = $cacheConfig['backend_options']['port'];
 
                 $this->_redisClient = new Credis_Client($server, $port);
                 $this->_redisInfo = $this->_redisClient->__call('info', array());
@@ -60,9 +60,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
      */
     public function getVersion()
     {
-        if(isset($this->_redisInfo['redis_version'])) {
+        if (isset($this->_redisInfo['redis_version'])) {
             return $this->_redisInfo['redis_version'];
         }
+
         return 0;
     }
 
@@ -72,9 +73,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
      */
     public function isActive()
     {
-        if(isset($this->_redisClient) && isset($this->_redisInfo)) {
+        if (isset($this->_redisClient) && isset($this->_redisInfo)) {
             return true;
         }
+
         return false;
     }
 
@@ -93,9 +95,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
      */
     public function getMemoryUsed()
     {
-        if(isset($this->_redisInfo['used_memory'])) {
+        if (isset($this->_redisInfo['used_memory'])) {
             return $this->_redisInfo['used_memory'];
         }
+
         return 0;
     }
 
@@ -105,9 +108,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
      */
     public function getCacheHits()
     {
-        if(isset($this->_redisInfo['keyspace_hits'])) {
+        if (isset($this->_redisInfo['keyspace_hits'])) {
             return $this->_redisInfo['keyspace_hits'];
         }
+
         return 0;
     }
 
@@ -117,9 +121,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
      */
     public function getCacheMisses()
     {
-        if(isset($this->_redisInfo['keyspace_hits'])) {
+        if (isset($this->_redisInfo['keyspace_hits'])) {
             return $this->_redisInfo['keyspace_misses'];
         }
+
         return 0;
     }
 
@@ -130,6 +135,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     public function flushCache()
     {
         $this->_redisClient->flushDb();
+
         return true;
     }
 

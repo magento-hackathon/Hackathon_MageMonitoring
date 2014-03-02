@@ -27,12 +27,12 @@
 <config>
     <modules>
         <Hackathon_MageMonitoring>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
+            <depends>
+                <Mage_Adminhtml />
+            </depends>
         </Hackathon_MageMonitoring>
     </modules>
-
-    <default>
-    </default>
 
     <global>
         <blocks>
@@ -44,13 +44,13 @@
         <models>
             <magemonitoring>
                 <class>Hackathon_MageMonitoring_Model</class>
-                <resourceModel>cachereset_mysql4</resourceModel>
+                <resourceModel>magemonitoring_resource</resourceModel>
             </magemonitoring>
-            <magemonitoring_mysql4>
-                <class>Hackathon_MageMonitoring_Model_Mysql4</class>
+            <magemonitoring_resource>
+                <class>Hackathon_MageMonitoring_Model_Resource</class>
                 <entities>
                 </entities>
-            </magemonitoring_mysql4>
+            </magemonitoring_resource>
             <!-- Fake model rewrite -->
             <!--<catalog>-->
                 <!--<rewrite>-->
@@ -60,33 +60,28 @@
             <!-- / Fake model rewrite -->
         </models>
 
-        <events>
-              <!-- publish widget folders -->
-              <magemonitoring_collect_widgets_cachestat>
-                <observers>
-                  <magemonitoring>
-                    <type>singleton</type>
-                    <class>Hackathon_MageMonitoring_Model_Observer</class>
-                    <method>addCacheStatFolder</method>
-                  </magemonitoring>
-                </observers>
-              </magemonitoring_collect_widgets_cachestat>
-              <magemonitoring_collect_widgets_dashboard>
-                <observers>
-                  <magemonitoring>
-                    <type>singleton</type>
-                    <class>Hackathon_MageMonitoring_Model_Observer</class>
-                    <method>addDashboardFolder</method>
-                  </magemonitoring>
-                </observers>
-              </magemonitoring_collect_widgets_dashboard>
-       </events>
-
         <helpers>
             <magemonitoring>
                 <class>Hackathon_MageMonitoring_Helper</class>
             </magemonitoring>
         </helpers>
+
+        <template>
+            <email>
+                <magemonitoring_watchdog_report module="magemonitoring">
+                    <label>MageMonitoring Watch Dog Reports</label>
+                    <file>magemonitoring_watchdogs.html</file>
+                    <type>html</type>
+                </magemonitoring_watchdog_report>
+            </email>
+        </template>
+
+        <widgets>
+            <magemonitoring>
+                <folder>Model/Widget</folder>
+            </magemonitoring>
+        </widgets>
+
     </global>
 
     <admin>
@@ -110,4 +105,75 @@
             </updates>
         </layout>
     </adminhtml>
+
+    <crontab>
+        <jobs>
+            <magemonitoring_uberdog>
+                <schedule>
+                    <cron_expr>always</cron_expr>
+                </schedule>
+                <run>
+                    <model>magemonitoring/watchDog_uberDog::triggerActiveDogs</model>
+                </run>
+            </magemonitoring_uberdog>
+        </jobs>
+    </crontab>
+
+    <default>
+        <magemonitoring>
+            <tabs>
+                <system_overview>
+                    <label>System Overview</label>
+                    <titel>System Overview</titel>
+                    <widgets>
+                      <Hackathon_MageMonitoring_Model_Widget_System_Magento />
+                      <Hackathon_MageMonitoring_Model_Widget_System_Server />
+                      <Hackathon_MageMonitoring_Model_Widget_System_Watchdog />
+                    </widgets>
+                </system_overview>
+                <php_info>
+                    <label>PHP Information</label>
+                    <titel>PHP Information</titel>
+                    <block>magemonitoring/system_overview_read_tabs_php</block>
+                    <widgets>
+                    </widgets>
+                </php_info>
+                <cache_stat>
+                    <label>Cache Statistics</label>
+                    <titel>Cache Statistics</titel>
+                    <widgets>
+                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc />
+                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu />
+                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy />
+                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache />
+                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis />
+                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache />
+                    </widgets>
+                </cache_stat>
+                <class_rewrites>
+                    <label>Class Rewrites</label>
+                    <titel>Class Rewrites</titel>
+                    <block>magemonitoring/system_overview_read_tabs_rewrites</block>
+                    <widgets>
+                    </widgets>
+                </class_rewrites>
+                <modules_installed>
+                    <label>Modules Installed</label>
+                    <titel>Modules Installed</titel>
+                    <block>magemonitoring/system_overview_read_tabs_modules</block>
+                    <widgets>
+                    </widgets>
+                </modules_installed>
+                <system_logs>
+                    <label>System Logs</label>
+                    <titel>System Logs</titel>
+                    <widgets>
+                      <Hackathon_MageMonitoring_Model_Widget_Log_Debug />
+                      <Hackathon_MageMonitoring_Model_Widget_Log_Exception />
+                    </widgets>
+                </system_logs>
+            </tabs>
+        </magemonitoring>
+    </default>
+
 </config>

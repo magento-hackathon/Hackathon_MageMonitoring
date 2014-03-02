@@ -42,66 +42,27 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->renderLayout();
     }
 
-    // ajax refresh
-    public function refreshWidgetAction() {
-        $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId', null)) {
-            $widget = new $id();
-            $widget->loadConfig();
-            $response = $this->getLayout()->createBlock('core/template')
-                ->setTemplate('monitoring/widget/body.phtml')
-                ->setData('output', $widget->getOutput())
-                ->setData('buttons', $widget->getButtons())
-                ->toHtml();
-        }
-        $this->getResponse()
-             ->clearHeaders()
-             ->setHeader('Content-Type', 'application/json')
-             ->setBody($response);
-    }
+    public function configTabsAction() {
+        $this->loadLayout();
+        $this->_setActiveMenu('system/tools/monitoring');
+        $this->_addBreadcrumb(
+                Mage::helper('magemonitoring')->__('Monitoring'),
+                Mage::helper('magemonitoring')->__('Monitoring')
+        );
 
-    // get widget config html
-    public function getWidgetConfAction() {
-        $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId', null)) {
-            $widget = new $id();
-            $widget->loadConfig();
-            $response = $this->getLayout()->createBlock('core/template')
-                                                    ->setTemplate('monitoring/widget/config.phtml')
-                                                    ->setData('widget', $widget)
-                                                    ->toHtml();
-        }
-        $this->getResponse()->setBody($response);
-    }
+        $this->_title('Tab Config');
 
-    // save widget config
-    public function saveWidgetConfAction() {
-        $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId')) {
-            $widget = new $id();
-            $post = $this->getRequest()->getPost();
-            unset($post['form_key']);
-            $widget->saveConfig($post);
-            $response = 'Settings saved for '.$widget->getName().' Reload the page or widget.';
-        }
-        $this->getResponse()->setBody($response);
-    }
-
-    // delete widget config
-    public function resetWidgetConfAction() {
-        $response = "ERR";
-        if ($id = $this->getRequest()->getParam('widgetId')) {
-            $widget = new $id();
-            $widget->deleteConfig();
-            $response = 'Deleted config for ' . $widget->getName();
-        }
-        $this->getResponse()->setBody($response);
+        $this->_addContent(
+                $this->getLayout()->createBlock('magemonitoring/tab_config', 'magemonitoring_tab_config')
+        );
+        $this->renderLayout();
     }
 
     public function flushAllCacheAction()
     {
         try {
-            $caches = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat');
+
+            $caches = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_Widget_CacheStat');
 
             foreach ($caches as $cache) {
                 if ($cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
@@ -112,30 +73,8 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
             $this->_getSession()->addSuccess($this->__('All caches flushed with success'));
 
         } catch (Exception $e) {
-            MAge::logException($e);
+            Mage::logException($e);
             $this->_getSession()->addError($e->__toString());
-        }
-
-        return $this->_redirect('*/*/index');
-    }
-
-    public function flushCacheAction()
-    {
-        $cacheId = (string) $this->getRequest()->getParam('cache');
-
-        if ($cacheId) {
-            try {
-
-                $cache = Mage::helper('magemonitoring')->getActiveWidgets('CacheStat', $cacheId);
-                if (!empty($cache) && $cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
-                    $cache->flushCache();
-                }
-
-                $this->_getSession()->addSuccess($this->__('Cache %s flushed with success', $cacheId));
-            } catch (Exception $e) {
-                Mage::logException($e);
-                $this->_getSession()->addError($e->__toString());
-            }
         }
 
         return $this->_redirect('*/*/index');

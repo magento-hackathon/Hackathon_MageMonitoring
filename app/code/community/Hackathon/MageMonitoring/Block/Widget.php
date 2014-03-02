@@ -34,10 +34,17 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
         $this->setTemplate('monitoring/widget.phtml');
     }
 
+    protected function _toHtml() {
+        foreach ($this->_getWidget()->getOutput() as $block) {
+            $this->append($block);
+        }
+        return parent::_toHtml();
+    }
+
     /**
      * @param Hackathon_MageMonitoring_Model_Widget $model
      */
-    private function _getWidget() {
+    protected function _getWidget() {
         if ($this->_widgetModel instanceof Hackathon_MageMonitoring_Model_Widget) {
             return $this->_widgetModel;
         } else {
@@ -52,7 +59,6 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      */
     public function setWidget($model) {
         if ($model instanceof Hackathon_MageMonitoring_Model_Widget) {
-            $model->loadConfig();
             $this->_widgetModel = $model;
         } else {
             throw new Exception ('Passed model does not implement Hackathon_MageMonitoring_Model_Widget interface.');
@@ -109,12 +115,24 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
     }
 
     /**
-     * Returns button array for rendering.
-     *
-     * @return array
+     * @return string
      */
-    public function getButtons() {
-        return $this->_getWidget()->getButtons();
+    public function getConfigUrl() {
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/getWidgetConf', $this->_getWidget());
+    }
+
+    /**
+     * @return string
+     */
+    public function getCallbackUrl() {
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $this->_getWidget());
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefreshUrl() {
+        return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/refreshWidget', $this->_getWidget());
     }
 
 }

@@ -23,12 +23,15 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
+    extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat, Hackathon_MageMonitoring_Model_WatchDog
 {
-    public function __construct()
-    {
-    }
+    // override defaults
+    protected $_DEF_START_COLLAPSED = 1;
+    protected $_DEF_WATCHDOG_ACTIVE = 0;
+
+    public function __construct() {}
 
     /**
      * (non-PHPdoc)
@@ -36,7 +39,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
      */
     public function getName()
     {
-        return 'Dummy Monitoring Widget';
+        return 'Dummy CacheStat Widget';
     }
 
     /**
@@ -95,47 +98,39 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
-     */
-    public function initConfig() {
-        // override abstract as we do not want any user interaction for this widget
-        return array();
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
-    public function getOutput() {
-        // we want the standard cache widget output..
+    public function getOutput()
+    {
+        // generate default cache widget output..
         parent::getOutput();
 
-        // ..but without flush cache button
-        $this->_buttons = array();
+        // grab generated block so we can play with it
+        $defaultBlock = reset($this->_output);
+
+        // no buttons please.
+        $defaultBlock->setButtons();
 
         // add some more data
-        $this->addRow('info', 'Simple Info Stat with no chart', '42');
+        $defaultBlock->addRow('info', 'Simple Info Stat with no chart', '42');
 
         // prepare a chart
         $chartData = array(array('value' => 34, 'color' => '#ff0000'),
                            array('value' => 12, 'color' => '#00ff00'),
                            array('value' => 42, 'color' => '#0000ff')
                            );
-        $chart = $this->createChartArray($this->getId().'_another_imp', $chartData);
+        $chart = $defaultBlock->newChartArray($this->getId().'_another_imp', $chartData);
 
         // add row with chart
-        $this->addRow('warning', 'Another Important Stat with a 3 pieces pie chart', 'I like pie.', $chart);
+        $defaultBlock->addRow('warning', 'Another Important Stat with a 3 pieces pie chart', 'I like pie.', $chart);
+
+        // add another block to output that just dumps passed string
+        $this->dump('<br/>hello world!<br/>');
+
+        //$block = Mage::app()->getLayout()->createBlock('yourmod/yourblock');
+        //$this->_output[] = $block;
 
         return $this->_output;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
-     */
-    public function displayCollapsed() {
-        // always display this widget collapsed, content will be ajaxed once the widget is opened
-        return true;
     }
 
     /**
@@ -145,6 +140,15 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy extends Hackathon_Ma
     public function flushCache()
     {
         return true;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
+     */
+    public function watch() {
+        $this->addReportRow('warning', 'some label', 'some warning');
+        return $this->_report;
     }
 
 }

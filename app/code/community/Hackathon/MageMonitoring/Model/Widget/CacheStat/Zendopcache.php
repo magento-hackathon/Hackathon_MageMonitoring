@@ -24,7 +24,7 @@
  */
 
 class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-                                                                  implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_opCacheConfig;
     private $_opCacheStats;
@@ -55,6 +55,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackat
         if (isset($this->_opCacheConfig['version'])) {
             return $this->_opCacheConfig['version']['version'];
         }
+
         return 'ERR';
     }
 
@@ -69,6 +70,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackat
                 return $this->_opCacheConfig['directives']['opcache.enable'];
             }
         }
+
         return false;
     }
 
@@ -81,6 +83,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackat
         if (isset($this->_opCacheStats['memory_usage'])) {
             return $this->_opCacheStats['memory_usage']['free_memory'];
         }
+
         return 0;
     }
 
@@ -93,6 +96,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackat
         if (isset($this->_opCacheStats['memory_usage'])) {
             return $this->_opCacheStats['memory_usage']['used_memory'];
         }
+
         return 0;
     }
 
@@ -105,6 +109,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackat
         if (isset($this->_opCacheStats['opcache_statistics'])) {
             return $this->_opCacheStats['opcache_statistics']['hits'];
         }
+
         return 0;
     }
 
@@ -117,6 +122,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache extends Hackat
         if (isset($this->_opCacheStats['opcache_statistics'])) {
             return $this->_opCacheStats['opcache_statistics']['misses'];
         }
+
         return 0;
     }
 
