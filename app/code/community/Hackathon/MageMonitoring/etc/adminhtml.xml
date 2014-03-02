@@ -28,15 +28,11 @@
     <menu>
         <system>
             <children>
-                <tools>
-                    <children>
-                        <magemonitoring translate="title" module="magemonitoring">
-                            <title>Monitoring</title>
-                            <sort_order>10</sort_order>
-                            <action>adminhtml/monitoring</action>
-                        </magemonitoring>
-                    </children>
-                </tools>
+                <magemonitoring translate="title" module="magemonitoring">
+                    <title>Monitoring</title>
+                    <sort_order>10</sort_order>
+                    <action>monitoring/monitoring</action>
+                </magemonitoring>
             </children>
         </system>
     </menu>
@@ -44,13 +40,9 @@
         <resources>
             <admin>
                 <children>
-                    <tools>
-                        <children>
-                            <magemonitoring translate="label" module="magemonitoring">
-                                <title>Magento Monitoring</title>
-                            </magemonitoring>
-                        </children>
-                    </tools>
+                    <magemonitoring translate="label" module="magemonitoring">
+                        <title>Magento Monitoring</title>
+                    </magemonitoring>
                 </children>
             </admin>
         </resources>
