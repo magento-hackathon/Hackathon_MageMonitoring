@@ -1,0 +1,34 @@
+body.hackathon-healthcheck-check-index .middle{
+    background: #f3f3f3;
+}
+.health-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+.health-table, .health-table td, .health-table th {
+    border: 1px solid #E6E4E4;
+}
+.health-table td, .health-table th {
+    padding: 10px 20px;
+    text-align: left;
+}
+.health-table tr:nth-child(even) td, .health-table th {
+    background: #f3f3f3;
+}
+.healthcheck-box {
+    box-sizing: border-box;
+    width: auto;
+    padding: 20px;
+    margin: 20px;
+    background: #fff;
+    border: 1px solid #E6E6E6;
+}
+.health-warning {
+    background: #FFFCB3;
+}
+.health-ok {
+    background: #CEFFBE;
+}
+.health-error {
+    background: #FC6666;
+}

@@ -23,21 +23,37 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Logs extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Model_WatchDog_Error extends Hackathon_MageMonitoring_Model_Widget_Abstract
+                                                   implements Hackathon_MageMonitoring_Model_WatchDog
 {
-    protected function _construct()
+    protected $_DEF_WATCHDOG_CRON = '* * * * *';
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
+    public function getDogName()
     {
-        $this->setTemplate('monitoring/logs.phtml');
-        return parent::_construct();
+        return 'Watch Dog Error Test';
     }
 
-    public function getDebugLog($lines=30) {
-        $debugLogName = Mage::getStoreConfig('dev/log/file');
-        return Mage::helper('magemonitoring')->tailFile('var/log/'.$debugLogName, $lines);
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
+    public function getVersion()
+    {
+        return '1.0';
     }
 
-    public function getExceptionLog($lines=30) {
-        $exLogName = Mage::getStoreConfig('dev/log/exception_file');
-        return Mage::helper('magemonitoring')->tailFile('var/log/'.$exLogName, $lines);
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
+     */
+    public function watch()
+    {
+        // throw a wrench
+        throw new Exception ('Watch dog runtime error reporting test.');
     }
+
 }

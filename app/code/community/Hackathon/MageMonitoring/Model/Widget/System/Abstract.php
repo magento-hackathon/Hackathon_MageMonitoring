@@ -22,18 +22,10 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
-    extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Model_Widget_System_Abstract extends Hackathon_MageMonitoring_Model_Widget_Abstract
 {
     protected $_serverInfo = null;
     protected $_mageInfo = null;
-
-    protected function _construct()
-    {
-        $this->setTemplate('monitoring/overview.phtml');
-        return parent::_construct();
-    }
 
     /**
      * Returns requested parameter's value from the $_SERVER variable
@@ -184,7 +176,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Overview
      */
     protected function _getValue($value)
     {
-       echo $this->getServerInfo($value);
+        return $this->getServerInfo($value);
     }
 
     /**

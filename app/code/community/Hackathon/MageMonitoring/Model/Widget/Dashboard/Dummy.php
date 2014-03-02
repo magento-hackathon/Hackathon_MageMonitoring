@@ -23,8 +23,9 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_MageMonitoring_Model_Widget_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_Widget_Dashboard
+class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget_Dashboard
 {
 
     const CONFIG_PIE_COLOR_ONE = 'pie_color_one';
@@ -62,25 +63,40 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
-    public function initConfig() {
+    public function initConfig()
+    {
         // we want the default config for persistent collapseable state ..
         parent::initConfig();
 
         // ...and add 3 text fields with tooltip to that
-        $this->addConfig(self::CONFIG_PIE_COLOR_ONE, 'Pie Color 1:', '#f00000', 'text', false, 'A wild tooltip appears.');
-        $this->addConfig(self::CONFIG_PIE_COLOR_TWO, 'Pie Color 2:', '#0000f0', 'text', false, 'Another wild tooltip appears.');
-        $this->addConfig(self::CONFIG_PIE_COLOR_THREE, 'Pie Color 3:', '#00f000', 'text', false, 'Yep, here too.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_ONE, 'Pie Color 1:', '#f00000', 'widget', 'text', false, 'A wild tooltip appears.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_TWO, 'Pie Color 2:', '#0000f0', 'widget', 'text', false, 'Another wild tooltip appears.');
+        $this->addConfig(self::CONFIG_PIE_COLOR_THREE, 'Pie Color 3:', '#00f000','widget', 'text', false, 'Yep, here too.');
 
         return $this->_config;
+    }
+
+    /**
+     * Example for a custom callback method. Do some work and return string or any html.
+     *
+     * @return string
+     */
+    public function helloCallback ()
+    {
+        // hard work
+        sleep(3);
+        return Mage::helper('monitoring')->__('Pleased to inform you that the operation was indeed a great success! <br/> Now let me refresh that widget for you..');
     }
 
     /**
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
-    public function getOutput() {
+    public function getOutput()
+    {
+        $block = $this->newMonitoringBlock();
         // add some data
-        $this->addRow('info', 'Simple Info Stat with no chart', '42');
+        $block->addRow('info', 'Simple Info Stat with no chart', '42');
 
         // prepare a chart suitable for lines/bars/radar
         $chartData = array('labels' => array("January","February","March","April","May","June","July"),
@@ -96,29 +112,35 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy extends Hackathon_Ma
                                                      'data' => array(25,29,50,81,52,25,70))
                                               )
                            );
-        $chart = $this->createChartArray($this->getId().'_very_imp', $chartData, 'Line', 500, 200);
+        $chart = $block->newChartArray($this->getId().'_very_imp', $chartData, 'Line', 500, 200);
 
         // add row with line chart
-        $this->addRow('warning', 'Very Important Stat with a line chart and 2 data sets', '303 / 2048M', $chart);
+        $block->addRow('warning', 'Very Important Stat with a line chart and 2 data sets', '303 / 2048M', $chart);
 
         // prepare a pie chart
         $chartDataPie = array(array('value' => 34, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_ONE)),
                               array('value' => 12, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_TWO)),
                               array('value' => 42, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_THREE))
                              );
-        $chart = $this->createChartArray($this->getId().'_another_imp', $chartDataPie);
+        $chart = $block->newChartArray($this->getId().'_another_imp', $chartDataPie);
 
         // add row with pie chart
-        $this->addRow('warning', 'Another Important Stat with a 3 pieces pie chart, colors can be changed by user', 'I like pie.', $chart);
+        $block->addRow('warning', 'Another Important Stat with a 3 pieces pie chart, colors can be changed by user', 'I like pie.', $chart);
 
-        $chart = $this->createChartArray($this->getId().'_orders', $chartData, 'Radar', 300, 300);
+        $chart = $block->newChartArray($this->getId().'_orders', $chartData, 'Radar', 300, 300);
 
         // add row with radar chart
-        $this->addRow('error', 'Orders of the last 6 months in comparsion with previous year.', ' ', $chart);
+        $block->addRow('error', 'Orders of the last 6 months in comparsion with previous year.', ' ', $chart);
 
-        // add 2 buttons
-        $this->addButton($this->getId().'_bone', 'click me!' , '*/*/', null, 'Thanks for clicking!', 'f-right');
-        $this->addButton($this->getId().'_btwo', 'dont click me!' , '*/*/qwerty', null, 'Last chance!', 'f-right');
+        // add a button that will execute helloCallback() when clicked. callback method needs to be in this class.
+        // we want the widget to refresh itself after the call is done
+        // and a confirm dialog before executing
+        $block->addButton($this, 'bone', 'click me!' , self::CALLBACK.'helloCallback', array('refreshAfter' => true), 'Long running operation! You sure?');
+
+        // just a normal button that links to a standard magento route
+        $block->addButton($this, 'btwo', 'dont click me!' , '*/*/qwerty', null, 'Last chance!');
+
+        $this->_output[] = $block;
 
         return $this->_output;
     }
