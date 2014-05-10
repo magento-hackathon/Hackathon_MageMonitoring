@@ -38,7 +38,9 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Database extends 
     public function getTemplate()
     {
         $connection = Mage::getSingleton('core/resource')->getConnection('core_read');
-        switch($connection->getConfig()->getModel()){
+        $_config = $connection->getConfig();
+
+        switch ($_config['model']) {
             case "mysql4":
                 $_template = 'monitoring/mysql.phtml';
                 break;
