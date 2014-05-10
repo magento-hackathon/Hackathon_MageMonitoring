@@ -110,7 +110,7 @@
         <jobs>
             <magemonitoring_uberdog>
                 <schedule>
-                    <cron_expr>always</cron_expr>
+                    <cron_expr>* * * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>magemonitoring/watchDog_uberDog::triggerActiveDogs</model>
