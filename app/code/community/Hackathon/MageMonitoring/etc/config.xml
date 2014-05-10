@@ -124,7 +124,7 @@
             <tabs>
                 <system_overview>
                     <label>System Overview</label>
-                    <titel>System Overview</titel>
+                    <title>System Overview</title>
                     <widgets>
                       <Hackathon_MageMonitoring_Model_Widget_System_Magento />
                       <Hackathon_MageMonitoring_Model_Widget_System_Server />
@@ -133,14 +133,14 @@
                 </system_overview>
                 <php_info>
                     <label>PHP Information</label>
-                    <titel>PHP Information</titel>
+                    <title>PHP Information</title>
                     <block>magemonitoring/system_overview_read_tabs_php</block>
                     <widgets>
                     </widgets>
                 </php_info>
                 <cache_stat>
                     <label>Cache Statistics</label>
-                    <titel>Cache Statistics</titel>
+                    <title>Cache Statistics</title>
                     <widgets>
                       <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc />
                       <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu />
@@ -152,21 +152,21 @@
                 </cache_stat>
                 <class_rewrites>
                     <label>Class Rewrites</label>
-                    <titel>Class Rewrites</titel>
+                    <title>Class Rewrites</title>
                     <block>magemonitoring/system_overview_read_tabs_rewrites</block>
                     <widgets>
                     </widgets>
                 </class_rewrites>
                 <modules_installed>
                     <label>Modules Installed</label>
-                    <titel>Modules Installed</titel>
+                    <title>Modules Installed</title>
                     <block>magemonitoring/system_overview_read_tabs_modules</block>
                     <widgets>
                     </widgets>
                 </modules_installed>
                 <system_logs>
                     <label>System Logs</label>
-                    <titel>System Logs</titel>
+                    <title>System Logs</title>
                     <widgets>
                       <Hackathon_MageMonitoring_Model_Widget_Log_Debug />
                       <Hackathon_MageMonitoring_Model_Widget_Log_Exception />
