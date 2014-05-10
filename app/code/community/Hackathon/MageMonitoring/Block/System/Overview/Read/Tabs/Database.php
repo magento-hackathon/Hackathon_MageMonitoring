@@ -41,11 +41,11 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Database extends 
         $_config = $connection->getConfig();
 
         switch ($_config['model']) {
-            case "mysql4":
-                $_template = 'monitoring/mysql.phtml';
+            case 'mysql4':
+                $_template = 'monitoring/database/mysql.phtml';
                 break;
             default:
-                $_template = 'monitoring/database.phtml';
+                $_template = 'monitoring/database/default.phtml';
                 break;
         }
         //ToDo: get Database Type and return the right tab
