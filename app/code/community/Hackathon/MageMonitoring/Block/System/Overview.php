@@ -36,11 +36,12 @@ class Hackathon_MageMonitoring_Block_System_Overview extends Mage_Adminhtml_Bloc
         $this->removeButton('reset');
         $this->removeButton('save');
 
-        $this->addButton('tab_config', array(
-                'label' => $this->__('Tab Config'),
-                'onclick' => 'setLocation(\''.$this->getUrl('*/*/configTabs').'\')',
-                'class' => 'config'
-        ));
+        // @todo - finish to implement see with @edannenberg
+//        $this->addButton('tab_config', array(
+//                'label' => $this->__('Tab Config'),
+//                'onclick' => 'setLocation(\''.$this->getUrl('*/*/configTabs').'\')',
+//                'class' => 'config'
+//        ));
 
         $this->addButton('flush_all_cache', array(
             'label' => $this->__('Flush All Caches'),

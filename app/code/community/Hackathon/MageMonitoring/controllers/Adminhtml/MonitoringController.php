@@ -43,7 +43,11 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->renderLayout();
     }
 
-    public function configTabsAction() {
+    /**
+     * @todo - To finish to implement
+     */
+    public function configTabsAction()
+    {
         $this->loadLayout();
         $this->_setActiveMenu('system/tools/monitoring');
         $this->_addBreadcrumb(
