@@ -24,6 +24,11 @@
  */
 
 
-/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Database_Mysql */
-
-echo $this->getDatabaseHelper()->getMysqlVersion();
+/* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Database */
+?>
+getMysqlServerInfo
+<?php var_dump($this->getDatabaseHelper()->getMysqlServerInfo()); ?>
+getMysqlServerStatus
+<?php var_dump($this->getDatabaseHelper()->getMysqlServerStatus()); ?>
+getMysqlServerSettingInformation
+<?php var_dump($this->getDatabaseHelper()->getMysqlServerSettingInformation()); ?>
