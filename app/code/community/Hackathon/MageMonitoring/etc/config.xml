@@ -138,6 +138,13 @@
                     <widgets>
                     </widgets>
                 </php_info>
+                <database_info>
+                    <label>Database Information</label>
+                    <tite>Database Information</tite>
+                    <block>magemonitoring/system_overview_read_tabs_database</block>
+                    <widgets>
+                    </widgets>
+                </database_info>
                 <cache_stat>
                     <label>Cache Statistics</label>
                     <title>Cache Statistics</title>
