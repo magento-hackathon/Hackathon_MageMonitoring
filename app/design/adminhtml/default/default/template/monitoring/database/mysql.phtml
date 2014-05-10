@@ -23,12 +23,75 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-
 /* @var $this Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Database */
+
+/* @var $_helper Hackathon_MageMonitoring_Helper_Database */
+$_helper = $this->getDatabaseHelper();
+$serverInfo = $_helper->getMysqlServerInfo();
+$serverStatus = $_helper->getMysqlServerStatus();
+$serverSettingsInformation = $_helper->getMysqlServerSettingsInformation();
+
 ?>
-getMysqlServerInfo
-<?php var_dump($this->getDatabaseHelper()->getMysqlServerInfo()); ?>
-getMysqlServerStatus
-<?php var_dump($this->getDatabaseHelper()->getMysqlServerStatus()); ?>
-getMysqlServerSettingInformation
-<?php var_dump($this->getDatabaseHelper()->getMysqlServerSettingInformation()); ?>
+
+<div class="entry-edit">
+    <div class="entry-edit-head collapseable">
+        <a onclick="Fieldset.toggleCollapse('db_general_information'); return false;" href="#" id="db_general_information-head" class=""><?php echo $this->__('General Information') ?></a>
+        <input type="hidden" id="db_general_information-state" value="0" />
+    </div>
+    <fieldset id="db_general_information" class="collapseable">
+        <?php foreach ($serverInfo as $config): ?>
+            <div class="monitoring-data-container">
+                <div class="md-item md-item-info">
+                    <div class="md-icon md-icon-info"></div>
+                    <div class="md-item-title"><?php echo $config['label'] ?></div>
+                    <div class="md-item-value"><?php echo $config['value'] ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('db_general_information');
+        //]]>
+    </script>
+    <div class="entry-edit-head collapseable">
+        <a onclick="Fieldset.toggleCollapse('db_status_information'); return false;" href="#" id="db_status_information-head" class=""><?php echo $this->__('Status Information') ?></a>
+        <input type="hidden" id="db_status_information-state" value="0" />
+    </div>
+    <fieldset id="db_status_information" class="collapseable">
+        <?php foreach ($serverStatus as $config): ?>
+            <div class="monitoring-data-container">
+                <div class="md-item md-item-info">
+                    <div class="md-icon md-icon-info"></div>
+                    <div class="md-item-title"><?php echo $config['label'] ?></div>
+                    <div class="md-item-value"><?php echo $config['value'] ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('db_status_information');
+        //]]>
+    </script>
+    <div class="entry-edit-head collapseable">
+        <a onclick="Fieldset.toggleCollapse('db_settings_information'); return false;" href="#" id="db_settings_information-head" class=""><?php echo $this->__('Settings Information') ?></a>
+        <input type="hidden" id="db_settings_information-state" value="0" />
+    </div>
+    <fieldset id="db_settings_information" class="collapseable">
+        <?php foreach ($serverSettingsInformation as $config): ?>
+            <div class="monitoring-data-container">
+                <div class="md-item md-item-info">
+                    <div class="md-icon md-icon-info"></div>
+                    <div class="md-item-title"><?php echo $config['label'] ?></div>
+                    <div class="md-item-value"><?php echo $config['value'] ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </fieldset>
+    <script type="text/javascript">
+        //<![CDATA[
+        Fieldset.toggleCollapse('db_settings_information');
+        //]]>
+    </script>
+</div>

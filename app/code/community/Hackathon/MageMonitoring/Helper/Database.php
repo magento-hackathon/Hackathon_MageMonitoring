@@ -4,8 +4,7 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
 {
     private $_connection = null;
 
-    #private $_settings = array("have_innodb");
-    private $_settings = array();
+    private $_settings = array("have_innodb");
 
     public function getConnection()
     {
@@ -64,13 +63,11 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
          */
         $results = $readConnection->fetchAll($query);
 
-        foreach ($results as $_result){
-            if($_result['Variable_name'] == 'version'){
-                $result[] = array('label' => $_result['Variable_name'], 'value' => $_result['Value']);
-            }
+        foreach ($results as $_result) {
+            $result[] = array('label' => $_result['Variable_name'], 'value' => $_result['Value']);
         }
 
-        return $results;
+        return $result;
     }
 
     public function getMysqlTunerOutput()
@@ -93,7 +90,7 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
         return "ToDo";
     }
 
-    public function getMysqlServerSettingInformation()
+    public function getMysqlServerSettingsInformation()
     {
 
         /**
@@ -108,12 +105,9 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
          */
         $results = $readConnection->fetchAll($query);
 
-        if (count($this->_settings) == 0) {
-            return $results;
-        }
-
-        foreach ($results as $_result){
-            if (in_array($_result['Variable_name'], $this->_settings)) {
+        $result = array();
+        foreach ($results as $_result) {
+            if (!count($this->_settings) || in_array($_result['Variable_name'], $this->_settings)) {
                 $result[] = array('label' => $_result['Variable_name'], 'value' => $_result['Value']);
             }
         }
