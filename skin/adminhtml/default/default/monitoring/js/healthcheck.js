@@ -5,6 +5,8 @@ var Hackathon_MageMonitoring = {
     },
 
     showData : function(checkIdentifier) {
+        jQuery('#monitoring-loading-' + checkIdentifier).css('display', 'block');
+
         jQuery.getJSON(this.url, {checkIdentifier: checkIdentifier} , function(data) {
             /*
              *   TYPE TABLE
@@ -114,6 +116,9 @@ var Hackathon_MageMonitoring = {
                     }]
                 });
             }
+        })
+        .complete(function() {
+            jQuery('#monitoring-loading-' + checkIdentifier).css('display', 'none');
         })
     }
 }

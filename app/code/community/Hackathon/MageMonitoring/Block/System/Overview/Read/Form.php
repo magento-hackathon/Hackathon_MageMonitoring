@@ -38,10 +38,9 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Form extends Mage_Admi
                 'method' => 'post',
                 'enctype' => 'multipart/form-data',
         ));
-        
+
         $form->setUseContainer(true);
         $this->setForm($form);
         return parent::_prepareForm();
     }
-
 }

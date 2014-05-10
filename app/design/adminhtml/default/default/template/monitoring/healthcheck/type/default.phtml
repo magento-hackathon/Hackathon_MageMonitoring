@@ -1,15 +1,13 @@
 <?php
-
-$checkId = $this->getCheck()->getCheckId();
-
+/* @var $this Mage_Adminhtml_Block_Template */
 ?>
+<?php $checkId = $this->getCheck()->getCheckId(); ?>
 <div class="<?php echo $this->getCheck()->getContentType() ?> healthcheck-box">
     <h2><?php echo $this->__($this->getCheck()->getTitle()); ?></h2>
 
     <div id="<?php echo $checkId; ?>"></div>
-
     <?php  if ($this->getCheck()->getType() == Hackathon_MageMonitoring_Helper_Data::TYPE_ONDEMAND): ?>
-        <button onclick="Hackathon_MageMonitoring.showData('<?php echo $checkId; ?>');" class="button execute-button">
+        <button type="button" onclick="Hackathon_MageMonitoring.showData('<?php echo $checkId; ?>');" class="button execute-button">
             <span>
                 <span>
                     <?php echo $this->__('Execute Check') ?>
@@ -22,7 +20,6 @@ $checkId = $this->getCheck()->getCheckId();
                 Hackathon_MageMonitoring.showData('<?php echo $checkId; ?>');
             });
         </script>
-
     <?php endif; ?>
-
+    <img id="monitoring-loading-<?php echo $checkId; ?>" src="<?php echo $this->getSkinUrl('monitoring/images/spinner.gif') ?>" alt="Loading icon" width="25" height="25" class="health-loading" />
 </div>

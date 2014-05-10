@@ -32,3 +32,9 @@ body.hackathon-healthcheck-check-index .middle{
 .health-error {
     background: #FC6666;
 }
+
+.health-loading {
+    display: none;
+    vertical-align: middle;
+    float: left;
+}
