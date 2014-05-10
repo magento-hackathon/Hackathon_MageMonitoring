@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
- * Magento
+ * Hackathon
  *
  * NOTICE OF LICENSE
  *
@@ -53,9 +53,9 @@
             </magemonitoring_resource>
             <!-- Fake model rewrite -->
             <!--<catalog>-->
-                <!--<rewrite>-->
-                    <!--<category>Hackathon_MageMonitoring_Model_Category</category>-->
-                <!--</rewrite>-->
+            <!--<rewrite>-->
+            <!--<category>Hackathon_MageMonitoring_Model_Category</category>-->
+            <!--</rewrite>-->
             <!--</catalog>-->
             <!-- / Fake model rewrite -->
         </models>
@@ -82,17 +82,130 @@
             </magemonitoring>
         </widgets>
 
+        <!-- PLUGIN CONFIG -->
+
+        <healthcheck>
+            <shop_status>
+                <model>magemonitoring/check_shopStatus</model>
+                <type>static</type>
+                <versions>
+                    *
+                </versions>
+                <content_type>table</content_type>
+                <title>Shop-Status</title>
+                <sort_order>2</sort_order>
+            </shop_status>
+
+            <sitemap>
+                <model>magemonitoring/check_sitemap</model>
+                <versions>
+                    *
+                    1.6.2
+                    1.3*
+                    1.7.0*
+                </versions>
+                <type>static</type>
+                <content_type>table</content_type>
+                <title>Sitemap/robots.txt</title>
+                <sort_order>3</sort_order>
+            </sitemap>
+
+            <producttypes>
+                <active>true</active>
+                <model>magemonitoring/check_producttypes</model>
+                <type>ondemand</type>
+                <content_type>donutchart</content_type>
+                <title>Product Types</title>
+                <sort_order>4</sort_order>
+            </producttypes>
+
+            <productcomposition>
+                <active>true</active>
+                <model>magemonitoring/check_productComposition</model>
+                <type>ondemand</type>
+                <content_type>table</content_type>
+                <title>Product Composition</title>
+                <sort_order>1</sort_order>
+            </productcomposition>
+
+            <logfilesize>
+                <active>true</active>
+                <model>magemonitoring/check_logfilesize</model>
+                <type>ondemand</type>
+                <content_type>barchart</content_type>
+                <title>Logfile Size</title>
+                <sort_order>25</sort_order>
+            </logfilesize>
+
+            <mediasize>
+                <model>magemonitoring/check_mediasize</model>
+                <type>static</type>
+                <content_type>table</content_type>
+                <title>Media Dir Size</title>
+            </mediasize>
+
+            <shop_configuration>
+                <model>magemonitoring/check_shopConfiguration</model>
+                <type>static</type>
+                <content_type>table</content_type>
+                <title>Shop Configuration</title>
+                <values>
+                    <flat_table_product>
+                        <path>catalog/frontend/flat_catalog_product</path>
+                        <recommendation>1</recommendation>
+                    </flat_table_product>
+                    <flat_table_category>
+                        <path>catalog/frontend/flat_catalog_category</path>
+                        <recommendation>1</recommendation>
+                    </flat_table_category>
+                    <system_smtp_disable>
+                        <path>system/smtp/disable</path>
+                        <recommendation>0</recommendation>
+                    </system_smtp_disable>
+                    <dev_log_active>
+                        <path>dev/log/active</path>
+                        <recommendation>1</recommendation>
+                    </dev_log_active>
+                    <dev_js_merge_files>
+                        <path>dev/js/merge_files</path>
+                        <recommendation>1</recommendation>
+                    </dev_js_merge_files>
+                    <dev_css_merge_css_files>
+                        <path>dev/css/merge_css_files</path>
+                        <recommendation>1</recommendation>
+                    </dev_css_merge_css_files>
+                    <admin_security_use_form_key>
+                        <path>admin/security/use_form_key</path>
+                        <recommendation>1</recommendation>
+                    </admin_security_use_form_key>
+                    <admin_url_use_custom>
+                        <path>admin/url/use_custom</path>
+                        <recommendation>1</recommendation>
+                    </admin_url_use_custom>
+                    <admin_url_custom>
+                        <path>admin/url/custom</path>
+                    </admin_url_custom>
+                </values>
+                <sort_order>1</sort_order>
+            </shop_configuration>
+        </healthcheck>
+
+        <!-- PLUGIN CONFIG END -->
+
     </global>
 
     <admin>
         <routers>
-            <adminhtml>
+            <magemonitoring>
+                <use>admin</use>
                 <args>
+                    <module>Hackathon_MageMonitoring</module>
+                    <frontName>monitoring</frontName>
                     <modules>
                         <magemonitoring before="Mage_Adminhtml">Hackathon_MageMonitoring_Adminhtml</magemonitoring>
                     </modules>
                 </args>
-            </adminhtml>
+            </magemonitoring>
         </routers>
     </admin>
 
@@ -104,6 +217,16 @@
                 </magemonitoring>
             </updates>
         </layout>
+
+        <translate>
+            <modules>
+                <magemonitoring>
+                    <files>
+                        <default>Hackathon_MageMonitoring.csv</default>
+                    </files>
+                </magemonitoring>
+            </modules>
+        </translate>
     </adminhtml>
 
     <crontab>
@@ -122,54 +245,60 @@
     <default>
         <magemonitoring>
             <tabs>
+                <dashboard>
+                    <label>Dashboard</label>
+                    <title>Dashboard</title>
+                    <block>magemonitoring/system_overview_read_tabs_dashboard</block>
+                    <widgets/>
+                </dashboard>
                 <system_overview>
                     <label>System Overview</label>
-                    <titel>System Overview</titel>
+                    <title>System Overview</title>
                     <widgets>
-                      <Hackathon_MageMonitoring_Model_Widget_System_Magento />
-                      <Hackathon_MageMonitoring_Model_Widget_System_Server />
-                      <Hackathon_MageMonitoring_Model_Widget_System_Watchdog />
+                        <Hackathon_MageMonitoring_Model_Widget_System_Magento />
+                        <Hackathon_MageMonitoring_Model_Widget_System_Server />
+                        <Hackathon_MageMonitoring_Model_Widget_System_Watchdog />
                     </widgets>
                 </system_overview>
                 <php_info>
                     <label>PHP Information</label>
-                    <titel>PHP Information</titel>
+                    <title>PHP Information</title>
                     <block>magemonitoring/system_overview_read_tabs_php</block>
                     <widgets>
                     </widgets>
                 </php_info>
                 <cache_stat>
                     <label>Cache Statistics</label>
-                    <titel>Cache Statistics</titel>
+                    <title>Cache Statistics</title>
                     <widgets>
-                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc />
-                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu />
-                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy />
-                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache />
-                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis />
-                      <Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache />
+                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc />
+                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu />
+                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy />
+                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache />
+                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis />
+                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache />
                     </widgets>
                 </cache_stat>
                 <class_rewrites>
                     <label>Class Rewrites</label>
-                    <titel>Class Rewrites</titel>
+                    <title>Class Rewrites</title>
                     <block>magemonitoring/system_overview_read_tabs_rewrites</block>
                     <widgets>
                     </widgets>
                 </class_rewrites>
                 <modules_installed>
                     <label>Modules Installed</label>
-                    <titel>Modules Installed</titel>
+                    <title>Modules Installed</title>
                     <block>magemonitoring/system_overview_read_tabs_modules</block>
                     <widgets>
                     </widgets>
                 </modules_installed>
                 <system_logs>
                     <label>System Logs</label>
-                    <titel>System Logs</titel>
+                    <title>System Logs</title>
                     <widgets>
-                      <Hackathon_MageMonitoring_Model_Widget_Log_Debug />
-                      <Hackathon_MageMonitoring_Model_Widget_Log_Exception />
+                        <Hackathon_MageMonitoring_Model_Widget_Log_Debug />
+                        <Hackathon_MageMonitoring_Model_Widget_Log_Exception />
                     </widgets>
                 </system_logs>
             </tabs>

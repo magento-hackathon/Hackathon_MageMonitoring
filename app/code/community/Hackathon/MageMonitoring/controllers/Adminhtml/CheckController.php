@@ -1,6 +1,6 @@
 <?php
 /**
- * Magento
+ * Hackathon
  *
  * NOTICE OF LICENSE
  *
@@ -23,24 +23,31 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Form extends Mage_Adminhtml_Block_Widget_Form
+class Hackathon_MageMonitoring_Adminhtml_CheckController extends Mage_Adminhtml_Controller_Action
 {
-    /**
-     * Init Form Block
-     *
-     * @return Mage_Adminhtml_Block_Widget_Form
-     */
-    protected function _prepareForm()
-    {
-        $form = new Varien_Data_Form(array(
-                'id' => 'read_form',
-                'action' => '',
-                'method' => 'post',
-                'enctype' => 'multipart/form-data',
-        ));
 
-        $form->setUseContainer(true);
-        $this->setForm($form);
-        return parent::_prepareForm();
+    public function indexAction()
+    {
+        $this->loadLayout();
+        $this->renderLayout();
+    }
+
+    public function ajaxAction()
+    {
+        $checkIdentifier = $this->getRequest()->getParam('checkIdentifier');
+
+        $factory = Mage::getModel('magemonitoring/factory');
+
+        if ($checkIdentifier) {
+            /** @var Hackathon_MageMonitoring_Model_Abstract $check */
+            $check = $factory->getCheck($checkIdentifier);
+
+            /** @var Hackathon_MageMonitoring_Model_Content_Renderer_Abstract $renderer */
+            $renderer = $factory->getContentRenderer($check);
+            $check
+                ->setContentRenderer($renderer)
+                ->run()
+            ;
+        }
     }
 }

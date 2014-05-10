@@ -1,0 +1,13 @@
+<script>
+    jQuery(document).ready(function() {
+        Hackathon_MageMonitoring.init('<?php echo $this->getUrl('monitoring/check/ajax') ?>');
+    });
+</script>
+<?php
+
+foreach ($this->getAllChecks() as $check) {
+    $checkBlock = $this->getCheckBlock($check);
+    if ($checkBlock) {
+        echo $checkBlock->toHtml();
+    }
+}

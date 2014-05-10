@@ -54,7 +54,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
             $this->addTab(
                     $key, array(
                             'label' => $this->__($tab['label']),
-                            'title' => $this->__($tab['titel']),
+                            'title' => $this->__($tab['title']),
                             'content' => $block->toHtml()
                     )
             );
