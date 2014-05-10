@@ -140,7 +140,7 @@
                 </php_info>
                 <database_info>
                     <label>Database Information</label>
-                    <tite>Database Information</tite>
+                    <title>Database Information</title>
                     <block>magemonitoring/system_overview_read_tabs_database</block>
                     <widgets>
                     </widgets>
