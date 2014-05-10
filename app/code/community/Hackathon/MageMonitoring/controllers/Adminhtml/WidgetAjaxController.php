@@ -1,6 +1,6 @@
 <?php
 /**
- * Magento
+ * Hackathon
  *
  * NOTICE OF LICENSE
  *

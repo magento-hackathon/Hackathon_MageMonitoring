@@ -101,17 +101,17 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Php extends Mage_
             if (in_array($key, array('memory_limit', 'post_max_size', 'upload_max_filesize'))) {
                 $class = ((int) $this->getMonitoringHelper()->getValueInByte(ini_get($key), true) < (int) $config) ? 'warning' : 'success';
                 $value = $this->getMonitoringHelper()->getValueInByte(ini_get($key), true) . 'MB';
-                $recommentded = ($config && $class == 'warning') ? $config . 'MB' : false;
+                $recommended = ($config && $class == 'warning') ? $config . 'MB' : false;
             } else {
                 $value = ini_get($key);
                 $class = (empty($config) || (!empty($config) && (bool) $config == (bool) $value) ) ? 'success' : 'warning';
-                $recommentded = ($config && $class == 'warning') ? $config : false;
+                $recommended = ($config && $class == 'warning') ? $config : false;
             }
 
             $check[] = array(
                 'label' => $key,
                 'installed' => $value,
-                'recommended' => $recommentded,
+                'recommended' => $recommended,
                 'class' => $class,
             );
         }

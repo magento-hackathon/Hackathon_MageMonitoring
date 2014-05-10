@@ -25,13 +25,13 @@
 */
 -->
 <layout>
-    <adminhtml_monitoring_index>
+    <magemonitoring_monitoring_index>
         <update handle="monitoring_css_js" />
-    </adminhtml_monitoring_index>
+    </magemonitoring_monitoring_index>
 
-    <adminhtml_monitoring_config_tabs>
+    <magemonitoring_monitoring_config_tabs>
         <update handle="monitoring_css_js" />
-    </adminhtml_monitoring_config_tabs>
+    </magemonitoring_monitoring_config_tabs>
 
     <monitoring_css_js>
         <reference name="head">
@@ -41,6 +41,15 @@
             <action method="addItem"><type>skin_js</type><script>monitoring/js/mh_widget.js</script></action>
             <action method="addJs"><script>chartjs/Chart.min.js</script></action>
             <action method="addJs"><script>modal/modalbox.js</script></action>
+            
+            <!-- Merged from HealthCheck Extension -->
+            <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.js</script></action>
+            <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.noconflict.js</script></action>
+            <action method="addItem"><type>skin_js</type><script>monitoring/js/globalize.min.js</script></action>
+            <action method="addItem"><type>skin_js</type><script>monitoring/js/dx.chartjs.js</script></action>
+            <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.jsontotable.js</script></action>
+            <action method="addItem"><type>skin_js</type><script>monitoring/js/healthcheck.js</script></action>
+            <action method="addItem"><type>skin_css</type><script>monitoring/css/healthcheck.css</script></action>
         </reference>
     </monitoring_css_js>
 

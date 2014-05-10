@@ -25,7 +25,8 @@
 
 class Hackathon_MageMonitoring_Block_Widget_Dump extends Mage_Core_Block_Abstract
 {
-    protected function _toHtml() {
+    protected function _toHtml()
+    {
         $output = '';
         if ($this->getOutput()) {
             $output = $this->getOutput();

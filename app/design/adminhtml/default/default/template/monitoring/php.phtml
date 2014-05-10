@@ -42,9 +42,6 @@ $allExtensions = $this->getAllExtensions();
                 <div class="md-icon md-icon-<?php echo $version['class'] ?>"></div>
                 <div class="md-item-title"><?php echo $version['label']; ?></div>
                 <div class="md-item-value"><?php echo $version['installed']; echo ($version['recommended']) ? ' - ' . $this->__('Recommended:') . ' ' .$version['recommended'] : ''; ?></div>
-                <?php if ($version['recommended']) { ?>
-                    <div class="md-item-value"><?php echo $version['recommended']; ?></div>
-                <?php } ?>
             </div>
         </div>
         <?php foreach ($configs as $config) { ?>
