@@ -25,19 +25,18 @@
  */
 class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Database extends Mage_Adminhtml_Block_Abstract
 {
-
     /**
      *
      * @return Hackathon_MageMonitoring_Helper_Data|Mage_Core_Block_Abstract
      */
-    public function getMonitoringHelper()
+    public function getDatabaseHelper()
     {
-        return Mage::helper('magemonitoring');
+        return Mage::helper('magemonitoring/database');
     }
 
     public function getTemplate()
     {
-        $connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+        $connection = $this->getDatabaseHelper()->getConnection();
         $_config = $connection->getConfig();
 
         switch ($_config['model']) {
