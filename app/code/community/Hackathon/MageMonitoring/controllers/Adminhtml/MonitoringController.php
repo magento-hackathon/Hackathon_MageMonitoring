@@ -85,4 +85,9 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         return $this->_redirect('*/*/index');
     }
 
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('magemonitoring');
+    }
+
 }
