@@ -119,7 +119,6 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
 
     public function getMysqlInnodbBufferSizeInformation()
     {
-
         $query = 'SELECT engine, FORMAT( ( (sum( index_length ) ) + (sum( data_length ) ) ), 0) " total_size" FROM information_schema.TABLES WHERE engine IS NOT NULL GROUP BY engine;';
         $readConnection = $this->getConnection();
         $results = $readConnection->fetchAll($query);
@@ -130,27 +129,18 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
         $_comparableResult = array('label' => 'InnoDB Buffer Pool Size Check');
 
         foreach ($results as $_result) {
-            if (array_key_exists('Variable_name', $_result) && $_result['Variable_name'] == "innodb_buffer_pool_size") {
+            if (array_key_exists('Variable_name', $_result) && $_result['Variable_name'] == 'innodb_buffer_pool_size') {
                 $_bufferPoolSizeValue = (int)str_replace(',', '', $_result['Value']);
-                $_comparableResult[] = array(
-                    'label' => $_result['Variable_name'], 'value' => $_bufferPoolSizeValue
-                );
+                $_comparableResult['settings'][$_result['Variable_name']] = $_bufferPoolSizeValue;
 
             }
-            if (array_key_exists('engine', $_result) && $_result['engine'] == "InnoDB") {
+            if (array_key_exists('engine', $_result) && $_result['engine'] == 'InnoDB') {
                 $_bufferPoolSizeRecommendationValue = (int)str_replace(',', '', $_result['total_size']);
-                $_comparableResult[] = array(
-                    'label' => $_result['engine'], 'value' => $_bufferPoolSizeRecommendationValue
-                );
-
+                $_comparableResult['settings'][$_result['engine']] = $_bufferPoolSizeRecommendationValue;
             }
-
         }
 
-        $_check = ($_bufferPoolSizeRecommendationValue > $_bufferPoolSizeValue) ? "success" : "warning";
-        $_comparableResult[] = array(
-            'label' => "check", 'value' => $_check
-        );
+        $_comparableResult['check'] = ($_bufferPoolSizeRecommendationValue > $_bufferPoolSizeValue) ? 'ok' : 'warning';
 
         return $_comparableResult;
     }

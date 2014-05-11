@@ -33,64 +33,87 @@ $serverSettingsInformation = $_helper->getMysqlServerSettingsInformation();
 $innodbBufferInformation = $_helper->getMysqlInnodbBufferSizeInformation();
 ?>
 <div class="entry-edit">
-    <div class="entry-edit-head collapseable">
-        <a onclick="Fieldset.toggleCollapse('db_general_information'); return false;" href="#" id="db_general_information-head" class=""><?php echo $this->__('General Information') ?></a>
-        <input type="hidden" id="db_general_information-state" value="0" />
+
+    <div class="table healthcheck-box">
+        <h2><?php echo $this->__('General Information') ?></h2>
+
+        <div id="shop_configuration">
+            <table class="health-table">
+
+                <tbody>
+                    <?php foreach ($serverInfo as $config): ?>
+                        <tr>
+                            <td><?php echo ucfirst($config['label']) ?></td>
+                            <td><?php echo $config['value'] ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <fieldset id="db_general_information" class="collapseable">
-        <?php foreach ($serverInfo as $config): ?>
-            <div class="monitoring-data-container">
-                <div class="md-item md-item-info">
-                    <div class="md-icon md-icon-info"></div>
-                    <div class="md-item-title"><?php echo $config['label'] ?></div>
-                    <div class="md-item-value"><?php echo $config['value'] ?></div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </fieldset>
-    <script type="text/javascript">
-        //<![CDATA[
-        Fieldset.toggleCollapse('db_general_information');
-        //]]>
-    </script>
-    <div class="entry-edit-head collapseable">
-        <a onclick="Fieldset.toggleCollapse('db_status_information'); return false;" href="#" id="db_status_information-head" class=""><?php echo $this->__('Status Information') ?></a>
-        <input type="hidden" id="db_status_information-state" value="0" />
+
+    <div class="table healthcheck-box">
+        <h2><?php echo $this->__($innodbBufferInformation['label']) ?></h2>
+
+        <div id="shop_configuration">
+            <table class="health-table">
+                <tr>
+                    <th><?php echo $this->__('Setting') ?></th>
+                    <th><?php echo $this->__('Value') ?></th>
+                    <th><?php echo $this->__('Setting') ?></th>
+                    <th><?php echo $this->__('Value') ?></th>
+                </tr>
+                <tbody>
+                <tr class="health-<?php echo $innodbBufferInformation['check'] ?>">
+                    <?php foreach ($innodbBufferInformation['settings'] as $setting => $value): ?>
+                        <td><?php echo $setting ?></td>
+                        <td><?php echo $value ?></td>
+                    <?php endforeach; ?>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <fieldset id="db_status_information" class="collapseable">
-        <?php foreach ($serverStatus as $config): ?>
-            <div class="monitoring-data-container">
-                <div class="md-item md-item-info">
-                    <div class="md-icon md-icon-info"></div>
-                    <div class="md-item-title"><?php echo $config['label'] ?></div>
-                    <div class="md-item-value"><?php echo $config['value'] ?></div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </fieldset>
-    <script type="text/javascript">
-        //<![CDATA[
-        Fieldset.toggleCollapse('db_status_information');
-        //]]>
-    </script>
-    <div class="entry-edit-head collapseable">
-        <a onclick="Fieldset.toggleCollapse('db_settings_information'); return false;" href="#" id="db_settings_information-head" class=""><?php echo $this->__('Settings Information') ?></a>
-        <input type="hidden" id="db_settings_information-state" value="0" />
+
+    <div class="table healthcheck-box">
+        <h2><?php echo $this->__('Settings Information') ?></h2>
+
+        <div id="shop_configuration">
+            <table class="health-table">
+                <tr>
+                    <th><?php echo $this->__('Setting') ?></th>
+                    <th><?php echo $this->__('Value') ?></th>
+                </tr>
+                <tbody>
+                <?php foreach ($serverSettingsInformation as $config): ?>
+                    <tr class="health-<?php echo $config['label'] ?>">
+                        <td><?php echo ucfirst($config['label']) ?></td>
+                        <td><?php echo $config['value'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <fieldset id="db_settings_information" class="collapseable">
-        <?php foreach ($serverSettingsInformation as $config): ?>
-            <div class="monitoring-data-container">
-                <div class="md-item md-item-info">
-                    <div class="md-icon md-icon-info"></div>
-                    <div class="md-item-title"><?php echo $config['label'] ?></div>
-                    <div class="md-item-value"><?php echo $config['value'] ?></div>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </fieldset>
-    <script type="text/javascript">
-        //<![CDATA[
-        Fieldset.toggleCollapse('db_settings_information');
-        //]]>
-    </script>
+
+    <div class="table healthcheck-box">
+        <h2><?php echo $this->__('Status Information') ?></h2>
+
+        <div id="shop_configuration">
+            <table class="health-table">
+                <tr>
+                    <th><?php echo $this->__('Setting') ?></th>
+                    <th><?php echo $this->__('Value') ?></th>
+                </tr>
+                <tbody>
+                <?php foreach ($serverStatus as $config): ?>
+                    <tr>
+                        <td><?php echo ucfirst($config['label']) ?></td>
+                        <td><?php echo $config['value'] ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
