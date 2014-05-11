@@ -3,6 +3,8 @@ MageMonitoring
 
 Magento Extension to get health of your Magento installation (Server, PHP, Cache, Logs, Rewrites, Modules version installed ...)
 
+### License OSL v3
+
 ### Features
 
 The module gathers information of the current Magento installation:
@@ -15,6 +17,12 @@ The module gathers information of the current Magento installation:
 - Check for class and template file rewrites
 - Generic watch dogs with aggregated reports for less spam. Get notified when your log files start moving.
 - Custom site widgets or watch dogs can be added from other modules via config.xml declaration.
+- Integration of the healthcheck module [Healthcheck](https://github.com/magento-hackathon/HealthCheck)
+
+### Documentation
+
+The documentation is available into the doc folder [Hackathon Monitoring Documentation](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/master/doc)
+
 
 ### Usage
 
@@ -66,32 +74,6 @@ Uninstallation
 * Via modman: `modman remove Hackathon_MageMonitoring`
 * Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring`
 
-### How to add a new widget
-
-- Clone develop branch
-- Have a look at the base interface class Hackathon_MageMonitoring_Model_Widget
-- Create a new class in Model/Widget/$Tab/Mywidget.php
-- Extend from the nearest Abstract class to take care of boilerplate, example: cache widget => extend from Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-- Implement the remaining methods of corresponding child interface, example: cache widget => implement Hackathon_MageMonitoring_Model_Widget_CacheStat
-- Override isActive() if your widget depends on certain conditions.
-- Override initConfig() if your widget wants to use custom user parameters. The dashboard dummy widget has some examples.
-- You are done. Pull requests welcome. ;)
-
-Have a look at the existing widgets for more detailed usage.
-
-### How to add a new watch dog
-
-- The WatchDog interface is a tiny extension of the Widget interface.
-- It's fine to have a widget class also contain the watch dog implementation.
-- If you (already) extend from Widget_Abstract you only need to implement watch(), with a more specific abstract class it
-becomes even more easier. See Model/Widget/Log/* for details.
-
-### How to add a new widget or watch dog from another module
-
-- In your global module config add a widgets node that declares your widget folder. See config.xml of this module for details.
-- Now follow the same procedure as for adding a new widget or watch dog, except for the repo cloning part.
-- Drop your shiny new class into the folder your config.xml publishes. Compare with folder structure of this module if unsure.
-
 ### Core Contributors
 
 - [Sylvain Rayé](https://github.com/diglin)
@@ -100,7 +82,7 @@ becomes even more easier. See Model/Widget/Log/* for details.
 - [Yaroslav Rogoza](https://github.com/Gribnik)
 - [Nick Kravchuk](https://github.com/nickua)
 
-### Status of Project
+### Status of the project
 
 So a lot happened here in the dev branch, what changed:
 
