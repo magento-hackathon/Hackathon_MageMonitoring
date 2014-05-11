@@ -172,7 +172,7 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
         /* @var $node MageMonitoring Tab */
         foreach ($tabs as $tabId => $tab) {
             $tabJson = array();
-            $tabJson['text']       = $tab['titel'];
+            $tabJson['text']       = $tab['title'];
             $tabJson['id']         = $tabId;
             $tabJson['cls']        = 'folder';
             $tabJson['allowDrop']  = true;
