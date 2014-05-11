@@ -58,6 +58,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     // callback marker
     const CALLBACK = 'cb:';
 
+    protected $_dbConfigKey = null;
     protected $_tabId = null;
     protected $_output = array();
     protected $_config = array();
@@ -71,6 +72,22 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     public function getId()
     {
         return get_called_class();
+    }
+
+    /**
+     * Returns db config key, returns last 2 parts of classname with appended random string as default.
+     *
+     * @return string
+     */
+    public function getConfigId()
+    {
+        if (!$this->_dbConfigKey) {
+            $regOut = array();
+            if (preg_match("/.*_(.*_.*)/", $this->getId(), $regOut)) {
+                $this->_dbConfigKey = strtolower($regOut[1] .'-'. substr(md5(rand()), 0, 6));
+            }
+        }
+        return $this->_dbConfigKey;
     }
 
     /**
@@ -104,7 +121,10 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * @return Hackathon_MageMonitoring_Block_Widget_Monitoring
      */
     public function newMonitoringBlock() {
-        return Mage::app()->getLayout()->createBlock('magemonitoring/widget_monitoring');
+        $b = Mage::app()->getLayout()->createBlock('magemonitoring/widget_monitoring');
+        $b->setTabId($this->getTabId());
+        $b->setWidgetId($this->getConfigId());
+        return $b;
     }
 
     /**
@@ -256,10 +276,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
      */
-    public function loadConfig($configKey = null, $tabId = null)
+    public function loadConfig($configKey = null, $tabId = null, $widgetDbId = null)
     {
         $config = array();
         $this->_tabId = $tabId;
+        if ($widgetDbId !== null) {
+            $this->_dbConfigKey = $widgetDbId;
+        }
         if ($configKey) {
             $config[$configKey] = array('value' => null);
         } else {
@@ -287,9 +310,21 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     public function saveConfig($post, $postOnly = false)
     {
         $config = null;
+        if (array_key_exists('widget_id', $post)) {
+            $this->_dbConfigKey = $post['widget_id'];
+        }
         if ($postOnly) {
             $config = $post;
         } else {
+            $c = Mage::getModel('core/config');
+            if (array_key_exists('class_name', $post)) {
+                $c->saveConfig(
+                        Mage::helper('magemonitoring')->getConfigKeyById('impl', $this->_dbConfigKey, 'tabs/'.$this->getTabId()),
+                        $post['class_name'],
+                        'default',
+                        0
+                );
+            }
             $config = $this->getConfig();
         }
         foreach ($config as $key => $conf) {
@@ -302,14 +337,16 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     $post[$key] = 1;
                 }
             }
-            $c = Mage::getModel('core/config');
             $value = null;
-            if (!$postOnly && array_key_exists($key, $post)) {
-                $value = $post[$key];
-            } else {
-                $value = $post[$key]['value'];
+            if (array_key_exists($key, $post)) {
+                if (!$postOnly) {
+                    $value = $post[$key];
+                } else {
+                    $value = $post[$key]['value'];
+                }
             }
             # @todo: batch save
+            $c = Mage::getModel('core/config');
             $c->saveConfig(
                 Mage::helper('magemonitoring')->getConfigKey($key, $this),
                 $value,

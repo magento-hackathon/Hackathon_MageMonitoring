@@ -79,7 +79,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
             array('value' => $used, 'color' => '#f00000')
         );
 
-        return $block->newChartArray($cache->getId() . '_chart_memory', $chartData);
+        return $block->newChartArray('chart_memory', $chartData);
     }
 
     /**
@@ -97,7 +97,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon
             array('value' => $misses, 'color' => '#f00000')
         );
 
-        return $block->newChartArray($cache->getId() . '_chart_hitmiss', $chartData);
+        return $block->newChartArray('chart_hitmiss', $chartData);
     }
 
     /**

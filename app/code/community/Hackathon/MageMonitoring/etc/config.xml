@@ -255,9 +255,15 @@
                     <label>System Overview</label>
                     <title>System Overview</title>
                     <widgets>
-                        <Hackathon_MageMonitoring_Model_Widget_System_Magento />
-                        <Hackathon_MageMonitoring_Model_Widget_System_Server />
-                        <Hackathon_MageMonitoring_Model_Widget_System_Watchdog />
+                      <magento_info>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_Magento</impl>
+                      </magento_info>
+                      <server_info>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_Server</impl>
+                      </server_info>
+                      <watch_dog_control>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_Watchdog</impl>
+                      </watch_dog_control>
                     </widgets>
                 </system_overview>
                 <php_info>
@@ -271,12 +277,21 @@
                     <label>Cache Statistics</label>
                     <title>Cache Statistics</title>
                     <widgets>
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache />
+                      <apc>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc</impl>
+                      </apc>
+                      <apcu>
+                        <imp>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu</imp>
+                      </apcu>
+                      <memcached>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache</impl>
+                      </memcached>
+                      <redis>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis</impl>
+                      </redis>
+                      <zendopcache>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache</impl>
+                      </zendopcache>
                     </widgets>
                 </cache_stat>
                 <class_rewrites>
@@ -297,8 +312,12 @@
                     <label>System Logs</label>
                     <title>System Logs</title>
                     <widgets>
-                        <Hackathon_MageMonitoring_Model_Widget_Log_Debug />
-                        <Hackathon_MageMonitoring_Model_Widget_Log_Exception />
+                      <magento_debug>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_Log_Debug</impl>
+                      </magento_debug>
+                      <magento_exception>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_Log_Exception</impl>
+                      </magento_exception>
                     </widgets>
                 </system_logs>
             </tabs>

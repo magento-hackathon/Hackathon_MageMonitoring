@@ -92,7 +92,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
 
         $block->addRow('info', 'Installed Watch Dogs:', 'Schedule:');
 
-        $dogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_WatchDog');
+        $dogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
         foreach ($dogs as $d) {
             $block->addRow( (!$disabled && $d->onDuty()) ? 'success':'error', $d->getDogName(), $d->getSchedule());
         }

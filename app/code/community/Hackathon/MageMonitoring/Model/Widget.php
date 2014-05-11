@@ -26,11 +26,17 @@
 interface Hackathon_MageMonitoring_Model_Widget
 {
     /**
-     * Returns id string, use classname to avoid possible conflicts.
+     * Returns class name that must be compatible with magento autoloader.
      *
      * @return string
      */
     public function getId();
+    /**
+     * Returns widget config key in database.
+     *
+     * @return string
+     */
+    public function getConfigId();
     /**
      * Returns true if this widget is active.
      *

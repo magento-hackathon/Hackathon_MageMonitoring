@@ -41,11 +41,11 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * Returns array with implementations of $baseInterface that return isActive() == true.
      *
      * @param string|array $widgetId or array of widgetIds, if widgetId equals '*' all widgets are returned
-     * @param string $tabId config scope, null for global
+     * @param string $tabId config scope, null for globals only
      * @param string $baseInterface
      * @return array
      */
-    public function getActiveWidgets($widgetId='*', $tabId=null, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
+    public function getActiveWidgets($widgetId='*', $tabId=null, $returnSorted=true, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
     {
         $classFolders = array();
         $widgets = array();
@@ -76,27 +76,59 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
         // collect active widgets
         $activeWidgets = array();
-        foreach ($widgets as $widget) {
+        foreach ($widgets as $widgetDbId => $widget) {
             try {
                 $w = new $widget();
             } catch (Exception $e) {
                 Mage::logException($e);
                 continue;
             }
-            if ($w->isActive() && $widgetId == $w->getId()) {
-                return $w;
-            } else if ($w->isActive()) {
-                $w->loadConfig(null, $tabId);
-                $prio = 100;
-                if ($w->getDisplayPrio()) {
-                    $prio = $w->getDisplayPrio();
+            if ($w->isActive()) {
+                $w->loadConfig(null, $tabId, $widgetDbId);
+                if ($widgetId == $w->getId()) {
+                    return $w;
+                } else {
+                    $arrayKey = $w->getConfigId();
+                    if ($returnSorted && $w->getDisplayPrio()) {
+                        $arrayKey = $w->getDisplayPrio().'_'.$arrayKey;
+                    }
+                    $activeWidgets[$arrayKey] = $w;
                 }
-                $activeWidgets[$prio.'_'.$w->getId()] = $w;
             }
         }
 
         ksort($activeWidgets, SORT_NUMERIC);
         return $activeWidgets;
+    }
+
+    public function getConfiguredWidgets($tabId='*', $widgetDbId=null, $returnSorted=true, $baseInterface='Hackathon_MageMonitoring_Model_Widget') {
+        if ($tabId !== '*') {
+            $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
+        } else {
+            $tabs = Mage::getStoreConfig('magemonitoring/tabs');
+        }
+        $widgets = array();
+        foreach ($tabs as $key => $tab) {
+            // custom block for tab?
+            if (array_key_exists('block', $tab) && $tab['block']) {
+                continue;
+            }
+
+            if (array_key_exists('widgets', $tab) && is_array($tab['widgets'])) {
+                $implList = array();
+                if ($widgetDbId) {
+                    $implList[$widgetDbId] = $tab['widgets'][$widgetDbId]['impl'];
+                } else {
+                    foreach ($tab['widgets'] as $wDbId => $config) {
+                        if (array_key_exists('impl', $config)) {
+                            $implList[$wDbId] = $config['impl'];
+                        }
+                    }
+                }
+                $widgets[$key] = $this->getActiveWidgets($implList, $key, $returnSorted, $baseInterface);
+            }
+        }
+        return $widgets;
     }
 
     /**
@@ -105,7 +137,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @param string $path
      * @param int $maxDepth
      */
-    public function requireAll($path, $maxDepth=3)
+    public function requireAll($path, $maxDepth=7)
     {
         foreach (array_filter(glob($path."/*"), 'is_dir') as $d) {
             if ($maxDepth > 0) {
@@ -260,7 +292,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @return string $url
      */
     public function getWidgetUrl($controller_action, $widget) {
-        $params = array('widgetId' => $widget->getId());
+        $params = array('widgetId' => $widget->getConfigId());
         if ($tabId = $widget->getTabId()) {
             $params['tabId'] = $tabId;
         }
@@ -313,9 +345,8 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @param Hackathon_MageMonitoring_Model_Widget $widget
      * @return string
      */
-    public function getConfigKey($configKey, $widget) {
+    public function getConfigKey($configKey, $widget, $scope='global') {
         $conf = $widget->getConfig($configKey, false);
-        $scope = 'global';
         if (is_array($conf) && array_key_exists ('scope', $conf)) {
             if ($conf['scope'] === 'widget' && method_exists($widget, 'getTabId') && $widget->getTabId() !== null) {
                 $scope = 'tabs/' . $widget->getTabId();
@@ -323,7 +354,11 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
         $id = null;
         if (class_implements($widget, 'Hackathon_MageMonitoring_Model_Widget')) {
-            $id = $widget->getId();
+            if ($scope === 'global') {
+                $id = $widget->getId(); // class name for global params as db key
+            } else {
+                $id = $widget->getConfigId();
+            }
         } elseif (class_implements($widget, 'Hackathon_MageMonitoring_Model_WatchDog')) {
             $id = $widget->getDogId();
         } else {
@@ -340,10 +375,10 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @param string $scope
      * @return string
      */
-    public function getConfigKeyById($configKey, $widgetId, $scope='global') {
+    public function getConfigKeyById($configKey, $widgetDbId, $scope='global') {
         $key = 'magemonitoring/';
         $prefix = Hackathon_MageMonitoring_Model_Widget_Abstract::CONFIG_PRE_KEY;
-        return $key .= $scope . '/'. $prefix . '/' . $widgetId . '/' . $configKey;
+        return $key .= $scope . '/'. $prefix . '/' . $widgetDbId . '/' . $configKey;
     }
 
     /**

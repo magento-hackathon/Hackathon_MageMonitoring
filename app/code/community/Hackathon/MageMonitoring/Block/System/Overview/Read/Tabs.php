@@ -37,7 +37,8 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
     protected function _beforeToHtml()
     {
         $tabs = Mage::getStoreConfig('magemonitoring/tabs');
-        foreach ($tabs as $key => $tab) {
+
+        foreach ($tabs as $tabId => $tab) {
             // custom block for tab?
             if (array_key_exists('block', $tab)) {
                 $block = $tab['block'];
@@ -47,12 +48,12 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
             $block = $this->getLayout()->createBlock($block);
             // pass widgets
             if (array_key_exists('widgets', $tab) && is_array($tab['widgets'])) {
-                $block->setWidgets(array_keys($tab['widgets']));
-                $block->setTabId($key);
+                $block->setWidgets(Mage::helper('magemonitoring')->getConfiguredWidgets($tabId));
+                $block->setTabId($tabId);
             }
             // add tab if permissions are ok
             $this->addTab(
-                    $key, array(
+                    $tabId, array(
                             'label' => $this->__($tab['label']),
                             'title' => $this->__($tab['title']),
                             'content' => $block->toHtml()

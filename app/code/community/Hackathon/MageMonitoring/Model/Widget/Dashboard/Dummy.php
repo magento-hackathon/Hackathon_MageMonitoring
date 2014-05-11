@@ -56,7 +56,7 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy
      */
     public function isActive()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -85,7 +85,7 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy
     {
         // hard work
         sleep(3);
-        return Mage::helper('monitoring')->__('Pleased to inform you that the operation was indeed a great success! <br/> Now let me refresh that widget for you..');
+        return Mage::helper('magemonitoring')->__('Pleased to inform you that the operation was indeed a great success! <br/> Now let me refresh that widget for you..');
     }
 
     /**
@@ -112,7 +112,7 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy
                                                      'data' => array(25,29,50,81,52,25,70))
                                               )
                            );
-        $chart = $block->newChartArray($this->getId().'_very_imp', $chartData, 'Line', 500, 200);
+        $chart = $block->newChartArray('very_imp', $chartData, 'Line', 500, 200);
 
         // add row with line chart
         $block->addRow('warning', 'Very Important Stat with a line chart and 2 data sets', '303 / 2048M', $chart);
@@ -122,12 +122,12 @@ class Hackathon_MageMonitoring_Model_Widget_Dashboard_Dummy
                               array('value' => 12, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_TWO)),
                               array('value' => 42, 'color' => $this->getConfig(self::CONFIG_PIE_COLOR_THREE))
                              );
-        $chart = $block->newChartArray($this->getId().'_another_imp', $chartDataPie);
+        $chart = $block->newChartArray('another_imp', $chartDataPie);
 
         // add row with pie chart
         $block->addRow('warning', 'Another Important Stat with a 3 pieces pie chart, colors can be changed by user', 'I like pie.', $chart);
 
-        $chart = $block->newChartArray($this->getId().'_orders', $chartData, 'Radar', 300, 300);
+        $chart = $block->newChartArray('orders', $chartData, 'Radar', 300, 300);
 
         // add row with radar chart
         $block->addRow('error', 'Orders of the last 6 months in comparsion with previous year.', ' ', $chart);

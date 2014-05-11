@@ -43,11 +43,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->renderLayout();
     }
 
-    /**
-     * @todo - To finish to implement
-     */
-    public function configTabsAction()
-    {
+    public function config_tabsAction() {
         $this->loadLayout();
         $this->_setActiveMenu('system/tools/monitoring');
         $this->_addBreadcrumb(
@@ -67,7 +63,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     {
         try {
 
-            $caches = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_Widget_CacheStat');
+            $caches = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_Widget_CacheStat');
 
             foreach ($caches as $cache) {
                 if ($cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {

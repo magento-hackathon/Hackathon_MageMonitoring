@@ -72,7 +72,7 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      * @return string
      */
     public function getWidgetId() {
-        return $this->_getWidget()->getId();
+        return $this->getTabId().'-'.$this->_getWidget()->getConfigId();
     }
 
     /**

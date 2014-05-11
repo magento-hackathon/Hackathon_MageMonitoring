@@ -29,7 +29,7 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     // ajax refresh
     public function refreshWidgetAction() {
         $response = '';
-        if ($widget = $this->_getWidgetFromRequest(true)) {
+        if ($widget = $this->_getWidgetFromRequest()) {
             foreach ($widget->getOutput() as $blocks) {
                 $response .= $blocks->toHtml();
             }
@@ -46,10 +46,11 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     // get widget config html
     public function getWidgetConfAction() {
         $response = "ERR";
-        if ($widget = $this->_getWidgetFromRequest(true)) {
+        if ($widget = $this->_getWidgetFromRequest()) {
             $response = $this->getLayout()->createBlock('core/template')
                 ->setTemplate('monitoring/widget/config.phtml')
                 ->setData('widget', $widget)
+                ->setData('tab_id', $this->getRequest()->getParam('tabId'))
                 ->toHtml();
         }
         $this->getResponse()->setBody($response);
@@ -58,8 +59,21 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     // save widget config
     public function saveWidgetConfAction() {
         $response = "ERR";
-        if ($widget = $this->_getWidgetFromRequest(true)) {
-            $post = $this->getRequest()->getPost();
+        $post = $this->getRequest()->getPost();
+        $className = null;
+        if (array_key_exists('class_name', $post)) {
+            $className = $post['class_name'];
+        }
+        $widgetDbId = null;
+        if (array_key_exists('widget_id', $post)) {
+            $widgetDbId = $post['widget_id'];
+        }
+        if ($widget = $this->_getWidgetFromRequest($className, $widgetDbId)) {
+            // ignore display prio if we save from config tab page
+            $ref = $this->getRequest()->getServer('HTTP_REFERER');
+            if (strpos($ref, '/config_tabs/') !== false) {
+                $post['display_prio'] = $widget->getConfig('display_prio', true);
+            }
             unset($post['form_key']);
             $widget->saveConfig($post);
             $response = 'Settings saved for '.$widget->getName().'. Changing display prio and collapseable state requires a page reload.';
@@ -77,10 +91,39 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
         $this->getResponse()->setBody($response);
     }
 
+    // tab config - get widget config form html
+    public function getWidgetConfigFormAction() {
+        $response = "ERR";
+        if ($widget = $this->_getWidgetFromRequest()) {
+            $response = $this->getLayout()->createBlock('magemonitoring/tab_config_formconfig')
+                ->setData('widget', $widget)
+                ->setData('tab_id', $this->getRequest()->getParam('tabId'))
+                ->toHtml();
+        }
+        $this->getResponse()->setBody($response);
+    }
+
+    // save tab config
+    public function saveTabConfigAction() {
+        $data = Mage::helper('core')->jsonDecode($this->getRequest()->getPost('data'));
+        //$this->_getSession()->addSuccess($this->__('Saved Tab Config'));
+        $response = array();
+        $hasError = false;
+        if ($hasError) {
+            $this->_initLayoutMessages('adminhtml/session');
+            $response['error']   = 1;
+            $response['message'] = $this->getLayout()->getMessagesBlock()->getGroupedHtml();
+        } else {
+            $response['error']   = 0;
+            $response['url']     = $this->getUrl('*/monitoring/config_tabs');
+        }
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
+    }
+
     // execute callback on widget
     public function execCallbackAction() {
         $response = "ERR";
-        if ($widget = $this->_getWidgetFromRequest(true)) {
+        if ($widget = $this->_getWidgetFromRequest()) {
             if ($cbMethod = $this->getRequest()->getParam('cb')) {
                 if (method_exists($widget, $cbMethod)) {
                     try {
@@ -104,21 +147,32 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     /**
      * Returns widget instance if widgetId is found in current request params.
      *
-     * @param bool $loadConfig
+     * @param string $className
      *
      * @return Hackathon_MageMonitoring_Model_Widget|false
      */
-    private function _getWidgetFromRequest($loadConfig = false) {
+    private function _getWidgetFromRequest($className=null, $widgetDbId=null) {
         if ($id = $this->getRequest()->getParam('widgetId')) {
-            $widget = new $id();
-            if ($widget instanceof Hackathon_MageMonitoring_Model_Widget && $widget->isActive()) {
-                if ($loadConfig) {
-                    $tab = null;
-                    if ($this->getRequest()->getParam('tabId')) {
-                        $tab = $this->getRequest()->getParam('tabId');
-                    }
-                    $widget->loadConfig(null, $tab);
+            $tabId = null;
+            if ($this->getRequest()->getParam('tabId')) {
+                $tabId = $this->getRequest()->getParam('tabId');
+            }
+            if ($className !== null || (is_numeric($id) && $this->getRequest()->getParam('widgetImpl'))) {
+                if ($className === null) {
+                    $className = $this->getRequest()->getParam('widgetImpl');
                 }
+                if ($widgetDbId === null) {
+                    $w = new $className();
+                    $widgetDbId = $w->getConfigId();
+                }
+                $id = array($widgetDbId => $className);
+                $widget = Mage::helper('magemonitoring')->getActiveWidgets($id, $tabId, false);
+            } else {
+                $widget = Mage::helper('magemonitoring')->getConfiguredWidgets($tabId, $id, false);
+                $widget = reset($widget);
+            }
+            $widget = reset($widget);
+            if ($widget instanceof Hackathon_MageMonitoring_Model_Widget) {
                 return $widget;
             }
         }

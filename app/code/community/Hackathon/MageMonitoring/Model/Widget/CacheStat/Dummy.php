@@ -119,7 +119,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy
                            array('value' => 12, 'color' => '#00ff00'),
                            array('value' => 42, 'color' => '#0000ff')
                            );
-        $chart = $defaultBlock->newChartArray($this->getId().'_another_imp', $chartData);
+        $chart = $defaultBlock->newChartArray('another_imp', $chartData);
 
         // add row with chart
         $defaultBlock->addRow('warning', 'Another Important Stat with a 3 pieces pie chart', 'I like pie.', $chart);
