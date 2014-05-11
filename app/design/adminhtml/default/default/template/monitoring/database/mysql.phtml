@@ -30,9 +30,8 @@ $_helper = $this->getDatabaseHelper();
 $serverInfo = $_helper->getMysqlServerInfo();
 $serverStatus = $_helper->getMysqlServerStatus();
 $serverSettingsInformation = $_helper->getMysqlServerSettingsInformation();
-
+$innodbBufferInformation = $_helper->getMysqlInnodbBufferSizeInformation();
 ?>
-
 <div class="entry-edit">
     <div class="entry-edit-head collapseable">
         <a onclick="Fieldset.toggleCollapse('db_general_information'); return false;" href="#" id="db_general_information-head" class=""><?php echo $this->__('General Information') ?></a>

@@ -4,7 +4,9 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
 {
     private $_connection = null;
 
-    private $_settings = array("have_innodb");
+    //ToDo: make this arrays configurable in backend
+    private $_serverSettings = array();
+    private $_innodbSettings = array();
 
     public function getConnection()
     {
@@ -40,8 +42,8 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
          */
         $results = $readConnection->fetchAll($query);
 
-        foreach ($results as $_result){
-            if($_result['Variable_name'] == 'version'){
+        foreach ($results as $_result) {
+            if ($_result['Variable_name'] == 'version') {
                 $result[] = array('label' => $_result['Variable_name'], 'value' => $_result['Value']);
             }
         }
@@ -107,12 +109,50 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
 
         $result = array();
         foreach ($results as $_result) {
-            if (!count($this->_settings) || in_array($_result['Variable_name'], $this->_settings)) {
+            if (!count($this->_serverSettings) || in_array($_result['Variable_name'], $this->_serverSettings)) {
                 $result[] = array('label' => $_result['Variable_name'], 'value' => $_result['Value']);
             }
         }
 
         return $result;
+    }
+
+    public function getMysqlInnodbBufferSizeInformation()
+    {
+
+        $query = 'SELECT engine, FORMAT( ( (sum( index_length ) ) + (sum( data_length ) ) ), 0) " total_size" FROM information_schema.TABLES WHERE engine IS NOT NULL GROUP BY engine;';
+        $readConnection = $this->getConnection();
+        $results = $readConnection->fetchAll($query);
+
+        $query = 'SHOW VARIABLES like "%innodb_buffer_pool_size%";';
+        $_poolSizeValue = $readConnection->fetchAll($query);
+        $results[] = $_poolSizeValue[0];
+        $_comparableResult = array('label' => 'InnoDB Buffer Pool Size Check');
+
+        foreach ($results as $_result) {
+            if (array_key_exists('Variable_name', $_result) && $_result['Variable_name'] == "innodb_buffer_pool_size") {
+                $_bufferPoolSizeValue = (int)str_replace(',', '', $_result['Value']);
+                $_comparableResult[] = array(
+                    'label' => $_result['Variable_name'], 'value' => $_bufferPoolSizeValue
+                );
+
+            }
+            if (array_key_exists('engine', $_result) && $_result['engine'] == "InnoDB") {
+                $_bufferPoolSizeRecommendationValue = (int)str_replace(',', '', $_result['total_size']);
+                $_comparableResult[] = array(
+                    'label' => $_result['engine'], 'value' => $_bufferPoolSizeRecommendationValue
+                );
+
+            }
+
+        }
+
+        $_check = ($_bufferPoolSizeRecommendationValue > $_bufferPoolSizeValue) ? "success" : "warning";
+        $_comparableResult[] = array(
+            'label' => "check", 'value' => $_check
+        );
+
+        return $_comparableResult;
     }
 
 }
