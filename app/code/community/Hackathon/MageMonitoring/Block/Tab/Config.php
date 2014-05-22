@@ -45,13 +45,13 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
         );
 
         $this->setChild('edit_widget_config_form',
-            $this->getLayout()->createBlock('magemonitoring/tab_config_formconfig')
+            $this->getLayout()->createBlock('magemonitoring/tab_config_form_widgetConf')
         );
 
-        $this->setChild('delete_tab_button',
+        $this->setChild('delete_node_button',
             $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
-                'label'     => Mage::helper('catalog')->__('Delete Selected Tab'),
-                'onclick'   => 'editSet.submit();',
+                'label'     => Mage::helper('magemonitoring')->__('Delete Selected Node/Leaf'),
+                'onclick'   => 'editSet.deleteSelected();',
                 'class'     => 'delete'
         )));
 
@@ -69,12 +69,6 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
                 'class'     => 'back'
         )));
 
-        $this->setChild('reset_button',
-            $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
-                'label'     => Mage::helper('catalog')->__('Reset'),
-                'onclick'   => 'window.location.reload()'
-        )));
-
         $this->setChild('save_button',
             $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => Mage::helper('catalog')->__('Save Tab Config'),
@@ -82,17 +76,12 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
                 'class'     => 'save'
         )));
 
-        $this->setChild('delete_button',
+        $this->setChild('reset_config_button',
             $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => Mage::helper('catalog')->__('Factory Configuration'),
-                'onclick'   => 'deleteConfirm(\''. $this->jsQuoteEscape(Mage::helper('catalog')->__('Really delete tab configuration?')) . '\', \'' . '\')',
+                'onclick'   => 'deleteConfirm(\''. $this->jsQuoteEscape(Mage::helper('catalog')->__('Really wipe module config from database?'))
+                                              . '\', \'' . $this->getUrl('*/*/resetConfig') . '\')',
                 'class'     => 'delete'
-        )));
-
-        $this->setChild('rename_button',
-            $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
-                'label'     => Mage::helper('catalog')->__('New Tab Name'),
-                'onclick'   => 'editSet.rename()'
         )));
 
         return parent::_prepareLayout();
@@ -133,7 +122,7 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
      *
      * @return string
      */
-    public function getMoveUrl()
+    public function getSaveUrl()
     {
         return $this->getUrl('*/widgetAjax/saveTabConfig');
     }
@@ -161,13 +150,12 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
     public function getTabTreeJson()
     {
         $tabsJson = array();
-        $setId = $this->_getSetId();
 
         if (!$this->_configuredWidgets) {
             $this->_configuredWidgets = Mage::helper('magemonitoring')->getConfiguredWidgets();
         }
 
-        $tabs = Mage::getStoreConfig('magemonitoring/tabs');
+        $tabs = Mage::helper('magemonitoring')->getConfiguredTabs();
 
         /* @var $node MageMonitoring Tab */
         foreach ($tabs as $tabId => $tab) {
@@ -215,10 +203,11 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
     public function getWidgetTreeJson()
     {
         $widgetsJson = array();
-        $setId = $this->_getSetId();
 
         if (!$this->_activeWidgets) {
-            $this->_activeWidgets = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false);
+            $w = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false);
+            uasort($w, array($this, 'sortWidgetsByName'));
+            $this->_activeWidgets = $w;
         }
 
         foreach ($this->_activeWidgets as $id => $widget) {
@@ -252,6 +241,18 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
     }
 
     /**
+     * Compare function for uasort(). Sorts by widget name.
+     *
+     * @param array $a
+     * @param array $b
+     * @return number
+     */
+    protected function sortWidgetsByName($a, $b)
+    {
+        return strnatcmp($a->getName(), $b->getName());
+    }
+
+    /**
      * Retrieve Back Button HTML
      *
      * @return string
@@ -268,7 +269,7 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
      */
     public function getResetButtonHtml()
     {
-        return $this->getChildHtml('reset_button');
+        return $this->getChildHtml('reset_config_button');
     }
 
     /**
@@ -282,26 +283,13 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
     }
 
     /**
-     * Retrieve Delete Button HTML
-     *
-     * @return string
-     */
-    public function getDeleteButtonHtml()
-    {
-        if ($this->getIsCurrentSetDefault()) {
-            return '';
-        }
-        return $this->getChildHtml('delete_button');
-    }
-
-    /**
      * Retrieve Delete Group Button HTML
      *
      * @return string
      */
-    public function getDeleteTabButton()
+    public function getDeleteNodeButton()
     {
-        return $this->getChildHtml('delete_tab_button');
+        return $this->getChildHtml('delete_node_button');
     }
 
     /**
@@ -312,65 +300,6 @@ class Hackathon_MageMonitoring_Block_Tab_Config extends Mage_Adminhtml_Block_Tem
     public function getAddTabButton()
     {
         return $this->getChildHtml('add_tab_button');
-    }
-
-    /**
-     * Retrieve Rename Button HTML
-     *
-     * @return string
-     */
-    public function getRenameButton()
-    {
-        return $this->getChildHtml('rename_button');
-    }
-
-    /**
-     * Retrieve current Attribute Set object
-     *
-     * @return Mage_Eav_Model_Entity_Attribute_Set
-     */
-    protected function _getAttributeSet()
-    {
-        return Mage::registry('current_attribute_set');
-    }
-
-    /**
-     * Retrieve current attribute set Id
-     *
-     * @return int
-     */
-    protected function _getSetId()
-    {
-        return '33';
-    }
-
-    /**
-     * Check Current Attribute Set is a default
-     *
-     * @return bool
-     */
-    public function getIsCurrentSetDefault()
-    {
-        $isDefault = $this->getData('is_current_set_default');
-        if (is_null($isDefault)) {
-            $defaultSetId = Mage::getModel('eav/entity_type')
-                ->load(Mage::registry('entityType'))
-                ->getDefaultAttributeSetId();
-            $isDefault = $this->_getSetId() == $defaultSetId;
-            $this->setData('is_current_set_default', $isDefault);
-        }
-        return $isDefault;
-    }
-
-    /**
-     * Retrieve current Attribute Set object
-     *
-     * @deprecated use _getAttributeSet
-     * @return Mage_Eav_Model_Entity_Attribute_Set
-     */
-    protected function _getSetData()
-    {
-        return $this->_getAttributeSet();
     }
 
 }

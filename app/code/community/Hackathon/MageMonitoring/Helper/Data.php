@@ -36,7 +36,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     const WARN_TYPE_OK = 'health-ok';
     const WARN_TYPE_WARNING = 'health-warning';
     const WARN_TYPE_ERROR = 'health-error';
-    
+
     /**
      * Returns array with implementations of $baseInterface that return isActive() == true.
      *
@@ -88,19 +88,27 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                 if ($widgetId == $w->getId()) {
                     return $w;
                 } else {
-                    $arrayKey = $w->getConfigId();
-                    if ($returnSorted && $w->getDisplayPrio()) {
-                        $arrayKey = $w->getDisplayPrio().'_'.$arrayKey;
-                    }
-                    $activeWidgets[$arrayKey] = $w;
+                    $activeWidgets[$w->getConfigId()] = $w;
                 }
             }
         }
 
-        ksort($activeWidgets, SORT_NUMERIC);
+        if ($returnSorted) {
+            uasort($activeWidgets, array($this, 'compareWidgetDisplayPrio'));
+        }
+
         return $activeWidgets;
     }
 
+    /**
+     * Returns widget(s) configuration. Filters invisible/inactive widgets and sorts by display_prio.
+     *
+     * @param string $tabId
+     * @param string $widgetDbId
+     * @param string $returnSorted
+     * @param string $baseInterface
+     * @return multitype:Ambigous <multitype:, unknown, multitype:unknown >
+     */
     public function getConfiguredWidgets($tabId='*', $widgetDbId=null, $returnSorted=true, $baseInterface='Hackathon_MageMonitoring_Model_Widget') {
         if ($tabId !== '*') {
             $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
@@ -120,7 +128,11 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                     $implList[$widgetDbId] = $tab['widgets'][$widgetDbId]['impl'];
                 } else {
                     foreach ($tab['widgets'] as $wDbId => $config) {
-                        if (array_key_exists('impl', $config)) {
+                        $visible = true;
+                        if (array_key_exists('visible', $config) && !$config['visible']) {
+                            $visible = false;
+                        }
+                        if (array_key_exists('impl', $config) && $visible) {
                             $implList[$wDbId] = $config['impl'];
                         }
                     }
@@ -129,6 +141,75 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
             }
         }
         return $widgets;
+    }
+
+    /**
+     * Returns tab config array. Filters invisible and sorts by display_prio.
+     *
+     * @param string $tabId
+     * @return array
+     */
+    public function getConfiguredTabs($tabId='*')
+    {
+        if ($tabId !== '*') {
+            $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
+        } else {
+            $tabs = Mage::getStoreConfig('magemonitoring/tabs');
+        }
+        $tabs = array_filter($tabs, array($this, 'filterVisibleTabs'));
+        uasort($tabs, array($this, 'compareTabDisplayPrio'));
+        return $tabs;
+    }
+
+    /**
+     * Compare function for uasort(). Sorts by widget display_prio.
+     *
+     * @param array $a
+     * @param array $b
+     * @return number
+     */
+    protected function compareWidgetDisplayPrio($a, $b)
+    {
+        if ($a->getDisplayPrio() == $b->getDisplayPrio()) {
+            return 0;
+        }
+        return ($a->getDisplayPrio() > $b->getDisplayPrio()) ? 1 : -1;
+    }
+
+    /**
+     * Compare function for uasort(). Sorts by tab display_prio. Entries without display_prio go to the bottom.
+     *
+     * @param array $a
+     * @param array $b
+     * @return number
+     */
+    protected function compareTabDisplayPrio($a, $b)
+    {
+        if (!array_key_exists('display_prio', $a) && array_key_exists('display_prio', $b)) {
+            return -1;
+        }
+        else if (array_key_exists('display_prio', $a) && !array_key_exists('display_prio', $b)) {
+            return 1;
+        } else if (!array_key_exists('display_prio', $a) && !array_key_exists('display_prio', $b)) {
+            return 0;
+        }
+        if ($a['display_prio'] == $b['display_prio']) {
+            return 0;
+        }
+        return ($a['display_prio'] > $b['display_prio']) ? 1 : -1;
+    }
+
+    /**
+     * Filter function for array_filter(). Returns array where tabs have visible != 0.
+     *
+     * @param array $entry
+     * @return boolean
+     */
+    protected function filterVisibleTabs($entry) {
+        if (array_key_exists('visible', $entry) && $entry['visible'] == 0) {
+            return false;
+        }
+        return true;
     }
 
     /**

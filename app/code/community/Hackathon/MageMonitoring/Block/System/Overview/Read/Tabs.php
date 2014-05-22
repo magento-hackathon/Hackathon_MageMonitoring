@@ -36,8 +36,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
 
     protected function _beforeToHtml()
     {
-        $tabs = Mage::getStoreConfig('magemonitoring/tabs');
-
+        $tabs = Mage::helper('magemonitoring')->getConfiguredTabs();
         foreach ($tabs as $tabId => $tab) {
             // custom block for tab?
             if (array_key_exists('block', $tab)) {
@@ -63,4 +62,5 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
 
         return parent::_beforeToHtml();
     }
+
 }

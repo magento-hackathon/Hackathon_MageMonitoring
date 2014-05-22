@@ -248,12 +248,14 @@
                 <dashboard>
                     <label>Dashboard</label>
                     <title>Dashboard</title>
+                    <display_prio>10</display_prio>
                     <block>magemonitoring/system_overview_read_tabs_dashboard</block>
                     <widgets/>
                 </dashboard>
                 <system_overview>
                     <label>System Overview</label>
                     <title>System Overview</title>
+                    <display_prio>20</display_prio>
                     <widgets>
                       <magento_info>
                         <impl>Hackathon_MageMonitoring_Model_Widget_System_Magento</impl>
@@ -269,6 +271,7 @@
                 <php_info>
                     <label>PHP Information</label>
                     <title>PHP Information</title>
+                    <display_prio>30</display_prio>
                     <block>magemonitoring/system_overview_read_tabs_php</block>
                     <widgets>
                     </widgets>
@@ -276,12 +279,13 @@
                 <cache_stat>
                     <label>Cache Statistics</label>
                     <title>Cache Statistics</title>
+                    <display_prio>40</display_prio>
                     <widgets>
                       <apc>
                         <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc</impl>
                       </apc>
                       <apcu>
-                        <imp>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu</imp>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu</impl>
                       </apcu>
                       <memcached>
                         <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache</impl>
@@ -297,6 +301,7 @@
                 <class_rewrites>
                     <label>Class Rewrites</label>
                     <title>Class Rewrites</title>
+                    <display_prio>50</display_prio>
                     <block>magemonitoring/system_overview_read_tabs_rewrites</block>
                     <widgets>
                     </widgets>
@@ -304,6 +309,7 @@
                 <modules_installed>
                     <label>Modules Installed</label>
                     <title>Modules Installed</title>
+                    <display_prio>60</display_prio>
                     <block>magemonitoring/system_overview_read_tabs_modules</block>
                     <widgets>
                     </widgets>
@@ -311,6 +317,7 @@
                 <system_logs>
                     <label>System Logs</label>
                     <title>System Logs</title>
+                    <display_prio>70</display_prio>
                     <widgets>
                       <magento_debug>
                         <impl>Hackathon_MageMonitoring_Model_Widget_Log_Debug</impl>

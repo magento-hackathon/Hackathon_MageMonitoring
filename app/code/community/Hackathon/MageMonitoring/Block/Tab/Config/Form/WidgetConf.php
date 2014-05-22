@@ -30,7 +30,7 @@
  * @author      Magento Core Team <core@magentocommerce.com>
  */
 
-class Hackathon_MageMonitoring_Block_Tab_Config_Formconfig extends Mage_Adminhtml_Block_Widget_Form
+class Hackathon_MageMonitoring_Block_Tab_Config_Form_WidgetConf extends Mage_Adminhtml_Block_Widget_Form
 {
     public function __construct()
     {
@@ -62,11 +62,13 @@ class Hackathon_MageMonitoring_Block_Tab_Config_Formconfig extends Mage_Adminhtm
                     'value' => $this->getTabId()
             );
             $fieldset->addField('tab_id', 'text', $fieldParams);
+
             $fieldParams['name'] = 'widget_id';
             $fieldParams['disabled'] = false;
             $fieldParams['label'] = Mage::helper('magemonitoring')->__('Widget Id');
             $fieldParams['value'] = $widget->getConfigId();
             $fieldset->addField('widget_id', 'text', $fieldParams);
+
             $fieldParams['name'] = 'class_name_display';
             $fieldParams['disabled'] = true;
             $fieldParams['label'] = Mage::helper('magemonitoring')->__('Class');
@@ -77,6 +79,12 @@ class Hackathon_MageMonitoring_Block_Tab_Config_Formconfig extends Mage_Adminhtm
                                     'name' => 'class_name',
                                     'value' => $widget->getId(),
                                 )
+            );
+            $fieldset->addField('widget_id_org', 'hidden',
+                    array(
+                            'name' => 'widget_id_org',
+                            'value' => $this->getWidgetIdOrg(),
+                    )
             );
             foreach ($widget->getConfig() as $k => $c) {
                 if (is_numeric($k)) { // add a custom header @todo looks fugly
@@ -91,12 +99,16 @@ class Hackathon_MageMonitoring_Block_Tab_Config_Formconfig extends Mage_Adminhtm
                 if ($k === 'display_prio') {
                      continue;
                 }
+                $cssClasses = 'validate-no-html-tags';
+                if ($c['required'] === true) {
+                    $cssClasses .= ' required-entry';
+                }
                 $fieldParams = array(
                     'label' => Mage::helper('magemonitoring')->__($c['label']),
                     'note' => Mage::helper('magemonitoring')->__($c['tooltip']),
                     'name' => $k,
                     'required' => $c['required'],
-                    'class' => 'required-entry validate-no-html-tags',
+                    'class' => $cssClasses,
                     'value' => $c['value']
                 );
                 switch ($c['type']) {
@@ -109,16 +121,10 @@ class Hackathon_MageMonitoring_Block_Tab_Config_Formconfig extends Mage_Adminhtm
                 $fieldset->addField($k, $c['type'], $fieldParams);
             }
             $postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/saveWidgetConf', $widget);
-            $onClick = "Modalbox.show('".$postUrl."',
-                                   {title: 'Saving Config..',
-                                   params: Form.serialize('set_prop_form'),
-                                   method: 'post',
-                                  });
-                     return false;";
             $this->setChild('form_after',
                 $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => Mage::helper('magemonitoring')->__('Save'),
-                'onclick'   => $onClick,
+                'onclick'   => 'saveWidgetConfig(\''.$postUrl.'\')',
                 'class'     => 'save'
             )));
         } else {
@@ -130,7 +136,7 @@ class Hackathon_MageMonitoring_Block_Tab_Config_Formconfig extends Mage_Adminhtm
             ));
         }
 
-        $form->setId('set_prop_form');
+        $form->setId('widget_conf_form');
         $form->setMethod('post');
         $form->setAction('#');
         $form->setUseContainer(true);

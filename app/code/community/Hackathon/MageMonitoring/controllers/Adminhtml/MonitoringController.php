@@ -59,6 +59,42 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->renderLayout();
     }
 
+    public function resetConfigAction() {
+        $transaction = Mage::getSingleton('core/resource')->getConnection('core_write');
+        try {
+            $config = Mage::getStoreConfig('magemonitoring');
+            $transaction->beginTransaction();
+            $this->deleteConfigData($config);
+            $transaction->commit();
+            $this->_getSession()->addSuccess($this->__('Wiped all module configuration from database.'));
+        } catch (Exception $e) {
+            $transaction->rollback();
+            $this->_getSession()->addError($e->__toString());
+        }
+
+        return $this->_redirect('*/*/index');
+    }
+
+    /**
+     * Deletes entries in $config from config_data. Recursive. Locked to entries below path 'magemonitoring/'
+     *
+     * @param array $config
+     * @param string $prefix
+     */
+    protected function deleteConfigData($config, $prefix='') {
+        foreach ($config as $key => $value) {
+            if (is_array($value) && !empty($value)) {
+                $this->deleteConfigData($value, $prefix.$key.'/');
+            }
+            $c = Mage::getModel('core/config');
+            $c->deleteConfig(
+                    'magemonitoring/'.$prefix.$key,
+                    'default',
+                    0
+            );
+        }
+    }
+
     public function flushAllCacheAction()
     {
         try {
