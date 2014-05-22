@@ -128,6 +128,16 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
+     * @return Hackathon_MageMonitoring_Block_Widget_Multi
+     */
+    public function newMultiBlock() {
+        $b = Mage::app()->getLayout()->createBlock('magemonitoring/widget_multi');
+        $b->setTabId($this->getTabId());
+        $b->setWidgetId($this->getConfigId());
+        return $b;
+    }
+
+    /**
      * Adds $string to output.
      *
      * @param string $string
@@ -442,6 +452,44 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     public function getTabId()
     {
         return $this->_tabId;
+    }
+
+    /**
+     * @see Hackathon_MageMonitoring_Model_Widget::getSupportedMagentoVersions()
+     * @return string
+     */
+    public function getSupportedMagentoVersions() {
+        return '*';
+    }
+
+    /**
+     * @return bool
+     */
+    protected function _checkVersions()
+    {
+        if ($this->getSupportedMagentoVersions() === '*') {
+            return true;
+        }
+        #TODO: do proper merge, things will go probably south for code below.
+        $mageVersion = Mage::getVersion();
+
+        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        $helper = Mage::helper('magemonitoring');
+
+        // retrieve supported versions from config.xml
+        $versions = $helper->extractVersions($this->getSupportedMagentoVersions());
+
+        // iterate on versions to find a fitting one
+        foreach ($versions as $_version) {
+            $quotedVersion = preg_quote($_version);
+            // build regular expression with wildcard to check magento version
+            $pregExpr = '#\A' . str_replace('\*', '.*', $quotedVersion) . '\z#ims';
+
+            if (preg_match($pregExpr, $mageVersion)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

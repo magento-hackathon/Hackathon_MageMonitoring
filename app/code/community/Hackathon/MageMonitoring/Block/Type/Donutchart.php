@@ -1,3 +1,0 @@
-<?php
-
-class Hackathon_MageMonitoring_Block_Type_Donutchart extends Mage_Adminhtml_Block_Template {}

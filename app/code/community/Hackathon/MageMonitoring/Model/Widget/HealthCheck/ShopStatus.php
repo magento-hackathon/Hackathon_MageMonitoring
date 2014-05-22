@@ -1,8 +1,37 @@
 <?php
 
-class Hackathon_MageMonitoring_Model_Check_ShopStatus extends Hackathon_MageMonitoring_Model_Check_Abstract
+class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget
 {
-    public function _run()
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
+    public function getName()
+    {
+        return 'Shop Status';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
+    public function getVersion()
+    {
+        return '1.0';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
+    public function isActive()
+    {
+        return true;
+    }
+
+    public function getOutput()
     {
         $helper = Mage::helper('magemonitoring');
 
@@ -11,7 +40,9 @@ class Hackathon_MageMonitoring_Model_Check_ShopStatus extends Hackathon_MageMoni
         $status_ok = $helper->getConst('WARN_TYPE_OK');
         $status_cssclass = $helper->getConst('WARN_CSSCLASS');
 
-        $renderer = $this->getContentRenderer();
+        $block = $this->newMultiBlock();
+        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        $renderer = $block->newContentRenderer('table');
 
         $header = array(
             $helper->__('Service'),
@@ -85,7 +116,8 @@ class Hackathon_MageMonitoring_Model_Check_ShopStatus extends Hackathon_MageMoni
             }
         }
 
+        $this->_output[] = $block;
 
-        return $this;
+        return $this->_output;
     }
 }

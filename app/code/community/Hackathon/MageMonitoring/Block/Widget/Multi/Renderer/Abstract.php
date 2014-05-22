@@ -1,12 +1,12 @@
 <?php
 
-/**
- * @method string getContentType()
- * @method string setContentType($type)
- */
-
-abstract class Hackathon_MageMonitoring_Model_Content_Renderer_Abstract extends Mage_Core_Model_Abstract
+class Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract extends Mage_Adminhtml_Block_Template
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setTemplate('monitoring/widget/multi/renderer/default.phtml');
+    }
 
     /**
      * Encode the content to json.
@@ -31,26 +31,20 @@ abstract class Hackathon_MageMonitoring_Model_Content_Renderer_Abstract extends 
             return $this->_encode(Mage::helper('magemonitoring')->__('No information available'));
         }
         $result = array(
-            'type'      => $this->getCheck()->getContentType(),
-            'content'   => $content
+                'type'      => $this->getType(),
+                'content'   => $content
         );
 
         return $this->_encode($result);
     }
 
     /**
-     *
-     */
-    public function renderResult()
-    {
-        echo $this->getContent();
-    }
-
-    /**
-     * Retrieve the data for the json output.
+     * Returns div id used for rendering content.
      *
      * @return string
      */
-    abstract protected function _getContent();
+    public function getDivId() {
+        return 'multi_' . $this->getTabId() . '_' . $this->getWidgetId();
+    }
 
 }

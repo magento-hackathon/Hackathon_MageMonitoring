@@ -1,8 +1,9 @@
 <?php
 
-class Hackathon_MageMonitoring_Model_Content_Renderer_Plaintext extends Hackathon_MageMonitoring_Model_Content_Renderer_Abstract
+class Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Plaintext
+    extends Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract
+    implements Hackathon_MageMonitoring_Block_Widget_Multi_Renderer
 {
-
     const CONTENT_TYPE_PLAINTEXT = 'plaintext';
 
     /**

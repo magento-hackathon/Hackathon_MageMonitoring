@@ -1,20 +1,49 @@
 <?php
 
-class Hackathon_MageMonitoring_Model_Check_ShopConfiguration extends Hackathon_MageMonitoring_Model_Check_Abstract
+class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget
 {
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
+    public function getName()
+    {
+        return 'Shop Configuration';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
+    public function getVersion()
+    {
+        return '1.0';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
+    public function isActive()
+    {
+        return true;
+    }
 
     protected function _getValues()
     {
-        return Mage::getConfig()->getNode($this->getConfigNodePath() . '/values')->children();
+        return Mage::getConfig()->getNode('global/healthcheck/shop_configuration/values')->children();
     }
 
-    public function _run()
+    public function getOutput()
     {
         /** @var Hackathon_MageMonitoring_Helper_Data $helper */
         $helper = Mage::helper('magemonitoring');
 
-        /** @var Hackathon_MageMonitoring_Model_Content_Renderer_Table $renderer */
-        $renderer = $this->getContentRenderer();
+        $block = $this->newMultiBlock();
+        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        $renderer = $block->newContentRenderer('table');
 
         $renderer->setHeaderRow(
             array(
@@ -55,6 +84,9 @@ class Hackathon_MageMonitoring_Model_Check_ShopConfiguration extends Hackathon_M
                 $rowConfig
             );
         }
-        return $this;
+
+        $this->_output[] = $block;
+
+        return $this->_output;
     }
 }

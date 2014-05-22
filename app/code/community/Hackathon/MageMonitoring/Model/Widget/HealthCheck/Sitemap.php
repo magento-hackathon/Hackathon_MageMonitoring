@@ -6,8 +6,36 @@
  * Time: 11:47
  */
 
-class Hackathon_MageMonitoring_Model_Check_Sitemap extends Hackathon_MageMonitoring_Model_Check_Abstract
+class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget
 {
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
+    public function getName()
+    {
+        return 'Sitemap Check';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
+    public function getVersion()
+    {
+        return '1.0';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
+    public function isActive()
+    {
+        return true;
+    }
 
     private function _getFileInfo($pathToFile, $helper)
     {
@@ -37,11 +65,13 @@ class Hackathon_MageMonitoring_Model_Check_Sitemap extends Hackathon_MageMonitor
 
     }
 
-    public function _run()
+    public function getOutput()
     {
-   	    $sitemaps = Mage::getModel('sitemap/sitemap')->getCollection();
+        $sitemaps = Mage::getModel('sitemap/sitemap')->getCollection();
         $helper = Mage::helper('magemonitoring');
-        $renderer = $this->getContentRenderer();
+        $block = $this->newMultiBlock();
+        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        $renderer = $block->newContentRenderer('table');
 
         $header = array(
             $helper->__('Filename'),
@@ -80,6 +110,8 @@ class Hackathon_MageMonitoring_Model_Check_Sitemap extends Hackathon_MageMonitor
 
         $renderer->addRow(array($file, $path, $fileInfo[0], $fileInfo[2]), $fileInfo[1]);
 
-        return $this;
+        $this->_output[] = $block;
+
+        return $this->_output;
     }
 }

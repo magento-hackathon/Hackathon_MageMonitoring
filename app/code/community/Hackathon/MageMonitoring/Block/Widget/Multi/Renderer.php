@@ -1,6 +1,6 @@
 <?php
 /**
- * Hackathon
+ * Magento
  *
  * NOTICE OF LICENSE
  *
@@ -23,31 +23,12 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Adminhtml_CheckController extends Mage_Adminhtml_Controller_Action
+interface Hackathon_MageMonitoring_Block_Widget_Multi_Renderer
 {
-
-    public function indexAction()
-    {
-        $this->loadLayout();
-        $this->renderLayout();
-    }
-
-    public function ajaxAction()
-    {
-        $checkIdentifier = $this->getRequest()->getParam('checkIdentifier');
-
-        $factory = Mage::getModel('magemonitoring/factory');
-
-        if ($checkIdentifier) {
-            /** @var Hackathon_MageMonitoring_Model_Abstract $check */
-            $check = $factory->getCheck($checkIdentifier);
-
-            /** @var Hackathon_MageMonitoring_Model_Content_Renderer_Abstract $renderer */
-            $renderer = $factory->getContentRenderer($check);
-            $check
-                ->setContentRenderer($renderer)
-                ->run()
-            ;
-        }
-    }
+    /**
+     * Returns json encoded content.
+     *
+     * @return string
+     */
+    public function getContent();
 }

@@ -29,9 +29,6 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 
     const CHECK_NODE = 'global/healthcheck/%s';
 
-    const TYPE_STATIC = 'static';
-    const TYPE_ONDEMAND = 'ondemand';
-
     const WARN_CSSCLASS = '_cssClasses';
     const WARN_TYPE_OK = 'health-ok';
     const WARN_TYPE_WARNING = 'health-warning';
@@ -401,7 +398,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     }
 
     /**
-     * Adds $dateString to $fileName, takes care or file extension handling.
+     * Adds $dateString to $fileName, takes care of file extension handling.
      *
      * @param string $fileName
      * @param string $dateString

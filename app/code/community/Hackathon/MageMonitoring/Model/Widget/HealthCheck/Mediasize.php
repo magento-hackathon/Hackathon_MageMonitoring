@@ -1,7 +1,35 @@
 <?php
 
-class Hackathon_MageMonitoring_Model_Check_Mediasize extends Hackathon_MageMonitoring_Model_Check_Abstract
+class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget
 {
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
+    public function getName()
+    {
+        return 'Media Size Check';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
+    public function getVersion()
+    {
+        return '1.0';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
+    public function isActive()
+    {
+        return true;
+    }
 
     protected function _sizeFormat($size)
     {
@@ -41,7 +69,7 @@ class Hackathon_MageMonitoring_Model_Check_Mediasize extends Hackathon_MageMonit
                     if (is_dir ($nextpath))
                     {
                         $dircount++;
-                        $result = $this->getDirectorySize($nextpath);
+                        $result = $this->_getDirectorySize($nextpath);
                         $totalsize += $result['size'];
                         $totalcount += $result['count'];
                         $dircount += $result['dircount'];
@@ -62,10 +90,11 @@ class Hackathon_MageMonitoring_Model_Check_Mediasize extends Hackathon_MageMonit
     }
 
 
-    public function _run()
+    public function getOutput()
     {
-        /** @var Hackathon_MageMonitoring_Model_Content_Renderer_Abstract $renderer */
-        $renderer = $this->getContentRenderer();
+        $block = $this->newMultiBlock();
+        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        $renderer = $block->newContentRenderer('table');
         $helper = Mage::helper('magemonitoring');
 
         $header = array(
@@ -73,7 +102,7 @@ class Hackathon_MageMonitoring_Model_Check_Mediasize extends Hackathon_MageMonit
             $helper->__('Number Directories'),
             $helper->__('Number Files')
         );
-        $this->getContentRenderer()->setHeaderRow($header);
+        $renderer->setHeaderRow($header);
 
         $path = Mage::getBaseDir() . "/media";
         $dirSize = $this->_getDirectorySize($path);
@@ -81,6 +110,8 @@ class Hackathon_MageMonitoring_Model_Check_Mediasize extends Hackathon_MageMonit
 
         $renderer->addRow($row);
 
-        return $this;
+        $this->_output[] = $block;
+
+        return $this->_output;
     }
 }

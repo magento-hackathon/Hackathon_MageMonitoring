@@ -1,14 +1,9 @@
 <?php
 
-/**
- *
- * @method Hackathon_MageMonitoring_Model_Content_Renderer_Table setHeaderRow() set the header row for table
- *
- */
-
-class Hackathon_MageMonitoring_Model_Content_Renderer_Table extends Hackathon_MageMonitoring_Model_Content_Renderer_Abstract
+class Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table
+    extends Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract
+    implements Hackathon_MageMonitoring_Block_Widget_Multi_Renderer
 {
-
     const CONTENT_TYPE_TABLE = 'table';
 
     /**

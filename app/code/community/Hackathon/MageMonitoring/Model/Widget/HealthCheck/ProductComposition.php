@@ -6,9 +6,37 @@
  * Time: 14:28
  */
 
-
-class Hackathon_MageMonitoring_Model_Check_ProductComposition extends Hackathon_MageMonitoring_Model_Check_Abstract
+class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget
 {
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     */
+    public function getName()
+    {
+        return 'Product Composition Check';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     */
+    public function getVersion()
+    {
+        return '1.0';
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     */
+    public function isActive()
+    {
+        return true;
+    }
+
     /**
      * @param $simples array like "sku => connected product count"
      * @return array avg, biggest, etc data array
@@ -70,13 +98,15 @@ class Hackathon_MageMonitoring_Model_Check_ProductComposition extends Hackathon_
         }
     }
 
-    public function _run()
+    public function getOutput()
     {
         $configurables = $this->getConfigurableRow();
         $bundles = $this->getBundleRow();
 
         $helper = Mage::helper('magemonitoring');
-        $renderer = $this->getContentRenderer();
+        $block = $this->newMultiBlock();
+        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        $renderer = $block->newContentRenderer('table');
 
         $header = array(
             $helper->__('Avg. connected product count'),
@@ -95,6 +125,8 @@ class Hackathon_MageMonitoring_Model_Check_ProductComposition extends Hackathon_
             $this->throwPlaintextContent('No data available');
         }
 
-    }
+        $this->_output[] = $block;
 
+        return $this->_output;
+    }
 }
