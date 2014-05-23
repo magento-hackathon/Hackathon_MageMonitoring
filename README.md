@@ -1,32 +1,41 @@
 MageMonitoring
 ==============
 
-Magento Extension to get health of your Magento installation (Server, PHP, Cache, Logs, Rewrites, Modules version installed ...)
+Magento module to get health information of your Magento installation (Server, PHP, Cache, Logs, Rewrites, Modules version installed, ...)
 
 ### License OSL v3
 
+### News
+
+- UI now fully configurable via frontend.
+- Merged with [Healthcheck](https://github.com/magento-hackathon/HealthCheck)
+
 ### Features
 
-The module gathers information of the current Magento installation:
+- Flexible yet simple plugin framework to execute checks or other tasks
+- Easily automate tasks with the provided WatchDog interface, includes aggregated reports for less spam. Get notified when your log files start moving!
+- Plugins can be added from other modules via config.xml declaration
+- UI fully configurable via frontend or config.xml
+
+The default plugins currently provide the following information:
 
 - OS / Server / Memory Information / Magento version vs available
 - PHP version and some important configuration values vs recommended
+- Store configuration checks
 - Modules installed and their version number and status
+- Product composition / types
 - Cache statistics with option to flush each cache or all at once (APC, APCU, Memcache, Redis, ZendOpcache)
-- Magento debug/exception logs
+- Magento debug/exception log monitoring
 - Check for class and template file rewrites
-- Generic watch dogs with aggregated reports for less spam. Get notified when your log files start moving.
-- Custom site widgets or watch dogs can be added from other modules via config.xml declaration.
-- Integration of the healthcheck module [Healthcheck](https://github.com/magento-hackathon/HealthCheck)
 
 ### Documentation
 
-The documentation is available into the doc folder [Hackathon Monitoring Documentation](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/master/doc)
-
+[Plugin Dev Documentation](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/master/doc/PluginDev.md)
+[Example Extender Module](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/module/extender)
 
 ### Usage
 
-Go to the menu System > Tools > Monitoring
+Log into the Magento backend and navigate to: System > Monitoring
 
 Installation Instructions
 -------------------------
@@ -81,36 +90,3 @@ Uninstallation
 - [Erik Dannenberg](https://github.com/edannenberg)
 - [Yaroslav Rogoza](https://github.com/Gribnik)
 - [Nick Kravchuk](https://github.com/nickua)
-
-### Status of the project
-
-So a lot happened here in the dev branch, what changed:
-
-- We now have generic widgets in place, the prev. CacheStats interface was a bit to specific for other use cases.
- Check Widget interface in model folder.
-- Other modules can subscribe their widgets to any tab in this module. (currently only dashboard/cachestat, but could be easily all tabs if we want)
- Good for site/module specific widgets.
-- Widgets now have generic ajax refresh.
-- Widgets that have a collapsed init state will not render their output until opened. Good for widgets that are resource heavy.
-- Widgets support generic configuration mechanism for user interaction. Frontend users can edit default collapseable state and display priority per widget now.
-- Widgets have generic callback mechanism for custom buttons
-- Added WatchDog interface, widgets can now provide true monitoring via cron. Aggregated report mails to avoid spam.
-
-Use case example:
-
-You want to monitor a sql query specific to a magento site:
-
-- Create new class in Model/Widget/System/Myquery.php thats extends from Widget_Abstract and implements Widget_System
-- Implement getOutput(), getName(), getVersion() see Dummy widgets for examples
-- Done. :)
-
-NICETOHAVE:
-
-- Magento Permissions per widget, generic if possible
-- Magento Permissions per tab
-- Refactor widget/config.phtml. Tooltip display not working for example. It's in pretty basic shape in general, go grazy. ^^
-- More config types for widget configuration, currently we only have text/checkbox. Magento date picker would be nice, select and radio too.
- (see widget/config.phtml as starting point)
-- Use magento validation for generic input checking of config modal inputs
-
-Just create an issue with the task if you want to do one of the above.
