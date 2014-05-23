@@ -30,8 +30,9 @@ The default plugins currently provide the following information:
 
 ### Documentation
 
-[Plugin Dev Documentation](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/master/doc/PluginDev.md)
-[Example Extender Module](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/module/extender)
+- [Plugin Dev Documentation](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/master/doc/PluginDev.md)
+
+- [Example Extender Module](https://github.com/magento-hackathon/Hackathon_MageMonitoring/tree/module/extender)
 
 ### Usage
 

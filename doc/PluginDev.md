@@ -6,8 +6,8 @@ MageMonitoring Plugin Documentation
 
 ### Hello Widget
 
--Clone module/extender branch
--Create a new file Model/Widget/Hello.php with the following contents:
+- Clone module/extender branch
+- Create a new file Model/Widget/Hello.php with the following contents:
 
 ```php
 class Hackathon_MageMonitoringExt_Model_Widget_Hello
@@ -40,7 +40,7 @@ class Hackathon_MageMonitoringExt_Model_Widget_Hello
     {
         // using a monitoring block
         $monitoringBlock = $this->newMonitoringBlock();
-        // add content to $b
+        // add content
         $chartDataPie = array(array('value' => 34, 'color' => '#FF0000'),
                               array('value' => 12, 'color' => '#00FF00'),
                               array('value' => 42, 'color' => '#0000FF')
@@ -53,7 +53,7 @@ class Hackathon_MageMonitoringExt_Model_Widget_Hello
         // using a multi block - example for a table, check Model/Widget/HealthCheck/ for more usage examples
         $multiBlock = $this->newMultiBlock();
         $renderer = $multiBlock->newContentRenderer('table');
-        // add content to $c
+        // add content
         $header = array(
                 'Col A',
                 'Col B',
@@ -158,7 +158,7 @@ class Hackathon_MageMonitoringExt_Model_Widget_Hello
     }
 
     ...
-```php
+```
 
 ### Creating Custom Tabs on Module Installation
 
