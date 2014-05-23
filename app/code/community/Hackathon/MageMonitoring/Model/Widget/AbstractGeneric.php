@@ -41,12 +41,12 @@ class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
 
         $configOrg = $this->getConfig();
         $configNew = array();
-        $configNew[] = array_shift($configOrg);
+        $configNew[] = reset($configOrg);
 
         // "reset" config
         $this->_config = $configNew;
 
-        // add title
+        // add title config
         $this->addConfig(
                 self::CONFIG_WIDGET_TITLE,
                 'Widget Title:',
@@ -58,7 +58,6 @@ class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
 
         // append old config
         $this->_config += $configOrg;
-
         return $this->_config;
     }
 
