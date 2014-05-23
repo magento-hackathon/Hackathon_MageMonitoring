@@ -274,8 +274,10 @@
                     <label>Class Rewrites</label>
                     <title>Class Rewrites</title>
                     <display_prio>50</display_prio>
-                    <block>magemonitoring/tab_content_rewrites</block>
                     <widgets>
+                      <rewrites>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_ClassRewrites</impl>
+                      </rewrites>
                     </widgets>
                 </class_rewrites>
                 <modules_installed>
