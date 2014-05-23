@@ -244,8 +244,28 @@
                     <label>PHP Information</label>
                     <title>PHP Information</title>
                     <display_prio>30</display_prio>
-                    <block>magemonitoring/tab_content_php</block>
                     <widgets>
+                      <php_config_check>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpConfig</impl>
+                        <display_prio>10</display_prio>
+                      </php_config_check>
+                      <php_req_ext>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                        <title>Required Extensions</title>
+                        <only_required>true</only_required>
+                        <display_prio>20</display_prio>
+                      </php_req_ext>
+                      <php_all_ext>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                        <title>All Installed Extensions</title>
+                        <collapsed>1</collapsed>
+                        <display_prio>30</display_prio>
+                      </php_all_ext>
+                      <php_info>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpInfo</impl>
+                        <collapsed>1</collapsed>
+                        <display_prio>40</display_prio>
+                      </php_info>
                     </widgets>
                 </php_info>
                 <cache_stat>
