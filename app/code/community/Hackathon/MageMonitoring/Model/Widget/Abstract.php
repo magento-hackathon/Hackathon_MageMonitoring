@@ -455,6 +455,11 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         return $this->_tabId;
     }
 
+    public function getVersion()
+    {
+        return '0.0.1';
+    }
+
     /**
      * @see Hackathon_MageMonitoring_Model_Widget::getSupportedMagentoVersions()
      * @return string
