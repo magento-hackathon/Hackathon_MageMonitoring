@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hackathon_MageMonitoringExt>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Hackathon_MageMonitoringExt>
+    </modules>
+</config>

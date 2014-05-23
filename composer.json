@@ -1,0 +1,15 @@
+{
+    "name":"magento-hackathon/hackathon_magemonitoring_ext",
+    "type":"magento-module",
+    "license":"OSL-3.0",
+    "homepage":"https://github.com/magento-hackathon/Hackathon_MageMonitoring.git",
+    "description":"Skeleton module for extending MageMonitoring",
+    "authors":[
+        {
+            "name":"edannenberg"
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    }
+}
