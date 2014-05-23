@@ -282,8 +282,27 @@
                     <label>Modules Installed</label>
                     <title>Modules Installed</title>
                     <display_prio>60</display_prio>
-                    <block>magemonitoring/tab_content_modules</block>
                     <widgets>
+                      <modules_core>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                        <title>Modules core</title>
+                        <code_pool>core</code_pool>
+                        <collapsed>1</collapsed>
+                        <display_prio>10</display_prio>
+                      </modules_core>
+                      <modules_community>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                        <title>Modules community</title>
+                        <code_pool>community</code_pool>
+                        <display_prio>20</display_prio>
+                      </modules_community>
+                      <modules_local>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                        <title>Modules local</title>
+                        <code_pool>local</code_pool>
+                        <collapsed>1</collapsed>
+                        <display_prio>30</display_prio>
+                      </modules_local>
                     </widgets>
                 </modules_installed>
                 <system_logs>
