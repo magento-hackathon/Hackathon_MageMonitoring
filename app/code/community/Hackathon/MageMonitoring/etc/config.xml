@@ -292,10 +292,19 @@
                     <display_prio>70</display_prio>
                     <widgets>
                       <magento_debug>
-                        <impl>Hackathon_MageMonitoring_Model_Widget_Log_Debug</impl>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_Log_Tail</impl>
+                        <title>Magento Debug Log</title>
+                        <file_path>system.log</file_path>
+                        <color>warning</color>
+                        <collapsed>1</collapsed>
+                        <display_prio>10</display_prio>
                       </magento_debug>
                       <magento_exception>
-                        <impl>Hackathon_MageMonitoring_Model_Widget_Log_Exception</impl>
+                        <impl>Hackathon_MageMonitoring_Model_Widget_Log_Tail</impl>
+                        <title>Magento Exception Log</title>
+                        <file_path>exception.log</file_path>
+                        <color>error</color>
+                        <display_prio>20</display_prio>
                       </magento_exception>
                     </widgets>
                 </system_logs>

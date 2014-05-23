@@ -22,7 +22,8 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
+    extends Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
 {
     // define config keys
     const CONFIG_LAST_LOG_ENTRY = 'last_log_entry';
@@ -128,14 +129,23 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract extends Hackathon_MageM
     }
 
     /**
-     * @param string $fileName
+     * Returns last lines of given $filePath.
+     *
+     * @param string $filePath
      * @param int $lines
-     * @param string $path
      * @return string
      */
-    protected function getLogTail($fileName, $lines, $path='var/log/')
+    protected function getLogTail($filePath, $lines)
     {
-        return Mage::helper('magemonitoring')->tailFile($path.$fileName, $lines);
+        $logFile = '';
+        if (file_exists($filePath)) {
+            $logFile = $filePath;
+        } elseif (file_exists('var/log/'.$filePath)) {
+            $logFile = 'var/log/'.$filePath;
+        } else {
+            return false;
+        }
+        return Mage::helper('magemonitoring')->tailFile($logFile, $lines);
     }
 
 }
