@@ -28,7 +28,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     public function indexAction()
     {
         $this->loadLayout();
-        $this->_setActiveMenu('system/tools/monitoring');
+        $this->_setActiveMenu('system/monitoring');
         $this->_addBreadcrumb(
             Mage::helper('magemonitoring')->__('Monitoring'),
             Mage::helper('magemonitoring')->__('Monitoring')
@@ -37,7 +37,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->_title('Overview');
 
         $this->_addContent(
-            $this->getLayout()->createBlock('magemonitoring/system_overview', 'magemonitoring_overview')
+            $this->getLayout()->createBlock('magemonitoring/tab', 'magemonitoring_main')
         );
 
         $this->renderLayout();
@@ -45,7 +45,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
 
     public function config_tabsAction() {
         $this->loadLayout();
-        $this->_setActiveMenu('system/tools/monitoring');
+        $this->_setActiveMenu('system/monitoring');
         $this->_addBreadcrumb(
                 Mage::helper('magemonitoring')->__('Monitoring'),
                 Mage::helper('magemonitoring')->__('Monitoring')

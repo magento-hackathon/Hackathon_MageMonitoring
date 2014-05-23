@@ -23,27 +23,24 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Modules
-    extends Mage_Adminhtml_Block_Abstract
+class Hackathon_MageMonitoring_Block_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
 {
-    protected $_template = 'monitoring/modules.phtml';
-
-    public function getModulesList()
+    /**
+     * Init Form Block
+     *
+     * @return Mage_Adminhtml_Block_Widget_Form
+     */
+    protected function _prepareForm()
     {
-        $modules = array('core' => array(), 'community' => array(), 'local' => array());
-        foreach ((array)Mage::getConfig()->getModuleConfig() as $key => $module) {
-                switch ($module->codePool) {
-                    case 'community':
-                        $modules['community'][$key] = $module;
-                        break;
-                    case 'local':
-                        $modules['local'][$key] = $module;
-                        break;
-                    default:
-                        $modules['core'][$key] = $module;
-                    break;
-                }
-            }
-        return $modules;
+        $form = new Varien_Data_Form(array(
+                'id' => 'tab_form',
+                'action' => '',
+                'method' => 'post',
+                'enctype' => 'multipart/form-data',
+        ));
+
+        $form->setUseContainer(true);
+        $this->setForm($form);
+        return parent::_prepareForm();
     }
 }

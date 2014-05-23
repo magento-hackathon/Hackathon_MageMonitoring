@@ -23,15 +23,14 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview extends Mage_Adminhtml_Block_Widget_Form_Container
+class Hackathon_MageMonitoring_Block_Tab extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     public function __construct()
     {
         parent::__construct();
-        $this->_blockGroup = 'magemonitoring';
-        $this->_controller = 'system_overview';
+        // don't let the core try to guess the form block
+        $this->_blockGroup = null;
         $this->_headerText = $this->__('Mage Monitoring');
-        $this->_mode = 'read';
 
         $this->removeButton('reset');
         $this->removeButton('save');
@@ -52,7 +51,9 @@ class Hackathon_MageMonitoring_Block_System_Overview extends Mage_Adminhtml_Bloc
 
     protected function _prepareLayout()
     {
-        $this->getLayout()->getBlock('left')->append($this->getLayout()->createBlock('magemonitoring/system_overview_read_tabs', 'magemonitoring_tabs'));
+        $this->setChild('form', $this->getLayout()->createBlock('magemonitoring/tab_form'));
+        $tabList = $this->getLayout()->createBlock('magemonitoring/tab_list', 'magemonitoring_tabs');
+        $this->getLayout()->getBlock('left')->append($tabList);
         return parent::_prepareLayout();
     }
 }

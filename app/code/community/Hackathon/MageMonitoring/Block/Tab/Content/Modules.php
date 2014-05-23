@@ -23,39 +23,27 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs_Rewrites
+class Hackathon_MageMonitoring_Block_Tab_Content_Modules
     extends Mage_Adminhtml_Block_Abstract
 {
-    protected $_template = 'monitoring/rewrites.phtml';
+    protected $_template = 'monitoring/modules.phtml';
 
-    /**
-     * Returns list of all rewrites in the system
-     *
-     * @return mixed
-     */
-    public function getRewritesInfo()
+    public function getModulesList()
     {
-        return Mage::helper('magemonitoring/rewrites')->getRewrites();
+        $modules = array('core' => array(), 'community' => array(), 'local' => array());
+        foreach ((array)Mage::getConfig()->getModuleConfig() as $key => $module) {
+                switch ($module->codePool) {
+                    case 'community':
+                        $modules['community'][$key] = $module;
+                        break;
+                    case 'local':
+                        $modules['local'][$key] = $module;
+                        break;
+                    default:
+                        $modules['core'][$key] = $module;
+                    break;
+                }
+            }
+        return $modules;
     }
-
-    /**
-     * Return rewrite warning level
-     *
-     * @param array $rewriteInfo Rewrite info array
-     *
-     * @return string
-     */
-    public function getIconType($rewriteInfo)
-    {
-        if (isset($rewriteInfo['conflicts']) && count($rewriteInfo['conflicts']) > 1) {
-            return 'error';
-        }
-
-        if (isset($rewriteInfo['classes']) && count($rewriteInfo['classes']) > 1) {
-            return 'warning';
-        }
-
-        return 'info';
-    }
-
 }

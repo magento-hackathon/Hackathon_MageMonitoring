@@ -244,7 +244,7 @@
                     <label>PHP Information</label>
                     <title>PHP Information</title>
                     <display_prio>30</display_prio>
-                    <block>magemonitoring/system_overview_read_tabs_php</block>
+                    <block>magemonitoring/tab_content_php</block>
                     <widgets>
                     </widgets>
                 </php_info>
@@ -274,7 +274,7 @@
                     <label>Class Rewrites</label>
                     <title>Class Rewrites</title>
                     <display_prio>50</display_prio>
-                    <block>magemonitoring/system_overview_read_tabs_rewrites</block>
+                    <block>magemonitoring/tab_content_rewrites</block>
                     <widgets>
                     </widgets>
                 </class_rewrites>
@@ -282,7 +282,7 @@
                     <label>Modules Installed</label>
                     <title>Modules Installed</title>
                     <display_prio>60</display_prio>
-                    <block>magemonitoring/system_overview_read_tabs_modules</block>
+                    <block>magemonitoring/tab_content_modules</block>
                     <widgets>
                     </widgets>
                 </modules_installed>

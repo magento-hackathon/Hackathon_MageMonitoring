@@ -23,14 +23,14 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
+class Hackathon_MageMonitoring_Block_Tab_List
     extends Mage_Adminhtml_Block_Widget_Tabs
 {
     public function __construct()
     {
         parent::__construct();
-        $this->setId('magemonitoring_tabs');
-        $this->setDestElementId('read_form');
+        $this->setId('magemonitoring_tab_list');
+        $this->setDestElementId('tab_form');
         $this->setTitle($this->__('Mage Monitoring'));
     }
 
@@ -42,7 +42,7 @@ class Hackathon_MageMonitoring_Block_System_Overview_Read_Tabs
             if (array_key_exists('block', $tab)) {
                 $block = $tab['block'];
             } else {
-                $block = 'magemonitoring/system_overview_read_tabs_widgetList';
+                $block = 'magemonitoring/tab_content_widgetList';
             }
             $block = $this->getLayout()->createBlock($block);
             // pass widgets

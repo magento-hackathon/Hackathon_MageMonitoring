@@ -23,24 +23,12 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Block_System_Overview_Read_Form extends Mage_Adminhtml_Block_Widget_Form
+class Hackathon_MageMonitoring_Block_Tab_Content_WidgetList extends Mage_Adminhtml_Block_Abstract
 {
-    /**
-     * Init Form Block
-     *
-     * @return Mage_Adminhtml_Block_Widget_Form
-     */
-    protected function _prepareForm()
+    public function __construct()
     {
-        $form = new Varien_Data_Form(array(
-                'id' => 'read_form',
-                'action' => '',
-                'method' => 'post',
-                'enctype' => 'multipart/form-data',
-        ));
-
-        $form->setUseContainer(true);
-        $this->setForm($form);
-        return parent::_prepareForm();
+        parent::__construct();
+        $this->setTemplate('monitoring/widget/list.phtml');
     }
+
 }
