@@ -61,7 +61,7 @@ class Hackathon_MageMonitoring_Block_Widget_Multi extends Mage_Core_Block_Templa
      */
     public function getRenderer()
     {
-        if ($this->_renderer) {
+        if (!$this->_renderer) {
             Mage::throwException('Error: Undefined renderer.');
         }
         return $this->_renderer;
