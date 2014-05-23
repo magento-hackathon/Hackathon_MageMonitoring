@@ -29,18 +29,18 @@
     <div class="entry-edit-head collapseable md-relative">
         <a title="Toggle Widget.."
             onclick="toggleWithLoad('<?php echo $this->getWidgetId(); ?>',
-                                    '<?php echo $this->getRefreshUrl();?>');"
+                                    '<?php echo $this->getRefreshUrl();?>'); return false;"
             href="#" id="<?php echo $this->getWidgetId(); ?>-head"
             class="widget-collapse"><?php echo $this->getName(); ?>
         </a>
         <div class="md-additional-controls">
             <a title="Refresh Widget.." onclick="refreshWidget('<?php echo $this->getWidgetId(); ?>',
-                                                               '<?php echo $this->getRefreshUrl() ?>');"
+                                                               '<?php echo $this->getRefreshUrl() ?>'); return false;"
                                         href="#" class="md-icon-refresh md-icon md-icon-conf"
                                         id="refresh-<?php echo $this->getWidgetId(); ?>"></a>
             <?php if ($this->getConfig()) { ?>
                 <a title="Settings.." onclick="openWidgetConf('<?php echo $this->getName(); ?>',
-                                                              '<?php echo $this->getConfigUrl() ?>');"
+                                                              '<?php echo $this->getConfigUrl() ?>');  return false;"
                                       href="#" class="md-icon-conf md-icon"></a>
             <?php } ?>
         </div>

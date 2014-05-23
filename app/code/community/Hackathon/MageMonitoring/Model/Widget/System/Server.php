@@ -24,7 +24,7 @@
  */
 
 class Hackathon_MageMonitoring_Model_Widget_System_Server extends Hackathon_MageMonitoring_Model_Widget_System_Abstract
-                                                          implements Hackathon_MageMonitoring_Model_Widget_System
+                                                          implements Hackathon_MageMonitoring_Model_Widget
 {
     /**
      * (non-PHPdoc)

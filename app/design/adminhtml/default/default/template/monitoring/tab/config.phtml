@@ -412,7 +412,7 @@
                             return false;
                         }
                         node.addListener('click', editSet.unregister);
-                        if (editSet.currentLeaf) {
+                        if (editSet.currentLeaf && newParent && node.parentNode.id != newParent.parentNode.id) {
                             editSet.req.removedWidgets.push(new Array(editSet.currentLeaf.parentNode.id, editSet.currentLeaf.id));
                         }
                     },

@@ -69,7 +69,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_PhpExtensions extends Hackath
                 'widget',
                 'checkbox',
                 false,
-                'Only show extensions required by magento.');
+                'Only show extensions required by Magento.');
         return $this->_config;
     }
 

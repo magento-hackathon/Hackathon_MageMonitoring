@@ -60,7 +60,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail extends Hackathon_MageMonit
                          'widget',
                          'text',
                          true,
-                         'Complete system path or relative from magento root.');
+                         'Complete system path or relative from magento root or var/log.');
         // add background color
         $this->addConfig(self::CONFIG_LOG_COLOR,
                         'Background color:',
@@ -68,7 +68,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail extends Hackathon_MageMonit
                         'widget',
                         'text',
                         false,
-                        'success|info|warning|error');
+                        'success | info | warning | error');
         return $this->_config;
     }
 

@@ -30,7 +30,7 @@ class Hackathon_MageMonitoring_Block_Tab extends Mage_Adminhtml_Block_Widget_For
         parent::__construct();
         // don't let the core try to guess the form block
         $this->_blockGroup = null;
-        $this->_headerText = $this->__('Mage Monitoring');
+        $this->_headerText = '';
 
         $this->removeButton('reset');
         $this->removeButton('save');

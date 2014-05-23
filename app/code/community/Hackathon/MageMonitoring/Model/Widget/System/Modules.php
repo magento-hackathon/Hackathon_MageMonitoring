@@ -67,10 +67,16 @@ class Hackathon_MageMonitoring_Model_Widget_System_Modules extends Hackathon_Mag
     {
         $block = $this->newMonitoringBlock();
         $poolFilter = $this->getConfig(self::CONFIG_CODE_POOL);
-        foreach ((array)Mage::getConfig()->getModuleConfig() as $key => $module) {
+        $modules = (array)Mage::getConfig()->getModuleConfig();
+        $notEmpty = false;
+        foreach ($modules as $key => $module) {
             if ($poolFilter === 'all' || $module->codePool == $poolFilter) {
+                $notEmpty = true;
                 $block->addRow($module->is('active') ? 'success' : 'error', $key, $module->version);
             }
+        }
+        if (!$notEmpty) {
+            $block->addRow('info', Mage::helper('magemonitoring')->__('No modules found.'));
         }
 
         $this->_output[] = $block;

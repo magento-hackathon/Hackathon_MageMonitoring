@@ -34,7 +34,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
             Mage::helper('magemonitoring')->__('Monitoring')
         );
 
-        $this->_title('Overview');
+        $this->_title('Mage Monitoring');
 
         $this->_addContent(
             $this->getLayout()->createBlock('magemonitoring/tab', 'magemonitoring_main')
@@ -51,7 +51,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
                 Mage::helper('magemonitoring')->__('Monitoring')
         );
 
-        $this->_title('Tab Config');
+        $this->_title('Mage Monitoring - Tab Config');
 
         $this->_addContent(
                 $this->getLayout()->createBlock('magemonitoring/tab_config', 'magemonitoring_tab_config')
@@ -76,7 +76,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     }
 
     /**
-     * Deletes entries in $config from config_data. Recursive. Locked to entries below path 'magemonitoring/'
+     * Deletes entries in $config from core_config_data. Recursive. Locked to entries below path 'magemonitoring/'
      *
      * @param array $config
      * @param string $prefix
@@ -98,7 +98,6 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     public function flushAllCacheAction()
     {
         try {
-
             $caches = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_Widget_CacheStat');
 
             foreach ($caches as $cache) {

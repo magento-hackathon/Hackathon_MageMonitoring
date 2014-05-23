@@ -34,6 +34,7 @@ function refreshWidget(widgetId, url) {
                { evalScripts: true,
                  parameters: { widgetId: widgetId }
        });
+       return false;
 };
 
 function openWidgetConf(widgetName, url) {

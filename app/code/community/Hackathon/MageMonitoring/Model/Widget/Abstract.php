@@ -84,7 +84,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         if (!$this->_dbConfigKey) {
             $regOut = array();
             if (preg_match("/.*_(.*_.*)/", $this->getId(), $regOut)) {
-                $this->_dbConfigKey = strtolower($regOut[1] .'-'. substr(md5(rand()), 0, 6));
+                $this->_dbConfigKey = strtolower($regOut[1] .'_'. substr(md5(rand()), 0, 6));
             }
         }
         return $this->_dbConfigKey;
@@ -215,7 +215,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     $this->_DEF_WATCHDOG_MAILTO,
                     'global',
                     'text',
-                    false
+                    false,
+                    Mage::helper('magemonitoring')->__('Magento mail id (general, sales, etc) or valid email address.')
             );
         }
 

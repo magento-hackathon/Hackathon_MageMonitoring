@@ -31,8 +31,8 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     {
         $response = '';
         if ($widget = $this->_getWidgetFromRequest()) {
-            foreach ($widget->getOutput() as $blocks) {
-                $response .= $blocks->toHtml();
+            foreach ($widget->getOutput() as $block) {
+                $response .= $block->toHtml();
             }
         }
         if ($response == '') {

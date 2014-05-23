@@ -24,7 +24,7 @@
  */
 
 class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_MageMonitoring_Model_Widget_System_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_Widget_System
+                                                            implements Hackathon_MageMonitoring_Model_Widget
 {
     // override defaults
     protected $_DEF_DISPLAY_PRIO = 100;
@@ -36,7 +36,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
      */
     public function getName()
     {
-        return 'Watch Dogs';
+        return 'Watch Dog Control';
     }
 
     /**
