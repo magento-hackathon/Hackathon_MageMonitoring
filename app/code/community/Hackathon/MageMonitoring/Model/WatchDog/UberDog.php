@@ -32,11 +32,11 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
      * Collects all registered watch dogs, handles their schedule and fires them if it's time.
      * Sends aggregrated reports via email.
      *
-     * @param string $skipTestDog
+     * @param boolean $skipTestDog
      * @throws Exception
      * @return void|boolean
      */
-    public function triggerActiveDogs($skipTestDog=true)
+    public function triggerActiveDogs($skipTestDog = true)
     {
         $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
         // exit if globally disabled

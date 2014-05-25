@@ -100,6 +100,7 @@ h4.monitoring-section-title {
     padding-left: 2px;
     /*width: 40px;*/
     position: absolute;
+    top: 3px;
     right: 29px;
     z-index: 156;
 }
