@@ -32,6 +32,8 @@ if (empty($widgets)) {
     echo '<h4>'.$this->__('No active widgets found. :(').'</h4>';
 }
 foreach ($widgets as $widget) {
-    echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')->setWidget($widget)->setTabId($this->getTabId())->toHtml();
+    echo Mage::app()->getLayout()->createBlock('magemonitoring/widget')
+        ->setWidget($widget)
+        ->setTabId($this->getTabId())
+        ->toHtml();
 }
-?>

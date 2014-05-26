@@ -59,16 +59,30 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     {
         $simples = array();
 
-        $collection = Mage::getModel('catalog/product')->getCollection()
-            ->addAttributeToFilter('type_id', array('eq' => 'bundle'));
+        Varien_Profiler::start('HEALTHCHECK BUNDLES');
 
-        if (count($collection) != 0) {
-            foreach ($collection as $bundle) {
-                $simples[$bundle->getSku()] = 0;
-                foreach ($bundle->getTypeInstance()->getChildrenIds($bundle->getId()) as $simpleGroup) {
-                    $simples[$bundle->getSku()] += count($simpleGroup);
+        $resourceModel = Mage::getResourceModel('catalog/product');
+        $connection = $resourceModel->getReadConnection();
+        $sql = $connection
+            ->select()
+            ->from(array('cp' => $resourceModel->getTable('catalog/product')))
+            ->join(array('cpb' => $resourceModel->getTable('bundle/selection')),
+                'cp.entity_id = cpb.parent_product_id',
+                array('children_count' => 'count(cpb.parent_product_id)'))
+            ->where("type_id = 'bundle'")
+            ->group('cp.entity_id');
+
+        $items = $connection->fetchAll($sql);
+
+        if (count($items) != 0) {
+            foreach ($items as $bundle) {
+                $simples[$bundle['sku']] = 0;
+                if (!empty($bundle['children_count'])) {
+                    $simples[$bundle['sku']] = $bundle['children_count'];
                 }
             }
+
+            Varien_Profiler::stop('HEALTHCHECK BUNDLES');
             return $this->getDataRow($simples);
         } else {
             return false;
@@ -84,15 +98,31 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     {
         $simples = array();
 
-        $collection = Mage::getModel('catalog/product')->getCollection()
-            ->addAttributeToFilter('type_id', array('eq' => 'configurable'));
+        Varien_Profiler::start('HEALTHCHECK CONFIGURABLE');
 
-        if (count($collection) != 0) {
-            foreach ($collection as $configurable) {
-                $simples[$configurable->getSku()] = count($configurable->getTypeInstance()->getUsedProductIds());
+        $resourceModel = Mage::getResourceModel('catalog/product');
+        $connection = $resourceModel->getReadConnection();
+        $sql = $connection
+            ->select()
+            ->from(array('cp' => $resourceModel->getTable('catalog/product')))
+            ->join(array('cpc' => $resourceModel->getTable('catalog/product_super_link')),
+                'cp.entity_id = cpc.parent_id',
+                array('children_count' => 'count(cpc.parent_id)'))
+            ->where("type_id = 'configurable'")
+            ->group('cp.entity_id');
+
+        $items = $connection->fetchAll($sql);
+
+        if (count($items) != 0) {
+            foreach ($items as $configurable) {
+                $simples[$configurable['sku']] = 0;
+                if (!empty($configurable['children_count'])) {
+                    $simples[$configurable['sku']] = $configurable['children_count'];
+                }
             }
-            return $this->getDataRow($simples);
 
+            Varien_Profiler::stop('HEALTHCHECK CONFIGURABLE');
+            return $this->getDataRow($simples);
         } else {
             return false;
         }
@@ -117,12 +147,18 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
         $renderer->setHeaderRow($header);
 
         if ($configurables) {
+            $renderer->addRow(array('Configurables', 'Configurables', 'Configurables'));
             $renderer->addRow($configurables);
-        } else if ($bundles) {
+        }
+
+        if ($bundles) {
             $renderer->addRow(array('Bundles', 'Bundles', 'Bundles'));
             $renderer->addRow($bundles);
-        } else {
-            $this->throwPlaintextContent('No data available');
+        }
+
+        if (!$configurables && !$bundles) {
+            $noDataText = $helper->__('No data available');
+            $renderer->addRow(array($noDataText, $noDataText, $noDataText));
         }
 
         $this->_output[] = $block;

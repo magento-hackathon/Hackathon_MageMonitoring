@@ -31,29 +31,6 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
         return true;
     }
 
-    protected function _sizeFormat($size)
-    {
-        if($size<1024)
-        {
-            return $size." bytes";
-        }
-        else if($size<(1024*1024))
-        {
-            $size=round($size/1024,1);
-            return $size." KB";
-        }
-        else if($size<(1024*1024*1024))
-        {
-            $size=round($size/(1024*1024),1);
-            return $size." MB";
-        }
-        else
-        {
-            $size=round($size/(1024*1024*1024),1);
-            return $size." GB";
-        }
-    }
-
     protected function _getDirectorySize($path)
     {
         $totalsize = 0;
@@ -106,7 +83,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
 
         $path = Mage::getBaseDir() . "/media";
         $dirSize = $this->_getDirectorySize($path);
-        $row = array($this->_sizeFormat($dirSize['size']), $dirSize['count'], $dirSize['dircount']);
+        $row = array($helper->formatByteSize($dirSize['size']), $dirSize['count'], $dirSize['dircount']);
 
         $renderer->addRow($row);
 

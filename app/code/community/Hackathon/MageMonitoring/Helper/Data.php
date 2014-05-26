@@ -255,6 +255,35 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     }
 
     /**
+     * Format size from Byte to KB, MB or GB
+     *
+     * @param $size
+     * @return string
+     */
+    public function formatByteSize($size)
+    {
+        if ($size < 1024) {
+            return $size . " bytes";
+        } else {
+            if ($size < (1024 * 1024)) {
+                $size = round($size / 1024, 1);
+
+                return $size . " KB";
+            } else {
+                if ($size < (1024 * 1024 * 1024)) {
+                    $size = round($size / (1024 * 1024), 1);
+
+                    return $size . " MB";
+                } else {
+                    $size = round($size / (1024 * 1024 * 1024), 1);
+
+                    return $size . " GB";
+                }
+            }
+        }
+    }
+
+    /**
      * @return array|mixed
      */
     public function getPhpInfoArray()
