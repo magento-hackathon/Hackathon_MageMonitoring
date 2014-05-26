@@ -32,6 +32,7 @@ class Hackathon_MageMonitoring_Block_Tab extends Mage_Adminhtml_Block_Widget_For
         $this->_blockGroup = null;
         $this->_headerText = '';
 
+        $this->removeButton('back');
         $this->removeButton('reset');
         $this->removeButton('save');
 
