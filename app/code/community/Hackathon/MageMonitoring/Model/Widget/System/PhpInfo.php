@@ -26,6 +26,9 @@
 class Hackathon_MageMonitoring_Model_Widget_System_PhpInfo extends Hackathon_MageMonitoring_Model_Widget_System_Abstract
                                                            implements Hackathon_MageMonitoring_Model_Widget
 {
+    // global default values
+    protected $_DEF_START_COLLAPSED = true;
+
     /**
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getName()

@@ -263,7 +263,6 @@
                         </php_all_ext>
                         <php_info>
                             <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpInfo</impl>
-                            <collapsed>1</collapsed>
                             <display_prio>40</display_prio>
                         </php_info>
                     </widgets>
