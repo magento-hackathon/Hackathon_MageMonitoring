@@ -45,7 +45,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     {
         $avgSimplePerConfig = number_format(array_sum($simples) / count(array_keys($simples)), 2);
         $biggestConfigurableVal = max($simples);
-        $biggestConfigurableSku = array_keys($simples, max($simples));
+        $biggestConfigurableSku = implode(', ', array_keys($simples, max($simples)));
 
         return array($avgSimplePerConfig, $biggestConfigurableSku, $biggestConfigurableVal);
     }
@@ -74,7 +74,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
 
         $items = $connection->fetchAll($sql);
 
-        if (count($items) != 0) {
+        if (count($items)) {
             foreach ($items as $bundle) {
                 $simples[$bundle['sku']] = 0;
                 if (!empty($bundle['children_count'])) {
@@ -113,7 +113,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
 
         $items = $connection->fetchAll($sql);
 
-        if (count($items) != 0) {
+        if (count($items)) {
             foreach ($items as $configurable) {
                 $simples[$configurable['sku']] = 0;
                 if (!empty($configurable['children_count'])) {
