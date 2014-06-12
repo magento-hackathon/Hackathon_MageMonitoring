@@ -2,7 +2,7 @@
     "name":"magento-hackathon/hackathon_magemonitoring",
     "type":"magento-module",
     "license":"OSL-3.0",
-    "homepage":"https://github.com/magento-hackathon/Hackathon_MageMonitoring.git",
+    "homepage":"https://github.com/magento-hackathon/Hackathon_MageMonitoring",
     "description":"Magento Monitoring Module to get information about the current installation (Server,Cache,PHP,Rewrites,Logs,...)",
     "authors":[
         {
