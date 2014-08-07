@@ -89,9 +89,14 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
      *
      * @param string $label
      * @param string $background_id
+     * @param string $wrapper_tag
      * @return $this
      */
-    public function addHeaderRow($header = null, $background_id = 'info') {
+    public function addHeaderRow($header = null, $background_id = 'info', $wrapper_tag = 'h4')
+    {
+        if ($wrapper_tag && $wrapper_tag !== '') {
+            $header = '<'.$wrapper_tag.'>'.$header.'</'.$wrapper_tag.'>';
+        }
         $this->_rows[] = array(
                 'css_id' => $background_id,
                 'label' => null,

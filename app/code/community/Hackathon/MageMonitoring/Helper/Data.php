@@ -255,6 +255,76 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     }
 
     /**
+     * Format size from Byte to KB, MB or GB
+     *
+     * @param $size
+     * @return string
+     */
+    public function formatByteSize($size)
+    {
+        if ($size < 1024) {
+            return $size . " bytes";
+        } else {
+            if ($size < (1024 * 1024)) {
+                $size = round($size / 1024, 1);
+
+                return $size . " KB";
+            } else {
+                if ($size < (1024 * 1024 * 1024)) {
+                    $size = round($size / (1024 * 1024), 1);
+
+                    return $size . " MB";
+                } else {
+                    $size = round($size / (1024 * 1024 * 1024), 1);
+
+                    return $size . " GB";
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns total size in bytes of $dir, also supports files.
+     * Returns false if os native way of getting dir size is not available.
+     *
+     * Source: http://stackoverflow.com/a/18568222
+     *
+     * @param string $dir
+     * @return number|false
+     */
+    public function getTotalSize($dir)
+    {
+        $dir = rtrim(str_replace('\\', '/', $dir), '/');
+
+        if (is_dir($dir) === true) {
+            $totalSize = 0;
+            $os        = strtoupper(substr(PHP_OS, 0, 3));
+            // If on a Unix Host (Linux, Mac OS)
+            if ($os !== 'WIN') {
+                $io = popen('/usr/bin/du -sk ' . $dir, 'r');
+                if ($io !== false) {
+                    $totalSize = intval(fgets($io, 80));
+                    pclose($io);
+                    return $totalSize*1024;
+                }
+            }
+            // If on a Windows Host (WIN32, WINNT, Windows)
+            if ($os === 'WIN' && extension_loaded('com_dotnet')) {
+                $obj = new \COM('scripting.filesystemobject');
+                if (is_object($obj)) {
+                    $ref       = $obj->getfolder($dir);
+                    $totalSize = $ref->size;
+                    $obj       = null;
+                    return $totalSize;
+                }
+            }
+            return false;
+        } else if (is_file($dir) === true) {
+            return filesize($dir);
+        }
+    }
+
+    /**
      * @return array|mixed
      */
     public function getPhpInfoArray()

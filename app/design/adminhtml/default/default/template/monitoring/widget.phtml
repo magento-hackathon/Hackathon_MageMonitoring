@@ -48,10 +48,8 @@
     <fieldset id="<?php echo $this->getWidgetId(); ?>" class="collapseable">
         <div class="monitoring-data-container">
         <?php
-            // only render output if wigdet is not in collapsed state
-            if (!$this->displayCollapsed()) {
+                // render widget output
                 echo $this->getChildhtml();
-            }
         ?>
         </div>
     </fieldset>

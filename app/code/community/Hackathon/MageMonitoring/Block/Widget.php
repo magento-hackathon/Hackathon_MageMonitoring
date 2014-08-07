@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magento
  *
@@ -22,7 +23,6 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
 class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
 {
     private $_widgetModel;
@@ -34,17 +34,24 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
         $this->setTemplate('monitoring/widget.phtml');
     }
 
-    protected function _toHtml() {
-        foreach ($this->_getWidget()->getOutput() as $block) {
-            $this->append($block);
+    protected function _toHtml()
+    {
+        if (!$this->displayCollapsed()) {
+            foreach ($this->getOutput() as $block) {
+                $this->append($block);
+            }
         }
         return parent::_toHtml();
     }
 
     /**
-     * @param Hackathon_MageMonitoring_Model_Widget $model
+     * Get the widget model
+     *
+     * @return Hackathon_MageMonitoring_Model_Widget
+     * @throws Exception
      */
-    protected function _getWidget() {
+    protected function _getWidget()
+    {
         if ($this->_widgetModel instanceof Hackathon_MageMonitoring_Model_Widget) {
             return $this->_widgetModel;
         } else {
@@ -53,16 +60,20 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
     }
 
     /**
-     * Set source model.
+     * Set source model
      *
      * @param Hackathon_MageMonitoring_Model_Widget $model
+     * @return Hackathon_MageMonitoring_Block_Widget $this
+     * @throws Exception
      */
-    public function setWidget($model) {
+    public function setWidget($model)
+    {
         if ($model instanceof Hackathon_MageMonitoring_Model_Widget) {
             $this->_widgetModel = $model;
         } else {
             throw new Exception ('Passed model does not implement Hackathon_MageMonitoring_Model_Widget interface.');
         }
+
         return $this;
     }
 
@@ -71,8 +82,9 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      *
      * @return string
      */
-    public function getWidgetId() {
-        return $this->getTabId().'-'.$this->_getWidget()->getConfigId();
+    public function getWidgetId()
+    {
+        return $this->getTabId() . '-' . $this->_getWidget()->getConfigId();
     }
 
     /**
@@ -80,7 +92,8 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->_getWidget()->getName();
     }
 
@@ -89,7 +102,8 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      *
      * @return bool
      */
-    public function displayCollapsed() {
+    public function displayCollapsed()
+    {
         return $this->_getWidget()->displayCollapsed();
     }
 
@@ -98,7 +112,8 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      *
      * @return array
      */
-    public function getConfig() {
+    public function getConfig()
+    {
         return $this->_getWidget()->getConfig();
     }
 
@@ -107,31 +122,36 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
      *
      * @return array
      */
-    public function getOutput() {
+    public function getOutput()
+    {
         if (!$this->_output) {
             $this->_output = $this->_getWidget()->getOutput();
         }
+
         return $this->_output;
     }
 
     /**
      * @return string
      */
-    public function getConfigUrl() {
+    public function getConfigUrl()
+    {
         return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/getWidgetConf', $this->_getWidget());
     }
 
     /**
      * @return string
      */
-    public function getCallbackUrl() {
+    public function getCallbackUrl()
+    {
         return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $this->_getWidget());
     }
 
     /**
      * @return string
      */
-    public function getRefreshUrl() {
+    public function getRefreshUrl()
+    {
         return Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/refreshWidget', $this->_getWidget());
     }
 

@@ -39,15 +39,26 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes
         /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart $renderer */
         $renderer = $block->newContentRenderer('donutchart');
 
-        $productCollection = Mage::getModel('catalog/product')->getCollection();
-        $productCollection->getSelect()->group('type_id')->columns('type_id, COUNT(*) AS count');
+        Varien_Profiler::start('HEALTHCHECK PRODUCT_TYPE_CHECK');
 
-        foreach ($productCollection as $_product) {
-            $renderer->addValue($_product->getTypeId(), $_product->getCount());
+        $resourceModel = Mage::getResourceModel('catalog/product');
+        $connection = $resourceModel->getReadConnection();
+        $sql = $connection
+            ->select()
+            ->from(array('cp' => $resourceModel->getTable('catalog/product')), array('type_id', 'count' => 'count(*)'))
+            ->group('cp.type_id');
+
+        $items = $connection->fetchAll($sql);
+
+        foreach($items as $item) {
+            $renderer->addValue($item['type_id'], $item['count']);
         }
+
+        Varien_Profiler::stop('HEALTHCHECK PRODUCT_TYPE_CHECK');
 
         $this->_output[] = $block;
 
         return $this->_output;
+
     }
 }

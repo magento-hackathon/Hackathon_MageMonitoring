@@ -4,6 +4,11 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
     extends Hackathon_MageMonitoring_Model_Widget_Abstract
     implements Hackathon_MageMonitoring_Model_Widget
 {
+    // config key
+    const CONFIG_ALLOW_SLOW_MODE = 'allow_slow_mode';
+    // defaults
+    protected $_DEF_ALLOW_SLOW_MODE = false;
+
     /**
      * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
@@ -15,43 +20,23 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
 
     /**
      * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
-    public function getVersion()
+    public function initConfig()
     {
-        return '1.0';
-    }
+        $helper = Mage::helper('magemonitoring');
 
-    /**
-     * (non-PHPdoc)
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
-     */
-    public function isActive()
-    {
-        return true;
-    }
-
-    protected function _sizeFormat($size)
-    {
-        if($size<1024)
-        {
-            return $size." bytes";
-        }
-        else if($size<(1024*1024))
-        {
-            $size=round($size/1024,1);
-            return $size." KB";
-        }
-        else if($size<(1024*1024*1024))
-        {
-            $size=round($size/(1024*1024),1);
-            return $size." MB";
-        }
-        else
-        {
-            $size=round($size/(1024*1024*1024),1);
-            return $size." GB";
-        }
+        parent::initConfig();
+        // add config for slow mode
+        $this->addConfig(self::CONFIG_ALLOW_SLOW_MODE,
+                $helper->__('Enable slower php methods to collect dir size?'),
+                $this->_DEF_ALLOW_SLOW_MODE,
+                'widget',
+                'checkbox',
+                false,
+                $helper->__('Warning! Depending on the size of your media directory this might take a very long time.')
+        );
+        return $this->_config;
     }
 
     protected function _getDirectorySize($path)
@@ -89,7 +74,6 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
         return $total;
     }
 
-
     public function getOutput()
     {
         $block = $this->newMultiBlock();
@@ -98,17 +82,34 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
         $helper = Mage::helper('magemonitoring');
 
         $header = array(
-            $helper->__('Size'),
-            $helper->__('Number Directories'),
-            $helper->__('Number Files')
+                $helper->__('Size'),
+                $helper->__('Number Directories'),
+                $helper->__('Number Files')
         );
         $renderer->setHeaderRow($header);
 
         $path = Mage::getBaseDir() . "/media";
-        $dirSize = $this->_getDirectorySize($path);
-        $row = array($this->_sizeFormat($dirSize['size']), $dirSize['count'], $dirSize['dircount']);
+        $dirSize = $helper->getTotalSize($path);
 
-        $renderer->addRow($row);
+        if (!$dirSize && !$this->getConfig(self::CONFIG_ALLOW_SLOW_MODE)) {
+            $block = $this->newMonitoringBlock();
+            $os = strtoupper(substr(PHP_OS, 0, 3));
+            $block->addRow('warning', $helper->__('This PHP instance only allows slow methods for collecting the size of a directory. Solutions:'));
+            if ($os !== 'WIN') {
+                $block->addRow('info', $helper->__('1. Remove popen from disable_functions in your php.ini or..'));
+            } else {
+                $block->addRow('info', $helper->__('1. Enable com_dotnet extension in your PHP instance or..'));
+            }
+            $block->addRow('info', $helper->__('2. Enable the much slower php way of collecting directory size by clicking on the gear icon of this widget.'));
+            $block->addRow('warning', $helper->__('Solution 2 may take a very long time depending on your catalog size.'));
+        } elseif (!$dirSize && $this->getConfig(self::CONFIG_ALLOW_SLOW_MODE)) {
+            $dirSize = $this->_getDirectorySize($path);
+            $row = array($helper->formatByteSize($dirSize['size']), $dirSize['count'], $dirSize['dircount']);
+            $renderer->addRow($row);
+        } else {
+            $row = array($helper->formatByteSize($dirSize), '-', '-');
+            $renderer->addRow($row);
+        }
 
         $this->_output[] = $block;
 
