@@ -40,7 +40,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
     {
         $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
         // exit if globally disabled
-        if (Mage::getStoreConfig(Mage::helper('magemonitoring')->getConfigKeyById('dogs/disabled', $id))) {
+        if (!Mage::getStoreConfigFlag(Mage::helper('magemonitoring')->getConfigKeyById('dogs/disabled', $id))) {
             return;
         }
 
