@@ -2,6 +2,9 @@ app/code/community/Hackathon/MageMonitoring app/code/community/Hackathon/MageMon
 app/etc/modules/Hackathon_MageMonitoring.xml app/etc/modules/Hackathon_MageMonitoring.xml
 app/design/adminhtml/default/default/layout/monitoring.xml app/design/adminhtml/default/default/layout/monitoring.xml
 app/design/adminhtml/default/default/template/monitoring app/design/adminhtml/default/default/template/monitoring
+app/locale/de_DE/Hackathon_HealthCheck.csv app/locale/de_DE/Hackathon_HealthCheck.csv
+app/locale/en_US/Hackathon_HealthCheck.csv app/locale/en_US/Hackathon_HealthCheck.csv
+app/locale/en_US/template/email/magemonitoring_watchdogs.html app/locale/en_US/template/email/magemonitoring_watchdogs.html
 skin/adminhtml/default/default/monitoring skin/adminhtml/default/default/monitoring
 js/chartjs/Chart.min.js js/chartjs/Chart.min.js
 js/modal/modalbox.js js/modal/modalbox.js
