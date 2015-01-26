@@ -35,7 +35,7 @@ $refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', 
                                    {title: 'Saving Config..',
                                    params: Form.serialize('form_widget_config'),
                                    method: 'post',
-                                   afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                   afterHide: function() { refreshWidget('<?php echo $this->getTabId().'-'.$widget->getConfigId(); ?>',
                                                                          '<?php echo $refreshUrl; ?>') }
                                   });
                      return false;">
@@ -43,7 +43,7 @@ $refreshUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/*/refreshWidget', 
             onclick="Modalbox.show('<?php echo $resetUrl ?>',
                                    {width: 460,
                                     title: 'Delete Config..',
-                                    afterHide: function() { refreshWidget('<?php echo $widget->getId(); ?>',
+                                    afterHide: function() { refreshWidget('<?php echo $this->getTabId().'-'.$widget->getConfigId(); ?>',
                                                                           '<?php echo $refreshUrl; ?>') }
                                   });
                      return false;" />

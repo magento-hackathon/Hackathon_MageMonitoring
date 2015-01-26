@@ -30,7 +30,7 @@
             <children>
                 <magemonitoring translate="title" module="magemonitoring">
                     <title>Monitoring</title>
-                    <sort_order>10</sort_order>
+                    <sort_order>20</sort_order>
                     <action>monitoring/monitoring</action>
                 </magemonitoring>
             </children>

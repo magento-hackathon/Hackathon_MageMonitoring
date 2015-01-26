@@ -27,7 +27,7 @@
 <config>
     <modules>
         <Hackathon_MageMonitoring>
-            <version>1.1.0</version>
+            <version>2.0.2</version>
             <depends>
                 <Mage_Adminhtml />
             </depends>
@@ -76,79 +76,16 @@
             </email>
         </template>
 
+        <!-- widgets folder -->
         <widgets>
             <magemonitoring>
                 <folder>Model/Widget</folder>
             </magemonitoring>
         </widgets>
 
-        <!-- PLUGIN CONFIG -->
-
+        <!-- values for shop config checks -->
         <healthcheck>
-            <shop_status>
-                <model>magemonitoring/check_shopStatus</model>
-                <type>static</type>
-                <versions>
-                    *
-                </versions>
-                <content_type>table</content_type>
-                <title>Shop-Status</title>
-                <sort_order>2</sort_order>
-            </shop_status>
-
-            <sitemap>
-                <model>magemonitoring/check_sitemap</model>
-                <versions>
-                    *
-                    1.6.2
-                    1.3*
-                    1.7.0*
-                </versions>
-                <type>static</type>
-                <content_type>table</content_type>
-                <title>Sitemap/robots.txt</title>
-                <sort_order>3</sort_order>
-            </sitemap>
-
-            <producttypes>
-                <active>true</active>
-                <model>magemonitoring/check_producttypes</model>
-                <type>ondemand</type>
-                <content_type>donutchart</content_type>
-                <title>Product Types</title>
-                <sort_order>4</sort_order>
-            </producttypes>
-
-            <productcomposition>
-                <active>true</active>
-                <model>magemonitoring/check_productComposition</model>
-                <type>ondemand</type>
-                <content_type>table</content_type>
-                <title>Product Composition</title>
-                <sort_order>1</sort_order>
-            </productcomposition>
-
-            <logfilesize>
-                <active>true</active>
-                <model>magemonitoring/check_logfilesize</model>
-                <type>ondemand</type>
-                <content_type>barchart</content_type>
-                <title>Logfile Size</title>
-                <sort_order>25</sort_order>
-            </logfilesize>
-
-            <mediasize>
-                <model>magemonitoring/check_mediasize</model>
-                <type>static</type>
-                <content_type>table</content_type>
-                <title>Media Dir Size</title>
-            </mediasize>
-
             <shop_configuration>
-                <model>magemonitoring/check_shopConfiguration</model>
-                <type>static</type>
-                <content_type>table</content_type>
-                <title>Shop Configuration</title>
                 <values>
                     <flat_table_product>
                         <path>catalog/frontend/flat_catalog_product</path>
@@ -186,11 +123,9 @@
                         <path>admin/url/custom</path>
                     </admin_url_custom>
                 </values>
-                <sort_order>1</sort_order>
             </shop_configuration>
         </healthcheck>
-
-        <!-- PLUGIN CONFIG END -->
+        <!-- END values for shop config checks -->
 
     </global>
 
@@ -245,26 +180,91 @@
     <default>
         <magemonitoring>
             <tabs>
-                <dashboard>
-                    <label>Dashboard</label>
-                    <title>Dashboard</title>
-                    <block>magemonitoring/system_overview_read_tabs_dashboard</block>
-                    <widgets/>
-                </dashboard>
+                <health_check>
+                    <label>Health Check</label>
+                    <title>Health Check</title>
+                    <display_prio>20</display_prio>
+                    <widgets>
+                        <shop_status>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus</impl>
+                            <versions>
+                                *
+                            </versions>
+                            <display_prio>5</display_prio>
+                        </shop_status>
+                        <sitemap>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap</impl>
+                            <versions>
+                                *
+                                1.6.2
+                                1.3*
+                                1.7.0*
+                            </versions>
+                            <display_prio>30</display_prio>
+                        </sitemap>
+                        <producttypes>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes</impl>
+                            <display_prio>40</display_prio>
+                        </producttypes>
+                        <productcomposition>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition</impl>
+                            <display_prio>10</display_prio>
+                        </productcomposition>
+                        <logfilesize>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize</impl>
+                            <display_prio>25</display_prio>
+                        </logfilesize>
+                        <mediasize>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize</impl>
+                            <display_prio>50</display_prio>
+                        </mediasize>
+                        <shop_configuration>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration</impl>
+                            <display_prio>10</display_prio>
+                        </shop_configuration>
+                    </widgets>
+                </health_check>
                 <system_overview>
                     <label>System Overview</label>
                     <title>System Overview</title>
+                    <display_prio>10</display_prio>
                     <widgets>
-                        <Hackathon_MageMonitoring_Model_Widget_System_Magento />
-                        <Hackathon_MageMonitoring_Model_Widget_System_Server />
-                        <Hackathon_MageMonitoring_Model_Widget_System_Watchdog />
+                        <magento_info>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Magento</impl>
+                        </magento_info>
+                        <server_info>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Server</impl>
+                        </server_info>
+                        <watch_dog_control>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Watchdog</impl>
+                        </watch_dog_control>
                     </widgets>
                 </system_overview>
                 <php_info>
                     <label>PHP Information</label>
                     <title>PHP Information</title>
-                    <block>magemonitoring/system_overview_read_tabs_php</block>
+                    <display_prio>30</display_prio>
                     <widgets>
+                        <php_config_check>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpConfig</impl>
+                            <display_prio>10</display_prio>
+                        </php_config_check>
+                        <php_req_ext>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                            <title>Required Extensions</title>
+                            <only_required>true</only_required>
+                            <display_prio>20</display_prio>
+                        </php_req_ext>
+                        <php_all_ext>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                            <title>All Installed Extensions</title>
+                            <collapsed>1</collapsed>
+                            <display_prio>30</display_prio>
+                        </php_all_ext>
+                        <php_info>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpInfo</impl>
+                            <display_prio>40</display_prio>
+                        </php_info>
                     </widgets>
                 </php_info>
                 <database_info>
@@ -277,35 +277,82 @@
                 <cache_stat>
                     <label>Cache Statistics</label>
                     <title>Cache Statistics</title>
+                    <display_prio>40</display_prio>
                     <widgets>
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Dummy />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis />
-                        <Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache />
+                        <apc>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc</impl>
+                        </apc>
+                        <apcu>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu</impl>
+                        </apcu>
+                        <memcached>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache</impl>
+                        </memcached>
+                        <redis>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis</impl>
+                        </redis>
+                        <zendopcache>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache</impl>
+                        </zendopcache>
                     </widgets>
                 </cache_stat>
                 <class_rewrites>
                     <label>Class Rewrites</label>
                     <title>Class Rewrites</title>
-                    <block>magemonitoring/system_overview_read_tabs_rewrites</block>
+                    <display_prio>50</display_prio>
                     <widgets>
+                        <rewrites>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_ClassRewrites</impl>
+                        </rewrites>
                     </widgets>
                 </class_rewrites>
                 <modules_installed>
                     <label>Modules Installed</label>
                     <title>Modules Installed</title>
-                    <block>magemonitoring/system_overview_read_tabs_modules</block>
+                    <display_prio>60</display_prio>
                     <widgets>
+                        <modules_core>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <title>Modules core</title>
+                            <code_pool>core</code_pool>
+                            <collapsed>1</collapsed>
+                            <display_prio>10</display_prio>
+                        </modules_core>
+                        <modules_community>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <title>Modules community</title>
+                            <code_pool>community</code_pool>
+                            <display_prio>20</display_prio>
+                        </modules_community>
+                        <modules_local>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <title>Modules local</title>
+                            <code_pool>local</code_pool>
+                            <collapsed>1</collapsed>
+                            <display_prio>30</display_prio>
+                        </modules_local>
                     </widgets>
                 </modules_installed>
                 <system_logs>
                     <label>System Logs</label>
                     <title>System Logs</title>
+                    <display_prio>70</display_prio>
                     <widgets>
-                        <Hackathon_MageMonitoring_Model_Widget_Log_Debug />
-                        <Hackathon_MageMonitoring_Model_Widget_Log_Exception />
+                        <magento_debug>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Log_Tail</impl>
+                            <title>Magento Debug Log</title>
+                            <file_path>system.log</file_path>
+                            <color>warning</color>
+                            <collapsed>1</collapsed>
+                            <display_prio>10</display_prio>
+                        </magento_debug>
+                        <magento_exception>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Log_Tail</impl>
+                            <title>Magento Exception Log</title>
+                            <file_path>exception.log</file_path>
+                            <color>error</color>
+                            <display_prio>20</display_prio>
+                        </magento_exception>
                     </widgets>
                 </system_logs>
             </tabs>

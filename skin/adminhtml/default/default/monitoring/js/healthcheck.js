@@ -1,16 +1,11 @@
-var Hackathon_MageMonitoring = {
+var Hackathon_MageMonitoring_Multi = {
 
-    init : function(url) {
-        this.url = url;
-    },
-
-    showData : function(checkIdentifier) {
-        jQuery('#monitoring-loading-' + checkIdentifier).css('display', 'block');
-
-        jQuery.getJSON(this.url, {checkIdentifier: checkIdentifier} , function(data) {
+    showData : function(data, divId) {
             /*
              *   TYPE TABLE
              */
+            data=JSON.parse(data);
+            checkIdentifier = divId;
             if(data['type'] == "table") {
                 jQuery.jsontotable(data['content'], {
                     header: false,
@@ -65,7 +60,7 @@ var Hackathon_MageMonitoring = {
             else if(data['type'] == "barchart") {
                 var barChartSource = [];
                 jQuery.each(data['content'], function(key, value) {
-                    barChartSource.push({ name: key, value: parseFloat(value)})
+                    barChartSource.push({ name: key, value: parseFloat(value)});
                 });
 
                 jQuery('#' + checkIdentifier).dxChart({
@@ -87,7 +82,7 @@ var Hackathon_MageMonitoring = {
             else if(data['type'] == "donutchart") {
                 var donutChartSource = [];
                 jQuery.each(data['content'], function(key, value) {
-                    donutChartSource.push({ name: key, val: parseFloat(value)})
+                    donutChartSource.push({ name: key, val: parseFloat(value)});
                 });
 
                 jQuery('#' + checkIdentifier).dxPieChart({
@@ -116,9 +111,5 @@ var Hackathon_MageMonitoring = {
                     }]
                 });
             }
-        })
-        .complete(function() {
-            jQuery('#monitoring-loading-' + checkIdentifier).css('display', 'none');
-        })
     }
-}
+};

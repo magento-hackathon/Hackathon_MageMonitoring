@@ -29,23 +29,20 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 
     const CHECK_NODE = 'global/healthcheck/%s';
 
-    const TYPE_STATIC = 'static';
-    const TYPE_ONDEMAND = 'ondemand';
-
     const WARN_CSSCLASS = '_cssClasses';
     const WARN_TYPE_OK = 'health-ok';
     const WARN_TYPE_WARNING = 'health-warning';
     const WARN_TYPE_ERROR = 'health-error';
-    
+
     /**
      * Returns array with implementations of $baseInterface that return isActive() == true.
      *
      * @param string|array $widgetId or array of widgetIds, if widgetId equals '*' all widgets are returned
-     * @param string $tabId config scope, null for global
+     * @param string $tabId config scope, null for globals only
      * @param string $baseInterface
      * @return array
      */
-    public function getActiveWidgets($widgetId='*', $tabId=null, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
+    public function getActiveWidgets($widgetId='*', $tabId=null, $returnSorted=true, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
     {
         $classFolders = array();
         $widgets = array();
@@ -76,27 +73,140 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
         // collect active widgets
         $activeWidgets = array();
-        foreach ($widgets as $widget) {
+        foreach ($widgets as $widgetDbId => $widget) {
             try {
                 $w = new $widget();
             } catch (Exception $e) {
                 Mage::logException($e);
                 continue;
             }
-            if ($w->isActive() && $widgetId == $w->getId()) {
-                return $w;
-            } else if ($w->isActive()) {
-                $w->loadConfig(null, $tabId);
-                $prio = 100;
-                if ($w->getDisplayPrio()) {
-                    $prio = $w->getDisplayPrio();
+            if ($w->isActive()) {
+                $w->loadConfig(null, $tabId, $widgetDbId);
+                if ($widgetId == $w->getId()) {
+                    return $w;
+                } else {
+                    $activeWidgets[$w->getConfigId()] = $w;
                 }
-                $activeWidgets[$prio.'_'.$w->getId()] = $w;
             }
         }
 
-        ksort($activeWidgets, SORT_NUMERIC);
+        if ($returnSorted) {
+            uasort($activeWidgets, array($this, 'compareWidgetDisplayPrio'));
+        }
+
         return $activeWidgets;
+    }
+
+    /**
+     * Returns widget(s) configuration. Filters invisible/inactive widgets and sorts by display_prio.
+     *
+     * @param string $tabId
+     * @param string $widgetDbId
+     * @param string $returnSorted
+     * @param string $baseInterface
+     * @return multitype:Ambigous <multitype:, unknown, multitype:unknown >
+     */
+    public function getConfiguredWidgets($tabId='*', $widgetDbId=null, $returnSorted=true, $baseInterface='Hackathon_MageMonitoring_Model_Widget') {
+        if ($tabId !== '*') {
+            $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
+        } else {
+            $tabs = Mage::getStoreConfig('magemonitoring/tabs');
+        }
+        $widgets = array();
+        foreach ($tabs as $key => $tab) {
+            // custom block for tab?
+            if (array_key_exists('block', $tab) && $tab['block']) {
+                continue;
+            }
+
+            if (array_key_exists('widgets', $tab) && is_array($tab['widgets'])) {
+                $implList = array();
+                if ($widgetDbId) {
+                    $implList[$widgetDbId] = $tab['widgets'][$widgetDbId]['impl'];
+                } else {
+                    foreach ($tab['widgets'] as $wDbId => $config) {
+                        $visible = true;
+                        if (array_key_exists('visible', $config) && !$config['visible']) {
+                            $visible = false;
+                        }
+                        if (array_key_exists('impl', $config) && $visible) {
+                            $implList[$wDbId] = $config['impl'];
+                        }
+                    }
+                }
+                $widgets[$key] = $this->getActiveWidgets($implList, $key, $returnSorted, $baseInterface);
+            }
+        }
+        return $widgets;
+    }
+
+    /**
+     * Returns tab config array. Filters invisible and sorts by display_prio.
+     *
+     * @param string $tabId
+     * @return array
+     */
+    public function getConfiguredTabs($tabId='*')
+    {
+        if ($tabId !== '*') {
+            $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
+        } else {
+            $tabs = Mage::getStoreConfig('magemonitoring/tabs');
+        }
+        $tabs = array_filter($tabs, array($this, 'filterVisibleTabs'));
+        uasort($tabs, array($this, 'compareTabDisplayPrio'));
+        return $tabs;
+    }
+
+    /**
+     * Compare function for uasort(). Sorts by widget display_prio.
+     *
+     * @param array $a
+     * @param array $b
+     * @return number
+     */
+    protected function compareWidgetDisplayPrio($a, $b)
+    {
+        if ($a->getDisplayPrio() == $b->getDisplayPrio()) {
+            return 0;
+        }
+        return ($a->getDisplayPrio() > $b->getDisplayPrio()) ? 1 : -1;
+    }
+
+    /**
+     * Compare function for uasort(). Sorts by tab display_prio. Entries without display_prio go to the bottom.
+     *
+     * @param array $a
+     * @param array $b
+     * @return number
+     */
+    protected function compareTabDisplayPrio($a, $b)
+    {
+        if (!array_key_exists('display_prio', $a) && array_key_exists('display_prio', $b)) {
+            return -1;
+        }
+        else if (array_key_exists('display_prio', $a) && !array_key_exists('display_prio', $b)) {
+            return 1;
+        } else if (!array_key_exists('display_prio', $a) && !array_key_exists('display_prio', $b)) {
+            return 0;
+        }
+        if ($a['display_prio'] == $b['display_prio']) {
+            return 0;
+        }
+        return ($a['display_prio'] > $b['display_prio']) ? 1 : -1;
+    }
+
+    /**
+     * Filter function for array_filter(). Returns array where tabs have visible != 0.
+     *
+     * @param array $entry
+     * @return boolean
+     */
+    protected function filterVisibleTabs($entry) {
+        if (array_key_exists('visible', $entry) && $entry['visible'] == 0) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -105,7 +215,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @param string $path
      * @param int $maxDepth
      */
-    public function requireAll($path, $maxDepth=3)
+    public function requireAll($path, $maxDepth=7)
     {
         foreach (array_filter(glob($path."/*"), 'is_dir') as $d) {
             if ($maxDepth > 0) {
@@ -142,6 +252,76 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
 
         return $memoryLimit;
+    }
+
+    /**
+     * Format size from Byte to KB, MB or GB
+     *
+     * @param $size
+     * @return string
+     */
+    public function formatByteSize($size)
+    {
+        if ($size < 1024) {
+            return $size . " bytes";
+        } else {
+            if ($size < (1024 * 1024)) {
+                $size = round($size / 1024, 1);
+
+                return $size . " KB";
+            } else {
+                if ($size < (1024 * 1024 * 1024)) {
+                    $size = round($size / (1024 * 1024), 1);
+
+                    return $size . " MB";
+                } else {
+                    $size = round($size / (1024 * 1024 * 1024), 1);
+
+                    return $size . " GB";
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns total size in bytes of $dir, also supports files.
+     * Returns false if os native way of getting dir size is not available.
+     *
+     * Source: http://stackoverflow.com/a/18568222
+     *
+     * @param string $dir
+     * @return number|false
+     */
+    public function getTotalSize($dir)
+    {
+        $dir = rtrim(str_replace('\\', '/', $dir), '/');
+
+        if (is_dir($dir) === true) {
+            $totalSize = 0;
+            $os        = strtoupper(substr(PHP_OS, 0, 3));
+            // If on a Unix Host (Linux, Mac OS)
+            if ($os !== 'WIN') {
+                $io = popen('/usr/bin/du -sk ' . $dir, 'r');
+                if ($io !== false) {
+                    $totalSize = intval(fgets($io, 80));
+                    pclose($io);
+                    return $totalSize*1024;
+                }
+            }
+            // If on a Windows Host (WIN32, WINNT, Windows)
+            if ($os === 'WIN' && extension_loaded('com_dotnet')) {
+                $obj = new \COM('scripting.filesystemobject');
+                if (is_object($obj)) {
+                    $ref       = $obj->getfolder($dir);
+                    $totalSize = $ref->size;
+                    $obj       = null;
+                    return $totalSize;
+                }
+            }
+            return false;
+        } else if (is_file($dir) === true) {
+            return filesize($dir);
+        }
     }
 
     /**
@@ -260,7 +440,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @return string $url
      */
     public function getWidgetUrl($controller_action, $widget) {
-        $params = array('widgetId' => $widget->getId());
+        $params = array('widgetId' => $widget->getConfigId());
         if ($tabId = $widget->getTabId()) {
             $params['tabId'] = $tabId;
         }
@@ -288,7 +468,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     }
 
     /**
-     * Adds $dateString to $fileName, takes care or file extension handling.
+     * Adds $dateString to $fileName, takes care of file extension handling.
      *
      * @param string $fileName
      * @param string $dateString
@@ -313,9 +493,8 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @param Hackathon_MageMonitoring_Model_Widget $widget
      * @return string
      */
-    public function getConfigKey($configKey, $widget) {
+    public function getConfigKey($configKey, $widget, $scope='global') {
         $conf = $widget->getConfig($configKey, false);
-        $scope = 'global';
         if (is_array($conf) && array_key_exists ('scope', $conf)) {
             if ($conf['scope'] === 'widget' && method_exists($widget, 'getTabId') && $widget->getTabId() !== null) {
                 $scope = 'tabs/' . $widget->getTabId();
@@ -323,7 +502,11 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
         $id = null;
         if (class_implements($widget, 'Hackathon_MageMonitoring_Model_Widget')) {
-            $id = $widget->getId();
+            if ($scope === 'global') {
+                $id = $widget->getId(); // class name for global params as db key
+            } else {
+                $id = $widget->getConfigId();
+            }
         } elseif (class_implements($widget, 'Hackathon_MageMonitoring_Model_WatchDog')) {
             $id = $widget->getDogId();
         } else {
@@ -340,10 +523,10 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * @param string $scope
      * @return string
      */
-    public function getConfigKeyById($configKey, $widgetId, $scope='global') {
+    public function getConfigKeyById($configKey, $widgetDbId, $scope='global') {
         $key = 'magemonitoring/';
         $prefix = Hackathon_MageMonitoring_Model_Widget_Abstract::CONFIG_PRE_KEY;
-        return $key .= $scope . '/'. $prefix . '/' . $widgetId . '/' . $configKey;
+        return $key .= $scope . '/'. $prefix . '/' . $widgetDbId . '/' . $configKey;
     }
 
     /**

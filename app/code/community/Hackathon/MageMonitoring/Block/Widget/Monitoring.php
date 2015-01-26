@@ -89,9 +89,14 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
      *
      * @param string $label
      * @param string $background_id
+     * @param string $wrapper_tag
      * @return $this
      */
-    public function addHeaderRow($header = null, $background_id = 'info') {
+    public function addHeaderRow($header = null, $background_id = 'info', $wrapper_tag = 'h4')
+    {
+        if ($wrapper_tag && $wrapper_tag !== '') {
+            $header = '<'.$wrapper_tag.'>'.$header.'</'.$wrapper_tag.'>';
+        }
         $this->_rows[] = array(
                 'css_id' => $background_id,
                 'label' => null,
@@ -125,7 +130,7 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
     public function newChartArray($canvasId, $chartData, $chartType = 'Pie', $width = 76, $height = 76)
     {
         return array(
-                'chart_id' => $canvasId,
+                'chart_id' => $this->getTabId().'_'.$this->getWidgetId().'_'.$canvasId,
                 'chart_type' => $chartType,
                 'canvas_width' => $width,
                 'canvas_height' => $height,

@@ -43,7 +43,8 @@ class Hackathon_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_
         $cbMarker = Hackathon_MageMonitoring_Model_Widget_Abstract::CALLBACK;
         if (!strncmp($controller_action, $cbMarker, strlen($cbMarker))) {
             $callback = substr($controller_action, strlen($cbMarker));
-            $widgetId = $widget->getId();
+            $widgetId = $widget->getConfigId();
+            $tabId = $widget->getTabId();
             $widgetName = $widget->getName();
             $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $widget);
             $refreshUrl = 'null';
@@ -55,7 +56,7 @@ class Hackathon_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_
                 ) . '\'';
             }
             // add callback js
-            $onClick .= "execWidgetCallback('$widgetId', '$widgetName', '$callback', '$callbackUrl', $refreshUrl);";
+            $onClick .= "execWidgetCallback('$tabId-$widgetId', '$widgetName', '$callback', '$callbackUrl', $refreshUrl);";
             // add confirm dialog?
             if ($confirm_message) {
                 $onClick = "var r=confirm('$confirm_message'); if (r==true) {" . $onClick . "}";

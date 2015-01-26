@@ -24,7 +24,7 @@
  */
 
 class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_MageMonitoring_Model_Widget_System_Abstract
-                                                            implements Hackathon_MageMonitoring_Model_Widget_System
+                                                            implements Hackathon_MageMonitoring_Model_Widget
 {
     // override defaults
     protected $_DEF_DISPLAY_PRIO = 100;
@@ -36,7 +36,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
      */
     public function getName()
     {
-        return 'Watch Dogs';
+        return 'Watch Dog Control';
     }
 
     /**
@@ -52,7 +52,13 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
         parent::initConfig();
         $this->addConfigHeader('Global Watch Dog Configuration');
         $this->addConfig(self::CONFIG_DOGS_DISABLED, 'Disable all dogs?', $this->_DEF_DOGS_DISABLED, 'global', 'checkbox');
-        $this->addConfig(self::CONFIG_DOGS_MAILTO, 'Bark reports at: (sales|etc or valid email)', $this->_DEF_DOGS_MAILTO, 'global');
+        $this->addConfig(self::CONFIG_DOGS_MAILTO,
+                           'Default report destination:',
+                           $this->_DEF_DOGS_MAILTO,
+                           'global',
+                           'text',
+                           false,
+                           Mage::helper('magemonitoring')->__('Magento mail id (general, sales, etc) or valid email address.'));
         return $this->_config;
     }
 
@@ -92,7 +98,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
 
         $block->addRow('info', 'Installed Watch Dogs:', 'Schedule:');
 
-        $dogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_WatchDog');
+        $dogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
         foreach ($dogs as $d) {
             $block->addRow( (!$disabled && $d->onDuty()) ? 'success':'error', $d->getDogName(), $d->getSchedule());
         }

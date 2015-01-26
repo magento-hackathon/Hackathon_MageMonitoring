@@ -27,11 +27,12 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
 {
 
     // ajax refresh
-    public function refreshWidgetAction() {
+    public function refreshWidgetAction()
+    {
         $response = '';
-        if ($widget = $this->_getWidgetFromRequest(true)) {
-            foreach ($widget->getOutput() as $blocks) {
-                $response .= $blocks->toHtml();
+        if ($widget = $this->_getWidgetFromRequest()) {
+            foreach ($widget->getOutput() as $block) {
+                $response .= $block->toHtml();
             }
         }
         if ($response == '') {
@@ -44,22 +45,38 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     }
 
     // get widget config html
-    public function getWidgetConfAction() {
+    public function getWidgetConfAction()
+    {
         $response = "ERR";
-        if ($widget = $this->_getWidgetFromRequest(true)) {
+        if ($widget = $this->_getWidgetFromRequest()) {
             $response = $this->getLayout()->createBlock('core/template')
                 ->setTemplate('monitoring/widget/config.phtml')
                 ->setData('widget', $widget)
+                ->setData('tab_id', $this->getRequest()->getParam('tabId'))
                 ->toHtml();
         }
         $this->getResponse()->setBody($response);
     }
 
     // save widget config
-    public function saveWidgetConfAction() {
+    public function saveWidgetConfAction()
+    {
         $response = "ERR";
-        if ($widget = $this->_getWidgetFromRequest(true)) {
-            $post = $this->getRequest()->getPost();
+        $post = $this->getRequest()->getPost();
+        $className = null;
+        if (array_key_exists('class_name', $post)) {
+            $className = $post['class_name'];
+        }
+        $widgetDbId = null;
+        if (array_key_exists('widget_id', $post)) {
+            $widgetDbId = $post['widget_id'];
+        }
+        if ($widget = $this->_getWidgetFromRequest($className, $widgetDbId)) {
+            // ignore display prio if we save from config tab page
+            $ref = $this->getRequest()->getServer('HTTP_REFERER');
+            if (strpos($ref, '/config_tabs/') !== false) {
+                $post['display_prio'] = $widget->getConfig('display_prio', true);
+            }
             unset($post['form_key']);
             $widget->saveConfig($post);
             $response = 'Settings saved for '.$widget->getName().'. Changing display prio and collapseable state requires a page reload.';
@@ -68,7 +85,8 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     }
 
     // delete widget config
-    public function resetWidgetConfAction() {
+    public function resetWidgetConfAction()
+    {
         $response = "ERR";
         if ($widget = $this->_getWidgetFromRequest()) {
             $widget->deleteConfig();
@@ -77,10 +95,55 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
         $this->getResponse()->setBody($response);
     }
 
+    // tab config - get widget config form html
+    public function getWidgetConfigFormAction()
+    {
+        $response = "ERR";
+        if ($widget = $this->_getWidgetFromRequest()) {
+            $response = $this->getLayout()->createBlock('magemonitoring/tab_config_form_widgetConf')
+                ->setData('widget', $widget)
+                ->setData('tab_id', $this->getRequest()->getParam('tabId'))
+                ->setData('widget_id_org', $this->getRequest()->getParam('widgetId'))
+                ->toHtml();
+        }
+        $this->getResponse()->setBody($response);
+    }
+
+    // save tab config
+    public function saveTabConfigAction()
+    {
+        $response = array();
+        $hasError = false;
+        $data = Mage::helper('core')->jsonDecode($this->getRequest()->getPost('data'));
+
+        try {
+            $this->_saveTabConfig($data);
+            $this->_getSession()->addSuccess($this->__('Tab config has been saved.'));
+        } catch (Mage_Core_Exception $e) {
+            $this->_getSession()->addError($e->getMessage());
+            $hasError = true;
+        } catch (Exception $e) {
+            Mage::logException($e);
+            $this->_getSession()->addException($e,
+                    $this->__('An error occurred while saving the tab config.'));
+            $hasError = true;
+        }
+
+        if ($hasError) {
+            $this->_initLayoutMessages('adminhtml/session');
+            $response['error']   = 1;
+            $response['message'] = $this->getLayout()->getMessagesBlock()->getGroupedHtml();
+        } else {
+            $response['error']   = 0;
+            $response['url']     = $this->getUrl('*/monitoring');
+        }
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($response));
+    }
+
     // execute callback on widget
     public function execCallbackAction() {
         $response = "ERR";
-        if ($widget = $this->_getWidgetFromRequest(true)) {
+        if ($widget = $this->_getWidgetFromRequest()) {
             if ($cbMethod = $this->getRequest()->getParam('cb')) {
                 if (method_exists($widget, $cbMethod)) {
                     try {
@@ -102,27 +165,73 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
     }
 
     /**
-     * Returns widget instance if widgetId is found in current request params.
+     * Returns widget instance if widgetId or widgetImpl is found in current request params.
      *
-     * @param bool $loadConfig
+     * @param string $className
      *
      * @return Hackathon_MageMonitoring_Model_Widget|false
      */
-    private function _getWidgetFromRequest($loadConfig = false) {
+    private function _getWidgetFromRequest($className=null, $widgetDbId=null) {
         if ($id = $this->getRequest()->getParam('widgetId')) {
-            $widget = new $id();
-            if ($widget instanceof Hackathon_MageMonitoring_Model_Widget && $widget->isActive()) {
-                if ($loadConfig) {
-                    $tab = null;
-                    if ($this->getRequest()->getParam('tabId')) {
-                        $tab = $this->getRequest()->getParam('tabId');
-                    }
-                    $widget->loadConfig(null, $tab);
+            $tabId = null;
+            if ($this->getRequest()->getParam('tabId')) {
+                $tabId = $this->getRequest()->getParam('tabId');
+            }
+            if ($className !== null || (is_numeric($id) && $this->getRequest()->getParam('widgetImpl'))) {
+                if ($className === null) {
+                    $className = $this->getRequest()->getParam('widgetImpl');
                 }
+                if ($widgetDbId === null) {
+                    $w = new $className();
+                    $widgetDbId = $w->getConfigId();
+                }
+                $id = array($widgetDbId => $className);
+                $widget = Mage::helper('magemonitoring')->getActiveWidgets($id, $tabId, false);
+            } else {
+                $widget = Mage::helper('magemonitoring')->getConfiguredWidgets($tabId, $id, false);
+                $widget = reset($widget);
+            }
+            $widget = reset($widget);
+            if ($widget instanceof Hackathon_MageMonitoring_Model_Widget) {
                 return $widget;
             }
         }
         return false;
+    }
+
+    /**
+     *  Saves tab/widget display structure from ext.tree data array.
+     *
+     * @param array $data
+     */
+    private function _saveTabConfig($data)
+    {
+        $tabData = $data['tabs'];
+        foreach ($tabData as $t) {
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$t[0].'/visible', 1);
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$t[0].'/title', $t[1]);
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$t[0].'/label', $t[1]);
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$t[0].'/display_prio', $t[2]*10 );
+        }
+
+        $tabData = $data['removedTabs'];
+        foreach ($tabData as $t) {
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$t.'/visible', 0);
+        }
+
+        $widgetData = $data['widgets'];
+        foreach ($widgetData as $w) {
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$w[1].'/widgets/'.$w[0].'/impl', $w[3]);
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$w[1].'/widgets/'.$w[0].'/display_prio', $w[2]*10);
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$w[1].'/widgets/'.$w[0].'/visible', 1);
+        }
+
+        $widgetData = $data['removedWidgets'];
+        foreach ($widgetData as $w) {
+            Mage::getConfig()->saveConfig('magemonitoring/tabs/'.$w[0].'/widgets/'.$w[1].'/visible', 0);
+        }
+
+        Mage::getConfig()->reinit();
     }
 
 }

@@ -26,39 +26,52 @@
 interface Hackathon_MageMonitoring_Model_Widget
 {
     /**
-     * Returns id string, use classname to avoid possible conflicts.
+     * Returns class name that must be compatible with magento autoloader.
      *
      * @return string
      */
     public function getId();
     /**
+     * Returns widget config key in database.
+     *
+     * @return string
+     */
+    public function getConfigId();
+    /**
      * Returns true if this widget is active.
      *
-     * return bool
+     * @return bool
      */
     public function isActive();
     /**
      * Returns widget name.
      *
      * @return string
-    */
+     */
     public function getName();
     /**
      * Returns version string.
      *
      * @return string
-    */
+     */
     public function getVersion();
     /**
-     * Returns init state for collapseable the plugin is displayed in.
+     * Returns magento versions supported by this widget.
      *
-     * return bool
+     * @return string
+     */
+    public function getSupportedMagentoVersions();
+    /**
+     * Returns true if widget should start collapsed, speeds up loading times as
+     * the widget won't render it's content on page load.
+     *
+     * @return bool
      */
     public function displayCollapsed();
     /**
      * Returns display prio of this widget.
      *
-     * return int
+     * @return int
      */
     public function getDisplayPrio();
     /**

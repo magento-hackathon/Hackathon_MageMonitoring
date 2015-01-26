@@ -32,19 +32,19 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
      * Collects all registered watch dogs, handles their schedule and fires them if it's time.
      * Sends aggregrated reports via email.
      *
-     * @param string $skipTestDog
+     * @param boolean $skipTestDog
      * @throws Exception
      * @return void|boolean
      */
-    public function triggerActiveDogs($skipTestDog=true)
+    public function triggerActiveDogs($skipTestDog = true)
     {
         $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
         // exit if globally disabled
-        if (Mage::getStoreConfig(Mage::helper('magemonitoring')->getConfigKeyById('dogs/disabled', $id))) {
+        if (!Mage::getStoreConfigFlag(Mage::helper('magemonitoring')->getConfigKeyById('dogs/disabled', $id))) {
             return;
         }
 
-        $watchDogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, 'Hackathon_MageMonitoring_Model_WatchDog');
+        $watchDogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
         // add test watch dogs that always fire a report and a runtime error?
         if (!$skipTestDog) {
             foreach (array('test', 'error') as $m) {
