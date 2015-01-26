@@ -270,6 +270,7 @@
                 <database_info>
                     <label>Database Information</label>
                     <title>Database Information</title>
+                    <display_prio>35</display_prio>
                     <block>magemonitoring/system_overview_read_tabs_database</block>
                     <widgets>
                     </widgets>
