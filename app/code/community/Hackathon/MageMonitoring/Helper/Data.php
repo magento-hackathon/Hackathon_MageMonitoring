@@ -130,7 +130,9 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                             $visible = false;
                         }
                         if (array_key_exists('impl', $config) && $visible) {
-                            $implList[$wDbId] = $config['impl'];
+                            if (in_array($baseInterface, class_implements($config['impl']))) {
+                                $implList[$wDbId] = $config['impl'];
+                            }
                         }
                     }
                 }
