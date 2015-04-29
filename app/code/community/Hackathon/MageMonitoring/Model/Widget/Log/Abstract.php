@@ -140,8 +140,8 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
         $logFile = '';
         if (file_exists($filePath)) {
             $logFile = $filePath;
-        } elseif (file_exists('var/log/'.$filePath)) {
-            $logFile = 'var/log/'.$filePath;
+        } elseif (file_exists(Mage::getBaseDir('log').DS.$filePath)) {
+            $logFile = Mage::getBaseDir('log').DS.$filePath;
         } else {
             return false;
         }
