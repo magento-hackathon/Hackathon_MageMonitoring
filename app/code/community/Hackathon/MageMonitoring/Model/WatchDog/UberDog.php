@@ -44,7 +44,8 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
             return;
         }
 
-        $watchDogs = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
+        $watchDogs = Mage::helper('magemonitoring')->getConfiguredWatchDogs();
+
         // add test watch dogs that always fire a report and a runtime error?
         if (!$skipTestDog) {
             foreach (array('test', 'error') as $m) {

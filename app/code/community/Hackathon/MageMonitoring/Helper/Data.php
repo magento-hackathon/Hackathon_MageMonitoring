@@ -140,6 +140,21 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         return $widgets;
     }
 
+    /***
+     * Returns active watch dogs as flattened and indexed array.
+     * 
+     * @return array
+     */
+    public function getConfiguredWatchDogs() {
+        $tabs = $this->getConfiguredWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
+        $watchDogs = array();
+        foreach ($tabs as $tab) {
+            $d = array_values($tab);
+            $watchDogs += $d;
+        }
+        return $watchDogs;
+    }
+
     /**
      * Returns tab config array. Filters invisible and sorts by display_prio.
      *
