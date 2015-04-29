@@ -91,6 +91,7 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
         $response = "ERR";
         if ($widget = $this->_getWidgetFromRequest()) {
             $widget->deleteConfig();
+            Mage::getConfig()->reinit();
             $response = 'Deleted config for ' . $widget->getName();
         }
         $this->getResponse()->setBody($response);

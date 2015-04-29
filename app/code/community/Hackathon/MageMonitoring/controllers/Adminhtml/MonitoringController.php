@@ -66,6 +66,7 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
             $transaction->beginTransaction();
             $this->deleteConfigData($config);
             $transaction->commit();
+            Mage::getConfig()->reinit();
             $this->_getSession()->addSuccess($this->__('Wiped all module configuration from database.'));
         } catch (Exception $e) {
             $transaction->rollback();
