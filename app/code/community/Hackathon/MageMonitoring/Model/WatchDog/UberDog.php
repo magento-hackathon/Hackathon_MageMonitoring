@@ -32,7 +32,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
      * Collects all registered watch dogs, handles their schedule and fires them if it's time.
      * Sends aggregrated reports via email.
      *
-     * @param boolean $skipTestDog
+     * @param  boolean $skipTestDog Do not trigger watchdogs
      * @throws Exception
      * @return void|boolean
      */
@@ -56,7 +56,10 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
         }
 
         foreach ($watchDogs as $d) {
-            if (!$d->onDuty()) continue; // skip inactive dogs
+            if (!$d->onDuty()) { // skip inactive dogs
+                continue;
+            }
+
             $mailTo = $d->getConfig('cron/mail_to');
             try {
                 // check watch dog schedules and run watch() if it's time
@@ -104,8 +107,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
             if (array_key_exists($email, $this->_exceptionList)) {
                 $vars['errors'] = $this->_exceptionList[$email];
             }
-//             $processedTemplate = $emailTemplate->getProcessedTemplate($vars);
-//             Mage::log($processedTemplate);
+
             $emailTemplate->send($mailTo['email'], $mailTo['name'], $vars);
             return true;
         }
