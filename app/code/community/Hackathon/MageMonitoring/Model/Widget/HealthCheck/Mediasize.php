@@ -32,6 +32,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
 {
     // config key
     const CONFIG_ALLOW_SLOW_MODE = 'allow_slow_mode';
+
     // defaults
     protected $_defAllowSlowMode = false;
 

@@ -32,13 +32,15 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
     // define config keys
     const CONFIG_LAST_LOG_ENTRY = 'last_log_entry';
     const CONFIG_LOG_LINES = 'linecount';
+    
     // define global defaults
-    protected $_DEF_LOG_LINES = 30;
+    protected $_defLogLines = 30;
 
-    protected $_REGEX_LOGSTAMP = "\d{4}(-\d{2}){2}T(\d{2}:){2}\d{2}(\+|-)\d{2}:\d{2}";
+    protected $_regexLogstamp = "\d{4}(-\d{2}){2}T(\d{2}:){2}\d{2}(\+|-)\d{2}:\d{2}";
 
     /**
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
@@ -46,15 +48,16 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
         parent::initConfig();
         $this->addConfigHeader('Log Settings');
         // add config for tail -n param
-        $this->addConfig(self::CONFIG_LOG_LINES, 'Max. number of lines to tail:', $this->_DEF_LOG_LINES, 'widget');
+        $this->addConfig(self::CONFIG_LOG_LINES, 'Max. number of lines to tail:', $this->_defLogLines, 'widget');
         return $this->_config;
     }
 
     /**
      * Adds a tail -n row to widget output.
      *
-     * @param string $errorLevel
-     * @param string $fileName
+     * @param  string $errorLevel Error Level
+     * @param  string $fileName   Filename
+     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring Block
      */
     protected function newLogBlock($errorLevel, $fileName)
     {
@@ -71,12 +74,15 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
      * the last logged or whole tail if the last saved timestamp is not found.
      * Returns false if $logIn is empty or array with added report data.
      *
-     * @param string $log
-     * @return array|false
+     * @param  string $logIn          Log
+     * @param  string $attachmentName Attachment
+     * @return array|false Report
      */
     protected function watchLog($logIn, $attachmentName)
     {
-        if (!$logIn) return false;
+        if (!$logIn) {
+            return false;
+        }
 
         $this->loadConfig(self::CONFIG_LAST_LOG_ENTRY);
 
@@ -99,15 +105,15 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
     /**
      * Returns log entries with timestamp after $from or false if $from is not found.
      *
-     * @param string $log
-     * @param string $from
+     * @param  string $log  Log
+     * @param  string $from From
      * @return string|false
      */
     protected function extractNewLogEntries($log, $from)
     {
         $regOut = array();
         // find last time stamp
-        $pattern = '/('.$this->_REGEX_LOGSTAMP.')(?!.*'.$this->_REGEX_LOGSTAMP.')(.+)\z/ms';
+        $pattern = '/('.$this->_regexLogstamp.')(?!.*'.$this->_regexLogstamp.')(.+)\z/ms';
         if (preg_match_all($pattern, $log, $regOut)) {
             // last time stamp in log
             $curExcept = $regOut[1][0];
@@ -122,7 +128,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
 
                 // try to match everything after last logged exception
                 $r = array();
-                $p = '/(!?'.str_replace('+', '\+',$from).').*(('.$this->_REGEX_LOGSTAMP.')(.*?))\z/ms';
+                $p = '/(!?' . str_replace('+', '\+', $from) . ').*((' . $this->_regexLogstamp . ')(.*?))\z/ms';
                 $logOutput = '';
                 if ($from && preg_match_all($p, $log, $r)) {
                     return $r[7][0];
@@ -135,13 +141,12 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
     /**
      * Returns last lines of given $filePath.
      *
-     * @param string $filePath
-     * @param int $lines
+     * @param  string $filePath Filepath
+     * @param  int    $lines    Lines
      * @return string
      */
     protected function getLogTail($filePath, $lines)
     {
-        $logFile = '';
         if (file_exists($filePath)) {
             $logFile = $filePath;
         } elseif (file_exists(Mage::getBaseDir('log').DS.$filePath)) {

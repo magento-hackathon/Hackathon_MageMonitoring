@@ -1,27 +1,30 @@
 <?php
+/**
+ * This file is part of a FireGento e.V. module.
+ *
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * PHP version 5
+ *
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
+ */
 
 /**
- * Magento
+ * class Hackathon_MageMonitoring_Model_Widget_Abstract
  *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Hackathon
- * @package     Hackathon_MageMonitoring
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
  */
 class Hackathon_MageMonitoring_Model_Widget_Abstract
 {
@@ -102,31 +105,35 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring
+     * New Monitoring Block
+     *
+     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring Block
      */
     public function newMonitoringBlock()
     {
-        $b = Mage::app()->getLayout()->createBlock('magemonitoring/widget_monitoring');
-        $b->setTabId($this->getTabId());
-        $b->setWidgetId($this->getConfigId());
-        return $b;
+        $block = Mage::app()->getLayout()->createBlock('magemonitoring/widget_monitoring');
+        $block->setTabId($this->getTabId());
+        $block->setWidgetId($this->getConfigId());
+        return $block;
     }
 
     /**
-     * @return Hackathon_MageMonitoring_Block_Widget_Multi
+     * New Multi Block
+     *
+     * @return Hackathon_MageMonitoring_Block_Widget_Multi Block
      */
     public function newMultiBlock()
     {
-        $b = Mage::app()->getLayout()->createBlock('magemonitoring/widget_multi');
-        $b->setTabId($this->getTabId());
-        $b->setWidgetId($this->getConfigId());
-        return $b;
+        $block = Mage::app()->getLayout()->createBlock('magemonitoring/widget_multi');
+        $block->setTabId($this->getTabId());
+        $block->setWidgetId($this->getConfigId());
+        return $block;
     }
 
     /**
      * Adds $string to output.
      *
-     * @param string $string
+     * @param  string $string String
      * @return Hackathon_MageMonitoring_Model_Widget_Abstract
      */
     public function dump($string)
@@ -166,12 +173,12 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
+     * Get Config
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getConfig()
-     *
-     * @param null $configKey
-     * @param bool $valueOnly
+     * @param  null $configKey Config Key
+     * @param  bool $valueOnly Value Only
      * @return array|bool
+     * @see Hackathon_MageMonitoring_Model_Widget::getConfig()
      */
     public function getConfig($configKey = null, $valueOnly = true)
     {
@@ -196,7 +203,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     /**
      * Add empty or header row to config modal output.
      *
-     * @param string $header
+     * @param  string $header Header
      * @return Hackathon_MageMonitoring_Model_Widget
      */
     public function addConfigHeader($header = null)
@@ -208,28 +215,26 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     /**
      * Add Configuration
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::addConfig()
-     *
-     * @param $config_key
-     * @param $label
-     * @param $value
-     * @param string $scope
-     * @param string $inputType
-     * @param bool $required
-     * @param null $tooltip
+     * @param  string      $configKey Config Key
+     * @param  string      $label     Label
+     * @param  string|int  $value     Value
+     * @param  string      $scope     Scope
+     * @param  string      $inputType Input Type
+     * @param  bool        $required  Is Required
+     * @param  null|string $tooltip   Tooltip
      * @return $this
+     * @see Hackathon_MageMonitoring_Model_Widget::addConfig()
      */
     public function addConfig(
-        $config_key,
+        $configKey,
         $label,
         $value,
         $scope = 'global',
         $inputType = 'text',
         $required = false,
         $tooltip = null
-    )
-    {
-        $this->_config[$config_key] = array(
+    ) {
+        $this->_config[$configKey] = array(
             'scope' => $scope,
             'label' => $label,
             'value' => $value,
@@ -242,12 +247,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
+     * Load Config
      *
-     * @param null $configKey
-     * @param null $tabId
-     * @param null $widgetDbId
+     * @param  null|string|int $configKey  Config Key
+     * @param  null|string|int $tabId      Tab Id
+     * @param  null|string|int $widgetDbId Widget DB Id
      * @return array
+     * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
      */
     public function loadConfig($configKey = null, $tabId = null, $widgetDbId = null)
     {
@@ -276,8 +282,9 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * Save config in $post to core_config_data, can handle raw $_POST
      * or widget config arrays if $postOnly is true.
      *
-     * (non-PHPdoc)
-     *
+     * @param  array $post     Post
+     * @param  bool  $postOnly Post Only
+     * @return $this
      * @see Hackathon_MageMonitoring_Model_Widget::saveConfig()
      */
     public function saveConfig($post, $postOnly = false)
@@ -334,8 +341,10 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * (non-PHPdoc)
+     * Delete Config
      *
+     * @param  string|null $tabId Tab Id
+     * @return $this
      * @see Hackathon_MageMonitoring_Model_Widget::deleteConfig()
      */
     public function deleteConfig($tabId = null)
@@ -359,16 +368,16 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * Format of $attachments array:
      * array(array('filename' => $name, 'content' => $content), ...)
      *
-     * @param string $css_id
-     * @param string $label
-     * @param string $value
-     * @param array $attachments
+     * @param  string     $cssId       Css Id
+     * @param  string     $label       Label
+     * @param  string     $value       Value
+     * @param  array|null $attachments Attachments
      * @return $this
      */
-    public function addReportRow($css_id, $label, $value, $attachments = null)
+    public function addReportRow($cssId, $label, $value, $attachments = null)
     {
         $this->_report[] = array(
-            'css_id' => $css_id,
+            'css_id' => $cssId,
             'label' => $label,
             'value' => $value,
             'attachments' => $attachments
@@ -377,6 +386,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
+     * Get Tab Id
+     *
      * @return string
      */
     public function getTabId()
@@ -384,12 +395,19 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         return $this->_tabId;
     }
 
+    /**
+     * Get Version
+     *
+     * @return string
+     */
     public function getVersion()
     {
         return '0.0.1';
     }
 
     /**
+     * Get Supported Magento Versions
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getSupportedMagentoVersions()
      * @return string
      */
@@ -399,6 +417,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
+     * Check Versions
+     *
      * @return bool
      */
     protected function _checkVersions()
@@ -406,7 +426,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         if ($this->getSupportedMagentoVersions() === '*') {
             return true;
         }
-        #TODO: do proper merge, things will go probably south for code below.
+        // @todo: do proper merge, things will go probably south for code below.
         $mageVersion = Mage::getVersion();
 
         // retrieve supported versions from config.xml
@@ -425,9 +445,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         return false;
     }
 
+    /**
+     * Get Helper
+     *
+     * @return Hackathon_MageMonitoring_Helper_Data
+     */
     public function getHelper()
     {
         return Mage::helper('magemonitoring');
     }
-
 }
