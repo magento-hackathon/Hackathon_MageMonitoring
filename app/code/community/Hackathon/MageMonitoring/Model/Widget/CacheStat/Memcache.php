@@ -100,8 +100,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     }
 
     /**
-     * Returns memory max
-     *
+     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
      */
     public function getMemoryMax()
@@ -165,5 +164,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
         $this->_memCachePool->flush();
 
         return true;
+    }
+
+    protected function _getNodeName()
+    {
+        // TODO: Implement _getNodeName() method.
     }
 }

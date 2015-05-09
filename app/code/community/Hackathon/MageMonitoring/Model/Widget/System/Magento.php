@@ -63,12 +63,17 @@ class Hackathon_MageMonitoring_Model_Widget_System_Magento
         $block->addRow('info', 'Magento Version', $this->getMagentoInfo('version'));
         $block->addRow('info', 'Magento Root Path', $this->_getValue('DOCUMENT_ROOT'));
         $block->addRow('info', 'Total Products Count', $this->getMagentoInfo('products_count'));
-        $block->addRow('info', 'Total Customers Count', $this->getMagentoInfo('customers_count'));
+        $block->addRow('info', 'Total Customers Count',$this->getMagentoInfo('customers_count'));
         $block->addRow('info', 'Total Orders Count', $this->getMagentoInfo('orders_count'));
         $block->addRow('info', 'Current Online Visitors', $this->getMagentoInfo('online_visitors'));
 
         $this->_output[] = $block;
-
         return $this->_output;
     }
+
+    protected function _getNodeName()
+    {
+        // TODO: Implement _getNodeName() method.
+    }
 }
+

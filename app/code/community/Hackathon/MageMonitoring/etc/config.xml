@@ -352,6 +352,275 @@
                         </magento_exception>
                     </widgets>
                 </system_logs>
+                <monitoring_check>
+                    <label>Monitoring</label>
+                    <title>Monitoring</title>
+                    <display_prio>80</display_prio>
+                    <widgets>
+                        <seo>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_SEO</impl>
+                            <display_prio>10</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <catalog_seo_site_map>
+                                        <title>Frontend-Sitemap deactivated</title>
+                                        <path>catalog/seo/site_map</path>
+                                        <recommendation>0</recommendation>
+                                    </catalog_seo_site_map>
+
+                                    <sitemap_generate_enabled>
+                                        <title>XML Sitemap - enabled</title>
+                                        <path>sitemap/generate/enabled</path>
+                                        <recommendation>1</recommendation>
+                                    </sitemap_generate_enabled>
+                                    <sitemap_generate_time>
+                                        <title>XML Sitemap - generation time</title>
+                                        <path>sitemap/generate/time</path>
+                                        <recommendation>02,00,00</recommendation>
+                                    </sitemap_generate_time>
+                                    <sitemap_generate_error_email>
+                                        <title>XML Sitemap - email address for errors</title>
+                                        <path>sitemap/generate/error_email</path>
+                                        <recommendation>alert@example.com</recommendation>
+                                    </sitemap_generate_error_email>
+
+                                    <design_head_default_robots>
+                                        <title>Robots Permission</title>
+                                        <path>design/head/default_robots</path>
+                                        <recommendation>INDEX,FOLLOW</recommendation>
+                                    </design_head_default_robots>
+
+                                    <catalog_seo_category_canonical_tag>
+                                        <title>Canonical Tags - Categories</title>
+                                        <path>catalog/seo/category_canonical_tag</path>
+                                        <recommendation>1</recommendation>
+                                    </catalog_seo_category_canonical_tag>
+                                    <catalog_seo_product_canonical_tag>
+                                        <title>Canonical Tags - Products</title>
+                                        <path>catalog/seo/product_canonical_tag</path>
+                                        <recommendation>1</recommendation>
+                                    </catalog_seo_product_canonical_tag>
+                                    <catalog_seo_product_use_categories>
+                                        <title>Use Category Path in Product URLs</title>
+                                        <path>catalog/seo/product_use_categories</path>
+                                        <recommendation>0</recommendation>
+                                    </catalog_seo_product_use_categories>
+                                    <catalog_seo_search_terms>
+                                        <title>Search Terms in Frontend</title>
+                                        <path>catalog/seo/search_terms</path>
+                                        <recommendation>0</recommendation>
+                                    </catalog_seo_search_terms>
+
+                                    <cataloginventory_options_show_out_of_stock>
+                                        <title>Show out of Stock Products</title>
+                                        <path>cataloginventory/options/show_out_of_stock</path>
+                                        <recommendation>1</recommendation>
+                                    </cataloginventory_options_show_out_of_stock>
+                                </values>
+                            </shop_configuration>
+                        </seo>
+
+                        <privacy>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Privacy</impl>
+                            <display_prio>15</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <google_analytics_anonymization>
+                                        <title>Google-Analytics anonymization</title>
+                                        <path>google/analytics/anonymization</path>
+                                        <recommendation>1</recommendation>
+                                    </google_analytics_anonymization>
+                                    <google_analytics_ip_anonymization>
+                                        <title>Google-Analytics IP anonymization</title>
+                                        <path>google/analytics/ip_anonymization</path>
+                                        <recommendation>1</recommendation>
+                                    </google_analytics_ip_anonymization>
+                                    <sales_general_hide_customer_ip>
+                                        <title>Hide Customer IP</title>
+                                        <path>sales/general/hide_customer_ip</path>
+                                        <recommendation>1</recommendation>
+                                    </sales_general_hide_customer_ip>
+                                    <web_secure_use_in_frontend>
+                                        <title>Use secure URL in Frontend</title>
+                                        <path>web/secure/use_in_frontend</path>
+                                        <recommendation>1</recommendation>
+                                    </web_secure_use_in_frontend>
+                                    <web_secure_use_in_adminhtml>
+                                        <title>Use secure URL in Backend</title>
+                                        <path>web/secure/use_in_adminhtml</path>
+                                        <recommendation>1</recommendation>
+                                    </web_secure_use_in_adminhtml>
+                                    <sendfriend_email_enabled>
+                                        <title>Send-To-Friend enabled</title>
+                                        <path>sendfriend/email/enabled</path>
+                                        <recommendation>0</recommendation>
+                                    </sendfriend_email_enabled>
+                                    <payment_ccsave_active>
+                                        <title>Payment CC-Save active</title>
+                                        <path>payment/ccsave/active</path>
+                                        <recommendation>0</recommendation>
+                                    </payment_ccsave_active>
+                                    <customer_create_account_confirm>
+                                        <title>Customer create account confirmation</title>
+                                        <path>customer/create_account/confirm</path>
+                                        <recommendation>1</recommendation>
+                                    </customer_create_account_confirm>
+                                </values>
+                            </shop_configuration>
+                        </privacy>
+
+                        <security>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Security</impl>
+                            <display_prio>20</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <admin_url_use_custom_path>
+                                        <title>Use custom admin URL</title>
+                                        <path>admin/url/use_custom_path</path>
+                                        <recommendation>1</recommendation>
+                                    </admin_url_use_custom_path>
+                                    <admin_security_use_case_sensitive_login>
+                                        <title>Case sensitive login in admin</title>
+                                        <path>admin/security/use_case_sensitive_login</path>
+                                        <recommendation>1</recommendation>
+                                    </admin_security_use_case_sensitive_login>
+                                    <dev_template_allow_symlink>
+                                        <title>Symlinks allowed</title>
+                                        <path>dev/template/allow_symlink</path>
+                                        <recommendation>0</recommendation>
+                                    </dev_template_allow_symlink>
+                                </values>
+                            </shop_configuration>
+                        </security>
+
+                        <maintenance>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Maintenance</impl>
+                            <display_prio>30</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <dev_log_active>
+                                        <title>Logging activated</title>
+                                        <path>dev/log/active</path>
+                                        <recommendation>1</recommendation>
+                                    </dev_log_active>
+                                    <system_log_enabled>
+                                        <title>Log cleaning activated</title>
+                                        <path>system/log/enabled</path>
+                                        <recommendation>1</recommendation>
+                                    </system_log_enabled>
+                                    <system_log_clean_after_day>
+                                        <title>Log cleaning interval</title>
+                                        <path>system/log/clean_after_day</path>
+                                        <recommendation>30</recommendation>
+                                    </system_log_clean_after_day>
+                                </values>
+                            </shop_configuration>
+                        </maintenance>
+
+                        <default_extensions_community>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Extensions_Community</impl>
+                            <display_prio>32</display_prio>
+                            <collapsed>1</collapsed>
+                        </default_extensions_community>
+
+                        <log>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Log</impl>
+                            <display_prio>34</display_prio>
+                            <collapsed>1</collapsed>
+                        </log>
+
+                        <hosting>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Hosting</impl>
+                            <display_prio>35</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <system_cron_schedule_generate_every>
+                                        <title>Cron - Schedule every</title>
+                                        <path>system/cron/schedule_generate_every</path>
+                                        <recommendation>10</recommendation>
+                                    </system_cron_schedule_generate_every>
+                                    <system_cron_schedule_ahead_for>
+                                        <title>Cron - Schedule ahead for</title>
+                                        <path>system/cron/schedule_ahead_for</path>
+                                        <recommendation>30</recommendation>
+                                    </system_cron_schedule_ahead_for>
+                                    <system_cron_schedule_lifetime>
+                                        <title>Cron - Schedule Lifetime</title>
+                                        <path>system/cron/schedule_lifetime</path>
+                                        <recommendation>60</recommendation>
+                                    </system_cron_schedule_lifetime>
+                                    <system_cron_error_email>
+                                        <title>Cron - Schedule every</title>
+                                        <path>system/cron/error_email</path>
+                                        <recommendation>alert@example.com</recommendation>
+                                    </system_cron_error_email>
+                                    <system_cron_history_cleanup_every>
+                                        <title>Cron - History Cleanup every</title>
+                                        <path>system/cron/history_cleanup_every</path>
+                                        <recommendation>10080</recommendation>
+                                    </system_cron_history_cleanup_every>
+                                    <system_cron_history_success_lifetime>
+                                        <title>Cron - History success Lifetime</title>
+                                        <path>system/cron/history_success_lifetime</path>
+                                        <recommendation>10080</recommendation>
+                                    </system_cron_history_success_lifetime>
+                                    <system_cron_history_error_lifetime>
+                                        <title>Cron - History error Lifetime</title>
+                                        <path>system/cron/history_failure_lifetime</path>
+                                        <recommendation>10080</recommendation>
+                                    </system_cron_history_error_lifetime>
+                                </values>
+                            </shop_configuration>
+                        </hosting>
+
+                        <rootfiles>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_RootFiles</impl>
+                            <display_prio>36</display_prio>
+                            <collapsed>1</collapsed>
+                        </rootfiles>
+
+                        <performance>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Performance</impl>
+                            <display_prio>40</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <catalog_frontend_flat_catalog_category>
+                                        <title>Flat Tables - Category</title>
+                                        <path>catalog/frontend/flat_catalog_category</path>
+                                        <recommendation>1</recommendation>
+                                    </catalog_frontend_flat_catalog_category>
+                                    <catalog_frontend_flat_catalog_product>
+                                        <title>Flat Tables - Product</title>
+                                        <path>catalog/frontend/flat_catalog_product</path>
+                                        <recommendation>1</recommendation>
+                                    </catalog_frontend_flat_catalog_product>
+                                    <dev_js_merge_files>
+                                        <title>Merge JS Files</title>
+                                        <path>dev/js/merge_files</path>
+                                        <recommendation>1</recommendation>
+                                    </dev_js_merge_files>
+                                    <dev_css_merge_css_files>
+                                        <title>Merge CSS Files</title>
+                                        <path>dev/css/merge_css_files</path>
+                                        <recommendation>1</recommendation>
+                                    </dev_css_merge_css_files>
+                                </values>
+                            </shop_configuration>
+                        </performance>
+
+                        <patches>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Patches</impl>
+                            <display_prio>50</display_prio>
+                            <collapsed>1</collapsed>
+                        </patches>
+                    </widgets>
+                </monitoring_check>
             </tabs>
         </magemonitoring>
     </default>

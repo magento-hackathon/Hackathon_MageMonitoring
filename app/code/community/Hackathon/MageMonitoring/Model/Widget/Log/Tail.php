@@ -114,4 +114,8 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
         }
     }
 
+    protected function _getNodeName()
+    {
+        // TODO: Implement _getNodeName() method.
+    }
 }

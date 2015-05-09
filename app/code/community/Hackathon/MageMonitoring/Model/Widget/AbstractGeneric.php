@@ -76,4 +76,9 @@ class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
     {
         return $this->getConfig(self::CONFIG_WIDGET_TITLE);
     }
+
+    protected function _getNodeName()
+    {
+        // TODO: Implement _getNodeName() method.
+    }
 }

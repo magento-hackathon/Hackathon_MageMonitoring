@@ -92,8 +92,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis
     }
 
     /**
-     * Returns memory max
-     *
+     * (non-PHPdoc)
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
      */
     public function getMemoryMax()
@@ -153,5 +152,10 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis
         $this->_redisClient->flushDb();
 
         return true;
+    }
+
+    protected function _getNodeName()
+    {
+        // TODO: Implement _getNodeName() method.
     }
 }

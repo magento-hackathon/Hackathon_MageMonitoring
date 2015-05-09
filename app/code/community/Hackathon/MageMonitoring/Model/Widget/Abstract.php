@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Abstract
+abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackathon_MageMonitoring_Model_Widget
 {
     // define config keys
     const CONFIG_START_COLLAPSED = 'collapsed';
@@ -48,14 +48,68 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     protected $_config = array();
     protected $_report = array();
 
+    /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $_renderer */
+    protected $_renderer;
+
     /**
-     * Returns unique widget id. You really don't want to override is. ;)
+     * Used to render the widget, returns array of classes that have a ->toHtml() method.
+     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you .
+     *
+     * @return array
+     */
+    public function getOutput()
+    {
+        $block = $this->newMultiBlock();
+
+        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        $renderer = $block->newContentRenderer('table');
+        $this->setRenderer($renderer);
+
+        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        $helper = Mage::helper('magemonitoring');
+
+        $renderer->setHeaderRow(
+            array(
+                $helper->__('Test aspect'),
+                $helper->__('Test Details'),
+                $helper->__('Test result'),
+                $helper->__('Recommendation')
+            )
+        );
+
+        try {
+
+            $this->_renderConfigChecks();
+            $this->_renderMoreChecks();
+
+        } catch (Exception $e) {
+            Mage::logException($e);
+        }
+
+        return $this->_output;
+    }
+
+    /**
+     * New Multi Block
+     *
+     * @return Hackathon_MageMonitoring_Block_Widget_Multi Block
+     */
+    public function newMultiBlock()
+    {
+        $block = Mage::app()->getLayout()->createBlock('magemonitoring/widget_multi');
+        $block->setTabId($this->getTabId());
+        $block->setWidgetId($this->getConfigId());
+        return $block;
+    }
+
+    /**
+     * Get Tab Id
      *
      * @return string
      */
-    public function getId()
+    public function getTabId()
     {
-        return get_called_class();
+        return $this->_tabId;
     }
 
     /**
@@ -75,7 +129,152 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns unique widget id. You really don't want to override is. ;)
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return get_called_class();
+    }
+
+    /**
+     * Render configuration checks defined in config.xml
+     *
+     * @return $this
+     */
+    protected function _renderConfigChecks()
+    {
+
+        foreach ($this->_getConfigValues() as $_config) {
+            $title = (string)$_config->title;
+            $path = (string)$_config->path;
+            $recommendation = (string)$_config->recommendation;
+
+            $this->_checkConfigValue($title, $path, $recommendation);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Return configuration params from config.xml
+     *
+     * @return array|SimpleXMLElement
+     */
+    protected function _getConfigValues()
+    {
+        $nodes = Mage::getConfig()->getNode('default/magemonitoring/tabs/monitoring_check/widgets/' . $this->_getNodeName() . '/shop_configuration/values');
+        if ($nodes) {
+            return $nodes->children();
+        }
+        return array();
+    }
+
+    /**
+     * Returns the name of the widgets xml node
+     *
+     * @return string
+     */
+    abstract protected function _getNodeName();
+
+    /**
+     * Check a given configuration value concerning an optional recommendation
+     *
+     * @param  string $title The title of the configuration value.
+     * @param  string $configPath The configuration value path.
+     * @param  string $recommendation The recommended value for the given config value.
+     *
+     * @return $this
+     */
+    protected function _checkConfigValue($title, $configPath, $recommendation = null)
+    {
+        $renderer = $this->getRenderer();
+        if (is_null($renderer)) {
+            Mage::throwException('No Renderer set for Monitoring');
+        }
+
+        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        $helper = $this->_getHelper();
+
+        $configValue = Mage::getStoreConfig($configPath);
+        if (is_null($configValue)) {
+            $configValue = '---';
+        }
+
+        if (is_null($recommendation)) {
+            $recommendation = '---';
+        }
+
+        $this->getRenderer()->addRow(
+            array($helper->__($title), $configPath, $configValue, $recommendation),
+            $this->_getRowConfig($configValue == $recommendation)
+        );
+
+        $this->_output[] = $this->getRenderer();
+
+        return $this;
+    }
+
+    /**
+     * Get the renderer.
+     *
+     * @return Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract
+     */
+    public function getRenderer()
+    {
+        return $this->_renderer;
+    }
+
+    /**
+     * Set the renderer.
+     *
+     * @param Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $renderer A renderer
+     */
+    public function setRenderer(Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $renderer)
+    {
+        $this->_renderer = $renderer;
+    }
+
+    /**
+     * Get an instance of the module's data helper.
+     *
+     * @return Hackathon_MageMonitoring_Helper_Data
+     */
+    protected function _getHelper()
+    {
+        return Mage::helper('magemonitoring');
+    }
+
+    /**
+     * Get a row configuration.
+     *
+     * @param  bool $conditionMet A flag indicating whether the condition was met or not.
+     *
+     * @return array
+     */
+    protected function _getRowConfig($conditionMet)
+    {
+        if ($conditionMet) {
+            $rowConfig = array('_cssClasses' => Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_OK);
+        } else {
+            $rowConfig = array('_cssClasses' => Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_WARNING);
+        }
+        return $rowConfig;
+    }
+
+    /**
+     * Render additional checks.
+     *
+     * @return $this
+     */
+    protected function _renderMoreChecks()
+    {
+        return $this;
+    }
+
+    /**
+     * Returns true if this widget is active.
      *
      * @see Hackathon_MageMonitoring_Model_Widget::isActive()
      */
@@ -85,91 +284,14 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns true if widget should start collapsed, speeds up loading times as
+     * the widget won't render it's content on page load.
      *
      * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
      */
     public function displayCollapsed()
     {
         return $this->getConfig(self::CONFIG_START_COLLAPSED);
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
-     */
-    public function getDisplayPrio()
-    {
-        return $this->getConfig(self::CONFIG_DISPLAY_PRIO);
-    }
-
-    /**
-     * New Monitoring Block
-     *
-     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring Block
-     */
-    public function newMonitoringBlock()
-    {
-        $block = Mage::app()->getLayout()->createBlock('magemonitoring/widget_monitoring');
-        $block->setTabId($this->getTabId());
-        $block->setWidgetId($this->getConfigId());
-        return $block;
-    }
-
-    /**
-     * New Multi Block
-     *
-     * @return Hackathon_MageMonitoring_Block_Widget_Multi Block
-     */
-    public function newMultiBlock()
-    {
-        $block = Mage::app()->getLayout()->createBlock('magemonitoring/widget_multi');
-        $block->setTabId($this->getTabId());
-        $block->setWidgetId($this->getConfigId());
-        return $block;
-    }
-
-    /**
-     * Adds $string to output.
-     *
-     * @param  string $string String
-     * @return Hackathon_MageMonitoring_Model_Widget_Abstract
-     */
-    public function dump($string)
-    {
-        $this->_output[] = Mage::app()->getLayout()->createBlock('magemonitoring/widget_dump')->setOutput($string);
-        return $this;
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
-     */
-    public function initConfig()
-    {
-        $this->addConfigHeader('Widget Configuration');
-
-        $this->addConfig(
-            self::CONFIG_START_COLLAPSED,
-            'Do not render widget on pageload?',
-            $this->_defStartCollapsed,
-            'widget',
-            'checkbox',
-            false
-        );
-
-        $this->addConfig(
-            self::CONFIG_DISPLAY_PRIO,
-            'Display priority (0=top):',
-            $this->_defDisplayPrio,
-            'widget',
-            'text',
-            false
-        );
-
-        return $this->_config;
     }
 
     /**
@@ -196,6 +318,36 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                 return false;
             }
         }
+
+        return $this->_config;
+    }
+
+    /**
+     * Returns array with default config data for this widget or false if not implemented.
+     *
+     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     */
+    public function initConfig()
+    {
+        $this->addConfigHeader('Widget Configuration');
+
+        $this->addConfig(
+            self::CONFIG_START_COLLAPSED,
+            'Do not render widget on pageload?',
+            $this->_defStartCollapsed,
+            'widget',
+            'checkbox',
+            false
+        );
+
+        $this->addConfig(
+            self::CONFIG_DISPLAY_PRIO,
+            'Display priority (0=top):',
+            $this->_defDisplayPrio,
+            'widget',
+            'text',
+            false
+        );
 
         return $this->_config;
     }
@@ -233,7 +385,8 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
         $inputType = 'text',
         $required = false,
         $tooltip = null
-    ) {
+    )
+    {
         $this->_config[$configKey] = array(
             'scope' => $scope,
             'label' => $label,
@@ -247,10 +400,46 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
+     * Returns true if widget should start collapsed, speeds up loading times as
+     * the widget won't render it's content on page load.
+     *
+     * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
+     */
+    public function getDisplayPrio()
+    {
+        return $this->getConfig(self::CONFIG_DISPLAY_PRIO);
+    }
+
+    /**
+     * New Monitoring Block
+     *
+     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring Block
+     */
+    public function newMonitoringBlock()
+    {
+        $block = Mage::app()->getLayout()->createBlock('magemonitoring/widget_monitoring');
+        $block->setTabId($this->getTabId());
+        $block->setWidgetId($this->getConfigId());
+        return $block;
+    }
+
+    /**
+     * Adds $string to output.
+     *
+     * @param  string $string String
+     * @return Hackathon_MageMonitoring_Model_Widget_Abstract
+     */
+    public function dump($string)
+    {
+        $this->_output[] = Mage::app()->getLayout()->createBlock('magemonitoring/widget_dump')->setOutput($string);
+        return $this;
+    }
+
+    /**
      * Load Config
      *
-     * @param  null|string|int $configKey  Config Key
-     * @param  null|string|int $tabId      Tab Id
+     * @param  null|string|int $configKey Config Key
+     * @param  null|string|int $tabId Tab Id
      * @param  null|string|int $widgetDbId Widget DB Id
      * @return array
      * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
@@ -279,11 +468,21 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
+     * Get Helper
+     *
+     * @return Hackathon_MageMonitoring_Helper_Data
+     */
+    public function getHelper()
+    {
+        return Mage::helper('magemonitoring');
+    }
+
+    /**
      * Save config in $post to core_config_data, can handle raw $_POST
      * or widget config arrays if $postOnly is true.
      *
-     * @param  array $post     Post
-     * @param  bool  $postOnly Post Only
+     * @param  array $post Post
+     * @param  bool $postOnly Post Only
      * @return $this
      * @see Hackathon_MageMonitoring_Model_Widget::saveConfig()
      */
@@ -368,9 +567,9 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
      * Format of $attachments array:
      * array(array('filename' => $name, 'content' => $content), ...)
      *
-     * @param  string     $cssId       Css Id
-     * @param  string     $label       Label
-     * @param  string     $value       Value
+     * @param  string $cssId Css Id
+     * @param  string $label Label
+     * @param  string $value Value
      * @param  array|null $attachments Attachments
      * @return $this
      */
@@ -386,16 +585,6 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * Get Tab Id
-     *
-     * @return string
-     */
-    public function getTabId()
-    {
-        return $this->_tabId;
-    }
-
-    /**
      * Get Version
      *
      * @return string
@@ -403,17 +592,6 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     public function getVersion()
     {
         return '0.0.1';
-    }
-
-    /**
-     * Get Supported Magento Versions
-     *
-     * @see Hackathon_MageMonitoring_Model_Widget::getSupportedMagentoVersions()
-     * @return string
-     */
-    public function getSupportedMagentoVersions()
-    {
-        return '*';
     }
 
     /**
@@ -446,12 +624,13 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
     }
 
     /**
-     * Get Helper
+     * Get Supported Magento Versions
      *
-     * @return Hackathon_MageMonitoring_Helper_Data
+     * @see Hackathon_MageMonitoring_Model_Widget::getSupportedMagentoVersions()
+     * @return string
      */
-    public function getHelper()
+    public function getSupportedMagentoVersions()
     {
-        return Mage::helper('magemonitoring');
+        return '*';
     }
 }
