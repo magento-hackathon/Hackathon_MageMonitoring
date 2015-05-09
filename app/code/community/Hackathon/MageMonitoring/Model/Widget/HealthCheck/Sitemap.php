@@ -1,17 +1,38 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: blaber
- * Date: 22/02/14
- * Time: 11:47
+ * This file is part of a FireGento e.V. module.
+ *
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * PHP version 5
+ *
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
 
+/**
+ * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
     extends Hackathon_MageMonitoring_Model_Widget_Abstract
     implements Hackathon_MageMonitoring_Model_Widget
 {
     /**
-     * (non-PHPdoc)
+     * Returns name
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
@@ -20,7 +41,8 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns version
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
@@ -29,7 +51,8 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns isActive flag
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
@@ -37,6 +60,13 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
         return true;
     }
 
+    /**
+     * Returns file info
+     *
+     * @param  string                               $pathToFile Path to the file
+     * @param  Hackathon_MageMonitoring_Helper_Data $helper     Helper class
+     * @return array
+     */
     private function _getFileInfo($pathToFile, $helper)
     {
         if (file_exists($pathToFile)) {
@@ -44,10 +74,10 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
             $mtime = filemtime($pathToFile);
             $date = Mage::getModel('core/date')->timestamp(time());
             $date = date('Y-m-d H:i:s', $date);
-            $time24 = strtotime($date) - 86400;
+            $time = strtotime($date) - 86400;
 
 
-            if ( $mtime - $time24 < 0) {
+            if ($mtime - $time < 0) {
                 $status = $helper->__('OK, but not change within last 24h');
                 $warn = array('_cssClasses' => $helper->getConst('WARN_TYPE_WARNING'));
             } else {
@@ -65,6 +95,11 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
 
     }
 
+    /**
+     * Fetches and returns output
+     *
+     * @return array
+     */
     public function getOutput()
     {
         $sitemaps = Mage::getModel('sitemap/sitemap')->getCollection();

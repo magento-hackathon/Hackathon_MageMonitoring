@@ -1,37 +1,36 @@
 <?php
 /**
- * Magento
+ * This file is part of a FireGento e.V. module.
  *
- * NOTICE OF LICENSE
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * DISCLAIMER
+ * PHP version 5
  *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Mage
- * @package     Mage_Adminhtml
- * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
 
 /**
- * @category   Mage
- * @package    Mage_Adminhtml
- * @author      Magento Core Team <core@magentocommerce.com>
+ * Block for rendering widget configuration
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
  */
-
 class Hackathon_MageMonitoring_Block_Tab_Config_Form_WidgetConf extends Mage_Adminhtml_Block_Widget_Form
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         parent::__construct();

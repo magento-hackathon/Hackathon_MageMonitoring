@@ -1,29 +1,31 @@
 <?php
 /**
- * Magento
+ * This file is part of a FireGento e.V. module.
  *
- * NOTICE OF LICENSE
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
  *
- * This source file is subject to the Academic Free License (AFL 3.0)
- * that is bundled with this package in the file LICENSE_AFL.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/afl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * DISCLAIMER
+ * PHP version 5
  *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @author      Christian Münch <c.muench@netz98.de>
- * @category    Hackathon
- * @package     Hackathon_MageMonitoring
- * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
 
+/**
+ * Rewrites helper
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
 {
     protected $_rewriteTypes = array(
@@ -112,7 +114,7 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
      * If yes we have no conflict. The top class can extend every core class.
      * So we cannot check this.
      *
-     * @var array $classes
+     * @param  array $classes List of classes
      * @return bool
      */
     protected function _isInheritanceConflict($classes)
@@ -136,8 +138,8 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
     /**
      * Returns loaded class by type like models or blocks
      *
-     * @param string $type       Class Type
-     * @param string $classGroup Class Group Name
+     * @param  string $type       Class Type
+     * @param  string $classGroup Class Group Name
      *
      * @return string
      */
@@ -192,7 +194,7 @@ class Hackathon_MageMonitoring_Helper_Rewrites extends Mage_Core_Helper_Abstract
                 }
             }
         }
+
         return $return;
     }
-
 }

@@ -28,7 +28,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog extends Hackathon_Ma
 {
     // override defaults
     protected $_DEF_DISPLAY_PRIO = 100;
-    protected $_DEF_START_COLLAPSED = 1;
+    protected $_defStartCollapsed = 1;
 
     /**
      * (non-PHPdoc)

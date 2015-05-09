@@ -1,33 +1,41 @@
 <?php
 /**
- * Magento
+ * This file is part of a FireGento e.V. module.
  *
- * NOTICE OF LICENSE
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * DISCLAIMER
+ * PHP version 5
  *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Hackathon
- * @package     Hackathon_MageMonitoring
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
-class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+
+/**
+ * class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
+class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis
+    extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
     implements Hackathon_MageMonitoring_Model_Widget_CacheStat
 {
     private $_redisClient;
     private $_redisInfo;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         try {
@@ -46,7 +54,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns name
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
@@ -55,7 +64,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns version
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
@@ -68,7 +78,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns isActive flag
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
@@ -81,7 +92,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns memory max
+     *
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
      */
     public function getMemoryMax()
@@ -90,7 +102,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns used memory
+     *
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryUsed()
      */
     public function getMemoryUsed()
@@ -103,7 +116,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns number of cache hits
+     *
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheHits()
      */
     public function getCacheHits()
@@ -116,7 +130,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns number of cache misses
+     *
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheMisses()
      */
     public function getCacheMisses()
@@ -129,7 +144,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
     }
 
     /**
-     * (non-PHPdoc)
+     * Flushes cache
+     *
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::flushCache()
      */
     public function flushCache()
@@ -138,5 +154,4 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis extends Hackathon_Ma
 
         return true;
     }
-
 }

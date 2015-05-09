@@ -1,5 +1,31 @@
 <?php
+/**
+ * This file is part of a FireGento e.V. module.
+ *
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * PHP version 5
+ *
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
+ */
 
+/**
+ * Database helper
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
 {
     private $_connection = null;
@@ -8,6 +34,11 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
     private $_serverSettings = array();
     private $_innodbSettings = array();
 
+    /**
+     * Return database connection
+     *
+     * @return DB connection
+     */
     public function getConnection()
     {
         if (!$this->_connection) {
@@ -18,7 +49,9 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return array
+     * Returns MySQL version
+     *
+     * @return int
      */
     public function getMysqlVersion()
     {
@@ -26,7 +59,9 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * @return string
+     * Returns MySQL server information
+     *
+     * @return array
      */
     public function getMysqlServerInfo()
     {
@@ -51,6 +86,11 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
         return $result;
     }
 
+    /**
+     * Returns MySQL server status
+     *
+     * @return array
+     */
     public function getMysqlServerStatus()
     {
         /**
@@ -72,29 +112,57 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
         return $result;
     }
 
+    /**
+     * Returns MySQL tuner output
+     *
+     * @return string
+     * @todo Implement
+     */
     public function getMysqlTunerOutput()
     {
         return "ToDo";
     }
 
+    /**
+     * Returns MySQL traffic information
+     *
+     * @return string
+     * @todo Implement
+     */
     public function getMysqlTrafficInformation()
     {
         return "ToDo";
     }
 
+    /**
+     * Returns MySQL connection information
+     *
+     * @return string
+     * @todo Implement
+     */
     public function getMysqlConnectionInformation()
     {
         return "ToDo";
     }
 
+    /**
+     * Returns MySQL statements information
+     *
+     * @return string
+     * @todo Implement
+     */
     public function getMysqlStatementsInformation()
     {
         return "ToDo";
     }
 
+    /**
+     * Returns MySQL server settings information
+     *
+     * @return array
+     */
     public function getMysqlServerSettingsInformation()
     {
-
         /**
          * Retrieve the read connection
          */
@@ -117,9 +185,25 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
         return $result;
     }
 
+    /**
+     * Returns MySQL innoDB buffer size information
+     *
+     * @return array
+     */
     public function getMysqlInnodbBufferSizeInformation()
     {
-        $query = 'SELECT engine, FORMAT( ( (sum( index_length ) ) + (sum( data_length ) ) ), 0) " total_size" FROM information_schema.TABLES WHERE engine IS NOT NULL GROUP BY engine;';
+        $query = <<<EOS
+SELECT
+    engine,
+    FORMAT(((sum(index_length)) + (sum(data_length))), 0) " total_size"
+FROM
+    information_schema.TABLES
+WHERE
+    engine IS NOT NULL
+GROUP BY
+    engine;
+EOS;
+
         $readConnection = $this->getConnection();
         $results = $readConnection->fetchAll($query);
 
@@ -144,5 +228,4 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
 
         return $_comparableResult;
     }
-
 }
