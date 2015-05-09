@@ -23,10 +23,13 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
+
+/**
+ * Class Hackathon_MageMonitoring_Model_Widget_Log_Tail
+ */
 class Hackathon_MageMonitoring_Model_Widget_Log_Tail
     extends Hackathon_MageMonitoring_Model_Widget_Log_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget,
-    Hackathon_MageMonitoring_Model_WatchDog
+    implements Hackathon_MageMonitoring_Model_Widget, Hackathon_MageMonitoring_Model_WatchDog
 {
     // define config keys
     const CONFIG_LOG_FILE = 'file_path';
@@ -57,6 +60,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
     public function initConfig()
     {
         parent::initConfig();
+
         // add config for log file path
         $this->addConfig(self::CONFIG_LOG_FILE,
             'Log file path:',

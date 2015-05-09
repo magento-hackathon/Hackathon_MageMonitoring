@@ -23,7 +23,7 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
-    extends Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
+    extends Hackathon_MageMonitoring_Model_Widget_Watchdog
 {
     // define config keys
     const CONFIG_LAST_LOG_ENTRY = 'last_log_entry';

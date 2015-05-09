@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magento
  *
@@ -23,13 +24,17 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-class Hackathon_MageMonitoring_Model_WatchDog_Test extends Hackathon_MageMonitoring_Model_Widget_Abstract
-                                                   implements Hackathon_MageMonitoring_Model_WatchDog
+/**
+ * Class Hackathon_MageMonitoring_Model_WatchDog_Test
+ */
+class Hackathon_MageMonitoring_Model_WatchDog_Test
+    extends Hackathon_MageMonitoring_Model_WatchDog_Abstract
 {
-    protected $_DEF_WATCHDOG_CRON = '* * * * *';
+    protected $_defWatchdogCron = '* * * * *';
 
     /**
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getDogName()
@@ -39,6 +44,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Test extends Hackathon_MageMonitor
 
     /**
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
@@ -48,15 +54,21 @@ class Hackathon_MageMonitoring_Model_WatchDog_Test extends Hackathon_MageMonitor
 
     /**
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
      */
     public function watch()
     {
-        $value = 'Something terrible happened. See attachment test.log for details.';
-        $this->addReportRow('error', 'test label', $value,
-                array(array('filename' => 'test.log', 'content' => 'test test')));
+        $value = $this->getHelper()->__('Something terrible happened. See attachment test.log for details.');
 
-        $this->addReportRow('warning', 'another test label', 'just a warning');
+        $this->addReportRow('error', 'test label', $value,
+            array(array('filename' => 'test.log', 'content' => 'test test')));
+
+        $this->addReportRow(
+            'warning',
+            $this->getHelper()->__('Another test label'),
+            $this->getHelper()->__('Just a warning')
+        );
         return $this->_report;
     }
 

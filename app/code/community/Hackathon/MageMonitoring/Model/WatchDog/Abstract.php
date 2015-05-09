@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Magento
  *
@@ -25,40 +24,10 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_WatchDog_Error
+ * Class Hackathon_MageMonitoring_Model_WatchDog_Abstract
  */
-class Hackathon_MageMonitoring_Model_WatchDog_Error
-    extends Hackathon_MageMonitoring_Model_WatchDog_Abstract
+abstract class Hackathon_MageMonitoring_Model_WatchDog_Abstract
+    extends Hackathon_MageMonitoring_Model_Widget_Watchdog
+    implements Hackathon_MageMonitoring_Model_WatchDog
 {
-    protected $_defWatchdogCron = '* * * * *';
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
-     */
-    public function getDogName()
-    {
-        return 'Watch Dog Error Test';
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
-     */
-    public function getVersion()
-    {
-        return '1.0';
-    }
-
-    /**
-     * (non-PHPdoc)
-     *
-     * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
-     */
-    public function watch()
-    {
-        throw new Exception ('Watch dog runtime error reporting test.');
-    }
 }

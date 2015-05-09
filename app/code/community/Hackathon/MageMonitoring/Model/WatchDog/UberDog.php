@@ -33,7 +33,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
 
     /**
      * Collects all registered watch dogs, handles their schedule and fires them if it's time.
-     * Sends aggregrated reports via email.
+     * Sends aggregated reports via email.
      *
      * @param  boolean $skipTestDog Do not trigger watchdogs
      * @throws Exception
@@ -41,18 +41,19 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
      */
     public function triggerActiveDogs($skipTestDog = true)
     {
+        $helper = Mage::helper('magemonitoring');
         $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
         // exit if globally disabled
-        if (!Mage::getStoreConfigFlag(Mage::helper('magemonitoring')->getConfigKeyById('dogs/disabled', $id))) {
-            return;
+        if (Mage::getStoreConfigFlag($helper->getConfigKeyById('dogs/disabled', $id))) {
+            return false;
         }
 
-        $watchDogs = Mage::helper('magemonitoring')->getConfiguredWatchDogs();
+        $watchDogs = $helper->getConfiguredWatchDogs();
 
         // add test watch dogs that always fire a report and a runtime error?
         if (!$skipTestDog) {
             foreach (array('test', 'error') as $m) {
-                $t = Mage::getModel('magemonitoring/watchDog_'.$m);
+                $t = Mage::getModel('magemonitoring/watchDog_' . $m);
                 $t->loadConfig();
                 $watchDogs[] = $t;
             }
@@ -96,11 +97,13 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
                     }
                 }
             }
-            $mailFrom = Mage::helper('magemonitoring')->validateEmail('general');
-            $mailTo = Mage::helper('magemonitoring')->validateEmail($email);
+            $mailFrom = $helper->validateEmail('general');
+            $mailTo = $helper->validateEmail($email);
 
             if (!$mailFrom || !$mailTo) {
-                throw new Exception ('Error sending watch dog report. Could not find valid sender or recipent address.');
+                throw new Exception (
+                    $helper->__('Error sending watch dog report. Could not find valid sender or recipient address.')
+                );
             }
 
             $emailTemplate->setSenderName($mailFrom['name']);
@@ -115,5 +118,4 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
             return true;
         }
     }
-
 }

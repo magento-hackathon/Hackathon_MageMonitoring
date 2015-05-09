@@ -23,6 +23,9 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
+/**
+ * Interface Hackathon_MageMonitoring_Model_WatchDog
+ */
 interface Hackathon_MageMonitoring_Model_WatchDog
 {
     /**
@@ -32,13 +35,15 @@ interface Hackathon_MageMonitoring_Model_WatchDog
      * @return string
      */
     public function getDogId();
+
     /**
      * Returns watch dog name.
      * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return string
-    */
+     */
     public function getDogName();
+
     /**
      * Returns true if this watch dog is active.
      * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
@@ -46,6 +51,7 @@ interface Hackathon_MageMonitoring_Model_WatchDog
      * @return bool
      */
     public function onDuty();
+
     /**
      * Returns string in standard cron format or false.
      * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
@@ -53,8 +59,10 @@ interface Hackathon_MageMonitoring_Model_WatchDog
      * @return false|string
      */
     public function getSchedule();
+
     /**
-     * Method that executes if getSchedule() says it's time. Returns false if there is nothing to report or array with results.
+     * Method that executes if getSchedule() says it's time.
+     * Returns false if there is nothing to report or array with results.
      * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides addReportRow() for convenience.
      *
      * Return format of array:
