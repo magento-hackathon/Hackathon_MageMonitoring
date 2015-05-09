@@ -50,7 +50,10 @@ class Hackathon_MageMonitoring_Block_Tab extends Mage_Adminhtml_Block_Widget_For
 
         $this->addButton('flush_all_cache', array(
             'label' => $this->__('Flush All Caches'),
-            'onclick' => 'confirmSetLocation(\''. $this->__('Do you really want to flush all caches?') .'\', \'' . $this->getUrl('*/*/flushallcache') .'\')',
+            'onclick' => 'confirmSetLocation(\'' .
+                $this->__('Do you really want to flush all caches?') .'\', \'' .
+                $this->getUrl('*/*/flushallcache') .
+            '\')',
             'class' => 'delete'
         ));
     }
