@@ -249,7 +249,9 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
                 $w[0] = $w[1] . '_' . $w[0];
             }
             Mage::getConfig()->saveConfig('magemonitoring/tabs/' . $w[1] . '/widgets/' . $w[0] . '/impl', $w[3]);
-            Mage::getConfig()->saveConfig('magemonitoring/tabs/' . $w[1] . '/widgets/' . $w[0] . '/display_prio', $w[2] * 10);
+            Mage::getConfig()->saveConfig(
+                'magemonitoring/tabs/' . $w[1] . '/widgets/' . $w[0] . '/display_prio', $w[2] * 10
+            );
             Mage::getConfig()->saveConfig('magemonitoring/tabs/' . $w[1] . '/widgets/' . $w[0] . '/visible', 1);
         }
 
