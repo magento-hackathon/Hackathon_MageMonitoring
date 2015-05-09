@@ -156,5 +156,4 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
         }
         return Mage::helper('magemonitoring')->tailFile($logFile, $lines);
     }
-
 }
