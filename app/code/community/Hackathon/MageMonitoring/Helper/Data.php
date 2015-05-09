@@ -1,34 +1,35 @@
 <?php
 /**
- * Magento
+ * This file is part of a FireGento e.V. module.
  *
- * NOTICE OF LICENSE
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * DISCLAIMER
+ * PHP version 5
  *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Hackathon
- * @package     Hackathon_MageMonitoring
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
 
+/**
+ * Data helper
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
-	const VERSIONS_REGEXP = '#[\d\.\*]+#ims';
-
+    const VERSIONS_REGEXP = '#[\d\.\*]+#ims';
     const CHECK_NODE = 'global/healthcheck/%s';
-
     const WARN_CSSCLASS = '_cssClasses';
     const WARN_TYPE_OK = 'health-ok';
     const WARN_TYPE_WARNING = 'health-warning';
@@ -37,13 +38,18 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     /**
      * Returns array with implementations of $baseInterface that return isActive() == true.
      *
-     * @param string|array $widgetId or array of widgetIds, if widgetId equals '*' all widgets are returned
-     * @param string $tabId config scope, null for globals only
-     * @param string $baseInterface
+     * @param  string|array $widgetId      or array of widgetIds, if widgetId equals '*' all widgets are returned
+     * @param  string       $tabId         config scope, null for globals only
+     * @param  boolean      $returnSorted  Return sorted or not
+     * @param  string       $baseInterface The basic interface
      * @return array
      */
-    public function getActiveWidgets($widgetId='*', $tabId=null, $returnSorted=true, $baseInterface='Hackathon_MageMonitoring_Model_Widget')
-    {
+    public function getActiveWidgets(
+        $widgetId = '*',
+        $tabId = null,
+        $returnSorted = true,
+        $baseInterface = 'Hackathon_MageMonitoring_Model_Widget'
+    ) {
         $classFolders = array();
         $widgets = array();
 
@@ -65,7 +71,10 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
             if (interface_exists($baseInterface)) {
                 $widgets = array_filter(
                         get_declared_classes(),
-                        create_function('$className', "return in_array(\"$baseInterface\", class_implements(\"\$className\"));")
+                        create_function(
+                            '$className',
+                            "return in_array(\"$baseInterface\", class_implements(\"\$className\"));"
+                        )
                 );
             }
         } else {
@@ -100,13 +109,18 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     /**
      * Returns widget(s) configuration. Filters invisible/inactive widgets and sorts by display_prio.
      *
-     * @param string $tabId
-     * @param string $widgetDbId
-     * @param string $returnSorted
-     * @param string $baseInterface
+     * @param  string  $tabId         Tab Id
+     * @param  string  $widgetDbId    Widget Db Id
+     * @param  boolean $returnSorted  Return sorted or not
+     * @param  string  $baseInterface Basic interface
      * @return multitype:Ambigous <multitype:, unknown, multitype:unknown >
      */
-    public function getConfiguredWidgets($tabId='*', $widgetDbId=null, $returnSorted=true, $baseInterface='Hackathon_MageMonitoring_Model_Widget') {
+    public function getConfiguredWidgets(
+        $tabId = '*',
+        $widgetDbId = null,
+        $returnSorted = true,
+        $baseInterface = 'Hackathon_MageMonitoring_Model_Widget'
+    ) {
         if ($tabId !== '*') {
             $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
         } else {
@@ -139,31 +153,34 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                 $widgets[$key] = $this->getActiveWidgets($implList, $key, $returnSorted, $baseInterface);
             }
         }
+
         return $widgets;
     }
 
-    /***
+    /**
      * Returns active watch dogs as flattened and indexed array.
      * 
      * @return array
      */
-    public function getConfiguredWatchDogs() {
+    public function getConfiguredWatchDogs()
+    {
         $tabs = $this->getConfiguredWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
         $watchDogs = array();
         foreach ($tabs as $tab) {
             $d = array_values($tab);
             $watchDogs += $d;
         }
+
         return $watchDogs;
     }
 
     /**
      * Returns tab config array. Filters invisible and sorts by display_prio.
      *
-     * @param string $tabId
+     * @param  string $tabId Tab Id
      * @return array
      */
-    public function getConfiguredTabs($tabId='*')
+    public function getConfiguredTabs($tabId = '*')
     {
         if ($tabId !== '*') {
             $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
@@ -172,14 +189,15 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         }
         $tabs = array_filter($tabs, array($this, 'filterVisibleTabs'));
         uasort($tabs, array($this, 'compareTabDisplayPrio'));
+
         return $tabs;
     }
 
     /**
      * Compare function for uasort(). Sorts by widget display_prio.
      *
-     * @param array $a
-     * @param array $b
+     * @param  array $a Array A to compare display prio from
+     * @param  array $b Array B to compare display prio from
      * @return number
      */
     protected function compareWidgetDisplayPrio($a, $b)
@@ -187,22 +205,22 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         if ($a->getDisplayPrio() == $b->getDisplayPrio()) {
             return 0;
         }
+
         return ($a->getDisplayPrio() > $b->getDisplayPrio()) ? 1 : -1;
     }
 
     /**
      * Compare function for uasort(). Sorts by tab display_prio. Entries without display_prio go to the bottom.
      *
-     * @param array $a
-     * @param array $b
+     * @param  array $a Array A to compare display prio from
+     * @param  array $b Array B to compare display prio from
      * @return number
      */
     protected function compareTabDisplayPrio($a, $b)
     {
         if (!array_key_exists('display_prio', $a) && array_key_exists('display_prio', $b)) {
             return -1;
-        }
-        else if (array_key_exists('display_prio', $a) && !array_key_exists('display_prio', $b)) {
+        } else if (array_key_exists('display_prio', $a) && !array_key_exists('display_prio', $b)) {
             return 1;
         } else if (!array_key_exists('display_prio', $a) && !array_key_exists('display_prio', $b)) {
             return 0;
@@ -210,27 +228,30 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         if ($a['display_prio'] == $b['display_prio']) {
             return 0;
         }
+
         return ($a['display_prio'] > $b['display_prio']) ? 1 : -1;
     }
 
     /**
      * Filter function for array_filter(). Returns array where tabs have visible != 0.
      *
-     * @param array $entry
+     * @param  array $entry The entry array
      * @return boolean
      */
-    protected function filterVisibleTabs($entry) {
+    protected function filterVisibleTabs($entry)
+    {
         if (array_key_exists('visible', $entry) && $entry['visible'] == 0) {
             return false;
         }
+
         return true;
     }
 
     /**
      * Calls require_once on all files found in $path.
      *
-     * @param string $path
-     * @param int $maxDepth
+     * @param string $path     File path
+     * @param int    $maxDepth Max depth
      */
     public function requireAll($path, $maxDepth=7)
     {
@@ -245,8 +266,10 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     }
 
     /**
-     * @param string $value
-     * @param bool   $inMegabytes
+     * Returns a value in byte
+     *
+     * @param  string $value       The initial value
+     * @param  bool   $inMegabytes Return result in Megabytes
      *
      * @return int|string
      */
@@ -274,7 +297,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     /**
      * Format size from Byte to KB, MB or GB
      *
-     * @param $size
+     * @param  int $size The initial size
      * @return string
      */
     public function formatByteSize($size)
@@ -306,7 +329,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      *
      * Source: http://stackoverflow.com/a/18568222
      *
-     * @param string $dir
+     * @param  string $dir Directory path
      * @return number|false
      */
     public function getTotalSize($dir)
@@ -335,6 +358,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                     return $totalSize;
                 }
             }
+
             return false;
         } else if (is_file($dir) === true) {
             return filesize($dir);
@@ -342,6 +366,8 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     }
 
     /**
+     * Returns an array with PHP information
+     *
      * @return array|mixed
      */
     public function getPhpInfoArray()
@@ -356,7 +382,8 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                     '#^.*<body>(.*)</body>.*$#m', '#<h2>PHP License</h2>.*$#ms',
                     '#<h1>Configuration</h1>#',  "#\r?\n#", "#</(h1|h2|h3|tr)>#", '# +<#',
                     "#[ \t]+#", '#&nbsp;#', '#  +#', '# class=".*?"#', '%&#039;%',
-                    '#<tr>(?:.*?)" src="(?:.*?)=(.*?)" alt="PHP Logo" /></a><h1>PHP Version (.*?)</h1>(?:\n+?)</td></tr>#',
+                    '#<tr>(?:.*?)" src="(?:.*?)=(.*?)" alt="PHP Logo" /></a><h1>PHP Version (.*?)</h1>'.
+                    '(?:\n+?)</td></tr>#',
                     '#<h1><a href="(?:.*?)\?=(.*?)">PHP Credits</a></h1>#',
                     '#<tr>(?:.*?)" src="(?:.*?)=(.*?)"(?:.*?)Zend Engine (.*?),(?:.*?)</tr>#',
                     "# +#", '#<tr>#', '#</tr>#'),
@@ -386,7 +413,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                     if (!isset($m[0]) || !isset($m[1]) || !isset($m[2])) {
                         continue;
                     }
-                    $pi[$n][$m[1]]=(!isset($m[3])||$m[2]==$m[3])?$m[2]:array_slice($m,2);
+                    $pi[$n][$m[1]] = (!isset($m[3]) || $m[2]==$m[3]) ? $m[2] : array_slice($m, 2);
                 }
             }
 
@@ -400,27 +427,35 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     /**
      * tail -n in php, kindly lifted from https://gist.github.com/lorenzos/1711e81a9162320fde20
      *
-     * @param string $filepath
-     * @param int $lines
-     * @param bool $adaptive use adaptive buffersize for seeking, if false use static buffersize of 4096
+     * @param  string  $filepath File path
+     * @param  int     $lines    Lines
+     * @param  boolean $adaptive use adaptive buffersize for seeking, if false use static buffersize of 4096
      *
      * @return string
      */
-    function tailFile($filepath, $lines = 1, $adaptive = true) {
+    public function tailFile($filepath, $lines = 1, $adaptive = true)
+    {
         // Open file
         $f = @fopen($filepath, "rb");
-        if ($f === false) return false;
+        if ($f === false) {
+            return false;
+        }
 
         // Sets buffer size
-        if (!$adaptive) $buffer = 4096;
-        else $buffer = ($lines < 2 ? 64 : ($lines < 10 ? 512 : 4096));
+        if (!$adaptive) {
+            $buffer = 4096;
+        } else {
+            $buffer = ($lines < 2 ? 64 : ($lines < 10 ? 512 : 4096));
+        }
 
         // Jump to last character
         fseek($f, -1, SEEK_END);
 
         // Read it and adjust line number if necessary
         // (Otherwise the result would be wrong if file doesn't end with a blank line)
-        if (fread($f, 1) != "\n") $lines -= 1;
+        if (fread($f, 1) != "\n") {
+            $lines -= 1;
+        }
 
         // Start reading
         $output = '';
@@ -452,23 +487,27 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     }
 
     /**
-     * @param string $controller_action
-     * @param Hackathon_MageMonitoring_Model_Widget $widget
+     * Get widget url
+     *
+     * @param  string                                $controllerAction Controller action
+     * @param  Hackathon_MageMonitoring_Model_Widget $widget           Widget model
      * @return string $url
      */
-    public function getWidgetUrl($controller_action, $widget) {
+    public function getWidgetUrl($controllerAction, $widget)
+    {
         $params = array('widgetId' => $widget->getConfigId());
         if ($tabId = $widget->getTabId()) {
             $params['tabId'] = $tabId;
         }
-        return Mage::getSingleton('adminhtml/url')->getUrl($controller_action, $params);
+
+        return Mage::getSingleton('adminhtml/url')->getUrl($controllerAction, $params);
     }
 
     /**
      * If $email is valid returns it with default rec. name,
      * else tries to treat $email as magento trans email code.
      *
-     * @param string $email
+     * @param  string $email E-Mail
      * @return array|false
      */
     public function validateEmail($email)
@@ -476,22 +515,26 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return array('email' => $email, 'name' => 'MageMonitoring');
         }
+
         $name = Mage::getStoreConfig('trans_email/ident_'.$email.'/name');
         $email = Mage::getStoreConfig('trans_email/ident_'.$email.'/email');
+
         if ($name) {
             return array('email' => $email, 'name' => $name);
         }
+
         return false;
     }
 
     /**
      * Adds $dateString to $fileName, takes care of file extension handling.
      *
-     * @param string $fileName
-     * @param string $dateString
+     * @param  string $fileName   File name
+     * @param  string $dateString Date as string
      * @return string|false
      */
-    public function stampFileName($fileName, $dateString) {
+    public function stampFileName($fileName, $dateString)
+    {
         $p = pathinfo($fileName);
         $r = false;
         if (isset($p['filename']) && $p['filename']) {
@@ -500,17 +543,21 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         if (isset($p['extension']) && $p['extension']) {
             $r .= '.' . $p['extension'];
         }
+
         return $r;
     }
 
     /**
      * Returns unique config key for widget configs.
      *
-     * @param string $configKey
-     * @param Hackathon_MageMonitoring_Model_Widget $widget
+     * @param  string                                $configKey Configuration key
+     * @param  Hackathon_MageMonitoring_Model_Widget $widget    Widget Model
+     * @param  string                                $scope     Scope
+     * @throws Exception
      * @return string
      */
-    public function getConfigKey($configKey, $widget, $scope='global') {
+    public function getConfigKey($configKey, $widget, $scope = 'global')
+    {
         $conf = $widget->getConfig($configKey, false);
         if (is_array($conf) && array_key_exists ('scope', $conf)) {
             if ($conf['scope'] === 'widget' && method_exists($widget, 'getTabId') && $widget->getTabId() !== null) {
@@ -529,38 +576,47 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         } else {
             throw new Exception("Passed class does not implement Widget or WatchDog interface.");
         }
+
         return $this->getConfigKeyById($configKey, $id, $scope);
     }
 
     /**
      * Returns unique config key for widget configs.
      *
-     * @param string $configKey
-     * @param string $widgetId
-     * @param string $scope
+     * @param  string $configKey  Configuration key
+     * @param  string $widgetDbId Widget DB Id
+     * @param  string $scope      Scope
      * @return string
      */
-    public function getConfigKeyById($configKey, $widgetDbId, $scope='global') {
+    public function getConfigKeyById($configKey, $widgetDbId, $scope = 'global')
+    {
         $key = 'magemonitoring/';
         $prefix = Hackathon_MageMonitoring_Model_Widget_Abstract::CONFIG_PRE_KEY;
+
         return $key .= $scope . '/'. $prefix . '/' . $widgetDbId . '/' . $configKey;
     }
 
     /**
      * Extract versions from csv versions string with wildcards
      *
-     * @param $versions
+     * @param  string $versions Versions as string
      * @return array matches
      */
     public function extractVersions($versions)
     {
         preg_match_all(self::VERSIONS_REGEXP, $versions, $matches);
+
         return $matches[0];
     }
 
+    /**
+     * Get value of constant
+     *
+     * @param  string $typestring Constant name
+     * @return mixed
+     */
     public function getConst($typestring)
     {
         return constant('self::'.$typestring);
     }
-
 }

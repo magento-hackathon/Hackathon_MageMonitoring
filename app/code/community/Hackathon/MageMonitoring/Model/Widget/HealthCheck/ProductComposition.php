@@ -1,17 +1,38 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: blaber
- * Date: 01/03/14
- * Time: 14:28
+ * This file is part of a FireGento e.V. module.
+ *
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * PHP version 5
+ *
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
 
+/**
+ * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     extends Hackathon_MageMonitoring_Model_Widget_Abstract
     implements Hackathon_MageMonitoring_Model_Widget
 {
     /**
-     * (non-PHPdoc)
+     * Returns name
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
@@ -20,7 +41,8 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns version
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
@@ -29,7 +51,8 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns isActive flag
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
@@ -38,7 +61,9 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     }
 
     /**
-     * @param $simples array like "sku => connected product count"
+     * Gets data row
+     *
+     * @param  array $simples array like "sku => connected product count"
      * @return array avg, biggest, etc data array
      */
     private function getDataRow($simples)
@@ -51,9 +76,10 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     }
 
     /**
-     * @return array @see getDataRow
-     *
      * somewhat redundant BundleRow and ConfigurableRow - still beta though
+     *
+     * @return array
+     * @see getDataRow
      */
     private function getBundleRow()
     {
@@ -90,9 +116,10 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     }
 
     /**
-     * @return array @see getDataRow
-     *
      * somewhat redundant BundleRow and ConfigurableRow - still beta though - event this comment ;)
+     *
+     * @return array
+     * @see getDataRow
      */
     private function getConfigurableRow()
     {
@@ -128,6 +155,11 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
         }
     }
 
+    /**
+     * Fetches and returns output
+     *
+     * @return array
+     */
     public function getOutput()
     {
         $configurables = $this->getConfigurableRow();

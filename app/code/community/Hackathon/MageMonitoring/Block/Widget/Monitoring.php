@@ -1,31 +1,33 @@
 <?php
 /**
- * Magento
+ * This file is part of a FireGento e.V. module.
  *
- * NOTICE OF LICENSE
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * DISCLAIMER
+ * PHP version 5
  *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Hackathon
- * @package     Hackathon_MageMonitoring
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
 
+/**
+ * Block for rendering widget monitoring
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_Template
 {
-
     /**
      * Format of array:
      * array (array ( 'css_id' => 'info|success|warning|error',
@@ -57,6 +59,9 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
      */
     protected $_buttons = array();
 
+    /**
+     * Constructor
+     */
     protected function _construct()
     {
         parent::_construct();
@@ -66,16 +71,16 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
     /**
      * Adds a row to table.
      *
-     * @param string $css_id
-     * @param string $label
-     * @param string $value
-     * @param string $chart
+     * @param  string $cssId CSS id
+     * @param  string $label Label
+     * @param  string $value Value
+     * @param  string $chart Chart
      * @return $this
      */
-    public function addRow($css_id, $label, $value = null, $chart = null)
+    public function addRow($cssId, $label, $value = null, $chart = null)
     {
         $this->_rows[] = array(
-            'css_id' => $css_id,
+            'css_id' => $cssId,
             'label' => $label,
             'value' => $value,
             'chart' => $chart
@@ -87,18 +92,18 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
     /**
      * Add empty or header row to table.
      *
-     * @param string $label
-     * @param string $background_id
-     * @param string $wrapper_tag
+     * @param  string $header       Header
+     * @param  string $backgroundId Background ID
+     * @param  string $wrapperTag   Wrapper tag
      * @return $this
      */
-    public function addHeaderRow($header = null, $background_id = 'info', $wrapper_tag = 'h4')
+    public function addHeaderRow($header = null, $backgroundId = 'info', $wrapperTag = 'h4')
     {
-        if ($wrapper_tag && $wrapper_tag !== '') {
-            $header = '<'.$wrapper_tag.'>'.$header.'</'.$wrapper_tag.'>';
+        if ($wrapperTag && $wrapperTag !== '') {
+            $header = '<'.$wrapperTag.'>'.$header.'</'.$wrapperTag.'>';
         }
         $this->_rows[] = array(
-                'css_id' => $background_id,
+                'css_id' => $backgroundId,
                 'label' => null,
                 'value' => $header
         );
@@ -106,9 +111,12 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
     }
 
     /**
+     * Returns rows
+     *
      * @return array
      */
-    public function getRows() {
+    public function getRows()
+    {
         if (empty($this->_rows)) {
             return false;
         }
@@ -119,50 +127,51 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
     /**
      * Returns an array that can feed Hackathon_MageMonitoring_Block_Chart.
      *
-     * @param string $canvasId
-     * @param array $chartData
-     * @param string $chartType
-     * @param int $width
-     * @param int $height
+     * @param  string $canvasId  Canvas Id
+     * @param  array  $chartData Chart data
+     * @param  string $chartType Chart type
+     * @param  int    $width     Width
+     * @param  int    $height    Height
      *
      * @return array
      */
     public function newChartArray($canvasId, $chartData, $chartType = 'Pie', $width = 76, $height = 76)
     {
         return array(
-                'chart_id' => $this->getTabId().'_'.$this->getWidgetId().'_'.$canvasId,
-                'chart_type' => $chartType,
-                'canvas_width' => $width,
-                'canvas_height' => $height,
-                'chart_data' => $chartData
+            'chart_id'      => $this->getTabId() . '_' . $this->getWidgetId() . '_' . $canvasId,
+            'chart_type'    => $chartType,
+            'canvas_width'  => $width,
+            'canvas_height' => $height,
+            'chart_data'    => $chartData
         );
     }
 
     /**
      * Adds a button to button array.
      *
-     * @param string $widget_id
-     * @param string $button_id
-     * @param string $label
-     * @param string $controller_action or Hackathon_MageMonitoring_Model_Widget_Abstract::CALLBACK.$callbackMethod
-     * @param array $url_params
-     * @param string $confirm_message
-     * @param string $css_class
+     * @param  string $widget           Widget Id
+     * @param  string $buttonId         Button Id
+     * @param  string $label            Label
+     * @param  string $controllerAction Controller action
+     * @param  array  $urlParams        Url Params
+     * @param  string $confirmMessage   Confirm Message
+     * @param  string $cssClass         CSS class
      * @return $this
      */
-    public function addButton($widget,
-            $button_id,
-            $label,
-            $controller_action,
-            $url_params = null,
-            $confirm_message = null,
-            $css_class = 'f-right'
+    public function addButton(
+        $widget,
+        $buttonId,
+        $label,
+        $controllerAction,
+        $urlParams = null,
+        $confirmMessage = null,
+        $cssClass = 'f-right'
     ) {
         $b = Mage::app()->getLayout()->createBlock('magemonitoring/widget_button');
-        $b->setId($widget->getId().'_'.$button_id);
+        $b->setId($widget->getId().'_'.$buttonId);
         $b->setLabel($label);
-        $b->setOnClick($widget, $controller_action, $url_params, $confirm_message);
-        $b->setClass($css_class);
+        $b->setOnClick($widget, $controllerAction, $urlParams, $confirmMessage);
+        $b->setClass($cssClass);
         $b->setType('button');
 
         $this->_buttons[] = $b;
@@ -171,6 +180,8 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
     }
 
     /**
+     * Returns buttons
+     *
      * @return array|false
      */
     public function getButtons()
@@ -182,16 +193,17 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
         return $this->_buttons;
     }
 
-    /**
-     * @param array $buttons
+    /** Sets a list of buttons
+     *
+     * @param  array $buttons List of buttons
      * @return $this
      */
-    public function setButtons($buttons=array()) {
+    public function setButtons($buttons = array())
+    {
         if (!is_array($buttons)) {
             $buttons = array($buttons);
         }
         $this->_buttons = $buttons;
         return $this;
     }
-
 }

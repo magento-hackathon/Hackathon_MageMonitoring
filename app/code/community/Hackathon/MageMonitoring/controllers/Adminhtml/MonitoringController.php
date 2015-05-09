@@ -1,30 +1,36 @@
 <?php
 /**
- * Hackathon
+ * This file is part of a FireGento e.V. module.
  *
- * NOTICE OF LICENSE
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
  *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
  *
- * DISCLAIMER
+ * PHP version 5
  *
- * Do not edit or add to this file if you wish to upgrade Magento to newer
- * versions in the future. If you wish to customize Magento for your
- * needs please refer to http://www.magentocommerce.com for more information.
- *
- * @category    Hackathon
- * @package     Hackathon_MageMonitoring
- * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
  */
 
+/**
+ * Monitoring Controller
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Adminhtml_Controller_Action
 {
+    /**
+     * Index action
+     */
     public function indexAction()
     {
         $this->loadLayout();
@@ -43,7 +49,11 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->renderLayout();
     }
 
-    public function config_tabsAction() {
+    /**
+     * Config tabs action
+     */
+    public function config_tabsAction()
+    {
         $this->loadLayout();
         $this->_setActiveMenu('system/monitoring');
         $this->_addBreadcrumb(
@@ -56,10 +66,17 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         $this->_addContent(
                 $this->getLayout()->createBlock('magemonitoring/tab_config', 'magemonitoring_tab_config')
         );
+
         $this->renderLayout();
     }
 
-    public function resetConfigAction() {
+    /**
+     * Reset config action
+     *
+     * @return mixed
+     */
+    public function resetConfigAction()
+    {
         $transaction = Mage::getSingleton('core/resource')->getConnection('core_write');
         try {
             $config = Mage::getStoreConfig('magemonitoring');
@@ -79,10 +96,11 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
     /**
      * Deletes entries in $config from core_config_data. Recursive. Locked to entries below path 'magemonitoring/'
      *
-     * @param array $config
-     * @param string $prefix
+     * @param array  $config Configuration array
+     * @param string $prefix Prefix
      */
-    protected function deleteConfigData($config, $prefix='') {
+    protected function deleteConfigData($config, $prefix='')
+    {
         foreach ($config as $key => $value) {
             if (is_array($value) && !empty($value)) {
                 $this->deleteConfigData($value, $prefix.$key.'/');
@@ -96,10 +114,20 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         }
     }
 
+    /**
+     * Flush Cache action
+     *
+     * @return mixed
+     */
     public function flushAllCacheAction()
     {
         try {
-            $caches = Mage::helper('magemonitoring')->getActiveWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_Widget_CacheStat');
+            $caches = Mage::helper('magemonitoring')->getActiveWidgets(
+                '*',
+                null,
+                false,
+                'Hackathon_MageMonitoring_Model_Widget_CacheStat'
+            );
 
             foreach ($caches as $cache) {
                 if ($cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
@@ -117,9 +145,13 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
         return $this->_redirect('*/*/index');
     }
 
+    /**
+     * Permission check
+     *
+     * @return mixed
+     */
     protected function _isAllowed()
     {
         return Mage::getSingleton('admin/session')->isAllowed('magemonitoring');
     }
-
 }

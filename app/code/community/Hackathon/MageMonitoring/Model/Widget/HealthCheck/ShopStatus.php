@@ -1,11 +1,38 @@
 <?php
+/**
+ * This file is part of a FireGento e.V. module.
+ *
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * PHP version 5
+ *
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
+ */
 
+/**
+ * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
+ *
+ * @category FireGento
+ * @package  FireGento_MageMonitoring
+ * @author   FireGento Team <team@firegento.com>
+ */
 class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
     extends Hackathon_MageMonitoring_Model_Widget_Abstract
     implements Hackathon_MageMonitoring_Model_Widget
 {
     /**
-     * (non-PHPdoc)
+     * Returns name
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
@@ -14,7 +41,8 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns version
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
@@ -23,7 +51,8 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns isActive flag
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
@@ -31,14 +60,19 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
         return true;
     }
 
+    /**
+     * Fetches and returns output
+     *
+     * @return array
+     */
     public function getOutput()
     {
         $helper = Mage::helper('magemonitoring');
 
-        $status_error = $helper->getConst('WARN_TYPE_ERROR');
-        $status_warning = $helper->getConst('WARN_TYPE_WARNING');
-        $status_ok = $helper->getConst('WARN_TYPE_OK');
-        $status_cssclass = $helper->getConst('WARN_CSSCLASS');
+        $statusError    = $helper->getConst('WARN_TYPE_ERROR');
+        $statusWarning  = $helper->getConst('WARN_TYPE_WARNING');
+        $statusOk       = $helper->getConst('WARN_TYPE_OK');
+        $statusCssClass = $helper->getConst('WARN_CSSCLASS');
 
         $block = $this->newMultiBlock();
         /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
@@ -55,29 +89,29 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
          * Webserver interface, PHP.ini information
          */
 
-        $max_execution_time = ini_get('max_execution_time');
-        $memory_limit = ini_get('memory_limit');
+        $maxExecutionTime = ini_get('max_execution_time');
+        $memoryLimit      = ini_get('memory_limit');
 
         $row[$helper->__("Webserver")] = $_SERVER["SERVER_SOFTWARE"];
-        $row[$helper->__("Maximum execution time (PHP)")] = array('value' => $max_execution_time,
+        $row[$helper->__("Maximum execution time (PHP)")] = array('value' => $maxExecutionTime,
             'status' => array(
-                $status_cssclass =>
-                    $max_execution_time <= 30 ?
-                        $status_error : ($max_execution_time >= 180 ? $status_ok : $status_warning)
+                $statusCssClass =>
+                    $maxExecutionTime <= 30 ?
+                        $statusError : ($maxExecutionTime >= 180 ? $statusOk : $statusWarning)
             )
         );
 
         /**
          * Extract Memory Limit as Integer
          */
-        preg_match("/([0-9]+[\.,]?)+/", $memory_limit, $matches);
-        $memory_limit_value = $matches[0];
+        preg_match("/([0-9]+[\.,]?)+/", $memoryLimit, $matches);
+        $memoryLimitValue = $matches[0];
 
-        $row[$helper->__("Memory Limit")] = array('value' => $memory_limit,
+        $row[$helper->__("Memory Limit")] = array('value' => $memoryLimit,
             'status' => array(
-                $status_cssclass =>
-                    $memory_limit_value <= 64 ?
-                        $status_error : ($memory_limit_value >= 256 ? $status_ok : $status_warning)
+                $statusCssClass =>
+                    $memoryLimitValue <= 64 ?
+                        $statusError : ($memoryLimitValue >= 256 ? $statusOk : $statusWarning)
             )
         );
 
@@ -86,10 +120,10 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
          */
         $row[$helper->__('.htaccess')] = file_exists(Mage::getBaseDir() . "/.htaccess") ?
             (array('value' => $helper->__('.htaccess exists'),
-                'status' => array($status_cssclass => $status_ok,
+                'status' => array($statusCssClass => $statusOk,
                 ))) :
             (array('value' => $helper->__('.htaccess does not exist'),
-                'status' => array($status_cssclass => $status_error,
+                'status' => array($statusCssClass => $statusError,
                 )));
 
 
