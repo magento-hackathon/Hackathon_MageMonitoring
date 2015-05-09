@@ -42,7 +42,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
         parent::initConfig();
         $this->addConfigHeader('Log Settings');
         // add config for tail -n param
-        $this->addConfig(self::CONFIG_LOG_LINES, 'Max. number of lines to tail:', $this->_DEF_LOG_LINES);
+        $this->addConfig(self::CONFIG_LOG_LINES, 'Max. number of lines to tail:', $this->_DEF_LOG_LINES, 'widget');
         return $this->_config;
     }
 
@@ -140,8 +140,8 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
         $logFile = '';
         if (file_exists($filePath)) {
             $logFile = $filePath;
-        } elseif (file_exists('var/log/'.$filePath)) {
-            $logFile = 'var/log/'.$filePath;
+        } elseif (file_exists(Mage::getBaseDir('log').DS.$filePath)) {
+            $logFile = Mage::getBaseDir('log').DS.$filePath;
         } else {
             return false;
         }

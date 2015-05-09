@@ -189,7 +189,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_ACTIVE,
                     'Dog is on duty:',
                     $this->_DEF_WATCHDOG_ACTIVE,
-                    'global',
+                    'widget',
                     'checkbox',
                     false
             );
@@ -197,7 +197,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_CRON,
                     'Schedule:',
                     $this->_DEF_WATCHDOG_CRON,
-                    'global',
+                    'widget',
                     'text',
                     false
             );
@@ -205,7 +205,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_BARKON,
                     'Minimum bark level (warning|error):',
                     $this->_DEF_WATCHDOG_BARKON,
-                    'global',
+                    'widget',
                     'text',
                     false
             );
@@ -213,7 +213,7 @@ class Hackathon_MageMonitoring_Model_Widget_Abstract
                     self::CONFIG_WATCHDOG_MAILTO,
                     'Barks at:',
                     $this->_DEF_WATCHDOG_MAILTO,
-                    'global',
+                    'widget',
                     'text',
                     false,
                     Mage::helper('magemonitoring')->__('Magento mail id (general, sales, etc) or valid email address.')

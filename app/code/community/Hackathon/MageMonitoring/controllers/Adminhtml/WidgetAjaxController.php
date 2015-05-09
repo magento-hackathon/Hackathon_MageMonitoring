@@ -79,6 +79,7 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
             }
             unset($post['form_key']);
             $widget->saveConfig($post);
+            Mage::getConfig()->reinit();
             $response = 'Settings saved for '.$widget->getName().'. Changing display prio and collapseable state requires a page reload.';
         }
         $this->getResponse()->setBody($response);
@@ -90,6 +91,7 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
         $response = "ERR";
         if ($widget = $this->_getWidgetFromRequest()) {
             $widget->deleteConfig();
+            Mage::getConfig()->reinit();
             $response = 'Deleted config for ' . $widget->getName();
         }
         $this->getResponse()->setBody($response);

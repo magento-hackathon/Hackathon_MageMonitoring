@@ -130,7 +130,9 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                             $visible = false;
                         }
                         if (array_key_exists('impl', $config) && $visible) {
-                            $implList[$wDbId] = $config['impl'];
+                            if (in_array($baseInterface, class_implements($config['impl']))) {
+                                $implList[$wDbId] = $config['impl'];
+                            }
                         }
                     }
                 }
@@ -138,6 +140,21 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
             }
         }
         return $widgets;
+    }
+
+    /***
+     * Returns active watch dogs as flattened and indexed array.
+     * 
+     * @return array
+     */
+    public function getConfiguredWatchDogs() {
+        $tabs = $this->getConfiguredWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
+        $watchDogs = array();
+        foreach ($tabs as $tab) {
+            $d = array_values($tab);
+            $watchDogs += $d;
+        }
+        return $watchDogs;
     }
 
     /**
