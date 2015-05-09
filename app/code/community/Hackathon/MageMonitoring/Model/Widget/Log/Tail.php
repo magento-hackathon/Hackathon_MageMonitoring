@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magento
  *
@@ -22,23 +23,25 @@
  * @package     Hackathon_MageMonitoring
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
-class Hackathon_MageMonitoring_Model_Widget_Log_Tail extends Hackathon_MageMonitoring_Model_Widget_Log_Abstract
-                                                     implements Hackathon_MageMonitoring_Model_Widget,
-                                                                Hackathon_MageMonitoring_Model_WatchDog
+class Hackathon_MageMonitoring_Model_Widget_Log_Tail
+    extends Hackathon_MageMonitoring_Model_Widget_Log_Abstract
+    implements Hackathon_MageMonitoring_Model_Widget,
+    Hackathon_MageMonitoring_Model_WatchDog
 {
     // define config keys
     const CONFIG_LOG_FILE = 'file_path';
     const CONFIG_LOG_COLOR = 'color';
+
     // set/override defaults
-    protected $_DEF_WIDGET_TITLE = 'Log Watcher';
-    protected $_DEF_LOG_FILE = '';
-    protected $_DEF_LOG_COLOR = 'info';
-    protected $_DEF_LOG_LINES = 60;
-    protected $_DEF_DISPLAY_PRIO = 20;
+    protected $_defWidgetTitle = 'Log Watcher';
+    protected $_defLogFile = '';
+    protected $_defLogColor = 'info';
+    protected $_defLogLines = 60;
+    protected $_defDisplayPrio = 20;
 
     /**
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
@@ -48,6 +51,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail extends Hackathon_MageMonit
 
     /**
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
@@ -55,25 +59,26 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail extends Hackathon_MageMonit
         parent::initConfig();
         // add config for log file path
         $this->addConfig(self::CONFIG_LOG_FILE,
-                         'Log file path:',
-                         $this->_DEF_LOG_FILE,
-                         'widget',
-                         'text',
-                         true,
-                         'Complete system path or relative from magento root or var/log.');
+            'Log file path:',
+            $this->_defLogFile,
+            'widget',
+            'text',
+            true,
+            'Complete system path or relative from magento root or var/log.');
         // add background color
         $this->addConfig(self::CONFIG_LOG_COLOR,
-                        'Background color:',
-                        $this->_DEF_LOG_COLOR,
-                        'widget',
-                        'text',
-                        false,
-                        'success | info | warning | error');
+            'Background color:',
+            $this->_defLogColor,
+            'widget',
+            'text',
+            false,
+            'success | info | warning | error');
         return $this->_config;
     }
 
     /**
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
@@ -91,6 +96,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail extends Hackathon_MageMonit
      * Reports on new log entries.
      *
      * (non-PHPdoc)
+     *
      * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
      */
     public function watch()
