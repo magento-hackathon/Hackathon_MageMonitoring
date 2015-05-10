@@ -80,6 +80,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
             'text',
             false,
             $this->getHelper()->__('Magento mail id (general, sales, etc) or valid email address.'));
+
         return $this->_config;
     }
 
@@ -100,8 +101,10 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
             if ($mailTo = Mage::helper('magemonitoring')->validateEmail($email)) {
                 return $this->getHelper()->__('Dogs barked, report mail has been sent to: %s', $mailTo['email']);
             }
+
             return $this->getHelper()->__('Error, i have no valid email address to send to: %s', $email);
         }
+
         return $this->getHelper()->__('Error, looks like the test watch dogs did not bark.');
     }
 
@@ -141,6 +144,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
         );
 
         $this->_output[] = $block;
+
         return $this->_output;
     }
 }

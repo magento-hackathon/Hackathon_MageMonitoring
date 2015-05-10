@@ -63,6 +63,7 @@ class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
 
         // append old config
         $this->_config += $configOrg;
+
         return $this->_config;
     }
 
@@ -77,6 +78,9 @@ class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
         return $this->getConfig(self::CONFIG_WIDGET_TITLE);
     }
 
+    /**
+     * Returns node name
+     */
     protected function _getNodeName()
     {
         // TODO: Implement _getNodeName() method.

@@ -155,5 +155,4 @@ interface Hackathon_MageMonitoring_Model_Widget
      * @return bool
      */
     public function deleteConfig();
-
 }

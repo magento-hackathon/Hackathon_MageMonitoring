@@ -103,6 +103,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_PhpConfig
         }
 
         $this->_output[] = $block;
+
         return $this->_output;
     }
 }

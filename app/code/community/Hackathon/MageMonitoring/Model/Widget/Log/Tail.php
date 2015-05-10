@@ -76,6 +76,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
             'text',
             false,
             'success | info | warning | error');
+
         return $this->_config;
     }
 
@@ -92,6 +93,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
         } else {
             $this->dump(Mage::helper('magemonitoring')->__('Log file path is not configured!'));
         }
+
         return $this->_output;
     }
 
@@ -114,6 +116,9 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
         }
     }
 
+    /**
+     * Returns node name
+     */
     protected function _getNodeName()
     {
         // TODO: Implement _getNodeName() method.

@@ -58,5 +58,4 @@ interface Hackathon_MageMonitoring_Model_Widget_CacheStat extends Hackathon_Mage
      * @return bool
      */
     public function flushCache();
-
 }
