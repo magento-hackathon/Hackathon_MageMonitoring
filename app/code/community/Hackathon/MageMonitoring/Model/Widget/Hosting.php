@@ -57,7 +57,7 @@ class Hackathon_MageMonitoring_Model_Widget_Hosting
      * Check the accessibility of the specified file.
      *
      * @param  string $file               The path of the file to check
-     * @param  bool   $shouldBeAccessible A flag indicating whether the file should be accessible or not (default: false).
+     * @param  bool   $shouldBeAccessible A flag indicating whether the file should be accessible or not
      * @return $this
      */
     protected function _checkFileAccessible($file, $shouldBeAccessible = false)

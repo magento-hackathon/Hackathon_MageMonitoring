@@ -150,6 +150,9 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
         return opcache_reset();
     }
 
+    /**
+     * Returns node name
+     */
     protected function _getNodeName()
     {
         // TODO: Implement _getNodeName() method.

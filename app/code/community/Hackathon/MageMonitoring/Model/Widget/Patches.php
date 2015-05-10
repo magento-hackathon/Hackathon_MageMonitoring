@@ -80,7 +80,9 @@ class Hackathon_MageMonitoring_Model_Widget_Patches
      */
     protected function _isAPPSEC2014Applied()
     {
-        $wysiwygHelperContent = file_get_contents(Mage::getBaseDir('code') . DS . 'core/Mage/Cms/Helper/Wysiwyg/Images.php');
+        $wysiwygHelperContent = file_get_contents(
+            Mage::getBaseDir('code') . DS . 'core/Mage/Cms/Helper/Wysiwyg/Images.php'
+        );
 
         if (!strpos($wysiwygHelperContent, '$_storageRoot')) {
             return false;
@@ -100,7 +102,9 @@ class Hackathon_MageMonitoring_Model_Widget_Patches
             return true;
         }
 
-        $wysiwygHelperContent = file_get_contents(Mage::getBaseDir('code') . DS . 'core/Mage/Cms/Helper/Wysiwyg/Images.php');
+        $wysiwygHelperContent = file_get_contents(
+            Mage::getBaseDir('code') . DS . 'core/Mage/Cms/Helper/Wysiwyg/Images.php'
+        );
 
         if (!strpos($wysiwygHelperContent, 'realpath($this->getStorageRoot())')) {
             return false;
@@ -116,7 +120,9 @@ class Hackathon_MageMonitoring_Model_Widget_Patches
      */
     protected function _isPHP54Applied()
     {
-        $catalogModelProductContent = file_get_contents(Mage::getBaseDir('code') . DS . 'core/Mage/Catalog/Model/Product.php');
+        $catalogModelProductContent = file_get_contents(
+            Mage::getBaseDir('code') . DS . 'core/Mage/Catalog/Model/Product.php'
+        );
 
         if (strpos($catalogModelProductContent, '$options->setOptions(array_diff')) {
             return false;
@@ -191,5 +197,4 @@ class Hackathon_MageMonitoring_Model_Widget_Patches
 
         return $this;
     }
-
 }

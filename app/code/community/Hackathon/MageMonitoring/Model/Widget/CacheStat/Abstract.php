@@ -26,7 +26,8 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract extends Hackathon_MageMonitoring_Model_Widget_Abstract
+abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
 {
 
     /**

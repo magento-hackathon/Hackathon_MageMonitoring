@@ -68,13 +68,20 @@ class Hackathon_MageMonitoring_Model_Widget_Security
         $node = (string)Mage::getConfig()->getNode(self::CONFIG_ADMIN_URL_XML);
 
         $this->getRenderer()->addRow(
-            array($helper->__('Admin-URL in XML'), 'XML-Node: ' . self::CONFIG_ADMIN_URL_XML, $node, $helper->__('not admin')),
+            array(
+                $helper->__('Admin-URL in XML'),
+                'XML-Node: ' . self::CONFIG_ADMIN_URL_XML, $node, $helper->__('not admin')
+            ),
             $this->_getRowConfig(!is_null($node) && $node !== 'admin')
         );
 
         $configValue = Mage::getStoreConfig(self::CONFIG_ADMIN_URL_CUSTOM_PATH);
         $this->getRenderer()->addRow(
-            array($helper->__('Custom admin URL'), self::CONFIG_ADMIN_URL_CUSTOM_PATH, (is_null($configValue)) ? 'not set' : $configValue, $helper->__('not admin')),
+            array(
+                $helper->__('Custom admin URL'),
+                self::CONFIG_ADMIN_URL_CUSTOM_PATH,
+                (is_null($configValue)) ? 'not set' : $configValue, $helper->__('not admin')
+            ),
             $this->_getRowConfig(!is_null($configValue) && $configValue !== 'admin')
         );
 

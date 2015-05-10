@@ -164,7 +164,10 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      */
     protected function _getConfigValues()
     {
-        $nodes = Mage::getConfig()->getNode('default/magemonitoring/tabs/monitoring_check/widgets/' . $this->_getNodeName() . '/shop_configuration/values');
+        $nodes = Mage::getConfig()->getNode(
+            'default/magemonitoring/tabs/monitoring_check/widgets/' .
+            $this->_getNodeName() . '/shop_configuration/values'
+        );
         if ($nodes) {
             return $nodes->children();
         }
@@ -181,8 +184,8 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Check a given configuration value concerning an optional recommendation
      *
-     * @param  string $title The title of the configuration value.
-     * @param  string $configPath The configuration value path.
+     * @param  string $title          The title of the configuration value.
+     * @param  string $configPath     The configuration value path.
      * @param  string $recommendation The recommended value for the given config value.
      *
      * @return $this
@@ -385,8 +388,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
         $inputType = 'text',
         $required = false,
         $tooltip = null
-    )
-    {
+    ) {
         $this->_config[$configKey] = array(
             'scope' => $scope,
             'label' => $label,
@@ -438,8 +440,8 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Load Config
      *
-     * @param  null|string|int $configKey Config Key
-     * @param  null|string|int $tabId Tab Id
+     * @param  null|string|int $configKey  Config Key
+     * @param  null|string|int $tabId      Tab Id
      * @param  null|string|int $widgetDbId Widget DB Id
      * @return array
      * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
@@ -481,8 +483,8 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * Save config in $post to core_config_data, can handle raw $_POST
      * or widget config arrays if $postOnly is true.
      *
-     * @param  array $post Post
-     * @param  bool $postOnly Post Only
+     * @param  array $post     Post
+     * @param  bool  $postOnly Post Only
      * @return $this
      * @see Hackathon_MageMonitoring_Model_Widget::saveConfig()
      */
@@ -567,9 +569,9 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * Format of $attachments array:
      * array(array('filename' => $name, 'content' => $content), ...)
      *
-     * @param  string $cssId Css Id
-     * @param  string $label Label
-     * @param  string $value Value
+     * @param  string     $cssId       Css Id
+     * @param  string     $label       Label
+     * @param  string     $value       Value
      * @param  array|null $attachments Attachments
      * @return $this
      */

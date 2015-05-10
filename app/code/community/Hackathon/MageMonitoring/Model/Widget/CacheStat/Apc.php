@@ -141,6 +141,9 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc
         return true;
     }
 
+    /**
+     * Returns node name
+     */
     protected function _getNodeName()
     {
         // TODO: Implement _getNodeName() method.

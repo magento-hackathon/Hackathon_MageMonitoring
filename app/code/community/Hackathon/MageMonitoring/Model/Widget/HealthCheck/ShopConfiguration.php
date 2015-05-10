@@ -129,6 +129,9 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
         return $this->_output;
     }
 
+    /**
+     * Returns node name
+     */
     protected function _getNodeName()
     {
         // TODO: Implement _getNodeName() method.

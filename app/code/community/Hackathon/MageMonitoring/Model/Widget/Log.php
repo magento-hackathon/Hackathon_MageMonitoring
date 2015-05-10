@@ -63,15 +63,15 @@ class Hackathon_MageMonitoring_Model_Widget_Log
 
         $firstDayOfThisMonth = strtotime(date('Y-m-01'));
         $firstDayOfLastMonth = strtotime(date('Y-m-01', $firstDayOfThisMonth - 1));
-        $firstDayOfMonth2Before = strtotime(date('Y-m-01', $firstDayOfLastMonth - 1));
-        $firstDayOfMonth3Before = strtotime(date('Y-m-01', $firstDayOfMonth2Before - 1));
+        $firstDayOfMonthTwoBefore = strtotime(date('Y-m-01', $firstDayOfLastMonth - 1));
+        $firstDayOfMonthThreeBefore = strtotime(date('Y-m-01', $firstDayOfMonthTwoBefore - 1));
 
         // all error messages
         $this->_countLoggedErrors('Logged errors%s', 'The number of all logged errors (ERR, CRIT, ALERT, EMERG)');
 
         // error messages in log files last months
-        $this->_countLoggedErrors('Logged errors%s', '', $firstDayOfMonth3Before, $firstDayOfMonth2Before);
-        $this->_countLoggedErrors('Logged errors%s', '', $firstDayOfMonth2Before, $firstDayOfLastMonth);
+        $this->_countLoggedErrors('Logged errors%s', '', $firstDayOfMonthThreeBefore, $firstDayOfMonthTwoBefore);
+        $this->_countLoggedErrors('Logged errors%s', '', $firstDayOfMonthTwoBefore, $firstDayOfLastMonth);
         $this->_countLoggedErrors('Logged errors%s', '', $firstDayOfLastMonth, $firstDayOfThisMonth);
         $this->_countLoggedErrors('Logged errors%s', '', $firstDayOfThisMonth, time());
 
@@ -79,8 +79,8 @@ class Hackathon_MageMonitoring_Model_Widget_Log
         $this->_countReports('Reports%s', 'The number of reports currently saved in /var/reports');
 
         // reports last month
-        $this->_countReports('Reports%s', '', $firstDayOfMonth3Before, $firstDayOfMonth2Before);
-        $this->_countReports('Reports%s', '', $firstDayOfMonth2Before, $firstDayOfLastMonth);
+        $this->_countReports('Reports%s', '', $firstDayOfMonthThreeBefore, $firstDayOfMonthTwoBefore);
+        $this->_countReports('Reports%s', '', $firstDayOfMonthTwoBefore, $firstDayOfLastMonth);
         $this->_countReports('Reports%s', '', $firstDayOfLastMonth, $firstDayOfThisMonth);
         $this->_countReports('Reports%s', '', $firstDayOfThisMonth, time());
 
@@ -90,10 +90,10 @@ class Hackathon_MageMonitoring_Model_Widget_Log
     /**
      * Render the log-statistics for the given report text.
      *
-     * @param  string $textShort
-     * @param  string $textLong
-     * @param  int    $dateFrom
-     * @param  int    $dateTo
+     * @param  string $textShort Short text
+     * @param  string $textLong  Long text
+     * @param  int    $dateFrom  Date from
+     * @param  int    $dateTo    Date to
      *
      * @return $this
      */
@@ -106,7 +106,12 @@ class Hackathon_MageMonitoring_Model_Widget_Log
         $errorsCount = 0;
         foreach ($fi as $file) {
             $content = file_get_contents($file);
-            preg_match_all('#(\d{4}-\d{2}-\d{2})T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2} (ERR|CRIT|ALERT|EMERG)#ims', $content, $matches);
+            preg_match_all(
+                '#(\d{4}-\d{2}-\d{2})T\d{2}:\d{2}:\d{2}\+\d{2}:\d{2} (ERR|CRIT|ALERT|EMERG)#ims',
+                $content,
+                $matches
+            );
+
             if (!is_null($dateFrom) && !is_null($dateTo)) {
                 foreach ($matches[1] as $_match) {
                     $logDate = strtotime($_match);
@@ -137,10 +142,10 @@ class Hackathon_MageMonitoring_Model_Widget_Log
     /**
      * Render the report-statistics for the given report text.
      *
-     * @param  string $textShort
-     * @param  string $textLong
-     * @param  int    $dateFrom
-     * @param  int    $dateTo
+     * @param  string $textShort Text short
+     * @param  string $textLong  Text long
+     * @param  int    $dateFrom  Date from
+     * @param  int    $dateTo    Date to
      *
      * @return $this
      */
@@ -191,7 +196,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log
 
             return ' - ' . $helper->__(date('F', $date));
         }
+
         return '';
     }
-
 }

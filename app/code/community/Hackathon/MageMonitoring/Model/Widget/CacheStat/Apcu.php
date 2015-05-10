@@ -77,7 +77,8 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns memory max
+     *
      * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
      */
     public function getMemoryMax()
@@ -137,6 +138,9 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu
         return apc_clear_cache();
     }
 
+    /**
+     * Returns node name
+     */
     protected function _getNodeName()
     {
         // TODO: Implement _getNodeName() method.
