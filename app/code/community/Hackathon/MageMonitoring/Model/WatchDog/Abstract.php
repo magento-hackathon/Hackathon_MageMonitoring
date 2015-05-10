@@ -30,4 +30,5 @@ abstract class Hackathon_MageMonitoring_Model_WatchDog_Abstract
     extends Hackathon_MageMonitoring_Model_Widget_Watchdog
     implements Hackathon_MageMonitoring_Model_WatchDog
 {
+
 }
