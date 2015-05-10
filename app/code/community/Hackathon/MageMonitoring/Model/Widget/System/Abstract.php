@@ -26,11 +26,15 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-abstract class Hackathon_MageMonitoring_Model_Widget_System_Abstract extends Hackathon_MageMonitoring_Model_Widget_Abstract
+abstract class Hackathon_MageMonitoring_Model_Widget_System_Abstract
+    extends Hackathon_MageMonitoring_Model_Widget_Abstract
 {
     protected $_serverInfo = null;
     protected $_mageInfo = null;
 
+    /**
+     * Returns node name
+     */
     protected function _getNodeName()
     {
         // TODO: Implement _getNodeName() method.
