@@ -42,5 +42,4 @@ class Hackathon_MageMonitoring_Block_Widget_Dump extends Mage_Core_Block_Abstrac
 
         return $output;
     }
-
 }

@@ -36,5 +36,4 @@ class Hackathon_MageMonitoring_Block_Tab_Content_WidgetList extends Mage_Adminht
         parent::__construct();
         $this->setTemplate('monitoring/widget/list.phtml');
     }
-
 }

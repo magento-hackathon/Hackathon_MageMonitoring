@@ -28,7 +28,6 @@
  */
 class Hackathon_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_Widget_Button
 {
-
     /**
      * Set onClick data for button display.
      *

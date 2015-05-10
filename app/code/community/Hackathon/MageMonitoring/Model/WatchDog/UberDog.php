@@ -97,6 +97,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
                     }
                 }
             }
+
             $mailFrom = $helper->validateEmail('general');
             $mailTo = $helper->validateEmail($email);
 
@@ -115,6 +116,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
             }
 
             $emailTemplate->send($mailTo['email'], $mailTo['name'], $vars);
+
             return true;
         }
     }

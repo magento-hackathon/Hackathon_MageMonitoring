@@ -107,6 +107,7 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
                 'label' => null,
                 'value' => $header
         );
+
         return $this;
     }
 
@@ -204,6 +205,7 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
             $buttons = array($buttons);
         }
         $this->_buttons = $buttons;
+
         return $this;
     }
 }

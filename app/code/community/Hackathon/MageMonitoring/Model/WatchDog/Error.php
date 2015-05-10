@@ -32,7 +32,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Error
     protected $_defWatchdogCron = '* * * * *';
 
     /**
-     * (non-PHPdoc)
+     * Returns dog name
      *
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
@@ -42,7 +42,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Error
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns version
      *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
@@ -52,7 +52,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Error
     }
 
     /**
-     * (non-PHPdoc)
+     * Do watch
      *
      * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
      */

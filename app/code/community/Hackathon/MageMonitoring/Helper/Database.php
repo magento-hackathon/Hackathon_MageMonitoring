@@ -76,6 +76,7 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
          * Execute the query and store the results in $results
          */
         $results = $readConnection->fetchAll($query);
+        $result  = array();
 
         foreach ($results as $_result) {
             if ($_result['Variable_name'] == 'version') {
@@ -104,6 +105,7 @@ class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
          * Execute the query and store the results in $results
          */
         $results = $readConnection->fetchAll($query);
+        $result  = array();
 
         foreach ($results as $_result) {
             $result[] = array('label' => $_result['Variable_name'], 'value' => $_result['Value']);
@@ -211,6 +213,8 @@ EOS;
         $_poolSizeValue = $readConnection->fetchAll($query);
         $results[] = $_poolSizeValue[0];
         $_comparableResult = array('label' => 'InnoDB Buffer Pool Size Check');
+        $_bufferPoolSizeRecommendationValue = 0;
+        $_bufferPoolSizeValue = 0;
 
         foreach ($results as $_result) {
             if (array_key_exists('Variable_name', $_result) && $_result['Variable_name'] == 'innodb_buffer_pool_size') {

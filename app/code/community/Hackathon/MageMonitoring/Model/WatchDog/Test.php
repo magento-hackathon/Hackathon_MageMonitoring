@@ -32,7 +32,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Test
     protected $_defWatchdogCron = '* * * * *';
 
     /**
-     * (non-PHPdoc)
+     * Returns dog name
      *
      * @see Hackathon_MageMonitoring_Model_Widget::getName()
      */
@@ -42,7 +42,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Test
     }
 
     /**
-     * (non-PHPdoc)
+     * Returns version
      *
      * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
      */
@@ -52,7 +52,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Test
     }
 
     /**
-     * (non-PHPdoc)
+     * Do watch
      *
      * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
      */
@@ -68,7 +68,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Test
             $this->getHelper()->__('Another test label'),
             $this->getHelper()->__('Just a warning')
         );
+
         return $this->_report;
     }
-
 }
