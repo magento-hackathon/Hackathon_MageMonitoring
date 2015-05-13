@@ -1,14 +1,14 @@
-app/code/community/Hackathon/MageMonitoring app/code/community/Hackathon/MageMonitoring
-app/etc/modules/Hackathon_MageMonitoring.xml app/etc/modules/Hackathon_MageMonitoring.xml
-app/design/adminhtml/default/default/layout/monitoring.xml app/design/adminhtml/default/default/layout/monitoring.xml
-app/design/adminhtml/default/default/template/monitoring app/design/adminhtml/default/default/template/monitoring
+src/app/code/community/Firegento/MageMonitoring app/code/community/Firegento/MageMonitoring
+src/app/etc/modules/Firegento_MageMonitoring.xml app/etc/modules/Firegento_MageMonitoring.xml
+src/app/design/adminhtml/default/default/layout/monitoring.xml app/design/adminhtml/default/default/layout/monitoring.xml
+src/app/design/adminhtml/default/default/template/monitoring app/design/adminhtml/default/default/template/monitoring
 
-app/locale/de_DE/Hackathon_MageMonitoring.csv app/locale/de_DE/Hackathon_MageMonitoring.csv
-app/locale/en_US/Hackathon_MageMonitoring.csv app/locale/en_US/Hackathon_MageMonitoring.csv
+src/app/locale/de_DE/Firegento_MageMonitoring.csv app/locale/de_DE/Firegento_MageMonitoring.csv
+src/app/locale/en_US/Firegento_MageMonitoring.csv app/locale/en_US/Firegento_MageMonitoring.csv
 
-app/locale/de_DE/template/email/magemonitoring_watchdogs.html app/locale/de_DE/template/email/magemonitoring_watchdogs.html
-app/locale/en_US/template/email/magemonitoring_watchdogs.html app/locale/en_US/template/email/magemonitoring_watchdogs.html
+src/app/locale/de_DE/template/email/magemonitoring_watchdogs.html app/locale/de_DE/template/email/magemonitoring_watchdogs.html
+src/app/locale/en_US/template/email/magemonitoring_watchdogs.html app/locale/en_US/template/email/magemonitoring_watchdogs.html
 
-skin/adminhtml/default/default/monitoring skin/adminhtml/default/default/monitoring
-js/chartjs/Chart.min.js js/chartjs/Chart.min.js
-js/modal/modalbox.js js/modal/modalbox.js
+src/skin/adminhtml/default/default/monitoring skin/adminhtml/default/default/monitoring
+src/js/chartjs/Chart.min.js js/chartjs/Chart.min.js
+src/js/modal/modalbox.js js/modal/modalbox.js
