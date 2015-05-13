@@ -23,7 +23,7 @@
 <config>
     <modules>
         <Hackathon_MageMonitoring>
-            <version>2.0.2</version>
+            <version>2.1.0</version>
             <depends>
                 <Mage_Adminhtml />
             </depends>
@@ -99,6 +99,14 @@
                         <path>dev/log/active</path>
                         <recommendation>1</recommendation>
                     </dev_log_active>
+                    <system_log_enabled>
+                        <path>system/log/enabled</path>
+                        <recommendation>1</recommendation>
+                    </system_log_enabled>
+                    <system_log_clean_after_day>
+                        <path>system/log/clean_after_day</path>
+                        <recommendation>30</recommendation>
+                    </system_log_clean_after_day>
                     <dev_js_merge_files>
                         <path>dev/js/merge_files</path>
                         <recommendation>1</recommendation>
@@ -188,6 +196,14 @@
                             </versions>
                             <display_prio>5</display_prio>
                         </shop_status>
+                        <productcomposition>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition</impl>
+                            <display_prio>10</display_prio>
+                        </productcomposition>
+                        <shop_configuration>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration</impl>
+                            <display_prio>20</display_prio>
+                        </shop_configuration>
                         <sitemap>
                             <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap</impl>
                             <versions>
@@ -202,22 +218,19 @@
                             <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes</impl>
                             <display_prio>40</display_prio>
                         </producttypes>
-                        <productcomposition>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition</impl>
-                            <display_prio>10</display_prio>
-                        </productcomposition>
                         <logfilesize>
                             <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize</impl>
-                            <display_prio>25</display_prio>
+                            <display_prio>50</display_prio>
                         </logfilesize>
+                        <log>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Log</impl>
+                            <display_prio>60</display_prio>
+                            <collapsed>1</collapsed>
+                        </log>
                         <mediasize>
                             <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize</impl>
-                            <display_prio>50</display_prio>
+                            <display_prio>70</display_prio>
                         </mediasize>
-                        <shop_configuration>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration</impl>
-                            <display_prio>10</display_prio>
-                        </shop_configuration>
                     </widgets>
                 </health_check>
                 <system_overview>
@@ -304,10 +317,15 @@
                     </widgets>
                 </class_rewrites>
                 <modules_installed>
-                    <label>Modules Installed</label>
-                    <title>Modules Installed</title>
+                    <label>Magento Modules</label>
+                    <title>Magento Modules</title>
                     <display_prio>60</display_prio>
                     <widgets>
+                        <default_extensions_community>
+                            <impl>Hackathon_MageMonitoring_Model_Widget_Extensions_Community</impl>
+                            <display_prio>5</display_prio>
+                            <collapsed>1</collapsed>
+                        </default_extensions_community>
                         <modules_core>
                             <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
                             <title>Modules core</title>
@@ -330,6 +348,7 @@
                         </modules_local>
                     </widgets>
                 </modules_installed>
+
                 <system_logs>
                     <label>System Logs</label>
                     <title>System Logs</title>
@@ -496,43 +515,6 @@
                             </shop_configuration>
                         </security>
 
-                        <maintenance>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Maintenance</impl>
-                            <display_prio>30</display_prio>
-                            <collapsed>1</collapsed>
-                            <shop_configuration>
-                                <values>
-                                    <dev_log_active>
-                                        <title>Logging activated</title>
-                                        <path>dev/log/active</path>
-                                        <recommendation>1</recommendation>
-                                    </dev_log_active>
-                                    <system_log_enabled>
-                                        <title>Log cleaning activated</title>
-                                        <path>system/log/enabled</path>
-                                        <recommendation>1</recommendation>
-                                    </system_log_enabled>
-                                    <system_log_clean_after_day>
-                                        <title>Log cleaning interval</title>
-                                        <path>system/log/clean_after_day</path>
-                                        <recommendation>30</recommendation>
-                                    </system_log_clean_after_day>
-                                </values>
-                            </shop_configuration>
-                        </maintenance>
-
-                        <default_extensions_community>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Extensions_Community</impl>
-                            <display_prio>32</display_prio>
-                            <collapsed>1</collapsed>
-                        </default_extensions_community>
-
-                        <log>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Log</impl>
-                            <display_prio>34</display_prio>
-                            <collapsed>1</collapsed>
-                        </log>
-
                         <hosting>
                             <impl>Hackathon_MageMonitoring_Model_Widget_Hosting</impl>
                             <display_prio>35</display_prio>
@@ -583,36 +565,6 @@
                             <display_prio>36</display_prio>
                             <collapsed>1</collapsed>
                         </rootfiles>
-
-                        <performance>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Performance</impl>
-                            <display_prio>40</display_prio>
-                            <collapsed>1</collapsed>
-                            <shop_configuration>
-                                <values>
-                                    <catalog_frontend_flat_catalog_category>
-                                        <title>Flat Tables - Category</title>
-                                        <path>catalog/frontend/flat_catalog_category</path>
-                                        <recommendation>1</recommendation>
-                                    </catalog_frontend_flat_catalog_category>
-                                    <catalog_frontend_flat_catalog_product>
-                                        <title>Flat Tables - Product</title>
-                                        <path>catalog/frontend/flat_catalog_product</path>
-                                        <recommendation>1</recommendation>
-                                    </catalog_frontend_flat_catalog_product>
-                                    <dev_js_merge_files>
-                                        <title>Merge JS Files</title>
-                                        <path>dev/js/merge_files</path>
-                                        <recommendation>1</recommendation>
-                                    </dev_js_merge_files>
-                                    <dev_css_merge_css_files>
-                                        <title>Merge CSS Files</title>
-                                        <path>dev/css/merge_css_files</path>
-                                        <recommendation>1</recommendation>
-                                    </dev_css_merge_css_files>
-                                </values>
-                            </shop_configuration>
-                        </performance>
 
                         <patches>
                             <impl>Hackathon_MageMonitoring_Model_Widget_Patches</impl>

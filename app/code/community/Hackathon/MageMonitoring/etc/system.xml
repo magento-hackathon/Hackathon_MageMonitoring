@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <config>
-
     <sections>
         <magemonitoring translate="label" module="magemonitoring">
             <label>Monitoring</label>
             <frontend_type>text</frontend_type>
-            <tab>magemonitoring</tab>
+            <tab>advanced</tab>
             <sort_order>10</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
@@ -21,25 +20,6 @@
                     <fields>
                         <info translate="label">
                             <label>MageMonitoring</label>
-                            <!--<comment><![CDATA[Information text]]></comment>-->
-                            <!--<links>-->
-                                <!--<module>-->
-                                    <!--<label>Information about this module</label>-->
-                                    <!--<url>http://www.magemonitoring.com/magento-module/magento-module/MODULNAME.html</url>-->
-                                <!--</module>-->
-                                <!--<support>-->
-                                    <!--<label>Module Support</label>-->
-                                    <!--<url>http://www.magemonitoring.com/magento-module/contacts</url>-->
-                                <!--</support>-->
-                                <!--<guarantee>-->
-                                    <!--<label>Shopwerft Guarantees</label>-->
-                                    <!--<url>http://www.magemonitoring.com/magento-module/garantien.html</url>-->
-                                <!--</guarantee>-->
-                                <!--<more>-->
-                                    <!--<label>More Premium Shopwerft Modules</label>-->
-                                    <!--<url>http://www.magemonitoring.com/magento-module</url>-->
-                                <!--</more>-->
-                            <!--</links>-->
                             <sort_order>1</sort_order>
                             <frontend_model>magemonitoring/adminhtml_system_config_form_field_info</frontend_model>
                             <show_in_default>1</show_in_default>

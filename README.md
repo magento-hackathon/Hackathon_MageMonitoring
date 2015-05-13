@@ -1,14 +1,9 @@
 MageMonitoring
 ==============
 
-Magento module to get health information of your Magento installation (Server, PHP, Cache, Logs, Rewrites, Modules version installed, ...)
+Magento module to get health information of your Magento installation (Server, PHP, Database, Cache, Logs, Rewrites, Modules version installed, ...)
 
 ### License OSL v3
-
-### News
-
-- UI now fully configurable via frontend.
-- Merged with [Healthcheck](https://github.com/magento-hackathon/HealthCheck)
 
 ### Features
 
@@ -16,17 +11,20 @@ Magento module to get health information of your Magento installation (Server, P
 - Easily automate tasks with the provided WatchDog interface, includes aggregated reports for less spam. Get notified when your log files start moving!
 - Plugins can be added from other modules via config.xml declaration
 - UI fully configurable via frontend or config.xml
+- Merged with [Healthcheck](https://github.com/magento-hackathon/HealthCheck)
 
 The default plugins currently provide the following information:
 
 - OS / Server / Memory Information / Magento version vs available
+- Database Information
 - PHP version and some important configuration values vs recommended
 - Store configuration checks
-- Modules installed and their version number and status
+- Modules installed, their version number, their status and some recommended extensions
 - Product composition / types
 - Cache statistics with option to flush each cache or all at once (APC, APCU, Memcache, Redis, ZendOpcache)
 - Magento debug/exception log monitoring
 - Check for class and template file rewrites
+- SEO / Privacy / Security / Cron / Important files / Patches check
 
 ### Documentation
 
@@ -36,7 +34,7 @@ The default plugins currently provide the following information:
 
 ### Usage
 
-Log into the Magento backend and navigate to: System > Monitoring
+Log into the Magento backend and navigate to: System > Monitoring AND/OR System > Configuration > Advanced > Monitoring
 
 Installation Instructions
 -------------------------
@@ -82,7 +80,7 @@ Uninstallation
 --------------
 * Remove all extension files from your Magento installation
 * Via modman: `modman remove Hackathon_MageMonitoring`
-* Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring`
+* Via composer, remove the line of your composer.json related to `magento-hackathon/hackathon_magemonitoring` and do `php composer.phar update`
 
 ### Core Contributors
 
@@ -91,3 +89,5 @@ Uninstallation
 - [Erik Dannenberg](https://github.com/edannenberg)
 - [Yaroslav Rogoza](https://github.com/Gribnik)
 - [Nick Kravchuk](https://github.com/nickua)
+
+### Special Thanks to [Shopwerf](shopwerft.com) for their contribution

@@ -46,7 +46,6 @@ class Hackathon_MageMonitoring_Model_Widget_Extensions_Community
         'German_LocalePackDe',
         'Hackathon_IndexerStats',
         'Hackathon_MageMonitoring',
-        'Licentia_Ecms',
         'Netzarbeiter_NicerImageNames',
         'Treynolds_Qconfig',
     );

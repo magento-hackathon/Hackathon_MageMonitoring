@@ -31,7 +31,7 @@ class Hackathon_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info
     implements Varien_Data_Form_Element_Renderer_Interface
 {
 
-    const URL = 'http://www.magemonitoring.com/';
+    const URL = 'http://www.firegento.com/';
 
     /**
      * Renders element
@@ -41,16 +41,15 @@ class Hackathon_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info
      */
     public function render(Varien_Data_Form_Element_Abstract $element)
     {
-        $imagesPath = str_replace('_', '/', mb_strtolower($this->getModuleName()));
-        $logoSrc = $this->getSkinUrl('images/' . $imagesPath . '/magemonitoring_logo.png');
+        $logoSrc = $this->getSkinUrl('monitoring/images/firegento.jpg');
 
         $html = '
 <tr id="row_%s">
     <td colspan="2">
         <div class="box">
             <p>
-                <a href="' . self::URL . '" target="_blank" title="' . $this->__('Go to Shopwerft Website') . '">
-                    <img src="' . $logoSrc . '" alt="' . $this->__('Shopwerft') . '" />
+                <a href="' . self::URL . '" target="_blank" title="' . $this->__('Go to Firegento Website') . '">
+                    <img src="' . $logoSrc . '" alt="' . $this->__('Firegento') . '" />
                 </a>
             </p>
             <p>%s</p>
@@ -74,4 +73,3 @@ class Hackathon_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info
         return sprintf($html, $element->getHtmlId(), $element->getComment(), $linksHtml);
     }
 }
-
