@@ -20,15 +20,15 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_System_PhpConfig
+ * class Firegento_MageMonitoring_Model_Widget_System_PhpConfig
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_System_PhpConfig
-    extends Hackathon_MageMonitoring_Model_Widget_System_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_System_PhpConfig
+    extends Firegento_MageMonitoring_Model_Widget_System_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     protected $_configCheck = array(
         'safe_mode' => '0',
@@ -49,7 +49,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_PhpConfig
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -59,7 +59,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_PhpConfig
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -69,7 +69,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_PhpConfig
     /**
      * Fetches and returns output
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     * @see Firegento_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
     {

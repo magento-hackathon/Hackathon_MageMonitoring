@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Tab extends Mage_Adminhtml_Block_Widget_Form_Container
+class Firegento_MageMonitoring_Block_Tab extends Mage_Adminhtml_Block_Widget_Form_Container
 {
     /**
      * Constructor

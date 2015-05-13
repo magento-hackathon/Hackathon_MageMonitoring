@@ -20,15 +20,15 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_Log
+ * Class Firegento_MageMonitoring_Model_Widget_Log
  * renders log statistics.
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Log
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Firegento_MageMonitoring_Model_Widget_Log
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     const NODE_NAME = 'log';
 
@@ -99,7 +99,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log
      */
     protected function _countLoggedErrors($textShort, $textLong, $dateFrom = null, $dateTo = null)
     {
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = $this->_getHelper();
 
         $fi = new FilesystemIterator(Mage::getBaseDir('log'), FilesystemIterator::SKIP_DOTS);
@@ -151,7 +151,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log
      */
     protected function _countReports($textShort, $textLong, $dateFrom = null, $dateTo = null)
     {
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = $this->_getHelper();
 
         $fi = new FilesystemIterator(Mage::getBaseDir('var') . DS . 'report' . DS, FilesystemIterator::SKIP_DOTS);
@@ -191,7 +191,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log
     protected function _getMonth($date = null)
     {
         if (!is_null($date)) {
-            /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+            /** @var Firegento_MageMonitoring_Helper_Data $helper */
             $helper = $this->_getHelper();
 
             return ' - ' . $helper->__(date('F', $date));

@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-interface Hackathon_MageMonitoring_Block_Widget_Multi_Renderer
+interface Firegento_MageMonitoring_Block_Widget_Multi_Renderer
 {
     /**
      * Returns json encoded content.

@@ -20,13 +20,13 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_Watchdog
+ * class Firegento_MageMonitoring_Model_Widget_Watchdog
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Watchdog extends Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
+class Firegento_MageMonitoring_Model_Widget_Watchdog extends Firegento_MageMonitoring_Model_Widget_AbstractGeneric
 {
     // watch dog config keys, only added if widget implements watchdog interface
     const CONFIG_WATCHDOG_ACTIVE = 'cron/enabled';
@@ -62,7 +62,7 @@ class Hackathon_MageMonitoring_Model_Widget_Watchdog extends Hackathon_MageMonit
             $helper = Mage::helper('magemonitoring');
 
             // override watch dog default mail_to if global config is found
-            $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
+            $id = 'Firegento_MageMonitoring_Model_Widget_System_Watchdog';
             $confKey = $helper->getConfigKeyById(self::CONFIG_DOGS_MAILTO, $id);
 
             $defMail = Mage::getStoreConfig($confKey);
@@ -113,7 +113,7 @@ class Hackathon_MageMonitoring_Model_Widget_Watchdog extends Hackathon_MageMonit
     /**
      * Get Dog Id
      *
-     * @see Hackathon_MageMonitoring_Model_WatchDog::getDogId()
+     * @see Firegento_MageMonitoring_Model_WatchDog::getDogId()
      */
     public function getDogId()
     {
@@ -123,7 +123,7 @@ class Hackathon_MageMonitoring_Model_Widget_Watchdog extends Hackathon_MageMonit
     /**
      * Get Dog Name
      *
-     * @see Hackathon_MageMonitoring_Model_WatchDog::getDogName()
+     * @see Firegento_MageMonitoring_Model_WatchDog::getDogName()
      */
     public function getDogName()
     {
@@ -133,7 +133,7 @@ class Hackathon_MageMonitoring_Model_Widget_Watchdog extends Hackathon_MageMonit
     /**
      * Get Schedule
      *
-     * @see Hackathon_MageMonitoring_Model_WatchDog::getSchedule()
+     * @see Firegento_MageMonitoring_Model_WatchDog::getSchedule()
      * @return string
      */
     public function getSchedule()
@@ -144,7 +144,7 @@ class Hackathon_MageMonitoring_Model_Widget_Watchdog extends Hackathon_MageMonit
     /**
      * Is On Duty
      *
-     * @see Hackathon_MageMonitoring_Model_WatchDog::onDuty()
+     * @see Firegento_MageMonitoring_Model_WatchDog::onDuty()
      * @return string
      */
     public function onDuty()

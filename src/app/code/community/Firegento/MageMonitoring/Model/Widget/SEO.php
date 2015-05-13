@@ -20,15 +20,15 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_SEO
+ * Class Firegento_MageMonitoring_Model_Widget_SEO
  * checks common SEO-related configuration values.
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_SEO
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Firegento_MageMonitoring_Model_Widget_SEO
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     const NODE_NAME = 'seo';
 

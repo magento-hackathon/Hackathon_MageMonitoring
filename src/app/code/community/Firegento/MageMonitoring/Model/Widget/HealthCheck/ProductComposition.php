@@ -20,20 +20,20 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
+ * class Firegento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -43,7 +43,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -53,7 +53,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -167,7 +167,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition
 
         $helper = Mage::helper('magemonitoring');
         $block = $this->newMultiBlock();
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
         $renderer = $block->newContentRenderer('table');
 
         $header = array(

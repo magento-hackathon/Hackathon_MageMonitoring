@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Adminhtml_Controller_Action
+class Firegento_MageMonitoring_Adminhtml_MonitoringController extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Index action
@@ -126,11 +126,11 @@ class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Admin
                 '*',
                 null,
                 false,
-                'Hackathon_MageMonitoring_Model_Widget_CacheStat'
+                'Firegento_MageMonitoring_Model_Widget_CacheStat'
             );
 
             foreach ($caches as $cache) {
-                if ($cache instanceof Hackathon_MageMonitoring_Model_Widget_CacheStat) {
+                if ($cache instanceof Firegento_MageMonitoring_Model_Widget_CacheStat) {
                     $cache->flushCache();
                 }
             }

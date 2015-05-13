@@ -20,22 +20,22 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes
+ * class Firegento_MageMonitoring_Model_Widget_HealthCheck_Producttypes
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_HealthCheck_Producttypes
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     protected $_defStartCollapsed = 1;
 
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -45,7 +45,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -55,7 +55,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -70,7 +70,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes
     public function getOutput()
     {
         $block = $this->newMultiBlock();
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart $renderer */
         $renderer = $block->newContentRenderer('donutchart');
 
         Varien_Profiler::start('HEALTHCHECK PRODUCT_TYPE_CHECK');

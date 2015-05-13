@@ -20,15 +20,15 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_Privacy
+ * Class Firegento_MageMonitoring_Model_Widget_Privacy
  * checks common privacy/security settings such as https urls.
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Privacy
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Firegento_MageMonitoring_Model_Widget_Privacy
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     const NODE_NAME = 'privacy';
     const CONFIG_SECURE_URL = 'web/secure/base_url';
@@ -62,7 +62,7 @@ class Hackathon_MageMonitoring_Model_Widget_Privacy
     {
         parent::_renderMoreChecks();
 
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = Mage::helper('magemonitoring');
 
         $secureUrl = Mage::getStoreConfig(self::CONFIG_SECURE_URL);

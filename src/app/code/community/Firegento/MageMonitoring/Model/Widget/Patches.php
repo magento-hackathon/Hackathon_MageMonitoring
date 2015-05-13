@@ -20,7 +20,7 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_Patches
+ * Class Firegento_MageMonitoring_Model_Widget_Patches
  * displays whether the latest patches have been applied.
  * Todo: I am not sure how useful a static list of patches is ...
  *
@@ -28,8 +28,8 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Patches
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Firegento_MageMonitoring_Model_Widget_Patches
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     const NODE_NAME = 'patches';
 
@@ -161,7 +161,7 @@ class Hackathon_MageMonitoring_Model_Widget_Patches
             return $this;
         }
 
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = $this->_getHelper();
 
         $callbackFunction = $this->_patches[$patch]['callback'];

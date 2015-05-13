@@ -20,14 +20,14 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
+ * class Firegento_MageMonitoring_Model_Widget_Log_Abstract
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
-    extends Hackathon_MageMonitoring_Model_Widget_Watchdog
+class Firegento_MageMonitoring_Model_Widget_Log_Abstract
+    extends Firegento_MageMonitoring_Model_Widget_Watchdog
 {
     // define config keys
     const CONFIG_LAST_LOG_ENTRY = 'last_log_entry';
@@ -41,7 +41,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
     /**
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
     {
@@ -57,7 +57,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Abstract
      *
      * @param  string $errorLevel Error Level
      * @param  string $fileName   Filename
-     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring Block
+     * @return Firegento_MageMonitoring_Block_Widget_Monitoring Block
      */
     protected function newLogBlock($errorLevel, $fileName)
     {

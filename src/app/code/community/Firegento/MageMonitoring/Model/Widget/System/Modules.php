@@ -20,15 +20,15 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_System_Modules
+ * class Firegento_MageMonitoring_Model_Widget_System_Modules
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_System_Modules
-    extends Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_System_Modules
+    extends Firegento_MageMonitoring_Model_Widget_AbstractGeneric
+    implements Firegento_MageMonitoring_Model_Widget
 {
     const CONFIG_CODE_POOL = 'code_pool';
     // set/override defaults
@@ -39,7 +39,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Modules
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -49,7 +49,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Modules
     /**
      * Initializes configuration
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
     {
@@ -69,7 +69,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Modules
     /**
      * Fetches and returns output
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     * @see Firegento_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
     {

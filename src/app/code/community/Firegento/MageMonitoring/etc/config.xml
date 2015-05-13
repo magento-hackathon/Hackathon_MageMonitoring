@@ -22,35 +22,35 @@
 -->
 <config>
     <modules>
-        <Hackathon_MageMonitoring>
+        <Firegento_MageMonitoring>
             <version>2.1.0</version>
             <depends>
                 <Mage_Adminhtml />
             </depends>
-        </Hackathon_MageMonitoring>
+        </Firegento_MageMonitoring>
     </modules>
 
     <global>
         <blocks>
             <magemonitoring>
-                <class>Hackathon_MageMonitoring_Block</class>
+                <class>Firegento_MageMonitoring_Block</class>
             </magemonitoring>
         </blocks>
 
         <models>
             <magemonitoring>
-                <class>Hackathon_MageMonitoring_Model</class>
+                <class>Firegento_MageMonitoring_Model</class>
                 <resourceModel>magemonitoring_resource</resourceModel>
             </magemonitoring>
             <magemonitoring_resource>
-                <class>Hackathon_MageMonitoring_Model_Resource</class>
+                <class>Firegento_MageMonitoring_Model_Resource</class>
                 <entities>
                 </entities>
             </magemonitoring_resource>
             <!-- Fake model rewrite -->
             <!--<catalog>-->
             <!--<rewrite>-->
-            <!--<category>Hackathon_MageMonitoring_Model_Category</category>-->
+            <!--<category>Firegento_MageMonitoring_Model_Category</category>-->
             <!--</rewrite>-->
             <!--</catalog>-->
             <!-- / Fake model rewrite -->
@@ -58,7 +58,7 @@
 
         <helpers>
             <magemonitoring>
-                <class>Hackathon_MageMonitoring_Helper</class>
+                <class>Firegento_MageMonitoring_Helper</class>
             </magemonitoring>
         </helpers>
 
@@ -138,10 +138,10 @@
             <magemonitoring>
                 <use>admin</use>
                 <args>
-                    <module>Hackathon_MageMonitoring</module>
+                    <module>Firegento_MageMonitoring</module>
                     <frontName>monitoring</frontName>
                     <modules>
-                        <magemonitoring before="Mage_Adminhtml">Hackathon_MageMonitoring_Adminhtml</magemonitoring>
+                        <magemonitoring before="Mage_Adminhtml">Firegento_MageMonitoring_Adminhtml</magemonitoring>
                     </modules>
                 </args>
             </magemonitoring>
@@ -161,7 +161,7 @@
             <modules>
                 <magemonitoring>
                     <files>
-                        <default>Hackathon_MageMonitoring.csv</default>
+                        <default>Firegento_MageMonitoring.csv</default>
                     </files>
                 </magemonitoring>
             </modules>
@@ -190,22 +190,22 @@
                     <display_prio>20</display_prio>
                     <widgets>
                         <shop_status>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus</impl>
                             <versions>
                                 *
                             </versions>
                             <display_prio>5</display_prio>
                         </shop_status>
                         <productcomposition>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ProductComposition</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition</impl>
                             <display_prio>10</display_prio>
                         </productcomposition>
                         <shop_configuration>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration</impl>
                             <display_prio>20</display_prio>
                         </shop_configuration>
                         <sitemap>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_HealthCheck_Sitemap</impl>
                             <versions>
                                 *
                                 1.6.2
@@ -215,20 +215,20 @@
                             <display_prio>30</display_prio>
                         </sitemap>
                         <producttypes>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Producttypes</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_HealthCheck_Producttypes</impl>
                             <display_prio>40</display_prio>
                         </producttypes>
                         <logfilesize>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize</impl>
                             <display_prio>50</display_prio>
                         </logfilesize>
                         <log>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Log</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Log</impl>
                             <display_prio>60</display_prio>
                             <collapsed>1</collapsed>
                         </log>
                         <mediasize>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_HealthCheck_Mediasize</impl>
                             <display_prio>70</display_prio>
                         </mediasize>
                     </widgets>
@@ -239,13 +239,13 @@
                     <display_prio>10</display_prio>
                     <widgets>
                         <magento_info>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Magento</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_Magento</impl>
                         </magento_info>
                         <server_info>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Server</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_Server</impl>
                         </server_info>
                         <watch_dog_control>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Watchdog</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_Watchdog</impl>
                         </watch_dog_control>
                     </widgets>
                 </system_overview>
@@ -255,23 +255,23 @@
                     <display_prio>30</display_prio>
                     <widgets>
                         <php_config_check>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpConfig</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_PhpConfig</impl>
                             <display_prio>10</display_prio>
                         </php_config_check>
                         <php_req_ext>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
                             <title>Required Extensions</title>
                             <only_required>true</only_required>
                             <display_prio>20</display_prio>
                         </php_req_ext>
                         <php_all_ext>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
                             <title>All Installed Extensions</title>
                             <collapsed>1</collapsed>
                             <display_prio>30</display_prio>
                         </php_all_ext>
                         <php_info>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_PhpInfo</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_PhpInfo</impl>
                             <display_prio>40</display_prio>
                         </php_info>
                     </widgets>
@@ -290,19 +290,19 @@
                     <display_prio>40</display_prio>
                     <widgets>
                         <apc>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apc</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_CacheStat_Apc</impl>
                         </apc>
                         <apcu>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Apcu</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_CacheStat_Apcu</impl>
                         </apcu>
                         <memcached>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_CacheStat_Memcache</impl>
                         </memcached>
                         <redis>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Redis</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_CacheStat_Redis</impl>
                         </redis>
                         <zendopcache>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_CacheStat_Zendopcache</impl>
                         </zendopcache>
                     </widgets>
                 </cache_stat>
@@ -312,7 +312,7 @@
                     <display_prio>50</display_prio>
                     <widgets>
                         <rewrites>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_ClassRewrites</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_ClassRewrites</impl>
                         </rewrites>
                     </widgets>
                 </class_rewrites>
@@ -322,25 +322,25 @@
                     <display_prio>60</display_prio>
                     <widgets>
                         <default_extensions_community>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Extensions_Community</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Extensions_Community</impl>
                             <display_prio>5</display_prio>
                             <collapsed>1</collapsed>
                         </default_extensions_community>
                         <modules_core>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_Modules</impl>
                             <title>Modules core</title>
                             <code_pool>core</code_pool>
                             <collapsed>1</collapsed>
                             <display_prio>10</display_prio>
                         </modules_core>
                         <modules_community>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_Modules</impl>
                             <title>Modules community</title>
                             <code_pool>community</code_pool>
                             <display_prio>20</display_prio>
                         </modules_community>
                         <modules_local>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_System_Modules</impl>
                             <title>Modules local</title>
                             <code_pool>local</code_pool>
                             <collapsed>1</collapsed>
@@ -355,7 +355,7 @@
                     <display_prio>70</display_prio>
                     <widgets>
                         <magento_debug>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Log_Tail</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Log_Tail</impl>
                             <title>Magento Debug Log</title>
                             <file_path>system.log</file_path>
                             <color>warning</color>
@@ -363,7 +363,7 @@
                             <display_prio>10</display_prio>
                         </magento_debug>
                         <magento_exception>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Log_Tail</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Log_Tail</impl>
                             <title>Magento Exception Log</title>
                             <file_path>exception.log</file_path>
                             <color>error</color>
@@ -377,7 +377,7 @@
                     <display_prio>80</display_prio>
                     <widgets>
                         <seo>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_SEO</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_SEO</impl>
                             <display_prio>10</display_prio>
                             <collapsed>1</collapsed>
                             <shop_configuration>
@@ -441,7 +441,7 @@
                         </seo>
 
                         <privacy>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Privacy</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Privacy</impl>
                             <display_prio>15</display_prio>
                             <collapsed>1</collapsed>
                             <shop_configuration>
@@ -491,7 +491,7 @@
                         </privacy>
 
                         <security>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Security</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Security</impl>
                             <display_prio>20</display_prio>
                             <collapsed>1</collapsed>
                             <shop_configuration>
@@ -516,7 +516,7 @@
                         </security>
 
                         <hosting>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Hosting</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Hosting</impl>
                             <display_prio>35</display_prio>
                             <collapsed>1</collapsed>
                             <shop_configuration>
@@ -561,13 +561,13 @@
                         </hosting>
 
                         <rootfiles>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_RootFiles</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_RootFiles</impl>
                             <display_prio>36</display_prio>
                             <collapsed>1</collapsed>
                         </rootfiles>
 
                         <patches>
-                            <impl>Hackathon_MageMonitoring_Model_Widget_Patches</impl>
+                            <impl>Firegento_MageMonitoring_Model_Widget_Patches</impl>
                             <display_prio>50</display_prio>
                             <collapsed>1</collapsed>
                         </patches>

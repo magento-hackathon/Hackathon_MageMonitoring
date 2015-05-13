@@ -20,15 +20,15 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_Extensions_Community
+ * Class Firegento_MageMonitoring_Model_Widget_Extensions_Community
  * renders the community extension checks.
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Extensions_Community
-    extends Hackathon_MageMonitoring_Model_Widget_Extensions_Abstract
+class Firegento_MageMonitoring_Model_Widget_Extensions_Community
+    extends Firegento_MageMonitoring_Model_Widget_Extensions_Abstract
 {
     const NODE_NAME = 'default_extensions_community';
 
@@ -44,8 +44,8 @@ class Hackathon_MageMonitoring_Model_Widget_Extensions_Community
         'AvS_ScopeHint',
         'FireGento_MageSetup',
         'German_LocalePackDe',
-        'Hackathon_IndexerStats',
-        'Hackathon_MageMonitoring',
+        'Firegento_IndexerStats',
+        'Firegento_MageMonitoring',
         'Netzarbeiter_NicerImageNames',
         'Treynolds_Qconfig',
     );

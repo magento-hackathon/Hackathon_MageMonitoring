@@ -20,13 +20,13 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_Abstract
+ * class Firegento_MageMonitoring_Model_Widget_Abstract
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackathon_MageMonitoring_Model_Widget
+abstract class Firegento_MageMonitoring_Model_Widget_Abstract implements Firegento_MageMonitoring_Model_Widget
 {
     // define config keys
     const CONFIG_START_COLLAPSED = 'collapsed';
@@ -48,12 +48,12 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     protected $_config = array();
     protected $_report = array();
 
-    /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $_renderer */
+    /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $_renderer */
     protected $_renderer;
 
     /**
      * Used to render the widget, returns array of classes that have a ->toHtml() method.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you .
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract will give you .
      *
      * @return array
      */
@@ -61,11 +61,11 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     {
         $block = $this->newMultiBlock();
 
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
         $renderer = $block->newContentRenderer('table');
         $this->setRenderer($renderer);
 
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = Mage::helper('magemonitoring');
 
         $renderer->setHeaderRow(
@@ -92,7 +92,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * New Multi Block
      *
-     * @return Hackathon_MageMonitoring_Block_Widget_Multi Block
+     * @return Firegento_MageMonitoring_Block_Widget_Multi Block
      */
     public function newMultiBlock()
     {
@@ -197,7 +197,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
             Mage::throwException('No Renderer set for Monitoring');
         }
 
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = $this->_getHelper();
 
         $configValue = Mage::getStoreConfig($configPath);
@@ -222,7 +222,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Get the renderer.
      *
-     * @return Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract
+     * @return Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract
      */
     public function getRenderer()
     {
@@ -232,9 +232,9 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Set the renderer.
      *
-     * @param Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $renderer A renderer
+     * @param Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $renderer A renderer
      */
-    public function setRenderer(Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $renderer)
+    public function setRenderer(Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $renderer)
     {
         $this->_renderer = $renderer;
     }
@@ -242,7 +242,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Get an instance of the module's data helper.
      *
-     * @return Hackathon_MageMonitoring_Helper_Data
+     * @return Firegento_MageMonitoring_Helper_Data
      */
     protected function _getHelper()
     {
@@ -259,9 +259,9 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     protected function _getRowConfig($conditionMet)
     {
         if ($conditionMet) {
-            $rowConfig = array('_cssClasses' => Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_OK);
+            $rowConfig = array('_cssClasses' => Firegento_MageMonitoring_Helper_Data::WARN_TYPE_OK);
         } else {
-            $rowConfig = array('_cssClasses' => Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_WARNING);
+            $rowConfig = array('_cssClasses' => Firegento_MageMonitoring_Helper_Data::WARN_TYPE_WARNING);
         }
         return $rowConfig;
     }
@@ -279,7 +279,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Returns true if this widget is active.
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -290,7 +290,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * Returns true if widget should start collapsed, speeds up loading times as
      * the widget won't render it's content on page load.
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
+     * @see Firegento_MageMonitoring_Model_Widget::displayCollapsed()
      */
     public function displayCollapsed()
     {
@@ -303,7 +303,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * @param  null $configKey Config Key
      * @param  bool $valueOnly Value Only
      * @return array|bool
-     * @see Hackathon_MageMonitoring_Model_Widget::getConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::getConfig()
      */
     public function getConfig($configKey = null, $valueOnly = true)
     {
@@ -328,7 +328,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Returns array with default config data for this widget or false if not implemented.
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
     {
@@ -359,7 +359,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * Add empty or header row to config modal output.
      *
      * @param  string $header Header
-     * @return Hackathon_MageMonitoring_Model_Widget
+     * @return Firegento_MageMonitoring_Model_Widget
      */
     public function addConfigHeader($header = null)
     {
@@ -378,7 +378,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * @param  bool        $required  Is Required
      * @param  null|string $tooltip   Tooltip
      * @return $this
-     * @see Hackathon_MageMonitoring_Model_Widget::addConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::addConfig()
      */
     public function addConfig(
         $configKey,
@@ -405,7 +405,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * Returns true if widget should start collapsed, speeds up loading times as
      * the widget won't render it's content on page load.
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::displayCollapsed()
+     * @see Firegento_MageMonitoring_Model_Widget::displayCollapsed()
      */
     public function getDisplayPrio()
     {
@@ -415,7 +415,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * New Monitoring Block
      *
-     * @return Hackathon_MageMonitoring_Block_Widget_Monitoring Block
+     * @return Firegento_MageMonitoring_Block_Widget_Monitoring Block
      */
     public function newMonitoringBlock()
     {
@@ -429,7 +429,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * Adds $string to output.
      *
      * @param  string $string String
-     * @return Hackathon_MageMonitoring_Model_Widget_Abstract
+     * @return Firegento_MageMonitoring_Model_Widget_Abstract
      */
     public function dump($string)
     {
@@ -444,7 +444,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * @param  null|string|int $tabId      Tab Id
      * @param  null|string|int $widgetDbId Widget DB Id
      * @return array
-     * @see Hackathon_MageMonitoring_Model_Widget::loadConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::loadConfig()
      */
     public function loadConfig($configKey = null, $tabId = null, $widgetDbId = null)
     {
@@ -472,7 +472,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Get Helper
      *
-     * @return Hackathon_MageMonitoring_Helper_Data
+     * @return Firegento_MageMonitoring_Helper_Data
      */
     public function getHelper()
     {
@@ -486,7 +486,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      * @param  array $post     Post
      * @param  bool  $postOnly Post Only
      * @return $this
-     * @see Hackathon_MageMonitoring_Model_Widget::saveConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::saveConfig()
      */
     public function saveConfig($post, $postOnly = false)
     {
@@ -546,7 +546,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
      *
      * @param  string|null $tabId Tab Id
      * @return $this
-     * @see Hackathon_MageMonitoring_Model_Widget::deleteConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::deleteConfig()
      */
     public function deleteConfig($tabId = null)
     {
@@ -628,7 +628,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Abstract implements Hackath
     /**
      * Get Supported Magento Versions
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getSupportedMagentoVersions()
+     * @see Firegento_MageMonitoring_Model_Widget::getSupportedMagentoVersions()
      * @return string
      */
     public function getSupportedMagentoVersions()

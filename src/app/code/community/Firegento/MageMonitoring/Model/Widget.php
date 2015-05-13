@@ -20,13 +20,13 @@
  */
 
 /**
- * interface Hackathon_MageMonitoring_Model_Widget
+ * interface Firegento_MageMonitoring_Model_Widget
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-interface Hackathon_MageMonitoring_Model_Widget
+interface Firegento_MageMonitoring_Model_Widget
 {
     /**
      * Returns class name that must be compatible with magento autoloader.
@@ -88,7 +88,7 @@ interface Hackathon_MageMonitoring_Model_Widget
 
     /**
      * Used to render the widget, returns array of classes that have a ->toHtml() method.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you .
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract will give you .
      *
      * @return array
      */
@@ -99,7 +99,7 @@ interface Hackathon_MageMonitoring_Model_Widget
      *
      * Implementing this method enables you to add custom entries for user configuration.
      *
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
      * Data is saved to core_config_data with path = 'widgets/' + $widgetClassName '/' + $config_key
      *
      * Format of return array:
@@ -128,7 +128,7 @@ interface Hackathon_MageMonitoring_Model_Widget
 
     /**
      * Loads and returns the widget config via desired persistance layer. Never called if getConfig() returns false.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
      *
      * Returned array has same structure as initConfig()
      *
@@ -138,7 +138,7 @@ interface Hackathon_MageMonitoring_Model_Widget
 
     /**
      * Saves the widget config via desired persistance layer. Never called if getConfig() returns false.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
      *
      * Format of input array:
      * array('config_key' => $newValue, ...)
@@ -150,7 +150,7 @@ interface Hackathon_MageMonitoring_Model_Widget
 
     /**
      * Deletes the widget config via desired persistance layer. Never called if getConfig() returns false.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
      *
      * @return bool
      */

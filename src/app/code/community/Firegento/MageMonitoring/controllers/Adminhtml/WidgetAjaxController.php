@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Adminhtml_Controller_Action
+class Firegento_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Adminhtml_Controller_Action
 {
 
     /**
@@ -215,7 +215,7 @@ class Hackathon_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
                 $widget = reset($widget);
             }
             $widget = reset($widget);
-            if ($widget instanceof Hackathon_MageMonitoring_Model_Widget) {
+            if ($widget instanceof Firegento_MageMonitoring_Model_Widget) {
                 return $widget;
             }
         }

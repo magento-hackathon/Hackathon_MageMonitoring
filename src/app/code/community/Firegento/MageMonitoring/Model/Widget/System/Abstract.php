@@ -20,14 +20,14 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_System_Abstract
+ * class Firegento_MageMonitoring_Model_Widget_System_Abstract
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-abstract class Hackathon_MageMonitoring_Model_Widget_System_Abstract
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+abstract class Firegento_MageMonitoring_Model_Widget_System_Abstract
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     protected $_serverInfo = null;
     protected $_mageInfo = null;

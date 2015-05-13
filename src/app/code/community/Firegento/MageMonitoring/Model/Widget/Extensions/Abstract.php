@@ -20,15 +20,15 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_Extensions_Abstract
+ * Class Firegento_MageMonitoring_Model_Widget_Extensions_Abstract
  * provides the base for all extension check implementations.
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-abstract class Hackathon_MageMonitoring_Model_Widget_Extensions_Abstract
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+abstract class Firegento_MageMonitoring_Model_Widget_Extensions_Abstract
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
 
     /** @var array */
@@ -56,7 +56,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_Extensions_Abstract
      */
     protected function _checkExtensionInstalled($extensionName)
     {
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = $this->_getHelper();
 
         $extensions = $this->_getInstalledExtensions();

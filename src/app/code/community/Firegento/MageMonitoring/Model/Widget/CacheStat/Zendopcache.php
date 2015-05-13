@@ -20,15 +20,15 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
+ * class Firegento_MageMonitoring_Model_Widget_CacheStat_Zendopcache
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
-    extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+class Firegento_MageMonitoring_Model_Widget_CacheStat_Zendopcache
+    extends Firegento_MageMonitoring_Model_Widget_CacheStat_Abstract
+    implements Firegento_MageMonitoring_Model_Widget_CacheStat
 {
     private $_opCacheConfig;
     private $_opCacheStats;
@@ -47,7 +47,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getName()
+     * @see Firegento_MageMonitoring_Model_CacheStats::getName()
      */
     public function getName()
     {
@@ -57,7 +57,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getVersion()
+     * @see Firegento_MageMonitoring_Model_CacheStats::getVersion()
      */
     public function getVersion()
     {
@@ -71,7 +71,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::isActive()
+     * @see Firegento_MageMonitoring_Model_CacheStats::isActive()
      */
     public function isActive()
     {
@@ -87,7 +87,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Returns memory max
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryMax()
+     * @see Firegento_MageMonitoring_Model_CacheStats::getMemoryMax()
      */
     public function getMemoryMax()
     {
@@ -101,7 +101,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Returns used memory
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getMemoryUsed()
+     * @see Firegento_MageMonitoring_Model_CacheStats::getMemoryUsed()
      */
     public function getMemoryUsed()
     {
@@ -115,7 +115,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Returns number of cache hits
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheHits()
+     * @see Firegento_MageMonitoring_Model_CacheStats::getCacheHits()
      */
     public function getCacheHits()
     {
@@ -129,7 +129,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Returns number of cache misses
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::getCacheMisses()
+     * @see Firegento_MageMonitoring_Model_CacheStats::getCacheMisses()
      */
     public function getCacheMisses()
     {
@@ -143,7 +143,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Zendopcache
     /**
      * Flushes cache
      *
-     * @see Hackathon_MageMonitoring_Model_CacheStats::flushCache()
+     * @see Firegento_MageMonitoring_Model_CacheStats::flushCache()
      */
     public function flushCache()
     {

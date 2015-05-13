@@ -20,13 +20,13 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_CacheStat
+ * class Firegento_MageMonitoring_Model_Widget_CacheStat
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-interface Hackathon_MageMonitoring_Model_Widget_CacheStat extends Hackathon_MageMonitoring_Model_Widget
+interface Firegento_MageMonitoring_Model_Widget_CacheStat extends Firegento_MageMonitoring_Model_Widget
 {
     /**
      * Returns maximum cache size in bytes or false if not implemented.

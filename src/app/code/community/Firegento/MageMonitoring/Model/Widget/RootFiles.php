@@ -20,15 +20,15 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_RootFiles
+ * Class Firegento_MageMonitoring_Model_Widget_RootFiles
  * checks if the magento root contains problematic file types such as the "install.php".
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_RootFiles
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Firegento_MageMonitoring_Model_Widget_RootFiles
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     const NODE_NAME = 'rootfiles';
 
@@ -75,7 +75,7 @@ class Hackathon_MageMonitoring_Model_Widget_RootFiles
      */
     protected function _renderMoreChecks()
     {
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = $this->_getHelper();
         $offendingFileNames = $this->getOffendingFilesFromMagentoRoot();
 

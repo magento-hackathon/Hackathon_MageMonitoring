@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Widget_Multi extends Mage_Core_Block_Template
+class Firegento_MageMonitoring_Block_Widget_Multi extends Mage_Core_Block_Template
 {
     protected $_renderer = null;
 
@@ -43,13 +43,13 @@ class Hackathon_MageMonitoring_Block_Widget_Multi extends Mage_Core_Block_Templa
      * Initializes and returns a content renderer block of specified type.
      *
      * @param  string $type Renderer type
-     * @return Hackathon_MageMonitoring_Block_Widget_Multi_Renderer
+     * @return Firegento_MageMonitoring_Block_Widget_Multi_Renderer
      */
     public function newContentRenderer($type = 'table')
     {
         $blockString = 'magemonitoring/widget_multi_renderer_' . $type;
         $renderer = $this->getLayout()->createBlock($blockString);
-        if ($renderer instanceof Hackathon_MageMonitoring_Block_Widget_Multi_Renderer) {
+        if ($renderer instanceof Firegento_MageMonitoring_Block_Widget_Multi_Renderer) {
             $renderer->setWidgetId($this->getWidgetId())
                 ->setTabId($this->getTabId())
                 ->setType($type);
@@ -63,7 +63,7 @@ class Hackathon_MageMonitoring_Block_Widget_Multi extends Mage_Core_Block_Templa
     /**
      * Returns current content renderer.
      *
-     * @return Hackathon_MageMonitoring_Block_Widget_Multi_Renderer
+     * @return Firegento_MageMonitoring_Block_Widget_Multi_Renderer
      */
     public function getRenderer()
     {

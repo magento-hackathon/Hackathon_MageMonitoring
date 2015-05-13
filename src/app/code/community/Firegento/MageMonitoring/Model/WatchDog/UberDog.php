@@ -20,13 +20,13 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_WatchDog_UberDog
+ * Class Firegento_MageMonitoring_Model_WatchDog_UberDog
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_WatchDog_UberDog
+class Firegento_MageMonitoring_Model_WatchDog_UberDog
 {
     private $_exceptionList = array();
     private $_watchDogResults = array();
@@ -42,7 +42,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_UberDog
     public function triggerActiveDogs($skipTestDog = true)
     {
         $helper = Mage::helper('magemonitoring');
-        $id = 'Hackathon_MageMonitoring_Model_Widget_System_Watchdog';
+        $id = 'Firegento_MageMonitoring_Model_Widget_System_Watchdog';
         // exit if globally disabled
         if (Mage::getStoreConfigFlag($helper->getConfigKeyById('dogs/disabled', $id))) {
             return false;

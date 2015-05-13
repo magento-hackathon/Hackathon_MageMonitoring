@@ -20,17 +20,17 @@
  */
 
 /**
- * interface Hackathon_MageMonitoring_Model_WatchDog
+ * interface Firegento_MageMonitoring_Model_WatchDog
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-interface Hackathon_MageMonitoring_Model_WatchDog
+interface Firegento_MageMonitoring_Model_WatchDog
 {
     /**
      * Returns id string, use classname to avoid possible conflicts.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return string
      */
@@ -38,7 +38,7 @@ interface Hackathon_MageMonitoring_Model_WatchDog
 
     /**
      * Returns watch dog name.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return string
      */
@@ -46,7 +46,7 @@ interface Hackathon_MageMonitoring_Model_WatchDog
 
     /**
      * Returns true if this watch dog is active.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return bool
      */
@@ -54,7 +54,7 @@ interface Hackathon_MageMonitoring_Model_WatchDog
 
     /**
      * Returns string in standard cron format or false.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides default impl.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract provides default impl.
      *
      * @return false|string
      */
@@ -63,7 +63,7 @@ interface Hackathon_MageMonitoring_Model_WatchDog
     /**
      * Method that executes if getSchedule() says it's time.
      * Returns false if there is nothing to report or array with results.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract provides addReportRow() for convenience.
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract provides addReportRow() for convenience.
      *
      * Return format of array:
      * array(array('css_id' => 'info|success|warning|error',

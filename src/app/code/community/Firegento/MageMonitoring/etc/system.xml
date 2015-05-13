@@ -38,7 +38,7 @@
                         </module_active>
                         <logging translate="label">
                             <label>Logging</label>
-                            <comment><![CDATA[Enable logging to collect errors in <strong>Hackathon_MageMonitoring.log</strong>]]></comment>
+                            <comment><![CDATA[Enable logging to collect errors in <strong>Firegento_MageMonitoring.log</strong>]]></comment>
                             <sort_order>20</sort_order>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -49,7 +49,7 @@
                         </logging>
                         <debug_logging translate="label">
                             <label>Debug Logging</label>
-                            <comment><![CDATA[Enable debug logging to also collect debug information in <strong>Hackathon_MageMonitoring.log</strong>]]></comment>
+                            <comment><![CDATA[Enable debug logging to also collect debug information in <strong>Firegento_MageMonitoring.log</strong>]]></comment>
                             <sort_order>30</sort_order>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>

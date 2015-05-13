@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
+class Firegento_MageMonitoring_Helper_Database extends Mage_Core_Helper_Abstract
 {
     private $_connection = null;
 

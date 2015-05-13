@@ -20,22 +20,22 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize
+ * class Firegento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     protected $_defStartCollapsed = 1;
 
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -45,7 +45,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -55,7 +55,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -70,7 +70,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Logfilesize
     public function getOutput()
     {
         $block = $this->newMultiBlock();
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Barchart $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Barchart $renderer */
         $renderer = $block->newContentRenderer('barchart');
         $path = Mage::getBaseDir() . '/var/log/';
 

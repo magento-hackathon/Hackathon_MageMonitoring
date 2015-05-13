@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
+class Firegento_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
 {
     private $_widgetModel;
     private $_output;
@@ -59,12 +59,12 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
     /**
      * Get the widget model
      *
-     * @return Hackathon_MageMonitoring_Model_Widget
+     * @return Firegento_MageMonitoring_Model_Widget
      * @throws Exception
      */
     protected function _getWidget()
     {
-        if ($this->_widgetModel instanceof Hackathon_MageMonitoring_Model_Widget) {
+        if ($this->_widgetModel instanceof Firegento_MageMonitoring_Model_Widget) {
             return $this->_widgetModel;
         } else {
             throw new Exception ('Use setWidget() before using any getter.');
@@ -74,16 +74,16 @@ class Hackathon_MageMonitoring_Block_Widget extends Mage_Core_Block_Template
     /**
      * Set source model
      *
-     * @param  Hackathon_MageMonitoring_Model_Widget $model Model
-     * @return Hackathon_MageMonitoring_Block_Widget $this  Widget block
+     * @param  Firegento_MageMonitoring_Model_Widget $model Model
+     * @return Firegento_MageMonitoring_Block_Widget $this  Widget block
      * @throws Exception
      */
     public function setWidget($model)
     {
-        if ($model instanceof Hackathon_MageMonitoring_Model_Widget) {
+        if ($model instanceof Firegento_MageMonitoring_Model_Widget) {
             $this->_widgetModel = $model;
         } else {
-            throw new Exception ('Passed model does not implement Hackathon_MageMonitoring_Model_Widget interface.');
+            throw new Exception ('Passed model does not implement Firegento_MageMonitoring_Model_Widget interface.');
         }
 
         return $this;

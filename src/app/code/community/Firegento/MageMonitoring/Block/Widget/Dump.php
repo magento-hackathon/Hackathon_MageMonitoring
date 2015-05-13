@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Widget_Dump extends Mage_Core_Block_Abstract
+class Firegento_MageMonitoring_Block_Widget_Dump extends Mage_Core_Block_Abstract
 {
     /**
      * Returns it's output as HTML

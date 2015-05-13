@@ -20,20 +20,20 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
+ * class Firegento_MageMonitoring_Model_Widget_HealthCheck_Sitemap
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_HealthCheck_Sitemap
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -43,7 +43,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -53,7 +53,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -64,7 +64,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
      * Returns file info
      *
      * @param  string                               $pathToFile Path to the file
-     * @param  Hackathon_MageMonitoring_Helper_Data $helper     Helper class
+     * @param  Firegento_MageMonitoring_Helper_Data $helper     Helper class
      * @return array
      */
     private function _getFileInfo($pathToFile, $helper)
@@ -105,7 +105,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Sitemap
         $sitemaps = Mage::getModel('sitemap/sitemap')->getCollection();
         $helper = Mage::helper('magemonitoring');
         $block = $this->newMultiBlock();
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
         $renderer = $block->newContentRenderer('table');
 
         $header = array(

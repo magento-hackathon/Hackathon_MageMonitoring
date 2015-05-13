@@ -20,20 +20,20 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_System_Server
+ * class Firegento_MageMonitoring_Model_Widget_System_Server
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_System_Server
-    extends Hackathon_MageMonitoring_Model_Widget_System_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_System_Server
+    extends Firegento_MageMonitoring_Model_Widget_System_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -43,7 +43,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Server
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -53,7 +53,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Server
     /**
      * Fetches and returns output
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     * @see Firegento_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
     {

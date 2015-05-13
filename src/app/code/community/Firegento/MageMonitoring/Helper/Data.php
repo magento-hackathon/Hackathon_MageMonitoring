@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
+class Firegento_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
 {
     const VERSIONS_REGEXP = '#[\d\.\*]+#ims';
     const CHECK_NODE = 'global/healthcheck/%s';
@@ -48,7 +48,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         $widgetId = '*',
         $tabId = null,
         $returnSorted = true,
-        $baseInterface = 'Hackathon_MageMonitoring_Model_Widget'
+        $baseInterface = 'Firegento_MageMonitoring_Model_Widget'
     ) {
         $classFolders = array();
         $widgets = array();
@@ -119,7 +119,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
         $tabId = '*',
         $widgetDbId = null,
         $returnSorted = true,
-        $baseInterface = 'Hackathon_MageMonitoring_Model_Widget'
+        $baseInterface = 'Firegento_MageMonitoring_Model_Widget'
     ) {
         if ($tabId !== '*') {
             $tabs = array($tabId => Mage::getStoreConfig('magemonitoring/tabs/'.$tabId));
@@ -164,7 +164,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      */
     public function getConfiguredWatchDogs()
     {
-        $tabs = $this->getConfiguredWidgets('*', null, false, 'Hackathon_MageMonitoring_Model_WatchDog');
+        $tabs = $this->getConfiguredWidgets('*', null, false, 'Firegento_MageMonitoring_Model_WatchDog');
         $watchDogs = array();
         foreach ($tabs as $tab) {
             $d = array_values($tab);
@@ -491,7 +491,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * Get widget url
      *
      * @param  string                                $controllerAction Controller action
-     * @param  Hackathon_MageMonitoring_Model_Widget $widget           Widget model
+     * @param  Firegento_MageMonitoring_Model_Widget $widget           Widget model
      * @return string $url
      */
     public function getWidgetUrl($controllerAction, $widget)
@@ -552,7 +552,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
      * Returns unique config key for widget configs.
      *
      * @param  string                                $configKey Configuration key
-     * @param  Hackathon_MageMonitoring_Model_Widget $widget    Widget Model
+     * @param  Firegento_MageMonitoring_Model_Widget $widget    Widget Model
      * @param  string                                $scope     Scope
      * @throws Exception
      * @return string
@@ -566,13 +566,13 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
             }
         }
         $id = null;
-        if (class_implements($widget, 'Hackathon_MageMonitoring_Model_Widget')) {
+        if (class_implements($widget, 'Firegento_MageMonitoring_Model_Widget')) {
             if ($scope === 'global') {
                 $id = $widget->getId(); // class name for global params as db key
             } else {
                 $id = $widget->getConfigId();
             }
-        } elseif (class_implements($widget, 'Hackathon_MageMonitoring_Model_WatchDog')) {
+        } elseif (class_implements($widget, 'Firegento_MageMonitoring_Model_WatchDog')) {
             $id = $widget->getDogId();
         } else {
             throw new Exception("Passed class does not implement Widget or WatchDog interface.");
@@ -592,7 +592,7 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     public function getConfigKeyById($configKey, $widgetDbId, $scope = 'global')
     {
         $key = 'magemonitoring/';
-        $prefix = Hackathon_MageMonitoring_Model_Widget_Abstract::CONFIG_PRE_KEY;
+        $prefix = Firegento_MageMonitoring_Model_Widget_Abstract::CONFIG_PRE_KEY;
 
         return $key .= $scope . '/'. $prefix . '/' . $widgetDbId . '/' . $configKey;
     }

@@ -11,16 +11,18 @@ body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;
 
 <body style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
 <div style="background:#F6F6F6; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; margin:0; padding:0;">
-<table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
+    <table cellspacing="0" cellpadding="0" border="0" height="100%" width="100%">
         <tr>
             <td align="center" valign="top" style="padding:20px 0 20px 0">
-                {{block type='core/template' area='adminhtml' template='monitoring/email/watchdog/reports.phtml' reports=$reports}}
+                {{block type='core/template' area='adminhtml' template='monitoring/email/watchdog/reports.phtml'
+                reports=$reports}}
             </td>
         </tr>
         {{if errors}}
         <tr>
             <td align="center" valign="top" style="padding:20px 0 20px 0">
-                {{block type='core/template' area='adminhtml' template='monitoring/email/watchdog/errors.phtml' errors=$errors}}
+                {{block type='core/template' area='adminhtml' template='monitoring/email/watchdog/errors.phtml'
+                errors=$errors}}
             </td>
         </tr>
         {{/if}}

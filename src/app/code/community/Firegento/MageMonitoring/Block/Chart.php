@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Chart extends Mage_Core_Block_Template
+class Firegento_MageMonitoring_Block_Chart extends Mage_Core_Block_Template
 {
     /**
      * Constructor

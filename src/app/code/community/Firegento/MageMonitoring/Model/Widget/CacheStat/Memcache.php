@@ -20,15 +20,15 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
+ * class Firegento_MageMonitoring_Model_Widget_CacheStat_Memcache
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
-    extends Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget_CacheStat
+class Firegento_MageMonitoring_Model_Widget_CacheStat_Memcache
+    extends Firegento_MageMonitoring_Model_Widget_CacheStat_Abstract
+    implements Firegento_MageMonitoring_Model_Widget_CacheStat
 {
     private $_memCachePool;
     private $_memCacheStats;
@@ -68,7 +68,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -78,7 +78,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -88,7 +88,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -102,7 +102,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Returns memory max
      *
-     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
+     * @see Firegento_MageMonitoring_Model_Widget_CacheStat::getMemoryMax()
      */
     public function getMemoryMax()
     {
@@ -116,7 +116,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Returns used memory
      *
-     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getMemoryUsed()
+     * @see Firegento_MageMonitoring_Model_Widget_CacheStat::getMemoryUsed()
      */
     public function getMemoryUsed()
     {
@@ -130,7 +130,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Returns number of cache hits
      *
-     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheHits()
+     * @see Firegento_MageMonitoring_Model_Widget_CacheStat::getCacheHits()
      */
     public function getCacheHits()
     {
@@ -144,7 +144,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Returns number of cache misses
      *
-     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::getCacheMisses()
+     * @see Firegento_MageMonitoring_Model_Widget_CacheStat::getCacheMisses()
      */
     public function getCacheMisses()
     {
@@ -158,7 +158,7 @@ class Hackathon_MageMonitoring_Model_Widget_CacheStat_Memcache
     /**
      * Flushes cache
      *
-     * @see Hackathon_MageMonitoring_Model_Widget_CacheStat::flushCache()
+     * @see Firegento_MageMonitoring_Model_Widget_CacheStat::flushCache()
      */
     public function flushCache()
     {

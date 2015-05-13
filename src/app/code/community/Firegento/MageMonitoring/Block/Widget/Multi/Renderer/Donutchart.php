@@ -26,8 +26,8 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart
-    extends Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Chart
+class Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart
+    extends Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Chart
 {
     const CONTENT_TYPE_DONUTCHART = 'donutchart';
 }

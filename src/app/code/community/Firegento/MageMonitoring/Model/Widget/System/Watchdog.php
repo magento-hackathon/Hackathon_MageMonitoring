@@ -20,15 +20,15 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
+ * class Firegento_MageMonitoring_Model_Widget_System_Watchdog
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
-    extends Hackathon_MageMonitoring_Model_Widget_System_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_System_Watchdog
+    extends Firegento_MageMonitoring_Model_Widget_System_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     // override defaults
     protected $_defDisplayPrio = 100;
@@ -38,7 +38,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
     /**
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -48,7 +48,7 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
     /**
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -66,16 +66,16 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
 
         $this->addConfigHeader($this->getHelper()->__('Global Watch Dog Configuration'));
         $this->addConfig(
-            Hackathon_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_DISABLED,
+            Firegento_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_DISABLED,
             $this->getHelper()->__('Disable all dogs?'),
-            Hackathon_MageMonitoring_Model_Widget_Watchdog::DEFAULT_DISABLED,
+            Firegento_MageMonitoring_Model_Widget_Watchdog::DEFAULT_DISABLED,
             'global',
             'checkbox'
         );
 
-        $this->addConfig(Hackathon_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_MAILTO,
+        $this->addConfig(Firegento_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_MAILTO,
             $this->getHelper()->__('Default report destination (global|support|sales|custom1|custom2):'),
-            Hackathon_MageMonitoring_Model_Widget_Watchdog::DEFAULT_MAILTO,
+            Firegento_MageMonitoring_Model_Widget_Watchdog::DEFAULT_MAILTO,
             'global',
             'text',
             false,
@@ -91,13 +91,13 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
      */
     public function testCallback()
     {
-        if ($this->getConfig(Hackathon_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_DISABLED)) {
+        if ($this->getConfig(Firegento_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_DISABLED)) {
             return $this->getHelper()
                 ->__('Error: Watch dogs are globally disabled. Click the gear icon of the watch dog widget to edit.');
         }
 
         if (Mage::getModel('magemonitoring/watchDog_uberDog')->triggerActiveDogs(false)) {
-            $email = $this->getConfig(Hackathon_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_MAILTO);
+            $email = $this->getConfig(Firegento_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_MAILTO);
             if ($mailTo = Mage::helper('magemonitoring')->validateEmail($email)) {
                 return $this->getHelper()->__('Dogs barked, report mail has been sent to: %s', $mailTo['email']);
             }
@@ -111,12 +111,12 @@ class Hackathon_MageMonitoring_Model_Widget_System_Watchdog
     /**
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     * @see Firegento_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
     {
         $block = $this->newMonitoringBlock();
-        $disabled = $this->getConfig(Hackathon_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_DISABLED);
+        $disabled = $this->getConfig(Firegento_MageMonitoring_Model_Widget_Watchdog::CONFIG_DOGS_DISABLED);
 
         if (!$disabled) {
             $block->addRow('success', $this->getHelper()->__('Watch Dogs are enabled'));

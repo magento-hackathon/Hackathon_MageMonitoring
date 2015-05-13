@@ -20,16 +20,16 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_HealthCheck_Cron_Status
+ * Class Firegento_MageMonitoring_Model_HealthCheck_Cron_Status
  * renders the cron job status.
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_HealthCheck_Cron_Status
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_HealthCheck_Cron_Status
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     const NODE_NAME = 'default_healthcheck_cron_status';
 
@@ -54,7 +54,7 @@ class Hackathon_MageMonitoring_Model_HealthCheck_Cron_Status
 
     /**
      * Used to render the widget, returns array of classes that have a ->toHtml() method.
-     * Extending from Hackathon_MageMonitoring_Model_Widget_Abstract will give you .
+     * Extending from Firegento_MageMonitoring_Model_Widget_Abstract will give you .
      *
      * @return array
      */
@@ -62,10 +62,10 @@ class Hackathon_MageMonitoring_Model_HealthCheck_Cron_Status
     {
         $block = $this->newMultiBlock();
 
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
         $renderer = $block->newContentRenderer('table');
 
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = Mage::helper('magemonitoring');
 
         $renderer->setHeaderRow(array($helper->__('Status'), $helper->__('Job Count')));
@@ -88,18 +88,18 @@ class Hackathon_MageMonitoring_Model_HealthCheck_Cron_Status
             switch ($_status) {
                 case Mage_Cron_Model_Schedule::STATUS_ERROR:
                     if ($_statusCount > 0) {
-                        $_rowConfig['_cssClasses'] = Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_ERROR;
+                        $_rowConfig['_cssClasses'] = Firegento_MageMonitoring_Helper_Data::WARN_TYPE_ERROR;
                     }
                     break;
                 case Mage_Cron_Model_Schedule::STATUS_MISSED:
                 case Mage_Cron_Model_Schedule::STATUS_RUNNING:
                     if ($_statusCount > 0) {
-                        $_rowConfig['_cssClasses'] = Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_WARNING;
+                        $_rowConfig['_cssClasses'] = Firegento_MageMonitoring_Helper_Data::WARN_TYPE_WARNING;
                     }
                     break;
                 case Mage_Cron_Model_Schedule::STATUS_PENDING:
                     if (0 == $_statusCount) {
-                        $_rowConfig['_cssClasses'] = Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_WARNING;
+                        $_rowConfig['_cssClasses'] = Firegento_MageMonitoring_Helper_Data::WARN_TYPE_WARNING;
                     }
                     break;
             }

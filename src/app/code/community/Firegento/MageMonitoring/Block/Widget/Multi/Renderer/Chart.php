@@ -26,9 +26,9 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Chart
-    extends Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Abstract
-    implements Hackathon_MageMonitoring_Block_Widget_Multi_Renderer
+class Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Chart
+    extends Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract
+    implements Firegento_MageMonitoring_Block_Widget_Multi_Renderer
 {
     const CONTENT_TYPE_CHART = 'chart';
 

@@ -20,13 +20,13 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Helper_Log
+ * class Firegento_MageMonitoring_Helper_Log
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Helper_Log
+class Firegento_MageMonitoring_Helper_Log
     extends Mage_Core_Helper_Abstract
 {
 
@@ -67,7 +67,7 @@ class Hackathon_MageMonitoring_Helper_Log
      */
     public function log($msg, $level = null)
     {
-        /** @var $configHelper Hackathon_MageMonitoring_Helper_Config */
+        /** @var $configHelper Firegento_MageMonitoring_Helper_Config */
         $configHelper = Mage::helper('magemonitoring/config');
 
         if (!$configHelper->isModuleActive() || !$this->isLoggingActive()) {
@@ -91,7 +91,7 @@ class Hackathon_MageMonitoring_Helper_Log
      */
     public function logException($exception, $msg = null)
     {
-        /** @var $configHelper Hackathon_MageMonitoring_Helper_Config */
+        /** @var $configHelper Firegento_MageMonitoring_Helper_Config */
         $configHelper = Mage::helper('magemonitoring/config');
 
         if (!$configHelper->isModuleActive() || !$this->isLoggingActive()) {

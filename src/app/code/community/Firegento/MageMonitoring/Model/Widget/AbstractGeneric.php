@@ -20,14 +20,14 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
+ * class Firegento_MageMonitoring_Model_Widget_AbstractGeneric
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Firegento_MageMonitoring_Model_Widget_AbstractGeneric
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     // define config keys
     const CONFIG_WIDGET_TITLE = 'title';
@@ -38,7 +38,7 @@ class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
     /**
      * Init Config
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
     {
@@ -70,7 +70,7 @@ class Hackathon_MageMonitoring_Model_Widget_AbstractGeneric
     /**
      * Get Name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      * @return string
      */
     public function getName()

@@ -20,20 +20,20 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
+ * class Firegento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -43,7 +43,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -53,7 +53,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -75,7 +75,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopStatus
         $statusCssClass = $helper->getConst('WARN_CSSCLASS');
 
         $block = $this->newMultiBlock();
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
         $renderer = $block->newContentRenderer('table');
 
         $header = array(

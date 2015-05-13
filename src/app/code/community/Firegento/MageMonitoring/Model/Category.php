@@ -20,13 +20,13 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Category
+ * class Firegento_MageMonitoring_Model_Category
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Category extends Mage_Catalog_Model_Category
+class Firegento_MageMonitoring_Model_Category extends Mage_Catalog_Model_Category
 {
 
 }

@@ -20,15 +20,15 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_WatchDog_Abstract
+ * Class Firegento_MageMonitoring_Model_WatchDog_Abstract
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-abstract class Hackathon_MageMonitoring_Model_WatchDog_Abstract
-    extends Hackathon_MageMonitoring_Model_Widget_Watchdog
-    implements Hackathon_MageMonitoring_Model_WatchDog
+abstract class Firegento_MageMonitoring_Model_WatchDog_Abstract
+    extends Firegento_MageMonitoring_Model_Widget_Watchdog
+    implements Firegento_MageMonitoring_Model_WatchDog
 {
 
 }

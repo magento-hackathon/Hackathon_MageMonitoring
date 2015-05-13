@@ -20,13 +20,13 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Helper_Config
+ * class Firegento_MageMonitoring_Helper_Config
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Helper_Config
+class Firegento_MageMonitoring_Helper_Config
     extends Mage_Core_Helper_Abstract
 {
 

@@ -20,15 +20,15 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_Log_Tail
+ * class Firegento_MageMonitoring_Model_Widget_Log_Tail
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Log_Tail
-    extends Hackathon_MageMonitoring_Model_Widget_Log_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget, Hackathon_MageMonitoring_Model_WatchDog
+class Firegento_MageMonitoring_Model_Widget_Log_Tail
+    extends Firegento_MageMonitoring_Model_Widget_Log_Abstract
+    implements Firegento_MageMonitoring_Model_Widget, Firegento_MageMonitoring_Model_WatchDog
 {
     // define config keys
     const CONFIG_LOG_FILE = 'file_path';
@@ -44,7 +44,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
     /**
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -54,7 +54,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
     /**
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
     {
@@ -83,7 +83,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
     /**
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     * @see Firegento_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
     {
@@ -102,7 +102,7 @@ class Hackathon_MageMonitoring_Model_Widget_Log_Tail
      *
      * (non-PHPdoc)
      *
-     * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
+     * @see Firegento_MageMonitoring_Model_WatchDog::watch()
      */
     public function watch()
     {

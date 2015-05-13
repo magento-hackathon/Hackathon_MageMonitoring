@@ -20,20 +20,20 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
+ * class Firegento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -43,7 +43,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -53,7 +53,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
     /**
      * Returns isActive flag
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::isActive()
+     * @see Firegento_MageMonitoring_Model_Widget::isActive()
      */
     public function isActive()
     {
@@ -77,11 +77,11 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
      */
     public function getOutput()
     {
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = Mage::helper('magemonitoring');
 
         $block = $this->newMultiBlock();
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
         $renderer = $block->newContentRenderer('table');
 
         $renderer->setHeaderRow(
@@ -111,9 +111,9 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration
             $recommendation = (string) $_config->recommendation;
             if ($recommendation) {
                 if ($configValue == $recommendation) {
-                    $rowConfig = array('_cssClasses'   => Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_OK);
+                    $rowConfig = array('_cssClasses'   => Firegento_MageMonitoring_Helper_Data::WARN_TYPE_OK);
                 } else {
-                    $rowConfig = array('_cssClasses'   => Hackathon_MageMonitoring_Helper_Data::WARN_TYPE_WARNING);
+                    $rowConfig = array('_cssClasses'   => Firegento_MageMonitoring_Helper_Data::WARN_TYPE_WARNING);
                 }
             } else {
                 $recommendation = '---';

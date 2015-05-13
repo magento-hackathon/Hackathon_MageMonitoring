@@ -20,21 +20,21 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_WatchDog_Error
+ * Class Firegento_MageMonitoring_Model_WatchDog_Error
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_WatchDog_Error
-    extends Hackathon_MageMonitoring_Model_WatchDog_Abstract
+class Firegento_MageMonitoring_Model_WatchDog_Error
+    extends Firegento_MageMonitoring_Model_WatchDog_Abstract
 {
     protected $_defWatchdogCron = '* * * * *';
 
     /**
      * Returns dog name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getDogName()
     {
@@ -44,7 +44,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Error
     /**
      * Returns version
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getVersion()
+     * @see Firegento_MageMonitoring_Model_Widget::getVersion()
      */
     public function getVersion()
     {
@@ -54,7 +54,7 @@ class Hackathon_MageMonitoring_Model_WatchDog_Error
     /**
      * Do watch
      *
-     * @see Hackathon_MageMonitoring_Model_WatchDog::watch()
+     * @see Firegento_MageMonitoring_Model_WatchDog::watch()
      */
     public function watch()
     {

@@ -26,14 +26,14 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+abstract class Firegento_MageMonitoring_Model_Widget_CacheStat_Abstract
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
 
     /**
      * Default output for cachestat widgets.
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getOutput()
+     * @see Firegento_MageMonitoring_Model_Widget::getOutput()
      */
     public function getOutput()
     {
@@ -70,10 +70,10 @@ abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
     }
 
     /**
-     * Returns memory chart data as array, feeds Hackathon_MageMonitoring_Block_Chart.
+     * Returns memory chart data as array, feeds Firegento_MageMonitoring_Block_Chart.
      *
-     * @param  Hackathon_MageMonitoring_Model_Widget_CacheStat $cache Cache model
-     * @param  Hackathon_MageMonitoring_Block_Chart            $block Block
+     * @param  Firegento_MageMonitoring_Model_Widget_CacheStat $cache Cache model
+     * @param  Firegento_MageMonitoring_Block_Chart            $block Block
      * @return array
      */
     public function getMemoryChartData($cache, $block)
@@ -89,10 +89,10 @@ abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
     }
 
     /**
-     * Returns hit/miss chart data as array, feeds Hackathon_MageMonitoring_Block_Chart.
+     * Returns hit/miss chart data as array, feeds Firegento_MageMonitoring_Block_Chart.
      *
-     * @param  Hackathon_MageMonitoring_Model_Widget_CacheStat $cache Cache model
-     * @param  Hackathon_MageMonitoring_Block_Chart            $block Block
+     * @param  Firegento_MageMonitoring_Model_Widget_CacheStat $cache Cache model
+     * @param  Firegento_MageMonitoring_Block_Chart            $block Block
      * @return array
      */
     public function getHitMissChartData($cache, $block)
@@ -135,7 +135,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
     /**
      * Returns css class id for memory stats.
      *
-     * @param  Hackathon_MageMonitoring_Model_Widget_CacheStat $cache Cache model
+     * @param  Firegento_MageMonitoring_Model_Widget_CacheStat $cache Cache model
      * @return string
      */
     public function getMemoryCssId($cache)
@@ -154,7 +154,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
     /**
      * Returns css class id for hit/miss stats.
      *
-     * @param  Hackathon_MageMonitoring_Model_Widget_CacheStat $cache Cache model
+     * @param  Firegento_MageMonitoring_Model_Widget_CacheStat $cache Cache model
      * @return string
      */
     public function getHitMissCssId($cache)
@@ -184,7 +184,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
     /**
      * Format memory values for frontend
      *
-     * @param  Hackathon_MageMonitoring_Model_Widget_CacheStat $cache Cache model
+     * @param  Firegento_MageMonitoring_Model_Widget_CacheStat $cache Cache model
      * @return string
      */
     public function getFormatedMemoryValue($cache)
@@ -198,7 +198,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_CacheStat_Abstract
     /**
      * Format memory values for frontend
      *
-     * @param  Hackathon_MageMonitoring_Model_Widget_CacheStat $cache Cache model
+     * @param  Firegento_MageMonitoring_Model_Widget_CacheStat $cache Cache model
      * @return string
      */
     public function getFormatedHitMissValue($cache)

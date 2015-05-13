@@ -20,13 +20,13 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info
+ * class Firegento_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info
+class Firegento_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info
     extends Mage_Adminhtml_Block_Abstract
     implements Varien_Data_Form_Element_Renderer_Interface
 {

@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_Template
+class Firegento_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_Template
 {
     /**
      * Format of array:
@@ -126,7 +126,7 @@ class Hackathon_MageMonitoring_Block_Widget_Monitoring extends Mage_Core_Block_T
     }
 
     /**
-     * Returns an array that can feed Hackathon_MageMonitoring_Block_Chart.
+     * Returns an array that can feed Firegento_MageMonitoring_Block_Chart.
      *
      * @param  string $canvasId  Canvas Id
      * @param  array  $chartData Chart data

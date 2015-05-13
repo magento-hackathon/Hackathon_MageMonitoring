@@ -20,15 +20,15 @@
  */
 
 /**
- * class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
+ * class Firegento_MageMonitoring_Model_Widget_HealthCheck_Mediasize
  *
  * @category FireGento
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
-    implements Hackathon_MageMonitoring_Model_Widget
+class Firegento_MageMonitoring_Model_Widget_HealthCheck_Mediasize
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
+    implements Firegento_MageMonitoring_Model_Widget
 {
     // config key
     const CONFIG_ALLOW_SLOW_MODE = 'allow_slow_mode';
@@ -39,7 +39,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
     /**
      * Returns name
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::getName()
+     * @see Firegento_MageMonitoring_Model_Widget::getName()
      */
     public function getName()
     {
@@ -49,7 +49,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
     /**
      * Inits configuration
      *
-     * @see Hackathon_MageMonitoring_Model_Widget::initConfig()
+     * @see Firegento_MageMonitoring_Model_Widget::initConfig()
      */
     public function initConfig()
     {
@@ -114,7 +114,7 @@ class Hackathon_MageMonitoring_Model_Widget_HealthCheck_Mediasize
     public function getOutput()
     {
         $block = $this->newMultiBlock();
-        /** @var Hackathon_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
+        /** @var Firegento_MageMonitoring_Block_Widget_Multi_Renderer_Table $renderer */
         $renderer = $block->newContentRenderer('table');
         $helper = Mage::helper('magemonitoring');
 

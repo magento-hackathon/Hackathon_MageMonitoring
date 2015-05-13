@@ -20,7 +20,7 @@
  */
 
 /**
- * Class Hackathon_MageMonitoring_Model_Widget_Hosting
+ * Class Firegento_MageMonitoring_Model_Widget_Hosting
  * checks the availability of typical files of a standard
  * Magento installation.
  *
@@ -28,8 +28,8 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Model_Widget_Hosting
-    extends Hackathon_MageMonitoring_Model_Widget_Abstract
+class Firegento_MageMonitoring_Model_Widget_Hosting
+    extends Firegento_MageMonitoring_Model_Widget_Abstract
 {
     const NODE_NAME = 'hosting';
 
@@ -62,10 +62,10 @@ class Hackathon_MageMonitoring_Model_Widget_Hosting
      */
     protected function _checkFileAccessible($file, $shouldBeAccessible = false)
     {
-        /** @var Hackathon_MageMonitoring_Helper_Data $helper */
+        /** @var Firegento_MageMonitoring_Helper_Data $helper */
         $helper = $this->_getHelper();
 
-        /** @var Hackathon_MageMonitoring_Helper_Http $httpHelper */
+        /** @var Firegento_MageMonitoring_Helper_Http $httpHelper */
         $httpHelper = Mage::helper('magemonitoring/http');
 
         $response = $httpHelper->checkFile($file);

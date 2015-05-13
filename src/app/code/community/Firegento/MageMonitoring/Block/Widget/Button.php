@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_Widget_Button
+class Firegento_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_Widget_Button
 {
     /**
      * Set onClick data for button display.
@@ -42,7 +42,7 @@ class Hackathon_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_
     {
         $onClick = '';
         // check if this is an ajax call with callback
-        $cbMarker = Hackathon_MageMonitoring_Model_Widget_Abstract::CALLBACK;
+        $cbMarker = Firegento_MageMonitoring_Model_Widget_Abstract::CALLBACK;
         if (!strncmp($controllerAction, $cbMarker, strlen($cbMarker))) {
             $callback = substr($controllerAction, strlen($cbMarker));
             $widgetId = $widget->getConfigId();
