@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - FireGento_MageMonitoring_Model_Widget_RootFiles</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.html">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">FireGento_MageMonitoring_Model_Widget_RootFiles</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#tasks">Tasks</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+          <li>
+            <a href="../source/app/code/community/FireGento/MageMonitoring/Model/Widget/RootFiles.php.html#line30">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>\</small>FireGento_MageMonitoring_Model_Widget_RootFiles</h1>
+        <h4>Class FireGento_MageMonitoring_Model_Widget_RootFiles checks if the magento root contains problematic file types such as the "install.php".</h4>
+        <p/>
+        <ul>
+          <li>Author: FireGento Team &lt;team@firegento.com&gt;</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class FireGento_MageMonitoring_Model_Widget_RootFiles
+                extends <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract.html">FireGento_MageMonitoring_Model_Widget_Abstract</a>
+            {<br/><ul class="none"><li>// constants</li><li>const NODE_NAME = 'rootfiles';</li></ul><ul class="none"><li>// Inherited constants from <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract.html">FireGento_MageMonitoring_Model_Widget_Abstract</a></li><li>const <a href="#CONFIG_START_COLLAPSED">CONFIG_START_COLLAPSED</a> = 'collapsed';</li><li>const <a href="#CONFIG_DISPLAY_PRIO">CONFIG_DISPLAY_PRIO</a> = 'display_prio';</li><li>const <a href="#CONFIG_PRE_KEY">CONFIG_PRE_KEY</a> = 'widgets';</li><li>const <a href="#CALLBACK">CALLBACK</a> = 'cb:';</li></ul><ul class="none"><li>// members</li><li>protected array <a href="#members">$_criticalFileEndings</a> =
+                        ;
+                    </li></ul><ul class="none"><li>// Inherited members from <span title="FireGento_MageMonitoring_Model_Widget_Abstract">FireGento_MageMonitoring_Model_Widget_Abstract</span></li><li>protected integer <a href="#members">$_defStartCollapsed</a>;
+                        </li><li>protected integer <a href="#members">$_defDisplayPrio</a>;
+                        </li><li>protected <a href="#members">$_dbConfigKey</a>;
+                        </li><li>protected <a href="#members">$_tabId</a>;
+                        </li><li>protected array <a href="#members">$_output</a>;
+                        </li><li>protected array <a href="#members">$_config</a>;
+                        </li><li>protected array <a href="#members">$_report</a>;
+                        </li><li>protected  <a href="#members">$_renderer</a>;
+                        </li></ul><ul class="none"><li>// methods</li><li>public string <a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/getName.html">getName</a>()
+                    </li><li>protected string <a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/_getNodeName.html">_getNodeName</a>()
+                    </li><li>protected $this <a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/_renderMoreChecks.html">_renderMoreChecks</a>()
+                    </li><li>protected array <a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/getOffendingFilesFromMagentoRoot.html">getOffendingFilesFromMagentoRoot</a>()
+                    </li></ul><ul class="none"><li>// Inherited methods from <span title="FireGento_MageMonitoring_Model_Widget_Abstract">FireGento_MageMonitoring_Model_Widget_Abstract</span></li><li>public array <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getOutput.html">getOutput</a>()
+                        </li><li>public FireGento_MageMonitoring_Block_Widget_Multi <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/newMultiBlock.html">newMultiBlock</a>()
+                        </li><li>public string <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getTabId.html">getTabId</a>()
+                        </li><li>public string <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getConfigId.html">getConfigId</a>()
+                        </li><li>public string <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getId.html">getId</a>()
+                        </li><li>protected $this <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_renderConfigChecks.html">_renderConfigChecks</a>()
+                        </li><li>protected array|SimpleXMLElement <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getConfigValues.html">_getConfigValues</a>()
+                        </li><li>protected abstract string <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getNodeName.html">_getNodeName</a>()
+                        </li><li>protected $this <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_checkConfigValue.html">_checkConfigValue</a>()
+                        </li><li>public FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getRenderer.html">getRenderer</a>()
+                        </li><li>public void <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/setRenderer.html">setRenderer</a>()
+                        </li><li>protected FireGento_MageMonitoring_Helper_Data <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getHelper.html">_getHelper</a>()
+                        </li><li>protected array <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getRowConfig.html">_getRowConfig</a>()
+                        </li><li>protected $this <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_renderMoreChecks.html">_renderMoreChecks</a>()
+                        </li><li>public void <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/isActive.html">isActive</a>()
+                        </li><li>public void <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/displayCollapsed.html">displayCollapsed</a>()
+                        </li><li>public array|bool <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getConfig.html">getConfig</a>()
+                        </li><li>public void <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/initConfig.html">initConfig</a>()
+                        </li><li>public FireGento_MageMonitoring_Model_Widget <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/addConfigHeader.html">addConfigHeader</a>()
+                        </li><li>public $this <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/addConfig.html">addConfig</a>()
+                        </li><li>public void <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getDisplayPrio.html">getDisplayPrio</a>()
+                        </li><li>public FireGento_MageMonitoring_Block_Widget_Monitoring <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/newMonitoringBlock.html">newMonitoringBlock</a>()
+                        </li><li>public FireGento_MageMonitoring_Model_Widget_Abstract <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/dump.html">dump</a>()
+                        </li><li>public array <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/loadConfig.html">loadConfig</a>()
+                        </li><li>public FireGento_MageMonitoring_Helper_Data <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getHelper.html">getHelper</a>()
+                        </li><li>public $this <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/saveConfig.html">saveConfig</a>()
+                        </li><li>public $this <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/deleteConfig.html">deleteConfig</a>()
+                        </li><li>public $this <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/addReportRow.html">addReportRow</a>()
+                        </li><li>public string <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getVersion.html">getVersion</a>()
+                        </li><li>protected bool <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_checkVersions.html">_checkVersions</a>()
+                        </li><li>public string <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getSupportedMagentoVersions.html">getSupportedMagentoVersions</a>()
+                        </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>
+              <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract.html">FireGento_MageMonitoring_Model_Widget_Abstract</a>
+            </li>
+          </ul>
+        </div>
+        <h2 id="tasks">Tasks</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th style="width:3em;">Line</th>
+              <th>Task</th>
+            </tr>
+          </thead>
+          <tr>
+            <td class="nummeric">609</td>
+            <td>do proper merge, things will go probably south for code below.</td>
+          </tr>
+        </table>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="NODE_NAME">NODE_NAME</td>
+              <td>'rootfiles'</td>
+            </tr>
+            <tr>
+              <td id="CONFIG_START_COLLAPSED">CONFIG_START_COLLAPSED</td>
+              <td>'collapsed'</td>
+            </tr>
+            <tr>
+              <td id="CONFIG_DISPLAY_PRIO">CONFIG_DISPLAY_PRIO</td>
+              <td>'display_prio'</td>
+            </tr>
+            <tr>
+              <td id="CONFIG_PRE_KEY">CONFIG_PRE_KEY</td>
+              <td>'widgets'</td>
+            </tr>
+            <tr>
+              <td id="CALLBACK">CALLBACK</td>
+              <td>'cb:'</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_config">
+              <strong>$_config</strong>
+            </li>
+            <li id="_criticalFileEndings">
+              <strong>$_criticalFileEndings</strong>
+              <br/>
+              <span class="indent">@var array A list of file-exentions which are considered harmful in a Magento root</span>
+            </li>
+            <li id="_dbConfigKey">
+              <strong>$_dbConfigKey</strong>
+            </li>
+            <li id="_defDisplayPrio">
+              <strong>$_defDisplayPrio</strong>
+            </li>
+            <li id="_defStartCollapsed">
+              <strong>$_defStartCollapsed</strong>
+            </li>
+            <li id="_output">
+              <strong>$_output</strong>
+            </li>
+            <li id="_renderer">
+              <strong>$_renderer</strong>
+              <br/>
+              <span class="indent">@var FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $_renderer</span>
+            </li>
+            <li id="_report">
+              <strong>$_report</strong>
+            </li>
+            <li id="_tabId">
+              <strong>$_tabId</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="_getNodeName"><a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/_getNodeName.html">_getNodeName()</a>
+                — Returns the name of the widgets xml node</li>
+            <li id="_renderMoreChecks"><a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/_renderMoreChecks.html">_renderMoreChecks()</a>
+                — Displays the results of the root-file checks.</li>
+            <li id="getOffendingFilesFromMagentoRoot"><a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/getOffendingFilesFromMagentoRoot.html">getOffendingFilesFromMagentoRoot()</a>
+                — Get a list of all offending file names that can be found in the magento root.</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="getName"><a title="FireGento_MageMonitoring_Model_Widget_RootFiles" href="../classes/FireGento_MageMonitoring_Model_Widget_RootFiles/getName.html">getName()</a>
+                — Returns widget name.</li>
+          </ul>
+          <h3>Inherited from <a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract.html">FireGento_MageMonitoring_Model_Widget_Abstract</a></h3>
+          <h4>protected</h4>
+          <ul>
+            <li id="_checkConfigValue"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_checkConfigValue.html">_checkConfigValue()</a>
+                — Check a given configuration value concerning an optional recommendation</li>
+            <li id="_checkVersions"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_checkVersions.html">_checkVersions()</a>
+                — Check Versions</li>
+            <li id="_getConfigValues"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getConfigValues.html">_getConfigValues()</a>
+                — Return configuration params from config.xml</li>
+            <li id="_getHelper"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getHelper.html">_getHelper()</a>
+                — Get an instance of the module's data helper.</li>
+            <li id="_getNodeName"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getNodeName.html">_getNodeName()</a>
+                — Returns the name of the widgets xml node</li>
+            <li id="_getRowConfig"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_getRowConfig.html">_getRowConfig()</a>
+                — Get a row configuration.</li>
+            <li id="_renderConfigChecks"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_renderConfigChecks.html">_renderConfigChecks()</a>
+                — Render configuration checks defined in config.xml</li>
+            <li id="_renderMoreChecks"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/_renderMoreChecks.html">_renderMoreChecks()</a>
+                — Render additional checks.</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="addConfig"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/addConfig.html">addConfig()</a>
+                — Add Configuration</li>
+            <li id="addConfigHeader"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/addConfigHeader.html">addConfigHeader()</a>
+                — Add empty or header row to config modal output.</li>
+            <li id="addReportRow"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/addReportRow.html">addReportRow()</a>
+                — Adds another row to watch dog report output.</li>
+            <li id="deleteConfig"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/deleteConfig.html">deleteConfig()</a>
+                — Delete Config</li>
+            <li id="displayCollapsed"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/displayCollapsed.html">displayCollapsed()</a>
+                — Returns true if widget should start collapsed, speeds up loading times as the widget won't render it's content on page load.</li>
+            <li id="dump"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/dump.html">dump()</a>
+                — Adds $string to output.</li>
+            <li id="getConfig"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getConfig.html">getConfig()</a>
+                — Get Config</li>
+            <li id="getConfigId"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getConfigId.html">getConfigId()</a>
+                — Returns db config key, returns last 2 parts of classname with appended random string as default.</li>
+            <li id="getDisplayPrio"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getDisplayPrio.html">getDisplayPrio()</a>
+                — Returns true if widget should start collapsed, speeds up loading times as the widget won't render it's content on page load.</li>
+            <li id="getHelper"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getHelper.html">getHelper()</a>
+                — Get Helper</li>
+            <li id="getId"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getId.html">getId()</a>
+                — Returns unique widget id. You really don't want to override is. ;)</li>
+            <li id="getOutput"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getOutput.html">getOutput()</a>
+                — Used to render the widget, returns array of classes that have a -&gt;toHtml() method.</li>
+            <li id="getRenderer"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getRenderer.html">getRenderer()</a>
+                — Get the renderer.</li>
+            <li id="getSupportedMagentoVersions"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getSupportedMagentoVersions.html">getSupportedMagentoVersions()</a>
+                — Get Supported Magento Versions</li>
+            <li id="getTabId"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getTabId.html">getTabId()</a>
+                — Get Tab Id</li>
+            <li id="getVersion"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/getVersion.html">getVersion()</a>
+                — Get Version</li>
+            <li id="initConfig"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/initConfig.html">initConfig()</a>
+                — Returns array with default config data for this widget or false if not implemented.</li>
+            <li id="isActive"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/isActive.html">isActive()</a>
+                — Returns true if this widget is active.</li>
+            <li id="loadConfig"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/loadConfig.html">loadConfig()</a>
+                — Load Config</li>
+            <li id="newMonitoringBlock"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/newMonitoringBlock.html">newMonitoringBlock()</a>
+                — New Monitoring Block</li>
+            <li id="newMultiBlock"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/newMultiBlock.html">newMultiBlock()</a>
+                — New Multi Block</li>
+            <li id="saveConfig"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/saveConfig.html">saveConfig()</a>
+                — Save config in $post to core_config_data, can handle raw $_POST or widget config arrays if $postOnly is true.</li>
+            <li id="setRenderer"><a title="FireGento_MageMonitoring_Model_Widget_Abstract" href="../classes/FireGento_MageMonitoring_Model_Widget_Abstract/setRenderer.html">setRenderer()</a>
+                — Set the renderer.</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2015-05-15T11:06:15+02:00 (commit #<span title="1b13d79327fd0354439f3bd53956058d90233e44">1b13d79</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Rename Firegento to case sensitive FireGento</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:46:13+02:00 (commit #<span title="6d2184cabb7603c9001d1ee307e782e2088a665c">6d2184c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Replace Hackathon namespace to Firegento into all code files</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:34:26+02:00 (commit #<span title="3cf482bcffb9765f821ef1527fcf5e69c9d19883">3cf482b</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Replace Hackathon namespace to Firegento for the main code folder</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:20:49+02:00 (commit #<span title="2534802285b49da8d3ef26612475e83adb1df148">2534802</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Move source code of the extension to the src folder and set modman with firegento namespace</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-10T11:10:01+02:00 (commit #<span title="7454b5fb746b896da5f514134bd68b23324bdcb0">7454b5f</span>)</h3>
+            <div>
+              <p>
+                        Author: Andreas Koch (andreas.koch@bertelsmann.de) /
+                        Commiter: Andreas Koch (andreas.koch@bertelsmann.de)
+                    </p>
+              <pre class="wrapped">Integrated additional monitors (from Benjamin Wunderlich): SEO, Privacy, Security, Maintenance, Community Extensions, Log &amp; Reports, Hosting, Root Files, Performance, Patches</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

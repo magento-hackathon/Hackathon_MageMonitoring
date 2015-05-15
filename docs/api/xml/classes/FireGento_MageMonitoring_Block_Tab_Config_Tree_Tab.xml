@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Tab_Config_Tree_Tab" namespace="" name="FireGento_MageMonitoring_Block_Tab_Config_Tree_Tab" abstract="false" final="false" start="29" end="38">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Tree" file="Tab.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Tree/Tab.php" size="1221" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="9ea28c7c86bb60c5fe8f589f97d09ba638ed5513" relative="app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Tree/Tab.php"/>
+  <docblock>
+    <description compact="Block for rendering tree configuration"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Template" namespace="" name="Mage_Adminhtml_Block_Template" unresolved="true"/>
+  <method name="_construct" start="34" end="37" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </method>
+</class>

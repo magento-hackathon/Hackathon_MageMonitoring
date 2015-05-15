@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pmd version="@project.version@" timestamp="2015-05-15T11:28:50+02:00">
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Form/WidgetConf.php">
+    <violation beginline="43" endline="144" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Block_Tab_Config_Form_WidgetConf" method="_prepareForm" priority="3">
+      The method _prepareForm() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="43" endline="144" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessivemethodlength" class="FireGento_MageMonitoring_Block_Tab_Config_Form_WidgetConf" method="_prepareForm" priority="3">
+      The method _prepareForm() has 102 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+  </file>
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Data.php">
+    <violation beginline="29" endline="623" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="FireGento_MageMonitoring_Helper_Data" priority="3">
+      The class FireGento_MageMonitoring_Helper_Data has an overall complexity of 107 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="47" endline="107" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Helper_Data" method="getActiveWidgets" priority="3">
+      The method getActiveWidgets() has a Cyclomatic Complexity of 13. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="47" endline="107" rule="NPathComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="FireGento_MageMonitoring_Helper_Data" method="getActiveWidgets" priority="3">
+      The method getActiveWidgets() has an NPath complexity of 210. The configured NPath complexity threshold is 200.
+    </violation>
+    <violation beginline="118" endline="158" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Helper_Data" method="getConfiguredWidgets" priority="3">
+      The method getConfiguredWidgets() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="436" endline="488" rule="NPathComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="FireGento_MageMonitoring_Helper_Data" method="tailFile" priority="3">
+      The method tailFile() has an NPath complexity of 240. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Rewrites.php">
+    <violation beginline="42" endline="110" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Helper_Rewrites" method="getRewrites" priority="3">
+      The method getRewrites() has a Cyclomatic Complexity of 19. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="42" endline="110" rule="NPathComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="FireGento_MageMonitoring_Helper_Rewrites" method="getRewrites" priority="3">
+      The method getRewrites() has an NPath complexity of 1015. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/HealthCheck/Cron/Status.php">
+    <violation beginline="61" endline="113" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Model_HealthCheck_Cron_Status" method="getOutput" priority="3">
+      The method getOutput() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+    </violation>
+  </file>
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/WatchDog/UberDog.php">
+    <violation beginline="42" endline="122" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Model_WatchDog_UberDog" method="triggerActiveDogs" priority="3">
+      The method triggerActiveDogs() has a Cyclomatic Complexity of 22. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="42" endline="122" rule="NPathComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="FireGento_MageMonitoring_Model_WatchDog_UberDog" method="triggerActiveDogs" priority="3">
+      The method triggerActiveDogs() has an NPath complexity of 7938. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/Widget/Abstract.php">
+    <violation beginline="29" endline="638" rule="TooManyMethods" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="FireGento_MageMonitoring_Model_Widget_Abstract" priority="3">
+      The class FireGento_MageMonitoring_Model_Widget_Abstract has 20 methods. Consider refactoring FireGento_MageMonitoring_Model_Widget_Abstract to keep number of methods under 10.
+    </violation>
+    <violation beginline="29" endline="638" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="FireGento_MageMonitoring_Model_Widget_Abstract" priority="3">
+      The class FireGento_MageMonitoring_Model_Widget_Abstract has an overall complexity of 63 which is very high. The configured complexity threshold is 50.
+    </violation>
+    <violation beginline="491" endline="542" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Model_Widget_Abstract" method="saveConfig" priority="3">
+      The method saveConfig() has a Cyclomatic Complexity of 11. The configured cyclomatic complexity threshold is 10.
+    </violation>
+  </file>
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/ShopStatus.php">
+    <violation beginline="68" endline="156" rule="NPathComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus" method="getOutput" priority="3">
+      The method getOutput() has an NPath complexity of 2430. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+  <file name="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/Widget/System/PhpConfig.php">
+    <violation beginline="74" endline="108" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="FireGento_MageMonitoring_Model_Widget_System_PhpConfig" method="getOutput" priority="3">
+      The method getOutput() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.
+    </violation>
+    <violation beginline="74" endline="108" rule="NPathComplexity" ruleset="Code Size Rules" package="FireGento_MageMonitoring" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="FireGento_MageMonitoring_Model_Widget_System_PhpConfig" method="getOutput" priority="3">
+      The method getOutput() has an NPath complexity of 303. The configured NPath complexity threshold is 200.
+    </violation>
+  </file>
+</pmd>

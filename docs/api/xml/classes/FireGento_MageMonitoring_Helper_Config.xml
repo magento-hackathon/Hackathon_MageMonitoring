@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Helper_Config" namespace="" name="FireGento_MageMonitoring_Helper_Config" abstract="false" final="false" start="29" end="87">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper" file="Config.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Config.php" size="2496" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="1d44fb3810ed947b7c18e7902d68fb4aab0ab36c" relative="app/code/community/FireGento/MageMonitoring/Helper/Config.php"/>
+  <docblock>
+    <description compact="class FireGento_MageMonitoring_Helper_Config"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Helper_Abstract" namespace="" name="Mage_Core_Helper_Abstract" unresolved="true"/>
+  <constant type="string" name="CONFIG_MODULE_ACTIVE" value="'magemonitoring/general/module_active'"/>
+  <method name="getActiveStoreIds" start="40" end="43" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve all stores in which this module is activated."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="isModuleActive" start="51" end="54" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Check if module is active in a specific store."/>
+      <param description="Store model" type="object" variable="$store">
+        <type full="null|int|Mage_Core_Model_Store" namespace="" name="null|int|Mage_Core_Model_Store"/>
+      </param>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="store" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="_getEmailBcc" start="64" end="86" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Converts bcc from comma separated string to array.">Only valid e-mail address will be returned.</description>
+      <param description="E-Mail BCC" type="string" variable="$bcc"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="bcc" byreference="false" type="{unknown}"/>
+    <inline>
+      <comment value="is field filled?" line="66"/>
+      <comment value="split email addresses" line="71"/>
+      <comment value="validate email addresses" line="77"/>
+    </inline>
+  </method>
+</class>

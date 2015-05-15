@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Tab_Config_Form_WidgetConf" namespace="" name="FireGento_MageMonitoring_Block_Tab_Config_Form_WidgetConf" abstract="false" final="false" start="29" end="145">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Form" file="WidgetConf.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Form/WidgetConf.php" size="5731" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="6c8b4e63031577d15f4aee53734670ef670623a8" relative="app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Form/WidgetConf.php"/>
+  <docblock>
+    <description compact="Block for rendering widget configuration"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Widget_Form" namespace="" name="Mage_Adminhtml_Block_Widget_Form" unresolved="true"/>
+  <constructor name="__construct" start="34" end="37" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </constructor>
+  <method name="_prepareForm" start="43" end="144" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Prepares attribute set form"/>
+    </docblock>
+  </method>
+</class>

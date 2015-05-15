@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Model_Category" namespace="" name="FireGento_MageMonitoring_Model_Category" abstract="false" final="false" start="29" end="32">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model" file="Category.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/Category.php" size="1065" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c9433f34064e79a24b2bc29ba2e7b44da2deb36d" relative="app/code/community/FireGento/MageMonitoring/Model/Category.php"/>
+  <docblock>
+    <description compact="class FireGento_MageMonitoring_Model_Category"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Catalog_Model_Category" namespace="" name="Mage_Catalog_Model_Category" unresolved="true"/>
+</class>

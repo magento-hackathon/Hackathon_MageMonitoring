@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info" namespace="" name="FireGento_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info" abstract="false" final="false" start="29" end="75">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Adminhtml/System/Config/Form/Field" file="Info.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Adminhtml/System/Config/Form/Field/Info.php" size="2466" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="f53b5b1ff38c75003fd85f42680fc25baab845dc" relative="app/code/community/FireGento/MageMonitoring/Block/Adminhtml/System/Config/Form/Field/Info.php"/>
+  <docblock>
+    <description compact="class FireGento_MageMonitoring_Block_Adminhtml_System_Config_Form_Field_Info"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Abstract" namespace="" name="Mage_Adminhtml_Block_Abstract" unresolved="true"/>
+  <implements full="Varien_Data_Form_Element_Renderer_Interface" namespace="" name="Varien_Data_Form_Element_Renderer_Interface" unresolved="true"/>
+  <constant type="string" name="URL" value="'http://www.firegento.com/'"/>
+  <method name="render" start="42" end="74" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Renders element"/>
+      <param description="Element to render" type="object" variable="$element">
+        <type full="Varien_Data_Form_Element_Abstract" namespace="" name="Varien_Data_Form_Element_Abstract"/>
+      </param>
+      <return type="string"/>
+    </docblock>
+    <parameter name="element" byreference="false" type="object">
+      <type full="Varien_Data_Form_Element_Abstract" namespace="" name="Varien_Data_Form_Element_Abstract"/>
+    </parameter>
+  </method>
+</class>

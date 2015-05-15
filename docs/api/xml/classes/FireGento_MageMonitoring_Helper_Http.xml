@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Helper_Http" namespace="" name="FireGento_MageMonitoring_Helper_Http" abstract="false" final="false" start="29" end="45">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper" file="Http.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Http.php" size="1400" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="1ef074340a5b0ab180ac82179d72617c3637d0cc" relative="app/code/community/FireGento/MageMonitoring/Helper/Http.php"/>
+  <docblock>
+    <description compact="class FireGento_MageMonitoring_Helper_Http"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Helper_Abstract" namespace="" name="Mage_Core_Helper_Abstract" unresolved="true"/>
+  <method name="checkFile" start="38" end="44" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Checking file"/>
+      <param description="Path to the file" type="string" variable="$filePath"/>
+      <return type="object">
+        <type full="Zend_Http_Response" namespace="" name="Zend_Http_Response"/>
+      </return>
+    </docblock>
+    <parameter name="filePath" byreference="false" type="{unknown}"/>
+  </method>
+</class>

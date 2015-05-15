@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<source xmlns="http://xml.phpdox.net/src">
+  <dir name="/www-data/git/Hackathon_MageMonitoring/src">
+    <dir name="app">
+      <dir name="code">
+        <dir name="community">
+          <dir name="FireGento">
+            <dir name="MageMonitoring">
+              <dir name="Block">
+                <dir name="Adminhtml">
+                  <dir name="System">
+                    <dir name="Config">
+                      <dir name="Form">
+                        <dir name="Field">
+                          <file name="Info.php" size="2466" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="f53b5b1ff38c75003fd85f42680fc25baab845dc" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Adminhtml/System/Config/Form/Field/Info.php.xml"/>
+                        </dir>
+                      </dir>
+                    </dir>
+                  </dir>
+                </dir>
+                <file name="Chart.php" size="1784" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="21acbdab63a82292219fb613d79e211be65a4bd7" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Chart.php.xml"/>
+                <dir name="System">
+                  <dir name="Overview">
+                    <dir name="Read">
+                      <dir name="Tabs">
+                        <file name="Database.php" size="1918" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2ea009156ff3e6583bb4b28bc726b6e7de16a657" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/System/Overview/Read/Tabs/Database.php.xml"/>
+                      </dir>
+                    </dir>
+                  </dir>
+                </dir>
+                <dir name="Tab">
+                  <dir name="Config">
+                    <dir name="Form">
+                      <file name="WidgetConf.php" size="5731" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="6c8b4e63031577d15f4aee53734670ef670623a8" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Form/WidgetConf.php.xml"/>
+                    </dir>
+                    <dir name="Tree">
+                      <file name="Tab.php" size="1221" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="9ea28c7c86bb60c5fe8f589f97d09ba638ed5513" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Tree/Tab.php.xml"/>
+                      <file name="Widget.php" size="1229" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="ef7b82980cc764ec2a64131f9b35cf3b71cd1382" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab/Config/Tree/Widget.php.xml"/>
+                    </dir>
+                  </dir>
+                  <file name="Config.php" size="9586" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="e3b752ca23f04bbcbff3cf5d8039434f1cc9c447" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab/Config.php.xml"/>
+                  <dir name="Content">
+                    <file name="WidgetList.php" size="1238" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="b230a73591aa56be4f5512e31d8ed535d10def1a" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab/Content/WidgetList.php.xml"/>
+                  </dir>
+                  <file name="Form.php" size="1517" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="7c94a88a1b34fb2311c45f237a908c95c60b1958" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab/Form.php.xml"/>
+                  <file name="List.php" size="2480" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="1d20bfa089e73afa7a80f9f24eafdc26665b88c1" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab/List.php.xml"/>
+                </dir>
+                <file name="Tab.php" size="2411" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="ac6a0612463cf1c2c86331f38cfc3f84bce1be55" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Tab.php.xml"/>
+                <dir name="Widget">
+                  <file name="Button.php" size="3142" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c020088f30aa0b6c6c0ccfa17e05216650e7d277" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Button.php.xml"/>
+                  <file name="Dump.php" size="1308" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2262dddc31487b5dac6c94f44e9deb5410be45ac" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Dump.php.xml"/>
+                  <file name="Monitoring.php" size="6084" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="edc3b0e64dffa20d0824dab23a876c770a80cd80" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Monitoring.php.xml"/>
+                  <dir name="Multi">
+                    <dir name="Renderer">
+                      <file name="Abstract.php" size="2203" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="b245fe0f2d4acc65ee5f484aa19c336d790444ef" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Abstract.php.xml"/>
+                      <file name="Barchart.php" size="1166" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="149dee46ad58f72891a8e711958b94619d0d2f67" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Barchart.php.xml"/>
+                      <file name="Chart.php" size="1827" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="9cedd2d2114bf4d2a6adf7d4308c7feea0fdf690" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Chart.php.xml"/>
+                      <file name="Donutchart.php" size="1174" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="84763d995917d10b699cbec592c87225b4e5242b" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Donutchart.php.xml"/>
+                      <file name="Piechart.php" size="1166" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="da3b42c4a132037517acbd41d4e6dc82dc1f7887" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Piechart.php.xml"/>
+                      <file name="Plaintext.php" size="1478" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="070cced0df2ad461f1d230ef700d2daaea5855ce" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Plaintext.php.xml"/>
+                      <file name="Table.php" size="2525" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="b9b1bf87a0a509b1d82b729b66ea451a94226d31" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Table.php.xml"/>
+                    </dir>
+                    <file name="Renderer.php" size="1161" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2e6a65eab2798f8cddcdd7df2dc3fc427c70dae0" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer.php.xml"/>
+                  </dir>
+                  <file name="Multi.php" size="2386" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="488a9611b08a033a890f592b9359cd13d3934d4a" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi.php.xml"/>
+                </dir>
+                <file name="Widget.php" size="4229" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="3cd51fddd237e4269708eb4f681f4dfe9f902e02" xml="tokens/app/code/community/FireGento/MageMonitoring/Block/Widget.php.xml"/>
+              </dir>
+              <dir name="controllers">
+                <dir name="Adminhtml">
+                  <file name="MonitoringController.php" size="4660" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="792f72b58a351243c0acc44a465fe2617e876654" xml="tokens/app/code/community/FireGento/MageMonitoring/controllers/Adminhtml/MonitoringController.php.xml"/>
+                  <file name="WidgetAjaxController.php" size="9576" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="402dce1d212351aea20d68ee049421f8459d77e1" xml="tokens/app/code/community/FireGento/MageMonitoring/controllers/Adminhtml/WidgetAjaxController.php.xml"/>
+                </dir>
+              </dir>
+              <dir name="Helper">
+                <file name="Config.php" size="2496" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="1d44fb3810ed947b7c18e7902d68fb4aab0ab36c" xml="tokens/app/code/community/FireGento/MageMonitoring/Helper/Config.php.xml"/>
+                <file name="Data.php" size="20868" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c93f2401967565782abaa2a158857dee95083515" xml="tokens/app/code/community/FireGento/MageMonitoring/Helper/Data.php.xml"/>
+                <file name="Database.php" size="6292" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="526612d8bc65877ca401fec6951c58db4ca9452d" xml="tokens/app/code/community/FireGento/MageMonitoring/Helper/Database.php.xml"/>
+                <file name="Http.php" size="1400" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="1ef074340a5b0ab180ac82179d72617c3637d0cc" xml="tokens/app/code/community/FireGento/MageMonitoring/Helper/Http.php.xml"/>
+                <file name="Log.php" size="3492" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="00ce3084960906410782ff4a9a2db5b26d4192c0" xml="tokens/app/code/community/FireGento/MageMonitoring/Helper/Log.php.xml"/>
+                <file name="Rewrites.php" size="6978" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="93df9b71e52a55de3f1bd25d52b62210fb0e637c" xml="tokens/app/code/community/FireGento/MageMonitoring/Helper/Rewrites.php.xml"/>
+              </dir>
+              <dir name="Model">
+                <file name="Category.php" size="1065" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c9433f34064e79a24b2bc29ba2e7b44da2deb36d" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Category.php.xml"/>
+                <dir name="HealthCheck">
+                  <dir name="Cron">
+                    <file name="Status.php" size="4242" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="a2c9feaeb9bd25af0aab024f76fa3b229b414e6e" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/HealthCheck/Cron/Status.php.xml"/>
+                  </dir>
+                </dir>
+                <dir name="WatchDog">
+                  <file name="Abstract.php" size="1170" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="f80e5ba5279b31b675047e1c47e1c431ba56db2b" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/WatchDog/Abstract.php.xml"/>
+                  <file name="Error.php" size="1733" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="aaa0b50cede7794bcdc002c823684045b1611ab5" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/WatchDog/Error.php.xml"/>
+                  <file name="UberDog.php" size="4741" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="722b52607a51052903e65e7b78900f8bc9d56102" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/WatchDog/UberDog.php.xml"/>
+                </dir>
+                <file name="WatchDog.php" size="2576" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="a500f1cfaa09727779256e4757460f97feba7288" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/WatchDog.php.xml"/>
+                <dir name="Widget">
+                  <file name="Abstract.php" size="17852" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="f4e05ee382f8c5eff0c9b86dc492293344e1a6ec" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Abstract.php.xml"/>
+                  <file name="AbstractGeneric.php" size="2350" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="21512cb479dff6b28c6b21f66ca338a0d5784648" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/AbstractGeneric.php.xml"/>
+                  <dir name="CacheStat">
+                    <file name="Abstract.php" size="6524" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="0d6980a47e074e412fc42c806312d6002d5a696d" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/CacheStat/Abstract.php.xml"/>
+                    <file name="Apc.php" size="3671" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2b7577aa84c39818d98b74acc66bb8dab7b84a0f" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/CacheStat/Apc.php.xml"/>
+                    <file name="Apcu.php" size="3657" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="6098869f6d9ab5471d1cd7aacbc8d1f6ca3d0ec6" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/CacheStat/Apcu.php.xml"/>
+                    <file name="Memcache.php" size="4702" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="a70c22464a52f64be99674c874b73a0eae342e3a" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/CacheStat/Memcache.php.xml"/>
+                    <file name="Redis.php" size="4200" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="0240d42e6152602694f7c3d006155992239baa29" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/CacheStat/Redis.php.xml"/>
+                    <file name="Zendopcache.php" size="4090" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="1377592a8fdd8f7d20e2948e4b5383fe6449c441" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/CacheStat/Zendopcache.php.xml"/>
+                  </dir>
+                  <file name="CacheStat.php" size="1764" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2156dc600b27fae9709745ef30999652c12b4d8c" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/CacheStat.php.xml"/>
+                  <dir name="Extensions">
+                    <file name="Abstract.php" size="3269" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="51763f999aa43e27f17671eafc5e4f07bdbedd7a" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Extensions/Abstract.php.xml"/>
+                    <file name="Community.php" size="2347" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="dc70a878e5da3c947217005162b76e1a27d7ba87" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Extensions/Community.php.xml"/>
+                  </dir>
+                  <dir name="HealthCheck">
+                    <file name="Logfilesize.php" size="3099" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="ad05de60040905daf3b637239c07da0362b725b6" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/Logfilesize.php.xml"/>
+                    <file name="Mediasize.php" size="5815" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="08ee51af999d365c1b8164782efb22569dd2ee1e" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/Mediasize.php.xml"/>
+                    <file name="ProductComposition.php" size="6415" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="6b5d56affa06fea10bd5d89eed4ec43ee615863d" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/ProductComposition.php.xml"/>
+                    <file name="Producttypes.php" size="2923" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="a1d6c52746c2730f7dab70ce2df693ff5bb5408d" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/Producttypes.php.xml"/>
+                    <file name="ShopConfiguration.php" size="4112" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="6560bafcf7a5b784b4eb03944d96dae1a7f37de1" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/ShopConfiguration.php.xml"/>
+                    <file name="ShopStatus.php" size="4845" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="73859d9baa4203e743977b68eada7fc88c82e8e0" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/ShopStatus.php.xml"/>
+                    <file name="Sitemap.php" size="4936" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="efe2143b64a9a664911cb6c4d345cf1aa5e25f46" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/HealthCheck/Sitemap.php.xml"/>
+                  </dir>
+                  <file name="Hosting.php" size="4628" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="28446448d8c628e786485852a738b69957110ed1" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Hosting.php.xml"/>
+                  <dir name="Log">
+                    <file name="Abstract.php" size="5555" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="9368c6dfb82ac66220e3fc4237f2dd0cd8de1813" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Log/Abstract.php.xml"/>
+                    <file name="Tail.php" size="3690" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2a74c711d18c704fdfcb27d284a162ae2a096160" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Log/Tail.php.xml"/>
+                  </dir>
+                  <file name="Log.php" size="6635" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="40430daff554c816e485b7e656ffb1481a2f79d5" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Log.php.xml"/>
+                  <file name="Maintenance.php" size="1556" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="acfa0b9d36a92630f12aafe06f76e52eb57168dd" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Maintenance.php.xml"/>
+                  <file name="Patches.php" size="5589" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="567a98f7dedab361ccf0e48cdb4c46b659b9dbe1" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Patches.php.xml"/>
+                  <file name="Performance.php" size="1575" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c20d7140a53816abddf46764bc13468b98403476" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Performance.php.xml"/>
+                  <file name="Privacy.php" size="2404" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="4dad2661c0f380d964eb583e9c71b18768857452" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Privacy.php.xml"/>
+                  <file name="RootFiles.php" size="4322" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="d35bd0ac19d9901976821cfcaa7651c4cca42e8b" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/RootFiles.php.xml"/>
+                  <file name="Security.php" size="2865" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="0d0b8eed15b82222d214b1fdff659deb1bcf2a6e" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Security.php.xml"/>
+                  <file name="SEO.php" size="1522" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="0847744927356484c89ea99b77691357210d18f3" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/SEO.php.xml"/>
+                  <dir name="System">
+                    <file name="Abstract.php" size="5741" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="ae0d675c7b7670cd2f6cc8f50d814bec19064f88" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/Abstract.php.xml"/>
+                    <file name="ClassRewrites.php" size="3689" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="b1996dbfcd3f27920997c5526a3852f3a6809c0d" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/ClassRewrites.php.xml"/>
+                    <file name="Magento.php" size="2557" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="6617a3592ed21f215f3b6b9535bf8b8f6a8c5c90" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/Magento.php.xml"/>
+                    <file name="Modules.php" size="2915" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="caee58ad3680b0849cce4171b2d04cf572a05e69" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/Modules.php.xml"/>
+                    <file name="PhpConfig.php" size="3690" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="ec3dc0716475eecc3b641bcf9da4fd2e46c2af60" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/PhpConfig.php.xml"/>
+                    <file name="PhpExtensions.php" size="3305" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="d1ff6be92665d4f340aa64c507ddfc2d2423fc34" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/PhpExtensions.php.xml"/>
+                    <file name="PhpInfo.php" size="2265" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c9a60f127c1d8732df23e2e9b3c2b13a3b968c23" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/PhpInfo.php.xml"/>
+                    <file name="Server.php" size="2746" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="0737395486e15d6600a054c8c680dd1435732cce" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/Server.php.xml"/>
+                    <file name="Watchdog.php" size="5042" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="182aab4a43f74440854c31a07e397e132f70fa80" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/System/Watchdog.php.xml"/>
+                  </dir>
+                  <file name="Watchdog.php" size="4542" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="a061b5ba72ba221c7b62ebcdb74002bbb3cbad50" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget/Watchdog.php.xml"/>
+                </dir>
+                <file name="Widget.php" size="4762" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="75e1b325d212a35651e1dadb50785760a5da7c8d" xml="tokens/app/code/community/FireGento/MageMonitoring/Model/Widget.php.xml"/>
+              </dir>
+            </dir>
+          </dir>
+        </dir>
+      </dir>
+    </dir>
+  </dir>
+</source>

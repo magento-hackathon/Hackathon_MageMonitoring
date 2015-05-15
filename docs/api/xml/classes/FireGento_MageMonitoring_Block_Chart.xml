@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Chart" namespace="" name="FireGento_MageMonitoring_Block_Chart" abstract="false" final="false" start="29" end="69">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block" file="Chart.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Chart.php" size="1784" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="21acbdab63a82292219fb613d79e211be65a4bd7" relative="app/code/community/FireGento/MageMonitoring/Block/Chart.php"/>
+  <docblock>
+    <description compact="Block for rendering charts"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Block_Template" namespace="" name="Mage_Core_Block_Template" unresolved="true"/>
+  <method name="_construct" start="34" end="38" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </method>
+  <method name="getChartData" start="45" end="53" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns json encoded chart data"/>
+      <return description="encoded array" type="object">
+        <type full="json" namespace="" name="json"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getChartOptions" start="60" end="68" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Return json encoded chart options"/>
+      <return description="encoded array" type="object">
+        <type full="json" namespace="" name="json"/>
+      </return>
+    </docblock>
+  </method>
+</class>

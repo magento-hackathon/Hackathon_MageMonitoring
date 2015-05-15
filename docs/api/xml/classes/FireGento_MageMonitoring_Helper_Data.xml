@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Helper_Data" namespace="" name="FireGento_MageMonitoring_Helper_Data" abstract="false" final="false" start="29" end="623">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper" file="Data.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Data.php" size="20868" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c93f2401967565782abaa2a158857dee95083515" relative="app/code/community/FireGento/MageMonitoring/Helper/Data.php"/>
+  <docblock>
+    <description compact="Data helper"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Helper_Data" namespace="" name="Mage_Core_Helper_Data" unresolved="true"/>
+  <constant type="string" name="VERSIONS_REGEXP" value="'#[\d\.\*]+#ims'"/>
+  <constant type="string" name="CHECK_NODE" value="'global/healthcheck/%s'"/>
+  <constant type="string" name="WARN_CSSCLASS" value="'_cssClasses'"/>
+  <constant type="string" name="WARN_TYPE_OK" value="'health-ok'"/>
+  <constant type="string" name="WARN_TYPE_WARNING" value="'health-warning'"/>
+  <constant type="string" name="WARN_TYPE_ERROR" value="'health-error'"/>
+  <method name="getActiveWidgets" start="47" end="107" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns array with implementations of $baseInterface that return isActive() == true."/>
+      <param description="or array of widgetIds, if widgetId equals '*' all widgets are returned" type="object" variable="$widgetId">
+        <type full="string|array" namespace="" name="string|array"/>
+      </param>
+      <param description="config scope, null for globals only" type="string" variable="$tabId"/>
+      <param description="Return sorted or not" type="boolean" variable="$returnSorted"/>
+      <param description="The basic interface" type="string" variable="$baseInterface"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="widgetId" byreference="false" type="string" default="'*'"/>
+    <parameter name="tabId" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="returnSorted" byreference="false" type="boolean" default="true"/>
+    <parameter name="baseInterface" byreference="false" type="string" default="'FireGento_MageMonitoring_Model_Widget'"/>
+    <inline>
+      <comment value="collect active widgets" line="83"/>
+    </inline>
+  </method>
+  <method name="getConfiguredWidgets" start="118" end="158" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns widget(s) configuration. Filters invisible/inactive widgets and sorts by display_prio."/>
+      <param description="Tab Id" type="string" variable="$tabId"/>
+      <param description="Widget Db Id" type="string" variable="$widgetDbId"/>
+      <param description="Return sorted or not" type="boolean" variable="$returnSorted"/>
+      <param description="Basic interface" type="string" variable="$baseInterface"/>
+      <return description="&lt;multitype:, unknown, multitype:unknown &gt;" type="object">
+        <type full="multitype:Ambigous" namespace="" name="multitype:Ambigous"/>
+      </return>
+    </docblock>
+    <parameter name="tabId" byreference="false" type="string" default="'*'"/>
+    <parameter name="widgetDbId" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="returnSorted" byreference="false" type="boolean" default="true"/>
+    <parameter name="baseInterface" byreference="false" type="string" default="'FireGento_MageMonitoring_Model_Widget'"/>
+  </method>
+  <method name="getConfiguredWatchDogs" start="165" end="175" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns active watch dogs as flattened and indexed array."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getConfiguredTabs" start="183" end="194" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns tab config array. Filters invisible and sorts by display_prio."/>
+      <param description="Tab Id" type="string" variable="$tabId"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="tabId" byreference="false" type="string" default="'*'"/>
+  </method>
+  <method name="compareWidgetDisplayPrio" start="203" end="210" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Compare function for uasort(). Sorts by widget display_prio."/>
+      <param description="Array A to compare display prio from" type="array" variable="$a"/>
+      <param description="Array B to compare display prio from" type="array" variable="$b"/>
+      <return type="object">
+        <type full="number" namespace="" name="number"/>
+      </return>
+    </docblock>
+    <parameter name="a" byreference="false" type="{unknown}"/>
+    <parameter name="b" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="compareTabDisplayPrio" start="219" end="233" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Compare function for uasort(). Sorts by tab display_prio. Entries without display_prio go to the bottom."/>
+      <param description="Array A to compare display prio from" type="array" variable="$a"/>
+      <param description="Array B to compare display prio from" type="array" variable="$b"/>
+      <return type="object">
+        <type full="number" namespace="" name="number"/>
+      </return>
+    </docblock>
+    <parameter name="a" byreference="false" type="{unknown}"/>
+    <parameter name="b" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="filterVisibleTabs" start="241" end="248" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Filter function for array_filter(). Returns array where tabs have visible != 0."/>
+      <param description="The entry array" type="array" variable="$entry"/>
+      <return type="boolean"/>
+    </docblock>
+    <parameter name="entry" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="requireAll" start="256" end="266" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Calls require_once on all files found in $path."/>
+      <param description="File path" type="string" variable="$path"/>
+      <param description="Max depth" type="int" variable="$maxDepth"/>
+    </docblock>
+    <parameter name="path" byreference="false" type="{unknown}"/>
+    <parameter name="maxDepth" byreference="false" type="integer" default="7"/>
+  </method>
+  <method name="getValueInByte" start="276" end="295" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns a value in byte"/>
+      <param description="The initial value" type="string" variable="$value"/>
+      <param description="Return result in Megabytes" type="object" variable="$inMegabytes">
+        <type full="bool" namespace="" name="bool"/>
+      </param>
+      <return type="object">
+        <type full="int|string" namespace="" name="int|string"/>
+      </return>
+    </docblock>
+    <parameter name="value" byreference="false" type="{unknown}"/>
+    <parameter name="inMegabytes" byreference="false" type="boolean" default="false"/>
+  </method>
+  <method name="formatByteSize" start="303" end="324" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Format size from Byte to KB, MB or GB"/>
+      <param description="The initial size" type="int" variable="$size"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="size" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getTotalSize" start="335" end="366" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns total size in bytes of $dir, also supports files.">Returns false if os native way of getting dir size is not available.
+
+Source: http://stackoverflow.com/a/18568222</description>
+      <param description="Directory path" type="string" variable="$dir"/>
+      <return type="object">
+        <type full="number|false" namespace="" name="number|false"/>
+      </return>
+    </docblock>
+    <parameter name="dir" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getPhpInfoArray" start="373" end="425" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns an array with PHP information"/>
+      <return type="object">
+        <type full="array|mixed" namespace="" name="array|mixed"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="tailFile" start="436" end="488" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="tail -n in php, kindly lifted from https://gist.github.com/lorenzos/1711e81a9162320fde20"/>
+      <param description="File path" type="string" variable="$filepath"/>
+      <param description="Lines" type="int" variable="$lines"/>
+      <param description="use adaptive buffersize for seeking, if false use static buffersize of 4096" type="boolean" variable="$adaptive"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="filepath" byreference="false" type="{unknown}"/>
+    <parameter name="lines" byreference="false" type="integer" default="1"/>
+    <parameter name="adaptive" byreference="false" type="boolean" default="true"/>
+    <inline>
+      <comment value="Open file" line="438"/>
+      <comment value="Sets buffer size" line="444"/>
+      <comment value="Jump to last character" line="451"/>
+      <comment value="Read it and adjust line number if necessary" line="454"/>
+      <comment value="(Otherwise the result would be wrong if file doesn't end with a blank line)" line="455"/>
+      <comment value="Start reading" line="460"/>
+      <comment value="While we would like more" line="464"/>
+      <comment value="While we have too many lines" line="478"/>
+      <comment value="(Because of buffer size we might have read too many)" line="479"/>
+      <comment value="Close file and return" line="484"/>
+    </inline>
+  </method>
+  <method name="getWidgetUrl" start="497" end="505" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get widget url"/>
+      <param description="Controller action" type="string" variable="$controllerAction"/>
+      <param description="Widget model" type="object" variable="$widget">
+        <type full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget"/>
+      </param>
+      <return description="$url" type="string"/>
+    </docblock>
+    <parameter name="controllerAction" byreference="false" type="{unknown}"/>
+    <parameter name="widget" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="validateEmail" start="514" end="528" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="If $email is valid returns it with default rec. name, else tries to treat $email as magento trans email code."/>
+      <param description="E-Mail" type="string" variable="$email"/>
+      <return type="object">
+        <type full="array|false" namespace="" name="array|false"/>
+      </return>
+    </docblock>
+    <parameter name="email" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="stampFileName" start="537" end="549" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Adds $dateString to $fileName, takes care of file extension handling."/>
+      <param description="File name" type="string" variable="$fileName"/>
+      <param description="Date as string" type="string" variable="$dateString"/>
+      <return type="object">
+        <type full="string|false" namespace="" name="string|false"/>
+      </return>
+    </docblock>
+    <parameter name="fileName" byreference="false" type="{unknown}"/>
+    <parameter name="dateString" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getConfigKey" start="560" end="582" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns unique config key for widget configs."/>
+      <param description="Configuration key" type="string" variable="$configKey"/>
+      <param description="Widget Model" type="object" variable="$widget">
+        <type full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget"/>
+      </param>
+      <param description="Scope" type="string" variable="$scope"/>
+      <throws type="object">
+        <type full="Exception" namespace="" name="Exception"/>
+      </throws>
+      <return type="string"/>
+    </docblock>
+    <parameter name="configKey" byreference="false" type="{unknown}"/>
+    <parameter name="widget" byreference="false" type="{unknown}"/>
+    <parameter name="scope" byreference="false" type="string" default="'global'"/>
+  </method>
+  <method name="getConfigKeyById" start="592" end="598" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns unique config key for widget configs."/>
+      <param description="Configuration key" type="string" variable="$configKey"/>
+      <param description="Widget DB Id" type="string" variable="$widgetDbId"/>
+      <param description="Scope" type="string" variable="$scope"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="configKey" byreference="false" type="{unknown}"/>
+    <parameter name="widgetDbId" byreference="false" type="{unknown}"/>
+    <parameter name="scope" byreference="false" type="string" default="'global'"/>
+  </method>
+  <method name="extractVersions" start="606" end="611" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Extract versions from csv versions string with wildcards"/>
+      <param description="Versions as string" type="string" variable="$versions"/>
+      <return description="matches" type="array"/>
+    </docblock>
+    <parameter name="versions" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getConst" start="619" end="622" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get value of constant"/>
+      <param description="Constant name" type="string" variable="$typestring"/>
+      <return type="mixed"/>
+    </docblock>
+    <parameter name="typestring" byreference="false" type="{unknown}"/>
+  </method>
+</class>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Helper_Log" namespace="" name="FireGento_MageMonitoring_Helper_Log" abstract="false" final="false" start="29" end="112">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper" file="Log.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Log.php" size="3492" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="00ce3084960906410782ff4a9a2db5b26d4192c0" relative="app/code/community/FireGento/MageMonitoring/Helper/Log.php"/>
+  <docblock>
+    <description compact="class FireGento_MageMonitoring_Helper_Log"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Helper_Abstract" namespace="" name="Mage_Core_Helper_Abstract" unresolved="true"/>
+  <constant type="string" name="CONFIG_LOGGING" value="'magemonitoring/general/logging'"/>
+  <constant type="string" name="CONFIG_DEBUG_LOGGING" value="'magemonitoring/general/debug_logging'"/>
+  <method name="isLoggingActive" start="42" end="45" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns whether logging is generally activated."/>
+      <param description="Store model" type="object" variable="$store">
+        <type full="null|int|Mage_Core_Model_Store" namespace="" name="null|int|Mage_Core_Model_Store"/>
+      </param>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="store" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="isDebugLoggingActive" start="53" end="56" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns whether debug logging is activated."/>
+      <param description="Store model" type="object" variable="$store">
+        <type full="null|int|Mage_Core_Model_Store" namespace="" name="null|int|Mage_Core_Model_Store"/>
+      </param>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="store" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="log" start="68" end="83" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Logs a message to a file called &quot;NAMESPACE_MODULE.log&quot;.">A log level can be specified. If the log level is higher than Zend_Log::NOTICE, the logging depends
+on the activation of verbose logging,</description>
+      <param description="Message string" type="string" variable="$msg"/>
+      <param description="see Zend_Log for constants" type="object" variable="$level">
+        <type full="null|int" namespace="" name="null|int"/>
+      </param>
+      <return type="object">
+        <type full="$this" namespace="" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="msg" byreference="false" type="{unknown}"/>
+    <parameter name="level" byreference="false" type="{unknown}" default="" constant="null"/>
+    <inline>
+      <comment value="if debug logging is disabled, log only errors" line="77"/>
+    </inline>
+  </method>
+  <method name="logException" start="92" end="111" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Log exception"/>
+      <param description="Exception class" type="object" variable="$exception">
+        <type full="Exception" namespace="" name="Exception"/>
+      </param>
+      <param description="Message string" type="object" variable="$msg">
+        <type full="null|string" namespace="" name="null|string"/>
+      </param>
+      <return type="object">
+        <type full="$this" namespace="" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="exception" byreference="false" type="{unknown}"/>
+    <parameter name="msg" byreference="false" type="{unknown}" default="" constant="null"/>
+    <inline>
+      <comment value="optional message to log" line="101"/>
+      <comment value="log exception with backtrace" line="106"/>
+    </inline>
+  </method>
+</class>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Tab_Form" namespace="" name="FireGento_MageMonitoring_Block_Tab_Form" abstract="false" final="false" start="29" end="49">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab" file="Form.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Form.php" size="1517" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="7c94a88a1b34fb2311c45f237a908c95c60b1958" relative="app/code/community/FireGento/MageMonitoring/Block/Tab/Form.php"/>
+  <docblock>
+    <description compact="Block for rendering tab form"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Widget_Form" namespace="" name="Mage_Adminhtml_Block_Widget_Form" unresolved="true"/>
+  <method name="_prepareForm" start="36" end="48" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Init Form Block"/>
+      <return type="object">
+        <type full="Mage_Adminhtml_Block_Widget_Form" namespace="" name="Mage_Adminhtml_Block_Widget_Form"/>
+      </return>
+    </docblock>
+  </method>
+</class>

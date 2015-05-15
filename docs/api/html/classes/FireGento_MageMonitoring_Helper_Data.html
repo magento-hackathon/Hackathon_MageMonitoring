@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - FireGento_MageMonitoring_Helper_Data</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.html">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">FireGento_MageMonitoring_Helper_Data</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
+            <a href="#constants">Constants</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+          <li>
+            <a href="../source/app/code/community/FireGento/MageMonitoring/Helper/Data.php.html#line29">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>\</small>FireGento_MageMonitoring_Helper_Data</h1>
+        <h4>Data helper</h4>
+        <p/>
+        <ul>
+          <li>Author: FireGento Team &lt;team@firegento.com&gt;</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class FireGento_MageMonitoring_Helper_Data
+                extends Mage_Core_Helper_Data
+            {<br/><ul class="none"><li>// constants</li><li>const VERSIONS_REGEXP = '#[\d\.\*]+#ims';</li><li>const CHECK_NODE = 'global/healthcheck/%s';</li><li>const WARN_CSSCLASS = '_cssClasses';</li><li>const WARN_TYPE_OK = 'health-ok';</li><li>const WARN_TYPE_WARNING = 'health-warning';</li><li>const WARN_TYPE_ERROR = 'health-error';</li></ul><ul class="none"><li>// methods</li><li>public array <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getActiveWidgets.html">getActiveWidgets</a>()
+                    </li><li>public multitype:Ambigous <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfiguredWidgets.html">getConfiguredWidgets</a>()
+                    </li><li>public array <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfiguredWatchDogs.html">getConfiguredWatchDogs</a>()
+                    </li><li>public array <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfiguredTabs.html">getConfiguredTabs</a>()
+                    </li><li>protected number <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/compareWidgetDisplayPrio.html">compareWidgetDisplayPrio</a>()
+                    </li><li>protected number <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/compareTabDisplayPrio.html">compareTabDisplayPrio</a>()
+                    </li><li>protected boolean <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/filterVisibleTabs.html">filterVisibleTabs</a>()
+                    </li><li>public void <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/requireAll.html">requireAll</a>()
+                    </li><li>public int|string <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getValueInByte.html">getValueInByte</a>()
+                    </li><li>public string <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/formatByteSize.html">formatByteSize</a>()
+                    </li><li>public number|false <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getTotalSize.html">getTotalSize</a>()
+                    </li><li>public array|mixed <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getPhpInfoArray.html">getPhpInfoArray</a>()
+                    </li><li>public string <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/tailFile.html">tailFile</a>()
+                    </li><li>public string <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getWidgetUrl.html">getWidgetUrl</a>()
+                    </li><li>public array|false <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/validateEmail.html">validateEmail</a>()
+                    </li><li>public string|false <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/stampFileName.html">stampFileName</a>()
+                    </li><li>public string <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfigKey.html">getConfigKey</a>()
+                    </li><li>public string <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfigKeyById.html">getConfigKeyById</a>()
+                    </li><li>public array <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/extractVersions.html">extractVersions</a>()
+                    </li><li>public mixed <a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConst.html">getConst</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>Mage_Core_Helper_Data</li>
+          </ul>
+        </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">47 - 107</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method getActiveWidgets() has a Cyclomatic Complexity of 13. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+            <tr>
+              <td class="line">47 - 107</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
+              </td>
+              <td>The method getActiveWidgets() has an NPath complexity of 210. The configured NPath complexity threshold is 200.</td>
+            </tr>
+            <tr>
+              <td class="line">118 - 158</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method getConfiguredWidgets() has a Cyclomatic Complexity of 14. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+            <tr>
+              <td class="line">436 - 488</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
+              </td>
+              <td>The method tailFile() has an NPath complexity of 240. The configured NPath complexity threshold is 200.</td>
+            </tr>
+          </table>
+        </div>
+        <h2 id="constants">Constants</h2>
+        <table class="styled">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="VERSIONS_REGEXP">VERSIONS_REGEXP</td>
+              <td>'#[\d\.\*]+#ims'</td>
+            </tr>
+            <tr>
+              <td id="CHECK_NODE">CHECK_NODE</td>
+              <td>'global/healthcheck/%s'</td>
+            </tr>
+            <tr>
+              <td id="WARN_CSSCLASS">WARN_CSSCLASS</td>
+              <td>'_cssClasses'</td>
+            </tr>
+            <tr>
+              <td id="WARN_TYPE_OK">WARN_TYPE_OK</td>
+              <td>'health-ok'</td>
+            </tr>
+            <tr>
+              <td id="WARN_TYPE_WARNING">WARN_TYPE_WARNING</td>
+              <td>'health-warning'</td>
+            </tr>
+            <tr>
+              <td id="WARN_TYPE_ERROR">WARN_TYPE_ERROR</td>
+              <td>'health-error'</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="compareTabDisplayPrio"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/compareTabDisplayPrio.html">compareTabDisplayPrio()</a>
+                — Compare function for uasort(). Sorts by tab display_prio. Entries without display_prio go to the bottom.</li>
+            <li id="compareWidgetDisplayPrio"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/compareWidgetDisplayPrio.html">compareWidgetDisplayPrio()</a>
+                — Compare function for uasort(). Sorts by widget display_prio.</li>
+            <li id="filterVisibleTabs"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/filterVisibleTabs.html">filterVisibleTabs()</a>
+                — Filter function for array_filter(). Returns array where tabs have visible != 0.</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="extractVersions"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/extractVersions.html">extractVersions()</a>
+                — Extract versions from csv versions string with wildcards</li>
+            <li id="formatByteSize"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/formatByteSize.html">formatByteSize()</a>
+                — Format size from Byte to KB, MB or GB</li>
+            <li id="getActiveWidgets"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getActiveWidgets.html">getActiveWidgets()</a>
+                — Returns array with implementations of $baseInterface that return isActive() == true.</li>
+            <li id="getConfigKey"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfigKey.html">getConfigKey()</a>
+                — Returns unique config key for widget configs.</li>
+            <li id="getConfigKeyById"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfigKeyById.html">getConfigKeyById()</a>
+                — Returns unique config key for widget configs.</li>
+            <li id="getConfiguredTabs"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfiguredTabs.html">getConfiguredTabs()</a>
+                — Returns tab config array. Filters invisible and sorts by display_prio.</li>
+            <li id="getConfiguredWatchDogs"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfiguredWatchDogs.html">getConfiguredWatchDogs()</a>
+                — Returns active watch dogs as flattened and indexed array.</li>
+            <li id="getConfiguredWidgets"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConfiguredWidgets.html">getConfiguredWidgets()</a>
+                — Returns widget(s) configuration. Filters invisible/inactive widgets and sorts by display_prio.</li>
+            <li id="getConst"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getConst.html">getConst()</a>
+                — Get value of constant</li>
+            <li id="getPhpInfoArray"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getPhpInfoArray.html">getPhpInfoArray()</a>
+                — Returns an array with PHP information</li>
+            <li id="getTotalSize"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getTotalSize.html">getTotalSize()</a>
+                — Returns total size in bytes of $dir, also supports files.</li>
+            <li id="getValueInByte"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getValueInByte.html">getValueInByte()</a>
+                — Returns a value in byte</li>
+            <li id="getWidgetUrl"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/getWidgetUrl.html">getWidgetUrl()</a>
+                — Get widget url</li>
+            <li id="requireAll"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/requireAll.html">requireAll()</a>
+                — Calls require_once on all files found in $path.</li>
+            <li id="stampFileName"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/stampFileName.html">stampFileName()</a>
+                — Adds $dateString to $fileName, takes care of file extension handling.</li>
+            <li id="tailFile"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/tailFile.html">tailFile()</a>
+                — tail -n in php, kindly lifted from https://gist.github.com/lorenzos/1711e81a9162320fde20</li>
+            <li id="validateEmail"><a title="FireGento_MageMonitoring_Helper_Data" href="../classes/FireGento_MageMonitoring_Helper_Data/validateEmail.html">validateEmail()</a>
+                — If $email is valid returns it with default rec. name, else tries to treat $email as magento trans email code.</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2015-05-15T11:06:15+02:00 (commit #<span title="1b13d79327fd0354439f3bd53956058d90233e44">1b13d79</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Rename Firegento to case sensitive FireGento</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:46:13+02:00 (commit #<span title="6d2184cabb7603c9001d1ee307e782e2088a665c">6d2184c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Replace Hackathon namespace to Firegento into all code files</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:34:26+02:00 (commit #<span title="3cf482bcffb9765f821ef1527fcf5e69c9d19883">3cf482b</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Replace Hackathon namespace to Firegento for the main code folder</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:20:49+02:00 (commit #<span title="2534802285b49da8d3ef26612475e83adb1df148">2534802</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Move source code of the extension to the src folder and set modman with firegento namespace</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-10T11:09:54+02:00 (commit #<span title="2c495ad810560a8b2218394b429e2e0e0ea22841">2c495ad</span>)</h3>
+            <div>
+              <p>
+                        Author: Daniel Zohm (daniel.zohm@aoe.com) /
+                        Commiter: Daniel Zohm (daniel.zohm@aoe.com)
+                    </p>
+              <pre class="wrapped">Code standard fixings</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-09T18:14:45+02:00 (commit #<span title="68a4545add42a451c3035c794a19d6d86d1b8639">68a4545</span>)</h3>
+            <div>
+              <p>
+                        Author: Daniel Zohm (daniel.zohm@aoe.com) /
+                        Commiter: Daniel Zohm (daniel.zohm@aoe.com)
+                    </p>
+              <pre class="wrapped">first bunch of fixings from code sniffer</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-04-29T20:49:02+02:00 (commit #<span title="7594e37fbca48d7a852eff0804d521c5ea007664">7594e37</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Already filter for base interface in getConfiguredWidgets(), improves performance a bit.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-04-29T20:45:40+02:00 (commit #<span title="ecae2212c552a8212e00af4bde637ad95d726b4f">ecae221</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Fix watch dog config regression. #29</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-05-26T20:23:22+02:00 (commit #<span title="17de9a95bfb92bd628cc773e0a08f4c801739eb9">17de9a9</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Added faster getTotalSize(). Added safeguard before using slow _getDirectorySize(). #20</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-05-26T17:26:29+02:00 (commit #<span title="1932ce2e0ca818addf34bdca1d500a7e0aa416ca">1932ce2</span>)</h3>
+            <div>
+              <p>
+                        Author: diglin (sly@diglin.com) /
+                        Commiter: diglin (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Improve performance of Healthcheck, check if a widget is collapsed and block rendering in this case (ajax call will do the job when opening the widget)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-05-23T01:54:30+02:00 (commit #<span title="0228f7e6e9c2e8abb707ec4c70f48ecc3bed2387">0228f7e</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Unified healthcheck/monitoring plugins. #14</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-05-22T02:41:24+02:00 (commit #<span title="5d1964fe39e72f9c12bacf5fa13dfbcfd2734ba4">5d1964f</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Finished tab config functionality. Still needs some more refactoring.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-05-11T11:08:03+02:00 (commit #<span title="eb585448a40f5da216f5573eeefdbfa6dbabd9d7">eb58544</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Added tab config. Refactored widgets to support multiple instances per tab.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-03-02T02:59:09+01:00 (commit #<span title="1a70b8b6e376f351f06c21c037a2a39b237025a0">1a70b8b</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">[+TASK] Finalize the merge of HealthCheck Extension and MageMonitoring. Still Work in Progress. Known issue button "Execute Check" reload the complete page instead of doing an ajax call</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-03-02T02:45:54+01:00 (commit #<span title="b8c70aaff7ca3c5365fb960cd4a27b9ec5252121">b8c70aa</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Merge branch 'develop' of https://github.com/magento-hackathon/Hackathon_MageMonitoring into develop
+Merge HealthCheck Project
+Conflicts:
+	app/code/community/Hackathon/MageMonitoring/Block/System/Overview/Read/Tabs.php
+	app/code/community/Hackathon/MageMonitoring/Model/Widget/CacheStat/Abstract.php</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-24T23:09:35+01:00 (commit #<span title="2bb195a5bd1e9fa19013a8c8e9256b1c0fdf3359">2bb195a</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Decoupled tabs, configurable via config.xml. Widget config supports scoping.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-14T14:57:17+01:00 (commit #<span title="12d080a4dd348bd90497e1fdd4f1f0b435de33c2">12d080a</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Refactored tabs to one template. Some preparations for watch dogs.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-08T07:23:31+01:00 (commit #<span title="1a4309b018a6c910e55d753d8cb0f05d93bb920b">1a4309b</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Added support for configurable display priority per widget.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-08T01:37:11+01:00 (commit #<span title="730107644745cc8d10a01e8c22c0d62a16532a9a">7301076</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Widgets now support generic callbacks on buttons.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-07T00:31:53+01:00 (commit #<span title="cee00a1c6d8a380736c87fd80b36639fb15cda33">cee00a1</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Refactored observer. Yea it's gone. :p</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-06T17:44:37+01:00 (commit #<span title="2b1c688eeb4dd3b15fe2c4948acf2cc6967bcef4">2b1c688</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Deactivate dummy dashboard (enable it again if you are developing but please do not push in develop branch)
+Fix an error division per zero when cache doesn't provide correct value. That's the case when using APC on Zend Server. It doesn't implement APC correctly, it's just an "empty box".</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-05T02:24:35+01:00 (commit #<span title="745030a952330a66585a8574e630606b5e54f318">745030a</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Moar refactoring. CacheStat uses new widget interface. Other modules can subscribe their widgets.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-03T22:35:44+01:00 (commit #<span title="287b390c40e11dfaf6e82ca382a51559fbcb0f18">287b390</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Missing php doc header.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-02T03:04:43+01:00 (commit #<span title="84324bfcb3d2caa61e820a598918c087516d89e2">84324bf</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Added debug/exception log tab.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T20:01:18+01:00 (commit #<span title="7511f1cc55894a84bd8a8a9e886146e3d786b9a9">7511f1c</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">getValueInByte() now returns rounded value if  is set.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T19:02:05+01:00 (commit #<span title="04fc85377ca598dbe15cfcb0be4922e9a320321b">04fc853</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">implement button and logic to flush  per cache, fix an issue with Memcache class if not exist</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T17:37:36+01:00 (commit #<span title="e238e92b4200e8ffb93d7d302de17f64df828b58">e238e92</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Fixed undefined variable and a small typo</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T17:31:02+01:00 (commit #<span title="93cac19557d835e9d5ce098438d6c986f33c56b4">93cac19</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Fixed missing variable init.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T15:54:28+01:00 (commit #<span title="4e276efd9598518a809c0f1ee120340a463670dd">4e276ef</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">add phpinfo view and fix some display issue</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T14:24:55+01:00 (commit #<span title="694f4e0b34654c7dbed592540148a1c06374cc27">694f4e0</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Code style fixes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T14:18:49+01:00 (commit #<span title="ef6da260a9c0a0d5840e5c819f8a57a0ce815439">ef6da26</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">add missing Helper update</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T01:12:44+01:00 (commit #<span title="7ce89bb7d5cc7ddd0c4953fb8a4518953eafacfb">7ce89bb</span>)</h3>
+            <div>
+              <p>
+                        Author: Erik Dannenberg (erik.dannenberg@bbe-consulting.de) /
+                        Commiter: Erik Dannenberg (erik.dannenberg@bbe-consulting.de)
+                    </p>
+              <pre class="wrapped">Added helper method to get active caches.</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-01-31T22:13:03+01:00 (commit #<span title="777526fcd8561fc667e41aa224e038e05d8d72b2">777526f</span>)</h3>
+            <div>
+              <p>
+                        Author: Nick Kravchuk (nick@hexbrain.com) /
+                        Commiter: Nick Kravchuk (nick@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Code style fixes</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-01-31T21:31:28+01:00 (commit #<span title="3d916f5921ef84c21a9e21634da76eb725f8c2ff">3d916f5</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">add gitignore</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-01-31T21:28:35+01:00 (commit #<span title="0c56d02dd6ff5dc800cc3f931fdf530a4c3f9ed7">0c56d02</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Change Namespace (problem may occurred not tested
+)</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

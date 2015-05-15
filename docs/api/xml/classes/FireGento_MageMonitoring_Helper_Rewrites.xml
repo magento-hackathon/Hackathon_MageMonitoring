@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Helper_Rewrites" namespace="" name="FireGento_MageMonitoring_Helper_Rewrites" abstract="false" final="false" start="29" end="200">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper" file="Rewrites.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Rewrites.php" size="6978" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="93df9b71e52a55de3f1bd25d52b62210fb0e637c" relative="app/code/community/FireGento/MageMonitoring/Helper/Rewrites.php"/>
+  <docblock>
+    <description compact="Rewrites helper"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Helper_Abstract" namespace="" name="Mage_Core_Helper_Abstract" unresolved="true"/>
+  <member name="_rewriteTypes" type="array" default="" visibility="protected" line="31"/>
+  <method name="getRewrites" start="42" end="110" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Return all rewrites"/>
+      <return type="array"/>
+    </docblock>
+    <inline>
+      <comment value="Load config of each module because modules can overwrite config each other. Global config is already merged" line="53"/>
+    </inline>
+  </method>
+  <method name="_isInheritanceConflict" start="120" end="136" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Check if rewritten class has inherited the parent class.">If yes we have no conflict. The top class can extend every core class.
+So we cannot check this.</description>
+      <param description="List of classes" type="array" variable="$classes"/>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="classes" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_getLoadedClass" start="146" end="160" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Returns loaded class by type like models or blocks"/>
+      <param description="Class Type" type="string" variable="$type"/>
+      <param description="Class Group Name" type="string" variable="$classGroup"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="type" byreference="false" type="{unknown}"/>
+    <parameter name="classGroup" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="_loadLocalAutoloaderRewrites" start="169" end="199" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Searches for all rewrites over autoloader in &quot;app/code/local&quot; of Mage, Enterprise Zend, Varien namespaces."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+</class>

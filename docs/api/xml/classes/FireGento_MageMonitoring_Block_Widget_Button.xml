@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Widget_Button" namespace="" name="FireGento_MageMonitoring_Block_Widget_Button" abstract="false" final="false" start="29" end="78">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget" file="Button.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Button.php" size="3142" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="c020088f30aa0b6c6c0ccfa17e05216650e7d277" relative="app/code/community/FireGento/MageMonitoring/Block/Widget/Button.php"/>
+  <docblock>
+    <description compact="Block for rendering widget button"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Widget_Button" namespace="" name="Mage_Adminhtml_Block_Widget_Button" unresolved="true"/>
+  <method name="setOnClick" start="41" end="77" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set onClick data for button display."/>
+      <param description="Id of the widget" type="string" variable="$widget"/>
+      <param description="Controller action" type="string" variable="$controllerAction"/>
+      <param description="URL params" type="array" variable="$urlParams"/>
+      <param description="Confirmation message" type="string" variable="$confirmMessage"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="widget" byreference="false" type="{unknown}"/>
+    <parameter name="controllerAction" byreference="false" type="{unknown}"/>
+    <parameter name="urlParams" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="confirmMessage" byreference="false" type="{unknown}" default="" constant="null"/>
+    <inline>
+      <comment value="check if this is an ajax call with callback" line="44"/>
+    </inline>
+  </method>
+</class>

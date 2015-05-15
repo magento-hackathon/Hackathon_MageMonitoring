@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Tab_Content_WidgetList" namespace="" name="FireGento_MageMonitoring_Block_Tab_Content_WidgetList" abstract="false" final="false" start="29" end="39">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Content" file="WidgetList.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Content/WidgetList.php" size="1238" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="b230a73591aa56be4f5512e31d8ed535d10def1a" relative="app/code/community/FireGento/MageMonitoring/Block/Tab/Content/WidgetList.php"/>
+  <docblock>
+    <description compact="Block for rendering widget list"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Abstract" namespace="" name="Mage_Adminhtml_Block_Abstract" unresolved="true"/>
+  <constructor name="__construct" start="34" end="38" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </constructor>
+</class>

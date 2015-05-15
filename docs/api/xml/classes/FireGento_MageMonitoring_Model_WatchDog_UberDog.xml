@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Model_WatchDog_UberDog" namespace="" name="FireGento_MageMonitoring_Model_WatchDog_UberDog" abstract="false" final="false" start="29" end="123">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/WatchDog" file="UberDog.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/WatchDog/UberDog.php" size="4741" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="722b52607a51052903e65e7b78900f8bc9d56102" relative="app/code/community/FireGento/MageMonitoring/Model/WatchDog/UberDog.php"/>
+  <docblock>
+    <description compact="Class FireGento_MageMonitoring_Model_WatchDog_UberDog"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <member name="_exceptionList" type="array" default="" visibility="private" line="31"/>
+  <member name="_watchDogResults" type="array" default="" visibility="private" line="32"/>
+  <method name="triggerActiveDogs" start="42" end="122" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Collects all registered watch dogs, handles their schedule and fires them if it's time.">Sends aggregated reports via email.</description>
+      <param description="Do not trigger watchdogs" type="boolean" variable="$skipTestDog"/>
+      <throws type="object">
+        <type full="Exception" namespace="" name="Exception"/>
+      </throws>
+      <return type="object">
+        <type full="void|boolean" namespace="" name="void|boolean"/>
+      </return>
+    </docblock>
+    <parameter name="skipTestDog" byreference="false" type="boolean" default="true"/>
+    <inline>
+      <comment value="exit if globally disabled" line="46"/>
+      <comment value="add test watch dogs that always fire a report and a runtime error?" line="53"/>
+      <comment value="send collected reports to each mail" line="84"/>
+    </inline>
+  </method>
+</class>

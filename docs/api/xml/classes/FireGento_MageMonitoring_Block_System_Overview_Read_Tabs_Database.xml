@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_System_Overview_Read_Tabs_Database" namespace="" name="FireGento_MageMonitoring_Block_System_Overview_Read_Tabs_Database" abstract="false" final="false" start="29" end="63">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/System/Overview/Read/Tabs" file="Database.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/System/Overview/Read/Tabs/Database.php" size="1918" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2ea009156ff3e6583bb4b28bc726b6e7de16a657" relative="app/code/community/FireGento/MageMonitoring/Block/System/Overview/Read/Tabs/Database.php"/>
+  <docblock>
+    <description compact="Block for rendering database information"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Abstract" namespace="" name="Mage_Adminhtml_Block_Abstract" unresolved="true"/>
+  <method name="getDatabaseHelper" start="36" end="39" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns database helper"/>
+      <return type="object">
+        <type full="FireGento_MageMonitoring_Helper_Data|Mage_Core_Block_Abstract" namespace="" name="FireGento_MageMonitoring_Helper_Data|Mage_Core_Block_Abstract"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getTemplate" start="46" end="62" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns template name"/>
+      <return type="string"/>
+    </docblock>
+    <inline>
+      <todo value="get Database Type and return the right tab" line="60"/>
+    </inline>
+  </method>
+</class>

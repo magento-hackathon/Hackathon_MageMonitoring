@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" abstract="false" final="false" start="29" end="79">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer" file="Abstract.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Abstract.php" size="2203" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="b245fe0f2d4acc65ee5f484aa19c336d790444ef" relative="app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Abstract.php"/>
+  <docblock>
+    <description compact="Abstract class for multi widget renderer"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Template" namespace="" name="Mage_Adminhtml_Block_Template" unresolved="true"/>
+  <constructor name="__construct" start="34" end="38" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </constructor>
+  <method name="_encode" start="46" end="49" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Encode the content to json."/>
+      <param description="The content to encode" type="mixed" variable="$content"/>
+      <return type="string"/>
+    </docblock>
+    <parameter name="content" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getContent" start="56" end="68" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Return the encoded content."/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="getDivId" start="75" end="78" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns div id used for rendering content."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <extenders>
+    <extender full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Barchart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Barchart"/>
+    <extender full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Chart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Chart"/>
+    <extender full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart"/>
+    <extender full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Piechart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Piechart"/>
+    <extender full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Plaintext" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Plaintext"/>
+    <extender full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Table" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Table"/>
+  </extenders>
+</class>

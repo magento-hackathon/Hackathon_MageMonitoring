@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Helper_Database" namespace="" name="FireGento_MageMonitoring_Helper_Database" abstract="false" final="false" start="29" end="235">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper" file="Database.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Helper/Database.php" size="6292" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="526612d8bc65877ca401fec6951c58db4ca9452d" relative="app/code/community/FireGento/MageMonitoring/Helper/Database.php"/>
+  <docblock>
+    <description compact="Database helper"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Helper_Abstract" namespace="" name="Mage_Core_Helper_Abstract" unresolved="true"/>
+  <member name="_connection" type="{unknown}" default="" constant="null" visibility="private" line="31"/>
+  <member name="_serverSettings" type="array" default="" visibility="private" line="34"/>
+  <member name="_innodbSettings" type="array" default="" visibility="private" line="35"/>
+  <method name="getConnection" start="42" end="49" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Return database connection"/>
+      <return description="connection" type="object">
+        <type full="DB" namespace="" name="DB"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getMysqlVersion" start="56" end="59" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL version"/>
+      <return type="int"/>
+    </docblock>
+  </method>
+  <method name="getMysqlServerInfo" start="66" end="88" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL server information"/>
+      <return type="array"/>
+    </docblock>
+    <inline>
+      <comment value="Retrieve the read connection" line="68"/>
+      <comment value="Execute the query and store the results in $results" line="75"/>
+    </inline>
+  </method>
+  <method name="getMysqlServerStatus" start="95" end="115" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL server status"/>
+      <return type="array"/>
+    </docblock>
+    <inline>
+      <comment value="Retrieve the read connection" line="97"/>
+      <comment value="Execute the query and store the results in $results" line="104"/>
+    </inline>
+  </method>
+  <method name="getMysqlTunerOutput" start="123" end="126" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL tuner output"/>
+      <return type="string"/>
+      <todo value="Implement"/>
+    </docblock>
+  </method>
+  <method name="getMysqlTrafficInformation" start="134" end="137" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL traffic information"/>
+      <return type="string"/>
+      <todo value="Implement"/>
+    </docblock>
+  </method>
+  <method name="getMysqlConnectionInformation" start="145" end="148" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL connection information"/>
+      <return type="string"/>
+      <todo value="Implement"/>
+    </docblock>
+  </method>
+  <method name="getMysqlStatementsInformation" start="156" end="159" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL statements information"/>
+      <return type="string"/>
+      <todo value="Implement"/>
+    </docblock>
+  </method>
+  <method name="getMysqlServerSettingsInformation" start="166" end="188" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL server settings information"/>
+      <return type="array"/>
+    </docblock>
+    <inline>
+      <comment value="Retrieve the read connection" line="168"/>
+      <comment value="Execute the query and store the results in $results" line="175"/>
+    </inline>
+  </method>
+  <method name="getMysqlInnodbBufferSizeInformation" start="195" end="234" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns MySQL innoDB buffer size information"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+</class>

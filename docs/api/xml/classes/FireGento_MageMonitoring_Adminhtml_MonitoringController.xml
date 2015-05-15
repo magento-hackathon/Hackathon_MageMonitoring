@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Adminhtml_MonitoringController" namespace="" name="FireGento_MageMonitoring_Adminhtml_MonitoringController" abstract="false" final="false" start="29" end="157">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/controllers/Adminhtml" file="MonitoringController.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/controllers/Adminhtml/MonitoringController.php" size="4660" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="792f72b58a351243c0acc44a465fe2617e876654" relative="app/code/community/FireGento/MageMonitoring/controllers/Adminhtml/MonitoringController.php"/>
+  <docblock>
+    <description compact="Monitoring Controller"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Controller_Action" namespace="" name="Mage_Adminhtml_Controller_Action" unresolved="true"/>
+  <method name="indexAction" start="34" end="50" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Index action"/>
+    </docblock>
+  </method>
+  <method name="config_tabsAction" start="55" end="71" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Config tabs action"/>
+    </docblock>
+  </method>
+  <method name="resetConfigAction" start="78" end="94" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Reset config action"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="deleteConfigData" start="102" end="115" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Deletes entries in $config from core_config_data. Recursive. Locked to entries below path 'magemonitoring/'"/>
+      <param description="Configuration array" type="array" variable="$config"/>
+      <param description="Prefix" type="string" variable="$prefix"/>
+    </docblock>
+    <parameter name="config" byreference="false" type="{unknown}"/>
+    <parameter name="prefix" byreference="false" type="string" default="''"/>
+  </method>
+  <method name="flushAllCacheAction" start="122" end="146" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Flush Cache action"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="_isAllowed" start="153" end="156" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Permission check"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+</class>

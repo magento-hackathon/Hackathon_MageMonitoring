@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Tab_Config" namespace="" name="FireGento_MageMonitoring_Block_Tab_Config" abstract="false" final="false" start="29" end="317">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab" file="Config.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab/Config.php" size="9586" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="e3b752ca23f04bbcbff3cf5d8039434f1cc9c447" relative="app/code/community/FireGento/MageMonitoring/Block/Tab/Config.php"/>
+  <docblock>
+    <description compact="Block for rendering tab configuration"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Template" namespace="" name="Mage_Adminhtml_Block_Template" unresolved="true"/>
+  <constructor name="__construct" start="34" end="38" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </constructor>
+  <method name="_prepareLayout" start="45" end="95" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Prepare Global Layout"/>
+      <return type="object">
+        <type full="Mage_Adminhtml_Block_Catalog_Product_Attribute_Set_Main" namespace="" name="Mage_Adminhtml_Block_Catalog_Product_Attribute_Set_Main"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getTabTreeHtml" start="102" end="105" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Attribute Set Group Tree HTML"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getEditWidgetConfigFormHtml" start="112" end="115" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Attribute Set Edit Form HTML"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="_getHeader" start="122" end="125" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Retrieve Block Header Text"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getSaveUrl" start="132" end="135" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Attribute Set Save URL"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getEditWidgetConfigFormUrl" start="142" end="145" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns widget configuration form URL"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getTabUrl" start="152" end="155" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Attribute Set Group Save URL"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getTabTreeJson" start="162" end="209" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Tab Tree as JSON format"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getWidgetTreeJson" start="216" end="254" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Unused in Attribute Set Attribute Tree as JSON"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="sortWidgetsByName" start="263" end="266" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Compare function for uasort(). Sorts by widget name."/>
+      <param description="Array element A for string comparison" type="array" variable="$a"/>
+      <param description="Array element B for string comparison" type="array" variable="$b"/>
+      <return type="object">
+        <type full="number" namespace="" name="number"/>
+      </return>
+    </docblock>
+    <parameter name="a" byreference="false" type="{unknown}"/>
+    <parameter name="b" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getBackButtonHtml" start="273" end="276" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Back Button HTML"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getResetButtonHtml" start="283" end="286" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Reset Button HTML"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getSaveButtonHtml" start="293" end="296" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Save Button HTML"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getDeleteNodeButton" start="303" end="306" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Delete Group Button HTML"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getAddTabButton" start="313" end="316" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve Add New Group Button HTML"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+</class>

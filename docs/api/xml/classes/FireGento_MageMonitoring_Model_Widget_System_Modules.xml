@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Model_Widget_System_Modules" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Modules" abstract="false" final="false" start="29" end="94">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/Widget/System" file="Modules.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/Widget/System/Modules.php" size="2915" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="caee58ad3680b0849cce4171b2d04cf572a05e69" relative="app/code/community/FireGento/MageMonitoring/Model/Widget/System/Modules.php"/>
+  <docblock>
+    <description compact="class FireGento_MageMonitoring_Model_Widget_System_Modules"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="FireGento_MageMonitoring_Model_Widget_AbstractGeneric" namespace="" name="FireGento_MageMonitoring_Model_Widget_AbstractGeneric"/>
+  <implements full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget"/>
+  <constant type="string" name="CONFIG_CODE_POOL" value="'code_pool'"/>
+  <member name="_defWidgetTitle" type="string" default="'Magento Modules'" visibility="protected" line="35"/>
+  <member name="_defCodePool" type="string" default="'all'" visibility="protected" line="36"/>
+  <member name="_defDisplayPrio" type="integer" default="20" visibility="protected" line="37"/>
+  <method name="getVersion" start="44" end="47" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns version"/>
+      <see value="FireGento_MageMonitoring_Model_Widget::getVersion()"/>
+    </docblock>
+  </method>
+  <method name="initConfig" start="54" end="67" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Initializes configuration"/>
+      <see value="FireGento_MageMonitoring_Model_Widget::initConfig()"/>
+    </docblock>
+    <inline>
+      <comment value="add config for code pool filter" line="57"/>
+    </inline>
+  </method>
+  <method name="getOutput" start="74" end="93" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Fetches and returns output"/>
+      <see value="FireGento_MageMonitoring_Model_Widget::getOutput()"/>
+    </docblock>
+  </method>
+  <parent full="FireGento_MageMonitoring_Model_Widget_AbstractGeneric" namespace="" name="FireGento_MageMonitoring_Model_Widget_AbstractGeneric">
+    <extends full="FireGento_MageMonitoring_Model_Widget_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_Abstract"/>
+    <constant type="{unknown}" name="CONFIG_WIDGET_TITLE" value="'title'"/>
+    <member name="_defWidgetTitle" type="string" default="'MageMonitoring Widget'" visibility="protected" line="36"/>
+    <method name="initConfig" start="43" end="68" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Init Config"/>
+        <see value="FireGento_MageMonitoring_Model_Widget::initConfig()"/>
+      </docblock>
+      <inline>
+        <comment value="&quot;reset&quot; config" line="51"/>
+        <comment value="add title config" line="54"/>
+        <comment value="append old config" line="64"/>
+      </inline>
+    </method>
+    <method name="getName" start="76" end="79" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get Name"/>
+        <see value="FireGento_MageMonitoring_Model_Widget::getName()"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="_getNodeName" start="84" end="87" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Returns node name"/>
+      </docblock>
+    </method>
+  </parent>
+  <parent full="FireGento_MageMonitoring_Model_Widget_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_Abstract">
+    <implements full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget"/>
+    <constant type="{unknown}" name="CONFIG_START_COLLAPSED" value="'collapsed'"/>
+    <constant type="{unknown}" name="CONFIG_DISPLAY_PRIO" value="'display_prio'"/>
+    <constant type="{unknown}" name="CONFIG_PRE_KEY" value="'widgets'"/>
+    <constant type="{unknown}" name="CALLBACK" value="'cb:'"/>
+    <member name="_defStartCollapsed" type="integer" default="0" visibility="protected" line="42"/>
+    <member name="_defDisplayPrio" type="integer" default="10" visibility="protected" line="43"/>
+    <member name="_dbConfigKey" type="{unknown}" default="" constant="null" visibility="protected" line="45"/>
+    <member name="_tabId" type="{unknown}" default="" constant="null" visibility="protected" line="46"/>
+    <member name="_output" type="array" default="" visibility="protected" line="47"/>
+    <member name="_config" type="array" default="" visibility="protected" line="48"/>
+    <member name="_report" type="array" default="" visibility="protected" line="49"/>
+    <member name="_renderer" visibility="protected" line="52">
+      <docblock>
+        <description compact="@var FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract $_renderer"/>
+      </docblock>
+    </member>
+    <method name="getOutput" start="60" end="90" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Used to render the widget, returns array of classes that have a -&gt;toHtml() method.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you .</description>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="newMultiBlock" start="97" end="103" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="New Multi Block"/>
+        <return description="Block" type="object">
+          <type full="FireGento_MageMonitoring_Block_Widget_Multi" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="getTabId" start="110" end="113" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get Tab Id"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getConfigId" start="120" end="129" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns db config key, returns last 2 parts of classname with appended random string as default."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getId" start="136" end="139" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns unique widget id. You really don't want to override is. ;)"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="_renderConfigChecks" start="146" end="158" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Render configuration checks defined in config.xml"/>
+        <return type="object">
+          <type full="$this" namespace="" name="$this"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="_getConfigValues" start="165" end="175" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Return configuration params from config.xml"/>
+        <return type="object">
+          <type full="array|SimpleXMLElement" namespace="" name="array|SimpleXMLElement"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="_getNodeName" start="182" end="182" abstract="true" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Returns the name of the widgets xml node"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="_checkConfigValue" start="193" end="220" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Check a given configuration value concerning an optional recommendation"/>
+        <param description="The title of the configuration value." type="string" variable="$title"/>
+        <param description="The configuration value path." type="string" variable="$configPath"/>
+        <param description="The recommended value for the given config value." type="string" variable="$recommendation"/>
+        <return type="object">
+          <type full="$this" namespace="" name="$this"/>
+        </return>
+      </docblock>
+      <parameter name="title" byreference="false" type="{unknown}"/>
+      <parameter name="configPath" byreference="false" type="{unknown}"/>
+      <parameter name="recommendation" byreference="false" type="{unknown}" default="" constant="null"/>
+    </method>
+    <method name="getRenderer" start="227" end="230" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get the renderer."/>
+        <return type="object">
+          <type full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="setRenderer" start="237" end="240" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Set the renderer."/>
+        <param description="A renderer" type="object" variable="$renderer">
+          <type full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract"/>
+        </param>
+      </docblock>
+      <parameter name="renderer" byreference="false" type="object">
+        <type full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract"/>
+      </parameter>
+    </method>
+    <method name="_getHelper" start="247" end="250" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Get an instance of the module's data helper."/>
+        <return type="object">
+          <type full="FireGento_MageMonitoring_Helper_Data" namespace="" name="FireGento_MageMonitoring_Helper_Data"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="_getRowConfig" start="259" end="267" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Get a row configuration."/>
+        <param description="A flag indicating whether the condition was met or not." type="object" variable="$conditionMet">
+          <type full="bool" namespace="" name="bool"/>
+        </param>
+        <return type="array"/>
+      </docblock>
+      <parameter name="conditionMet" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="_renderMoreChecks" start="274" end="277" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Render additional checks."/>
+        <return type="object">
+          <type full="$this" namespace="" name="$this"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="isActive" start="284" end="287" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns true if this widget is active."/>
+        <see value="FireGento_MageMonitoring_Model_Widget::isActive()"/>
+      </docblock>
+    </method>
+    <method name="displayCollapsed" start="295" end="298" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns true if widget should start collapsed, speeds up loading times as the widget won't render it's content on page load."/>
+        <see value="FireGento_MageMonitoring_Model_Widget::displayCollapsed()"/>
+      </docblock>
+    </method>
+    <method name="getConfig" start="308" end="326" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get Config"/>
+        <param description="Config Key" type="object" variable="$configKey">
+          <type full="null" namespace="" name="null"/>
+        </param>
+        <param description="Value Only" type="object" variable="$valueOnly">
+          <type full="bool" namespace="" name="bool"/>
+        </param>
+        <return type="object">
+          <type full="array|bool" namespace="" name="array|bool"/>
+        </return>
+        <see value="FireGento_MageMonitoring_Model_Widget::getConfig()"/>
+      </docblock>
+      <parameter name="configKey" byreference="false" type="{unknown}" default="" constant="null"/>
+      <parameter name="valueOnly" byreference="false" type="boolean" default="true"/>
+    </method>
+    <method name="initConfig" start="333" end="356" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns array with default config data for this widget or false if not implemented."/>
+        <see value="FireGento_MageMonitoring_Model_Widget::initConfig()"/>
+      </docblock>
+    </method>
+    <method name="addConfigHeader" start="364" end="368" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Add empty or header row to config modal output."/>
+        <param description="Header" type="string" variable="$header"/>
+        <return type="object">
+          <type full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget"/>
+        </return>
+      </docblock>
+      <parameter name="header" byreference="false" type="{unknown}" default="" constant="null"/>
+    </method>
+    <method name="addConfig" start="383" end="402" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Add Configuration"/>
+        <param description="Config Key" type="string" variable="$configKey"/>
+        <param description="Label" type="string" variable="$label"/>
+        <param description="Value" type="object" variable="$value">
+          <type full="string|int" namespace="" name="string|int"/>
+        </param>
+        <param description="Scope" type="string" variable="$scope"/>
+        <param description="Input Type" type="string" variable="$inputType"/>
+        <param description="Is Required" type="object" variable="$required">
+          <type full="bool" namespace="" name="bool"/>
+        </param>
+        <param description="Tooltip" type="object" variable="$tooltip">
+          <type full="null|string" namespace="" name="null|string"/>
+        </param>
+        <return type="object">
+          <type full="$this" namespace="" name="$this"/>
+        </return>
+        <see value="FireGento_MageMonitoring_Model_Widget::addConfig()"/>
+      </docblock>
+      <parameter name="configKey" byreference="false" type="{unknown}"/>
+      <parameter name="label" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+      <parameter name="scope" byreference="false" type="string" default="'global'"/>
+      <parameter name="inputType" byreference="false" type="string" default="'text'"/>
+      <parameter name="required" byreference="false" type="boolean" default="false"/>
+      <parameter name="tooltip" byreference="false" type="{unknown}" default="" constant="null"/>
+    </method>
+    <method name="getDisplayPrio" start="410" end="413" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns true if widget should start collapsed, speeds up loading times as the widget won't render it's content on page load."/>
+        <see value="FireGento_MageMonitoring_Model_Widget::displayCollapsed()"/>
+      </docblock>
+    </method>
+    <method name="newMonitoringBlock" start="420" end="426" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="New Monitoring Block"/>
+        <return description="Block" type="object">
+          <type full="FireGento_MageMonitoring_Block_Widget_Monitoring" namespace="" name="FireGento_MageMonitoring_Block_Widget_Monitoring"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="dump" start="434" end="438" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Adds $string to output."/>
+        <param description="String" type="string" variable="$string"/>
+        <return type="object">
+          <type full="FireGento_MageMonitoring_Model_Widget_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_Abstract"/>
+        </return>
+      </docblock>
+      <parameter name="string" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="loadConfig" start="449" end="470" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Load Config"/>
+        <param description="Config Key" type="object" variable="$configKey">
+          <type full="null|string|int" namespace="" name="null|string|int"/>
+        </param>
+        <param description="Tab Id" type="object" variable="$tabId">
+          <type full="null|string|int" namespace="" name="null|string|int"/>
+        </param>
+        <param description="Widget DB Id" type="object" variable="$widgetDbId">
+          <type full="null|string|int" namespace="" name="null|string|int"/>
+        </param>
+        <return type="array"/>
+        <see value="FireGento_MageMonitoring_Model_Widget::loadConfig()"/>
+      </docblock>
+      <parameter name="configKey" byreference="false" type="{unknown}" default="" constant="null"/>
+      <parameter name="tabId" byreference="false" type="{unknown}" default="" constant="null"/>
+      <parameter name="widgetDbId" byreference="false" type="{unknown}" default="" constant="null"/>
+    </method>
+    <method name="getHelper" start="477" end="480" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get Helper"/>
+        <return type="object">
+          <type full="FireGento_MageMonitoring_Helper_Data" namespace="" name="FireGento_MageMonitoring_Helper_Data"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="saveConfig" start="491" end="542" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Save config in $post to core_config_data, can handle raw $_POST or widget config arrays if $postOnly is true."/>
+        <param description="Post" type="array" variable="$post"/>
+        <param description="Post Only" type="object" variable="$postOnly">
+          <type full="bool" namespace="" name="bool"/>
+        </param>
+        <return type="object">
+          <type full="$this" namespace="" name="$this"/>
+        </return>
+        <see value="FireGento_MageMonitoring_Model_Widget::saveConfig()"/>
+      </docblock>
+      <parameter name="post" byreference="false" type="{unknown}"/>
+      <parameter name="postOnly" byreference="false" type="boolean" default="false"/>
+    </method>
+    <method name="deleteConfig" start="551" end="564" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Delete Config"/>
+        <param description="Tab Id" type="object" variable="$tabId">
+          <type full="string|null" namespace="" name="string|null"/>
+        </param>
+        <return type="object">
+          <type full="$this" namespace="" name="$this"/>
+        </return>
+        <see value="FireGento_MageMonitoring_Model_Widget::deleteConfig()"/>
+      </docblock>
+      <parameter name="tabId" byreference="false" type="{unknown}" default="" constant="null"/>
+    </method>
+    <method name="addReportRow" start="578" end="587" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Adds another row to watch dog report output.">Format of $attachments array:
+array(array('filename' =&gt; $name, 'content' =&gt; $content), ...)</description>
+        <param description="Css Id" type="string" variable="$cssId"/>
+        <param description="Label" type="string" variable="$label"/>
+        <param description="Value" type="string" variable="$value"/>
+        <param description="Attachments" type="object" variable="$attachments">
+          <type full="array|null" namespace="" name="array|null"/>
+        </param>
+        <return type="object">
+          <type full="$this" namespace="" name="$this"/>
+        </return>
+      </docblock>
+      <parameter name="cssId" byreference="false" type="{unknown}"/>
+      <parameter name="label" byreference="false" type="{unknown}"/>
+      <parameter name="value" byreference="false" type="{unknown}"/>
+      <parameter name="attachments" byreference="false" type="{unknown}" default="" constant="null"/>
+    </method>
+    <method name="getVersion" start="594" end="597" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get Version"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="_checkVersions" start="604" end="626" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Check Versions"/>
+        <return type="object">
+          <type full="bool" namespace="" name="bool"/>
+        </return>
+      </docblock>
+      <inline>
+        <todo value="do proper merge, things will go probably south for code below." line="609"/>
+        <comment value="retrieve supported versions from config.xml" line="612"/>
+        <comment value="iterate on versions to find a fitting one" line="615"/>
+      </inline>
+    </method>
+    <method name="getSupportedMagentoVersions" start="634" end="637" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Get Supported Magento Versions"/>
+        <see value="FireGento_MageMonitoring_Model_Widget::getSupportedMagentoVersions()"/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+  <interface full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget">
+    <method name="getId" start="36" end="36" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns class name that must be compatible with magento autoloader."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getConfigId" start="43" end="43" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns widget config key in database."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="isActive" start="50" end="50" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns true if this widget is active."/>
+        <return type="object">
+          <type full="bool" namespace="" name="bool"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="getName" start="57" end="57" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns widget name."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getVersion" start="65" end="65" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns version string."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="getSupportedMagentoVersions" start="72" end="72" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns magento versions supported by this widget."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+    <method name="displayCollapsed" start="80" end="80" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns true if widget should start collapsed, speeds up loading times as the widget won't render it's content on page load."/>
+        <return type="object">
+          <type full="bool" namespace="" name="bool"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="getDisplayPrio" start="87" end="87" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns display prio of this widget."/>
+        <return type="int"/>
+      </docblock>
+    </method>
+    <method name="getOutput" start="95" end="95" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Used to render the widget, returns array of classes that have a -&gt;toHtml() method.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you .</description>
+        <return type="array"/>
+      </docblock>
+    </method>
+    <method name="initConfig" start="116" end="116" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns array with default config data for this widget or false if not implemented.">Implementing this method enables you to add custom entries for user configuration.
+
+Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+Data is saved to core_config_data with path = 'widgets/' + $widgetClassName '/' + $config_key
+
+Format of return array:
+array ('config_key' =&gt; array('type' =&gt; $inputType, // 'text' or 'checkbox' for now
+                             'scope' =&gt; 'global|widget',
+                             'required' =&gt; true|false,
+                             'label' =&gt; $label,
+                             'value' =&gt; $value,
+                             'tooltip' =&gt; $tooltipMsg),
+       ...)</description>
+        <return type="object">
+          <type full="array|false" namespace="" name="array|false"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="getConfig" start="127" end="127" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns current config data of this widget.">Returned array has same structure as initConfig()</description>
+        <param description="Key" type="string" variable="$key"/>
+        <param description="Value Only" type="object" variable="$valueOnly">
+          <type full="bool" namespace="" name="bool"/>
+        </param>
+        <return type="object">
+          <type full="array|false" namespace="" name="array|false"/>
+        </return>
+      </docblock>
+      <parameter name="key" byreference="false" type="{unknown}" default="" constant="null"/>
+      <parameter name="valueOnly" byreference="false" type="{unknown}" default="" constant="null"/>
+    </method>
+    <method name="loadConfig" start="137" end="137" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Loads and returns the widget config via desired persistance layer. Never called if getConfig() returns false.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+
+Returned array has same structure as initConfig()</description>
+        <return type="object">
+          <type full="array|false" namespace="" name="array|false"/>
+        </return>
+      </docblock>
+    </method>
+    <method name="saveConfig" start="149" end="149" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Saves the widget config via desired persistance layer. Never called if getConfig() returns false.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+
+Format of input array:
+array('config_key' =&gt; $newValue, ...)</description>
+        <param description="Array" type="array" variable="$array"/>
+        <return type="object">
+          <type full="bool" namespace="" name="bool"/>
+        </return>
+      </docblock>
+      <parameter name="array" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="deleteConfig" start="157" end="157" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Deletes the widget config via desired persistance layer. Never called if getConfig() returns false.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.</description>
+        <return type="object">
+          <type full="bool" namespace="" name="bool"/>
+        </return>
+      </docblock>
+    </method>
+  </interface>
+</class>

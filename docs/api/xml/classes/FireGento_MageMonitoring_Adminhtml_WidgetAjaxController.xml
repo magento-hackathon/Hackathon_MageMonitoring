@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Adminhtml_WidgetAjaxController" namespace="" name="FireGento_MageMonitoring_Adminhtml_WidgetAjaxController" abstract="false" final="false" start="29" end="265">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/controllers/Adminhtml" file="WidgetAjaxController.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/controllers/Adminhtml/WidgetAjaxController.php" size="9576" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="402dce1d212351aea20d68ee049421f8459d77e1" relative="app/code/community/FireGento/MageMonitoring/controllers/Adminhtml/WidgetAjaxController.php"/>
+  <docblock>
+    <description compact="Widget Ajax Controller"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Controller_Action" namespace="" name="Mage_Adminhtml_Controller_Action" unresolved="true"/>
+  <method name="refreshWidgetAction" start="35" end="50" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Ajax refresh"/>
+    </docblock>
+  </method>
+  <method name="getWidgetConfAction" start="55" end="66" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Get widget config html"/>
+    </docblock>
+  </method>
+  <method name="saveWidgetConfAction" start="71" end="97" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Save widget config"/>
+    </docblock>
+  </method>
+  <method name="resetWidgetConfAction" start="102" end="111" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Delete widget config"/>
+    </docblock>
+  </method>
+  <method name="getWidgetConfigFormAction" start="116" end="127" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Tab config - get widget config form html"/>
+    </docblock>
+  </method>
+  <method name="saveTabConfigAction" start="132" end="160" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Save tab config"/>
+    </docblock>
+  </method>
+  <method name="execCallbackAction" start="165" end="187" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Execute callback on widget"/>
+    </docblock>
+  </method>
+  <method name="_getWidgetFromRequest" start="196" end="224" abstract="false" final="false" static="false" visibility="private">
+    <docblock>
+      <description compact="Returns widget instance if widgetId or widgetImpl is found in current request params."/>
+      <param description="Class name" type="object" variable="$className">
+        <type full="string|null" namespace="" name="string|null"/>
+      </param>
+      <param description="Widget DB Id" type="object" variable="$widgetDbId">
+        <type full="int|null" namespace="" name="int|null"/>
+      </param>
+      <return type="mixed"/>
+    </docblock>
+    <parameter name="className" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="widgetDbId" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="_saveTabConfig" start="231" end="264" abstract="false" final="false" static="false" visibility="private">
+    <docblock>
+      <description compact="Saves tab/widget display structure from ext.tree data array."/>
+      <param description="Data" type="array" variable="$data"/>
+    </docblock>
+    <parameter name="data" byreference="false" type="{unknown}"/>
+  </method>
+</class>

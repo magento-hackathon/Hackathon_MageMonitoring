@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <title>phpDox - FireGento_MageMonitoring_Helper_Rewrites</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <nav class="topnav">
+      <ul>
+        <li>
+          <div class="logo"><span>/**</span>phpDox</div>
+        </li>
+        <li class="separator">
+          <a href="../index.html">Overview</a>
+        </li>
+        <li class="separator">
+          <a href="../namespaces.html">Namespaces</a>
+        </li>
+        <li>
+          <a href="../interfaces.html">Interfaces</a>
+        </li>
+        <li>
+          <a href="../classes.html">Classes</a>
+        </li>
+        <li class="separator">
+          <a href="../source/index.html">Source</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="mainstage">
+      <div class="box">
+        <ul class="breadcrumb">
+          <li>
+            <a href="../index.html">Overview</a>
+          </li>
+          <li class="separator">
+            <a href="../classes.html">Classes</a>
+          </li>
+          <li class="separator">FireGento_MageMonitoring_Helper_Rewrites</li>
+        </ul>
+      </div>
+      <nav class="box">
+        <ul>
+          <li>
+            <a href="#introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#synopsis">Synopsis</a>
+          </li>
+          <li>
+            <a href="#hierarchy">Hierarchy</a>
+          </li>
+          <li>
+            <a href="#violations">Violations</a>
+          </li>
+          <li>
+            <a href="#members">Members</a>
+          </li>
+          <li>
+            <a href="#methods">Methods</a>
+          </li>
+          <li>
+            <a href="#history">History</a>
+          </li>
+          <li>
+            <a href="../source/app/code/community/FireGento/MageMonitoring/Helper/Rewrites.php.html#line29">Source</a>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <h1 id="introduction"><small>\</small>FireGento_MageMonitoring_Helper_Rewrites</h1>
+        <h4>Rewrites helper</h4>
+        <p/>
+        <ul>
+          <li>Author: FireGento Team &lt;team@firegento.com&gt;</li>
+        </ul>
+        <h2 id="synopsis">Synopsis</h2>
+        <div class="synopsis">class FireGento_MageMonitoring_Helper_Rewrites
+                extends Mage_Core_Helper_Abstract
+            {<br/><ul class="none"><li>// members</li><li>protected array <a href="#members">$_rewriteTypes</a> =
+                        ;
+                    </li></ul><ul class="none"><li>// methods</li><li>public array <a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/getRewrites.html">getRewrites</a>()
+                    </li><li>protected bool <a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/_isInheritanceConflict.html">_isInheritanceConflict</a>()
+                    </li><li>protected string <a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/_getLoadedClass.html">_getLoadedClass</a>()
+                    </li><li>protected array <a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/_loadLocalAutoloaderRewrites.html">_loadLocalAutoloaderRewrites</a>()
+                    </li></ul>
+
+            }<br/></div>
+        <h2 id="hierarchy">Hierarchy</h2>
+        <div class="styled">
+          <h4>Extends</h4>
+          <ul>
+            <li>Mage_Core_Helper_Abstract</li>
+          </ul>
+        </div>
+        <h2 id="violations">Violations</h2>
+        <div class="styled">
+          <h3>PHPMessDetector</h3>
+          <table class="styled">
+            <thead>
+              <tr>
+                <th>Line</th>
+                <th>Rule</th>
+                <th>Message</th>
+              </tr>
+            </thead>
+            <tr>
+              <td class="line">42 - 110</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" target="_blank" title="Code Size Rules">CyclomaticComplexity</a>
+              </td>
+              <td>The method getRewrites() has a Cyclomatic Complexity of 19. The configured cyclomatic complexity threshold is 10.</td>
+            </tr>
+            <tr>
+              <td class="line">42 - 110</td>
+              <td>
+                <a href="http://phpmd.org/rules/codesize.html#npathcomplexity" target="_blank" title="Code Size Rules">NPathComplexity</a>
+              </td>
+              <td>The method getRewrites() has an NPath complexity of 1015. The configured NPath complexity threshold is 200.</td>
+            </tr>
+          </table>
+        </div>
+        <h2 id="members">Members</h2>
+        <div class="styled members">
+          <h4>protected</h4>
+          <ul class="members">
+            <li id="_rewriteTypes">
+              <strong>$_rewriteTypes</strong>
+            </li>
+          </ul>
+        </div>
+        <h2 id="methods">Methods</h2>
+        <div class="styled">
+          <h4>protected</h4>
+          <ul>
+            <li id="_getLoadedClass"><a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/_getLoadedClass.html">_getLoadedClass()</a>
+                — Returns loaded class by type like models or blocks</li>
+            <li id="_isInheritanceConflict"><a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/_isInheritanceConflict.html">_isInheritanceConflict()</a>
+                — Check if rewritten class has inherited the parent class.</li>
+            <li id="_loadLocalAutoloaderRewrites"><a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/_loadLocalAutoloaderRewrites.html">_loadLocalAutoloaderRewrites()</a>
+                — Searches for all rewrites over autoloader in "app/code/local" of Mage, Enterprise Zend, Varien namespaces.</li>
+          </ul>
+          <h4>public</h4>
+          <ul>
+            <li id="getRewrites"><a title="FireGento_MageMonitoring_Helper_Rewrites" href="../classes/FireGento_MageMonitoring_Helper_Rewrites/getRewrites.html">getRewrites()</a>
+                — Return all rewrites</li>
+          </ul>
+        </div>
+        <h2 id="history">History</h2>
+        <ul class="styled history">
+          <li>
+            <h3>2015-05-15T11:06:15+02:00 (commit #<span title="1b13d79327fd0354439f3bd53956058d90233e44">1b13d79</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Rename Firegento to case sensitive FireGento</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:46:13+02:00 (commit #<span title="6d2184cabb7603c9001d1ee307e782e2088a665c">6d2184c</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Replace Hackathon namespace to Firegento into all code files</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:34:26+02:00 (commit #<span title="3cf482bcffb9765f821ef1527fcf5e69c9d19883">3cf482b</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Replace Hackathon namespace to Firegento for the main code folder</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-13T23:20:49+02:00 (commit #<span title="2534802285b49da8d3ef26612475e83adb1df148">2534802</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">Move source code of the extension to the src folder and set modman with firegento namespace</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2015-05-09T18:14:45+02:00 (commit #<span title="68a4545add42a451c3035c794a19d6d86d1b8639">68a4545</span>)</h3>
+            <div>
+              <p>
+                        Author: Daniel Zohm (daniel.zohm@aoe.com) /
+                        Commiter: Daniel Zohm (daniel.zohm@aoe.com)
+                    </p>
+              <pre class="wrapped">first bunch of fixings from code sniffer</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-02T20:29:49+01:00 (commit #<span title="0a901335c418b4130007f2ba82f369aac8768c4c">0a90133</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Fixed a case when only local pool rewrites are present</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T20:31:16+01:00 (commit #<span title="bb8ec606168b25f21d4418f46dbe88c0a722cb72">bb8ec60</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Added local pool overrides section</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T20:10:39+01:00 (commit #<span title="85f5ae1ec3225557b5312a42126dcee5d3e9ff48">85f5ae1</span>)</h3>
+            <div>
+              <p>
+                        Author: Sylvain Rayé (sly@diglin.com) /
+                        Commiter: Sylvain Rayé (sly@diglin.com)
+                    </p>
+              <pre class="wrapped">replace Finder class with RecursiveDirectoryIterator class, some fixes for rewrites part</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T19:44:48+01:00 (commit #<span title="838f9aa88ee560c2d7f7250742848452337cee8a">838f9aa</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Added _isInheritanceConflict call</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T19:01:28+01:00 (commit #<span title="de12cb4318e56e3f869217c5f5465b91ae1ecd9c">de12cb4</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Moved rewrites stuff to a helper</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T18:56:37+01:00 (commit #<span title="72b476f012bd5729fa05de91c49b829adaf60f0c">72b476f</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Implemented conflicts checker</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T16:07:25+01:00 (commit #<span title="68fd7c66ca0b9d6871c22c21c3c53d16bb3b71fc">68fd7c6</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Rewrites code hotfix</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T15:52:45+01:00 (commit #<span title="95e0c98296def85055cf1fd63ae64b9841fdaa85">95e0c98</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Fixed rewrites code, output messages when there are no rewrites (is this an installation from Heaven?)</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T14:50:30+01:00 (commit #<span title="788a180bc9260d9ada629dee22721a9d59e9dd8b">788a180</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Renamed 'Main Information' tab to 'System Overview'</pre>
+            </div>
+          </li>
+          <li>
+            <h3>2014-02-01T14:24:55+01:00 (commit #<span title="694f4e0b34654c7dbed592540148a1c06374cc27">694f4e0</span>)</h3>
+            <div>
+              <p>
+                        Author: Alexander Turiak (alex@hexbrain.com) /
+                        Commiter: Alexander Turiak (alex@hexbrain.com)
+                    </p>
+              <pre class="wrapped">Code style fixes</pre>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      <span>Generated using phpDox 0.8.0-dev - Copyright (C) 2010 - 2015 by Arne Blankerts</span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer" abstract="false" final="false" start="29" end="37">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi" file="Renderer.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer.php" size="1161" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="2e6a65eab2798f8cddcdd7df2dc3fc427c70dae0" relative="app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer.php"/>
+  <docblock>
+    <description compact="Interface for rendering widget multi renderer"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <method name="getContent" start="36" end="36" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns json encoded content."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <implementors>
+    <class full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Barchart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Barchart"/>
+    <class full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Chart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Chart"/>
+    <class full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Donutchart"/>
+    <class full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Piechart" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Piechart"/>
+    <class full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Plaintext" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Plaintext"/>
+    <class full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Table" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Table"/>
+  </implementors>
+</interface>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Model_WatchDog" namespace="" name="FireGento_MageMonitoring_Model_WatchDog" abstract="false" final="false" start="29" end="78">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model" file="WatchDog.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/WatchDog.php" size="2576" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="a500f1cfaa09727779256e4757460f97feba7288" relative="app/code/community/FireGento/MageMonitoring/Model/WatchDog.php"/>
+  <docblock>
+    <description compact="interface FireGento_MageMonitoring_Model_WatchDog"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <method name="getDogId" start="37" end="37" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns id string, use classname to avoid possible conflicts.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract provides default impl.</description>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getDogName" start="45" end="45" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns watch dog name.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract provides default impl.</description>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="onDuty" start="53" end="53" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns true if this watch dog is active.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract provides default impl.</description>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getSchedule" start="61" end="61" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns string in standard cron format or false.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract provides default impl.</description>
+      <return type="object">
+        <type full="false|string" namespace="" name="false|string"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="watch" start="77" end="77" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Method that executes if getSchedule() says it's time.">Returns false if there is nothing to report or array with results.
+Extending from FireGento_MageMonitoring_Model_Widget_Abstract provides addReportRow() for convenience.
+
+Return format of array:
+array(array('css_id' =&gt; 'info|success|warning|error',
+            'label' =&gt; 'My Check',
+            'value' =&gt; 'my report msg', // any html
+            'attachments =&gt; array(array('filename' =&gt; $name, 'content' =&gt; $content), ...),
+            ... ))</description>
+      <return type="object">
+        <type full="false|array" namespace="" name="false|array"/>
+      </return>
+    </docblock>
+  </method>
+  <implementors>
+    <class full="FireGento_MageMonitoring_Model_WatchDog_Abstract" namespace="" name="FireGento_MageMonitoring_Model_WatchDog_Abstract"/>
+    <class full="FireGento_MageMonitoring_Model_WatchDog_Error" namespace="" name="FireGento_MageMonitoring_Model_WatchDog_Error"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Log_Tail" namespace="" name="FireGento_MageMonitoring_Model_Widget_Log_Tail"/>
+  </implementors>
+</interface>

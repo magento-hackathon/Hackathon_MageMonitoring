@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Widget_Monitoring" namespace="" name="FireGento_MageMonitoring_Block_Widget_Monitoring" abstract="false" final="false" start="29" end="211">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget" file="Monitoring.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Monitoring.php" size="6084" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="edc3b0e64dffa20d0824dab23a876c770a80cd80" relative="app/code/community/FireGento/MageMonitoring/Block/Widget/Monitoring.php"/>
+  <docblock>
+    <description compact="Block for rendering widget monitoring"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Block_Template" namespace="" name="Mage_Core_Block_Template" unresolved="true"/>
+  <member name="_rows" type="array" default="" visibility="protected" line="53">
+    <docblock>
+      <description compact="Format of array: array (array ( 'css_id' =&gt; 'info|success|warning|error',                 'label' =&gt; $label,                 'value' =&gt; $value                 'chart' =&gt; false|array (see below),        ...">)
+
+Setting 'label' = null will skip icon and label output, allowing free form html output via 'value'.
+'css_id' will still be used for background color. Set to info for neutral background.
+
+Format of chart array:
+array('chart_id' =&gt; 'unique_id',
+        'chart_type' =&gt; 'Bar|Doughnut|Line|Pie|PolarArea|Radar',
+        'canvas_width' =&gt; width in pixel as int,
+        'canvas_height' =&gt; height in pixel as int,
+        'chart_data' =&gt; array that matches chart type data structure spec at http://www.chartjs.org/docs/
+        'chart_options' =&gt; array that matches chart type chart options spec at http://www.chartjs.org/docs/
+        )</description>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <member name="_buttons" type="array" default="" visibility="protected" line="60">
+    <docblock>
+      <description compact="Array with magemonitoring/widget_button block instances."/>
+      <var type="array"/>
+    </docblock>
+  </member>
+  <method name="_construct" start="65" end="69" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </method>
+  <method name="addRow" start="80" end="90" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Adds a row to table."/>
+      <param description="CSS id" type="string" variable="$cssId"/>
+      <param description="Label" type="string" variable="$label"/>
+      <param description="Value" type="string" variable="$value"/>
+      <param description="Chart" type="string" variable="$chart"/>
+      <return type="object">
+        <type full="$this" namespace="" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="cssId" byreference="false" type="{unknown}"/>
+    <parameter name="label" byreference="false" type="{unknown}"/>
+    <parameter name="value" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="chart" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="addHeaderRow" start="100" end="112" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Add empty or header row to table."/>
+      <param description="Header" type="string" variable="$header"/>
+      <param description="Background ID" type="string" variable="$backgroundId"/>
+      <param description="Wrapper tag" type="string" variable="$wrapperTag"/>
+      <return type="object">
+        <type full="$this" namespace="" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="header" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="backgroundId" byreference="false" type="string" default="'info'"/>
+    <parameter name="wrapperTag" byreference="false" type="string" default="'h4'"/>
+  </method>
+  <method name="getRows" start="119" end="126" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns rows"/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="newChartArray" start="139" end="148" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns an array that can feed FireGento_MageMonitoring_Block_Chart."/>
+      <param description="Canvas Id" type="string" variable="$canvasId"/>
+      <param description="Chart data" type="array" variable="$chartData"/>
+      <param description="Chart type" type="string" variable="$chartType"/>
+      <param description="Width" type="int" variable="$width"/>
+      <param description="Height" type="int" variable="$height"/>
+      <return type="array"/>
+    </docblock>
+    <parameter name="canvasId" byreference="false" type="{unknown}"/>
+    <parameter name="chartData" byreference="false" type="{unknown}"/>
+    <parameter name="chartType" byreference="false" type="string" default="'Pie'"/>
+    <parameter name="width" byreference="false" type="integer" default="76"/>
+    <parameter name="height" byreference="false" type="integer" default="76"/>
+  </method>
+  <method name="addButton" start="162" end="181" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Adds a button to button array."/>
+      <param description="Widget Id" type="string" variable="$widget"/>
+      <param description="Button Id" type="string" variable="$buttonId"/>
+      <param description="Label" type="string" variable="$label"/>
+      <param description="Controller action" type="string" variable="$controllerAction"/>
+      <param description="Url Params" type="array" variable="$urlParams"/>
+      <param description="Confirm Message" type="string" variable="$confirmMessage"/>
+      <param description="CSS class" type="string" variable="$cssClass"/>
+      <return type="object">
+        <type full="$this" namespace="" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="widget" byreference="false" type="{unknown}"/>
+    <parameter name="buttonId" byreference="false" type="{unknown}"/>
+    <parameter name="label" byreference="false" type="{unknown}"/>
+    <parameter name="controllerAction" byreference="false" type="{unknown}"/>
+    <parameter name="urlParams" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="confirmMessage" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="cssClass" byreference="false" type="string" default="'f-right'"/>
+  </method>
+  <method name="getButtons" start="188" end="195" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns buttons"/>
+      <return type="object">
+        <type full="array|false" namespace="" name="array|false"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="setButtons" start="202" end="210" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Sets a list of buttons"/>
+      <param description="List of buttons" type="array" variable="$buttons"/>
+      <return type="object">
+        <type full="$this" namespace="" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="buttons" byreference="false" type="array" default=""/>
+  </method>
+</class>

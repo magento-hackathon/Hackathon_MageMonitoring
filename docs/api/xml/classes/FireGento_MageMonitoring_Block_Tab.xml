@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Tab" namespace="" name="FireGento_MageMonitoring_Block_Tab" abstract="false" final="false" start="29" end="74">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block" file="Tab.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Tab.php" size="2411" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="ac6a0612463cf1c2c86331f38cfc3f84bce1be55" relative="app/code/community/FireGento/MageMonitoring/Block/Tab.php"/>
+  <docblock>
+    <description compact="Block for rendering tabs"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Adminhtml_Block_Widget_Form_Container" namespace="" name="Mage_Adminhtml_Block_Widget_Form_Container" unresolved="true"/>
+  <constructor name="__construct" start="34" end="59" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+    <inline>
+      <comment value="don't let the core try to guess the form block" line="37"/>
+    </inline>
+  </constructor>
+  <method name="_prepareLayout" start="66" end="73" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Prepare layout"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+</class>

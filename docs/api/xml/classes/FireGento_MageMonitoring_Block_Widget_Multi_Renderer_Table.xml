@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Table" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Table" abstract="false" final="false" start="29" end="94">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer" file="Table.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Table.php" size="2525" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="b9b1bf87a0a509b1d82b729b66ea451a94226d31" relative="app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Table.php"/>
+  <docblock>
+    <description compact="Block for rendering multi renderer table"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract"/>
+  <implements full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer"/>
+  <constant type="string" name="CONTENT_TYPE_TABLE" value="'table'"/>
+  <method name="_construct" start="38" end="41" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </method>
+  <method name="init" start="46" end="52" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Reset the table rows."/>
+    </docblock>
+  </method>
+  <method name="_getContent" start="59" end="70" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve the data for the block output."/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="addRow" start="79" end="93" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Add new row to table."/>
+      <param description="Data row" type="array" variable="$row"/>
+      <param description="Row configuration" type="array" variable="$rowConfig"/>
+      <return type="object">
+        <type full="$this" namespace="" name="$this"/>
+      </return>
+    </docblock>
+    <parameter name="row" byreference="false" type="{unknown}"/>
+    <parameter name="rowConfig" byreference="false" type="array" default=""/>
+    <inline>
+      <comment value="collect data for new row and combine with config" line="83"/>
+    </inline>
+  </method>
+  <parent full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract">
+    <extends full="Mage_Adminhtml_Block_Template" namespace="" name="Mage_Adminhtml_Block_Template" unresolved="true"/>
+    <constructor name="__construct" start="34" end="38" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Constructor"/>
+      </docblock>
+    </constructor>
+    <method name="_encode" start="46" end="49" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Encode the content to json."/>
+        <param description="The content to encode" type="mixed" variable="$content"/>
+        <return type="string"/>
+      </docblock>
+      <parameter name="content" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getContent" start="56" end="68" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Return the encoded content."/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+    <method name="getDivId" start="75" end="78" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns div id used for rendering content."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+  <interface full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer">
+    <method name="getContent" start="36" end="36" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns json encoded content."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </interface>
+</class>

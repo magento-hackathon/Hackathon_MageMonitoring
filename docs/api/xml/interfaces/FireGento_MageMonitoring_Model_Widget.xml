@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget" abstract="false" final="false" start="29" end="158">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model" file="Widget.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Model/Widget.php" size="4762" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="75e1b325d212a35651e1dadb50785760a5da7c8d" relative="app/code/community/FireGento/MageMonitoring/Model/Widget.php"/>
+  <docblock>
+    <description compact="interface FireGento_MageMonitoring_Model_Widget"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <method name="getId" start="36" end="36" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns class name that must be compatible with magento autoloader."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getConfigId" start="43" end="43" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns widget config key in database."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="isActive" start="50" end="50" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns true if this widget is active."/>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getName" start="57" end="57" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns widget name."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getVersion" start="65" end="65" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns version string."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getSupportedMagentoVersions" start="72" end="72" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns magento versions supported by this widget."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="displayCollapsed" start="80" end="80" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns true if widget should start collapsed, speeds up loading times as the widget won't render it's content on page load."/>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getDisplayPrio" start="87" end="87" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns display prio of this widget."/>
+      <return type="int"/>
+    </docblock>
+  </method>
+  <method name="getOutput" start="95" end="95" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Used to render the widget, returns array of classes that have a -&gt;toHtml() method.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you .</description>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="initConfig" start="116" end="116" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns array with default config data for this widget or false if not implemented.">Implementing this method enables you to add custom entries for user configuration.
+
+Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+Data is saved to core_config_data with path = 'widgets/' + $widgetClassName '/' + $config_key
+
+Format of return array:
+array ('config_key' =&gt; array('type' =&gt; $inputType, // 'text' or 'checkbox' for now
+                             'scope' =&gt; 'global|widget',
+                             'required' =&gt; true|false,
+                             'label' =&gt; $label,
+                             'value' =&gt; $value,
+                             'tooltip' =&gt; $tooltipMsg),
+       ...)</description>
+      <return type="object">
+        <type full="array|false" namespace="" name="array|false"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getConfig" start="127" end="127" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns current config data of this widget.">Returned array has same structure as initConfig()</description>
+      <param description="Key" type="string" variable="$key"/>
+      <param description="Value Only" type="object" variable="$valueOnly">
+        <type full="bool" namespace="" name="bool"/>
+      </param>
+      <return type="object">
+        <type full="array|false" namespace="" name="array|false"/>
+      </return>
+    </docblock>
+    <parameter name="key" byreference="false" type="{unknown}" default="" constant="null"/>
+    <parameter name="valueOnly" byreference="false" type="{unknown}" default="" constant="null"/>
+  </method>
+  <method name="loadConfig" start="137" end="137" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Loads and returns the widget config via desired persistance layer. Never called if getConfig() returns false.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+
+Returned array has same structure as initConfig()</description>
+      <return type="object">
+        <type full="array|false" namespace="" name="array|false"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="saveConfig" start="149" end="149" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Saves the widget config via desired persistance layer. Never called if getConfig() returns false.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.
+
+Format of input array:
+array('config_key' =&gt; $newValue, ...)</description>
+      <param description="Array" type="array" variable="$array"/>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+    <parameter name="array" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="deleteConfig" start="157" end="157" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Deletes the widget config via desired persistance layer. Never called if getConfig() returns false.">Extending from FireGento_MageMonitoring_Model_Widget_Abstract will give you persistence via core_config_data.</description>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+  </method>
+  <implementors>
+    <class full="FireGento_MageMonitoring_Model_HealthCheck_Cron_Status" namespace="" name="FireGento_MageMonitoring_Model_HealthCheck_Cron_Status"/>
+    <class full="FireGento_MageMonitoring_Model_HealthCheck_Cron_Status" namespace="" name="FireGento_MageMonitoring_Model_HealthCheck_Cron_Status"/>
+    <class full="FireGento_MageMonitoring_Model_WatchDog_Abstract" namespace="" name="FireGento_MageMonitoring_Model_WatchDog_Abstract"/>
+    <class full="FireGento_MageMonitoring_Model_WatchDog_Error" namespace="" name="FireGento_MageMonitoring_Model_WatchDog_Error"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_Abstract"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_AbstractGeneric" namespace="" name="FireGento_MageMonitoring_Model_Widget_AbstractGeneric"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_CacheStat_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_CacheStat_Abstract"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_CacheStat_Apc" namespace="" name="FireGento_MageMonitoring_Model_Widget_CacheStat_Apc"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_CacheStat_Apcu" namespace="" name="FireGento_MageMonitoring_Model_Widget_CacheStat_Apcu"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_CacheStat_Memcache" namespace="" name="FireGento_MageMonitoring_Model_Widget_CacheStat_Memcache"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_CacheStat_Redis" namespace="" name="FireGento_MageMonitoring_Model_Widget_CacheStat_Redis"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_CacheStat_Zendopcache" namespace="" name="FireGento_MageMonitoring_Model_Widget_CacheStat_Zendopcache"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Extensions_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_Extensions_Abstract"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Extensions_Community" namespace="" name="FireGento_MageMonitoring_Model_Widget_Extensions_Community"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Mediasize" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Mediasize"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Mediasize" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Mediasize"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Producttypes" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Producttypes"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Producttypes" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Producttypes"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Sitemap" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Sitemap"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_HealthCheck_Sitemap" namespace="" name="FireGento_MageMonitoring_Model_Widget_HealthCheck_Sitemap"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Hosting" namespace="" name="FireGento_MageMonitoring_Model_Widget_Hosting"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Log_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_Log_Abstract"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Log_Tail" namespace="" name="FireGento_MageMonitoring_Model_Widget_Log_Tail"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Log_Tail" namespace="" name="FireGento_MageMonitoring_Model_Widget_Log_Tail"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Log" namespace="" name="FireGento_MageMonitoring_Model_Widget_Log"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Maintenance" namespace="" name="FireGento_MageMonitoring_Model_Widget_Maintenance"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Patches" namespace="" name="FireGento_MageMonitoring_Model_Widget_Patches"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Performance" namespace="" name="FireGento_MageMonitoring_Model_Widget_Performance"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Privacy" namespace="" name="FireGento_MageMonitoring_Model_Widget_Privacy"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_RootFiles" namespace="" name="FireGento_MageMonitoring_Model_Widget_RootFiles"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Security" namespace="" name="FireGento_MageMonitoring_Model_Widget_Security"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_SEO" namespace="" name="FireGento_MageMonitoring_Model_Widget_SEO"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Abstract" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Abstract"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_ClassRewrites" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_ClassRewrites"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_ClassRewrites" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_ClassRewrites"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Magento" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Magento"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Magento" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Magento"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Modules" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Modules"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Modules" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Modules"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_PhpConfig" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_PhpConfig"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_PhpConfig" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_PhpConfig"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_PhpExtensions" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_PhpExtensions"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_PhpExtensions" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_PhpExtensions"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_PhpInfo" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_PhpInfo"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_PhpInfo" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_PhpInfo"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Server" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Server"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Server" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Server"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Watchdog" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Watchdog"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_System_Watchdog" namespace="" name="FireGento_MageMonitoring_Model_Widget_System_Watchdog"/>
+    <class full="FireGento_MageMonitoring_Model_Widget_Watchdog" namespace="" name="FireGento_MageMonitoring_Model_Widget_Watchdog"/>
+  </implementors>
+  <extenders>
+    <extender full="FireGento_MageMonitoring_Model_Widget_CacheStat" namespace="" name="FireGento_MageMonitoring_Model_Widget_CacheStat"/>
+  </extenders>
+</interface>

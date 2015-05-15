@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Widget" namespace="" name="FireGento_MageMonitoring_Block_Widget" abstract="false" final="false" start="29" end="175">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block" file="Widget.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget.php" size="4229" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="3cd51fddd237e4269708eb4f681f4dfe9f902e02" relative="app/code/community/FireGento/MageMonitoring/Block/Widget.php"/>
+  <docblock>
+    <description compact="Block for rendering widget"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="Mage_Core_Block_Template" namespace="" name="Mage_Core_Block_Template" unresolved="true"/>
+  <member name="_widgetModel" visibility="private" line="31"/>
+  <member name="_output" visibility="private" line="32"/>
+  <method name="_construct" start="37" end="41" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Constructor"/>
+    </docblock>
+  </method>
+  <method name="_toHtml" start="48" end="57" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Returning HTML"/>
+      <return type="mixed"/>
+    </docblock>
+  </method>
+  <method name="_getWidget" start="65" end="72" abstract="false" final="false" static="false" visibility="protected">
+    <docblock>
+      <description compact="Get the widget model"/>
+      <return type="object">
+        <type full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget"/>
+      </return>
+      <throws type="object">
+        <type full="Exception" namespace="" name="Exception"/>
+      </throws>
+    </docblock>
+  </method>
+  <method name="setWidget" start="81" end="90" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Set source model"/>
+      <param description="Model" type="object" variable="$model">
+        <type full="FireGento_MageMonitoring_Model_Widget" namespace="" name="FireGento_MageMonitoring_Model_Widget"/>
+      </param>
+      <return description="$this  Widget block" type="object">
+        <type full="FireGento_MageMonitoring_Block_Widget" namespace="" name="FireGento_MageMonitoring_Block_Widget"/>
+      </return>
+      <throws type="object">
+        <type full="Exception" namespace="" name="Exception"/>
+      </throws>
+    </docblock>
+    <parameter name="model" byreference="false" type="{unknown}"/>
+  </method>
+  <method name="getWidgetId" start="97" end="100" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns id string."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getName" start="107" end="110" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns name of widget."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="displayCollapsed" start="117" end="120" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns true if widget should render in collapsed state."/>
+      <return type="object">
+        <type full="bool" namespace="" name="bool"/>
+      </return>
+    </docblock>
+  </method>
+  <method name="getConfig" start="127" end="130" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns config array."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getOutput" start="137" end="144" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns output array for rendering."/>
+      <return type="array"/>
+    </docblock>
+  </method>
+  <method name="getConfigUrl" start="151" end="154" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns configuration URL"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getCallbackUrl" start="161" end="164" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns callback URL"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <method name="getRefreshUrl" start="171" end="174" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Returns refresh URL"/>
+      <return type="string"/>
+    </docblock>
+  </method>
+</class>

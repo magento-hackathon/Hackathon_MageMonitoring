@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class xmlns="http://xml.phpdox.net/src" full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Plaintext" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Plaintext" abstract="false" final="false" start="29" end="46">
+  <file path="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer" file="Plaintext.php" realpath="/www-data/git/Hackathon_MageMonitoring/src/app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Plaintext.php" size="1478" time="2015-05-15T11:18:15+02:00" unixtime="1431681495" sha1="070cced0df2ad461f1d230ef700d2daaea5855ce" relative="app/code/community/FireGento/MageMonitoring/Block/Widget/Multi/Renderer/Plaintext.php"/>
+  <docblock>
+    <description compact="Block for rendering widget configuration"/>
+    <category value="FireGento"/>
+    <package value="FireGento_MageMonitoring"/>
+    <author value="FireGento Team &lt;team@firegento.com&gt;"/>
+  </docblock>
+  <extends full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract"/>
+  <implements full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer"/>
+  <constant type="string" name="CONTENT_TYPE_PLAINTEXT" value="'plaintext'"/>
+  <method name="_getContent" start="40" end="45" abstract="false" final="false" static="false" visibility="public">
+    <docblock>
+      <description compact="Retrieve the data for the block output."/>
+      <return type="string"/>
+    </docblock>
+  </method>
+  <parent full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer_Abstract">
+    <extends full="Mage_Adminhtml_Block_Template" namespace="" name="Mage_Adminhtml_Block_Template" unresolved="true"/>
+    <constructor name="__construct" start="34" end="38" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Constructor"/>
+      </docblock>
+    </constructor>
+    <method name="_encode" start="46" end="49" abstract="false" final="false" static="false" visibility="protected">
+      <docblock>
+        <description compact="Encode the content to json."/>
+        <param description="The content to encode" type="mixed" variable="$content"/>
+        <return type="string"/>
+      </docblock>
+      <parameter name="content" byreference="false" type="{unknown}"/>
+    </method>
+    <method name="getContent" start="56" end="68" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Return the encoded content."/>
+        <return type="mixed"/>
+      </docblock>
+    </method>
+    <method name="getDivId" start="75" end="78" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns div id used for rendering content."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </parent>
+  <interface full="FireGento_MageMonitoring_Block_Widget_Multi_Renderer" namespace="" name="FireGento_MageMonitoring_Block_Widget_Multi_Renderer">
+    <method name="getContent" start="36" end="36" abstract="false" final="false" static="false" visibility="public">
+      <docblock>
+        <description compact="Returns json encoded content."/>
+        <return type="string"/>
+      </docblock>
+    </method>
+  </interface>
+</class>
