@@ -1,2 +1,5 @@
 .DS_Store
 .idea
+vendor
+codesniffer_report.csv
+composer.lock

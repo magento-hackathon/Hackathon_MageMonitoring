@@ -1,7 +1,7 @@
 {
   "name": "firegento/magemonitoring",
   "type": "magento-module",
-  "license": "OSL-3.0",
+  "license": ["MIT","GPL-3.0"],
   "homepage": "https://github.com/firegento/magemonitoring",
   "description": "Magento Monitoring Module to get information about the current installation (Server, Cache, PHP, Rewrites, Logs,...)",
   "authors": [
@@ -20,6 +20,12 @@
   ],
   "require": {
     "magento-hackathon/magento-composer-installer": "*"
+  },
+  "require-dev": {
+    "phploc/phploc": "*",
+    "phpmd/phpmd" : "@stable",
+    "theseer/phpdox": "0.*",
+    "squizlabs/php_codesniffer": "2.*"
   },
   "replace": {
     "magento-hackathon/hackathon_monitoring": "self.version"
