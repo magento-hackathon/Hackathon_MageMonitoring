@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * This file is part of a FireGento e.V. module.
+ *
+ * This FireGento e.V. module is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License version 3 as
+ * published by the Free Software Foundation.
+ *
+ * This script is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * PHP version 5
+ *
+ * @category  FireGento
+ * @package   FireGento_MageMonitoring
+ * @author    FireGento Team <team@firegento.com>
+ * @copyright 2015 FireGento Team (http://www.firegento.com)
+ * @license   http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
+ */
+-->
+<config>
+    <modules>
+        <FireGento_MageMonitoring>
+            <version>2.1.0</version>
+            <depends>
+                <Mage_Adminhtml />
+            </depends>
+        </FireGento_MageMonitoring>
+    </modules>
+
+    <global>
+        <blocks>
+            <magemonitoring>
+                <class>FireGento_MageMonitoring_Block</class>
+            </magemonitoring>
+        </blocks>
+
+        <models>
+            <magemonitoring>
+                <class>FireGento_MageMonitoring_Model</class>
+                <resourceModel>magemonitoring_resource</resourceModel>
+            </magemonitoring>
+            <magemonitoring_resource>
+                <class>FireGento_MageMonitoring_Model_Resource</class>
+                <entities>
+                </entities>
+            </magemonitoring_resource>
+            <!-- Fake model rewrite -->
+            <!--<catalog>-->
+            <!--<rewrite>-->
+            <!--<category>FireGento_MageMonitoring_Model_Category</category>-->
+            <!--</rewrite>-->
+            <!--</catalog>-->
+            <!-- / Fake model rewrite -->
+        </models>
+
+        <helpers>
+            <magemonitoring>
+                <class>FireGento_MageMonitoring_Helper</class>
+            </magemonitoring>
+        </helpers>
+
+        <template>
+            <email>
+                <magemonitoring_watchdog_report module="magemonitoring">
+                    <label>MageMonitoring Watch Dog Reports</label>
+                    <file>magemonitoring_watchdogs.html</file>
+                    <type>html</type>
+                </magemonitoring_watchdog_report>
+            </email>
+        </template>
+
+        <!-- widgets folder -->
+        <widgets>
+            <magemonitoring>
+                <folder>Model/Widget</folder>
+            </magemonitoring>
+        </widgets>
+
+        <!-- values for shop config checks -->
+        <healthcheck>
+            <shop_configuration>
+                <values>
+                    <flat_table_product>
+                        <path>catalog/frontend/flat_catalog_product</path>
+                        <recommendation>1</recommendation>
+                    </flat_table_product>
+                    <flat_table_category>
+                        <path>catalog/frontend/flat_catalog_category</path>
+                        <recommendation>1</recommendation>
+                    </flat_table_category>
+                    <system_smtp_disable>
+                        <path>system/smtp/disable</path>
+                        <recommendation>0</recommendation>
+                    </system_smtp_disable>
+                    <dev_log_active>
+                        <path>dev/log/active</path>
+                        <recommendation>1</recommendation>
+                    </dev_log_active>
+                    <system_log_enabled>
+                        <path>system/log/enabled</path>
+                        <recommendation>1</recommendation>
+                    </system_log_enabled>
+                    <system_log_clean_after_day>
+                        <path>system/log/clean_after_day</path>
+                        <recommendation>30</recommendation>
+                    </system_log_clean_after_day>
+                    <dev_js_merge_files>
+                        <path>dev/js/merge_files</path>
+                        <recommendation>1</recommendation>
+                    </dev_js_merge_files>
+                    <dev_css_merge_css_files>
+                        <path>dev/css/merge_css_files</path>
+                        <recommendation>1</recommendation>
+                    </dev_css_merge_css_files>
+                    <admin_security_use_form_key>
+                        <path>admin/security/use_form_key</path>
+                        <recommendation>1</recommendation>
+                    </admin_security_use_form_key>
+                    <admin_url_use_custom>
+                        <path>admin/url/use_custom</path>
+                        <recommendation>1</recommendation>
+                    </admin_url_use_custom>
+                    <admin_url_custom>
+                        <path>admin/url/custom</path>
+                    </admin_url_custom>
+                </values>
+            </shop_configuration>
+        </healthcheck>
+        <!-- END values for shop config checks -->
+
+    </global>
+
+    <admin>
+        <routers>
+            <magemonitoring>
+                <use>admin</use>
+                <args>
+                    <module>FireGento_MageMonitoring</module>
+                    <frontName>monitoring</frontName>
+                    <modules>
+                        <magemonitoring before="Mage_Adminhtml">FireGento_MageMonitoring_Adminhtml</magemonitoring>
+                    </modules>
+                </args>
+            </magemonitoring>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <magemonitoring>
+                    <file>monitoring.xml</file>
+                </magemonitoring>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <magemonitoring>
+                    <files>
+                        <default>FireGento_MageMonitoring.csv</default>
+                    </files>
+                </magemonitoring>
+            </modules>
+        </translate>
+    </adminhtml>
+
+    <crontab>
+        <jobs>
+            <magemonitoring_uberdog>
+                <schedule>
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>magemonitoring/watchDog_uberDog::triggerActiveDogs</model>
+                </run>
+            </magemonitoring_uberdog>
+        </jobs>
+    </crontab>
+
+    <default>
+        <magemonitoring>
+            <tabs>
+                <health_check>
+                    <label>Health Check</label>
+                    <title>Health Check</title>
+                    <display_prio>20</display_prio>
+                    <widgets>
+                        <shop_status>
+                            <impl>FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopStatus</impl>
+                            <versions>
+                                *
+                            </versions>
+                            <display_prio>5</display_prio>
+                        </shop_status>
+                        <productcomposition>
+                            <impl>FireGento_MageMonitoring_Model_Widget_HealthCheck_ProductComposition</impl>
+                            <display_prio>10</display_prio>
+                        </productcomposition>
+                        <shop_configuration>
+                            <impl>FireGento_MageMonitoring_Model_Widget_HealthCheck_ShopConfiguration</impl>
+                            <display_prio>20</display_prio>
+                        </shop_configuration>
+                        <sitemap>
+                            <impl>FireGento_MageMonitoring_Model_Widget_HealthCheck_Sitemap</impl>
+                            <versions>
+                                *
+                                1.6.2
+                                1.3*
+                                1.7.0*
+                            </versions>
+                            <display_prio>30</display_prio>
+                        </sitemap>
+                        <producttypes>
+                            <impl>FireGento_MageMonitoring_Model_Widget_HealthCheck_Producttypes</impl>
+                            <display_prio>40</display_prio>
+                        </producttypes>
+                        <logfilesize>
+                            <impl>FireGento_MageMonitoring_Model_Widget_HealthCheck_Logfilesize</impl>
+                            <display_prio>50</display_prio>
+                        </logfilesize>
+                        <log>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Log</impl>
+                            <display_prio>60</display_prio>
+                            <collapsed>1</collapsed>
+                        </log>
+                        <mediasize>
+                            <impl>FireGento_MageMonitoring_Model_Widget_HealthCheck_Mediasize</impl>
+                            <display_prio>70</display_prio>
+                        </mediasize>
+                    </widgets>
+                </health_check>
+                <system_overview>
+                    <label>System Overview</label>
+                    <title>System Overview</title>
+                    <display_prio>10</display_prio>
+                    <widgets>
+                        <magento_info>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_Magento</impl>
+                        </magento_info>
+                        <server_info>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_Server</impl>
+                        </server_info>
+                        <watch_dog_control>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_Watchdog</impl>
+                        </watch_dog_control>
+                    </widgets>
+                </system_overview>
+                <php_info>
+                    <label>PHP Information</label>
+                    <title>PHP Information</title>
+                    <display_prio>30</display_prio>
+                    <widgets>
+                        <php_config_check>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_PhpConfig</impl>
+                            <display_prio>10</display_prio>
+                        </php_config_check>
+                        <php_req_ext>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                            <title>Required Extensions</title>
+                            <only_required>true</only_required>
+                            <display_prio>20</display_prio>
+                        </php_req_ext>
+                        <php_all_ext>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_PhpExtensions</impl>
+                            <title>All Installed Extensions</title>
+                            <collapsed>1</collapsed>
+                            <display_prio>30</display_prio>
+                        </php_all_ext>
+                        <php_info>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_PhpInfo</impl>
+                            <display_prio>40</display_prio>
+                        </php_info>
+                    </widgets>
+                </php_info>
+                <database_info>
+                    <label>Database Information</label>
+                    <title>Database Information</title>
+                    <display_prio>35</display_prio>
+                    <block>magemonitoring/system_overview_read_tabs_database</block>
+                    <widgets>
+                    </widgets>
+                </database_info>
+                <cache_stat>
+                    <label>Cache Statistics</label>
+                    <title>Cache Statistics</title>
+                    <display_prio>40</display_prio>
+                    <widgets>
+                        <apc>
+                            <impl>FireGento_MageMonitoring_Model_Widget_CacheStat_Apc</impl>
+                        </apc>
+                        <apcu>
+                            <impl>FireGento_MageMonitoring_Model_Widget_CacheStat_Apcu</impl>
+                        </apcu>
+                        <memcached>
+                            <impl>FireGento_MageMonitoring_Model_Widget_CacheStat_Memcache</impl>
+                        </memcached>
+                        <redis>
+                            <impl>FireGento_MageMonitoring_Model_Widget_CacheStat_Redis</impl>
+                        </redis>
+                        <zendopcache>
+                            <impl>FireGento_MageMonitoring_Model_Widget_CacheStat_Zendopcache</impl>
+                        </zendopcache>
+                    </widgets>
+                </cache_stat>
+                <class_rewrites>
+                    <label>Class Rewrites</label>
+                    <title>Class Rewrites</title>
+                    <display_prio>50</display_prio>
+                    <widgets>
+                        <rewrites>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_ClassRewrites</impl>
+                        </rewrites>
+                    </widgets>
+                </class_rewrites>
+                <modules_installed>
+                    <label>Magento Modules</label>
+                    <title>Magento Modules</title>
+                    <display_prio>60</display_prio>
+                    <widgets>
+                        <default_extensions_community>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Extensions_Community</impl>
+                            <display_prio>5</display_prio>
+                            <collapsed>1</collapsed>
+                        </default_extensions_community>
+                        <modules_core>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <title>Modules core</title>
+                            <code_pool>core</code_pool>
+                            <collapsed>1</collapsed>
+                            <display_prio>10</display_prio>
+                        </modules_core>
+                        <modules_community>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <title>Modules community</title>
+                            <code_pool>community</code_pool>
+                            <display_prio>20</display_prio>
+                        </modules_community>
+                        <modules_local>
+                            <impl>FireGento_MageMonitoring_Model_Widget_System_Modules</impl>
+                            <title>Modules local</title>
+                            <code_pool>local</code_pool>
+                            <collapsed>1</collapsed>
+                            <display_prio>30</display_prio>
+                        </modules_local>
+                    </widgets>
+                </modules_installed>
+
+                <system_logs>
+                    <label>System Logs</label>
+                    <title>System Logs</title>
+                    <display_prio>70</display_prio>
+                    <widgets>
+                        <magento_debug>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Log_Tail</impl>
+                            <title>Magento Debug Log</title>
+                            <file_path>system.log</file_path>
+                            <color>warning</color>
+                            <collapsed>1</collapsed>
+                            <display_prio>10</display_prio>
+                        </magento_debug>
+                        <magento_exception>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Log_Tail</impl>
+                            <title>Magento Exception Log</title>
+                            <file_path>exception.log</file_path>
+                            <color>error</color>
+                            <display_prio>20</display_prio>
+                        </magento_exception>
+                    </widgets>
+                </system_logs>
+                <monitoring_check>
+                    <label>Monitoring</label>
+                    <title>Monitoring</title>
+                    <display_prio>80</display_prio>
+                    <widgets>
+                        <seo>
+                            <impl>FireGento_MageMonitoring_Model_Widget_SEO</impl>
+                            <display_prio>10</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <catalog_seo_site_map>
+                                        <title>Frontend-Sitemap deactivated</title>
+                                        <path>catalog/seo/site_map</path>
+                                        <recommendation>0</recommendation>
+                                    </catalog_seo_site_map>
+
+                                    <sitemap_generate_enabled>
+                                        <title>XML Sitemap - enabled</title>
+                                        <path>sitemap/generate/enabled</path>
+                                        <recommendation>1</recommendation>
+                                    </sitemap_generate_enabled>
+                                    <sitemap_generate_time>
+                                        <title>XML Sitemap - generation time</title>
+                                        <path>sitemap/generate/time</path>
+                                        <recommendation>02,00,00</recommendation>
+                                    </sitemap_generate_time>
+                                    <sitemap_generate_error_email>
+                                        <title>XML Sitemap - email address for errors</title>
+                                        <path>sitemap/generate/error_email</path>
+                                        <recommendation>alert@example.com</recommendation>
+                                    </sitemap_generate_error_email>
+
+                                    <design_head_default_robots>
+                                        <title>Robots Permission</title>
+                                        <path>design/head/default_robots</path>
+                                        <recommendation>INDEX,FOLLOW</recommendation>
+                                    </design_head_default_robots>
+
+                                    <catalog_seo_category_canonical_tag>
+                                        <title>Canonical Tags - Categories</title>
+                                        <path>catalog/seo/category_canonical_tag</path>
+                                        <recommendation>1</recommendation>
+                                    </catalog_seo_category_canonical_tag>
+                                    <catalog_seo_product_canonical_tag>
+                                        <title>Canonical Tags - Products</title>
+                                        <path>catalog/seo/product_canonical_tag</path>
+                                        <recommendation>1</recommendation>
+                                    </catalog_seo_product_canonical_tag>
+                                    <catalog_seo_product_use_categories>
+                                        <title>Use Category Path in Product URLs</title>
+                                        <path>catalog/seo/product_use_categories</path>
+                                        <recommendation>0</recommendation>
+                                    </catalog_seo_product_use_categories>
+                                    <catalog_seo_search_terms>
+                                        <title>Search Terms in Frontend</title>
+                                        <path>catalog/seo/search_terms</path>
+                                        <recommendation>0</recommendation>
+                                    </catalog_seo_search_terms>
+
+                                    <cataloginventory_options_show_out_of_stock>
+                                        <title>Show out of Stock Products</title>
+                                        <path>cataloginventory/options/show_out_of_stock</path>
+                                        <recommendation>1</recommendation>
+                                    </cataloginventory_options_show_out_of_stock>
+                                </values>
+                            </shop_configuration>
+                        </seo>
+
+                        <privacy>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Privacy</impl>
+                            <display_prio>15</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <google_analytics_anonymization>
+                                        <title>Google-Analytics anonymization</title>
+                                        <path>google/analytics/anonymization</path>
+                                        <recommendation>1</recommendation>
+                                    </google_analytics_anonymization>
+                                    <google_analytics_ip_anonymization>
+                                        <title>Google-Analytics IP anonymization</title>
+                                        <path>google/analytics/ip_anonymization</path>
+                                        <recommendation>1</recommendation>
+                                    </google_analytics_ip_anonymization>
+                                    <sales_general_hide_customer_ip>
+                                        <title>Hide Customer IP</title>
+                                        <path>sales/general/hide_customer_ip</path>
+                                        <recommendation>1</recommendation>
+                                    </sales_general_hide_customer_ip>
+                                    <web_secure_use_in_frontend>
+                                        <title>Use secure URL in Frontend</title>
+                                        <path>web/secure/use_in_frontend</path>
+                                        <recommendation>1</recommendation>
+                                    </web_secure_use_in_frontend>
+                                    <web_secure_use_in_adminhtml>
+                                        <title>Use secure URL in Backend</title>
+                                        <path>web/secure/use_in_adminhtml</path>
+                                        <recommendation>1</recommendation>
+                                    </web_secure_use_in_adminhtml>
+                                    <sendfriend_email_enabled>
+                                        <title>Send-To-Friend enabled</title>
+                                        <path>sendfriend/email/enabled</path>
+                                        <recommendation>0</recommendation>
+                                    </sendfriend_email_enabled>
+                                    <payment_ccsave_active>
+                                        <title>Payment CC-Save active</title>
+                                        <path>payment/ccsave/active</path>
+                                        <recommendation>0</recommendation>
+                                    </payment_ccsave_active>
+                                    <customer_create_account_confirm>
+                                        <title>Customer create account confirmation</title>
+                                        <path>customer/create_account/confirm</path>
+                                        <recommendation>1</recommendation>
+                                    </customer_create_account_confirm>
+                                </values>
+                            </shop_configuration>
+                        </privacy>
+
+                        <security>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Security</impl>
+                            <display_prio>20</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <admin_url_use_custom_path>
+                                        <title>Use custom admin URL</title>
+                                        <path>admin/url/use_custom_path</path>
+                                        <recommendation>1</recommendation>
+                                    </admin_url_use_custom_path>
+                                    <admin_security_use_case_sensitive_login>
+                                        <title>Case sensitive login in admin</title>
+                                        <path>admin/security/use_case_sensitive_login</path>
+                                        <recommendation>1</recommendation>
+                                    </admin_security_use_case_sensitive_login>
+                                    <dev_template_allow_symlink>
+                                        <title>Symlinks allowed</title>
+                                        <path>dev/template/allow_symlink</path>
+                                        <recommendation>0</recommendation>
+                                    </dev_template_allow_symlink>
+                                </values>
+                            </shop_configuration>
+                        </security>
+
+                        <hosting>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Hosting</impl>
+                            <display_prio>35</display_prio>
+                            <collapsed>1</collapsed>
+                            <shop_configuration>
+                                <values>
+                                    <system_cron_schedule_generate_every>
+                                        <title>Cron - Schedule every</title>
+                                        <path>system/cron/schedule_generate_every</path>
+                                        <recommendation>10</recommendation>
+                                    </system_cron_schedule_generate_every>
+                                    <system_cron_schedule_ahead_for>
+                                        <title>Cron - Schedule ahead for</title>
+                                        <path>system/cron/schedule_ahead_for</path>
+                                        <recommendation>30</recommendation>
+                                    </system_cron_schedule_ahead_for>
+                                    <system_cron_schedule_lifetime>
+                                        <title>Cron - Schedule Lifetime</title>
+                                        <path>system/cron/schedule_lifetime</path>
+                                        <recommendation>60</recommendation>
+                                    </system_cron_schedule_lifetime>
+                                    <system_cron_error_email>
+                                        <title>Cron - Schedule every</title>
+                                        <path>system/cron/error_email</path>
+                                        <recommendation>alert@example.com</recommendation>
+                                    </system_cron_error_email>
+                                    <system_cron_history_cleanup_every>
+                                        <title>Cron - History Cleanup every</title>
+                                        <path>system/cron/history_cleanup_every</path>
+                                        <recommendation>10080</recommendation>
+                                    </system_cron_history_cleanup_every>
+                                    <system_cron_history_success_lifetime>
+                                        <title>Cron - History success Lifetime</title>
+                                        <path>system/cron/history_success_lifetime</path>
+                                        <recommendation>10080</recommendation>
+                                    </system_cron_history_success_lifetime>
+                                    <system_cron_history_error_lifetime>
+                                        <title>Cron - History error Lifetime</title>
+                                        <path>system/cron/history_failure_lifetime</path>
+                                        <recommendation>10080</recommendation>
+                                    </system_cron_history_error_lifetime>
+                                </values>
+                            </shop_configuration>
+                        </hosting>
+
+                        <rootfiles>
+                            <impl>FireGento_MageMonitoring_Model_Widget_RootFiles</impl>
+                            <display_prio>36</display_prio>
+                            <collapsed>1</collapsed>
+                        </rootfiles>
+
+                        <patches>
+                            <impl>FireGento_MageMonitoring_Model_Widget_Patches</impl>
+                            <display_prio>50</display_prio>
+                            <collapsed>1</collapsed>
+                        </patches>
+                    </widgets>
+                </monitoring_check>
+            </tabs>
+        </magemonitoring>
+    </default>
+
+</config>

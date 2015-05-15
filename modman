@@ -1,10 +1,10 @@
-src/app/code/community/Firegento/MageMonitoring app/code/community/Firegento/MageMonitoring
-src/app/etc/modules/Firegento_MageMonitoring.xml app/etc/modules/Firegento_MageMonitoring.xml
+src/app/code/community/FireGento/MageMonitoring app/code/community/FireGento/MageMonitoring
+src/app/etc/modules/FireGento_MageMonitoring.xml app/etc/modules/FireGento_MageMonitoring.xml
 src/app/design/adminhtml/default/default/layout/monitoring.xml app/design/adminhtml/default/default/layout/monitoring.xml
 src/app/design/adminhtml/default/default/template/monitoring app/design/adminhtml/default/default/template/monitoring
 
-src/app/locale/de_DE/Firegento_MageMonitoring.csv app/locale/de_DE/Firegento_MageMonitoring.csv
-src/app/locale/en_US/Firegento_MageMonitoring.csv app/locale/en_US/Firegento_MageMonitoring.csv
+src/app/locale/de_DE/FireGento_MageMonitoring.csv app/locale/de_DE/FireGento_MageMonitoring.csv
+src/app/locale/en_US/FireGento_MageMonitoring.csv app/locale/en_US/FireGento_MageMonitoring.csv
 
 src/app/locale/de_DE/template/email/magemonitoring_watchdogs.html app/locale/de_DE/template/email/magemonitoring_watchdogs.html
 src/app/locale/en_US/template/email/magemonitoring_watchdogs.html app/locale/en_US/template/email/magemonitoring_watchdogs.html
