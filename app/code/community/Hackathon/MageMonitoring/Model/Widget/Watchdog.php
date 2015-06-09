@@ -44,7 +44,7 @@ class Hackathon_MageMonitoring_Model_Widget_Watchdog extends Hackathon_MageMonit
     protected $_defWatchdogCron = '*/5 * * * *';
     protected $_defWatchdogMailto = null;
 
-    const DEFAULT_MAILTO = 'general';
+    const DEFAULT_MAILTO = 'support';
     const DEFAULT_DISABLED = 1;
 
     protected $_defaultConfig = true;
