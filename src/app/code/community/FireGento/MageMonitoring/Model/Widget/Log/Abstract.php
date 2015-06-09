@@ -88,7 +88,7 @@ class FireGento_MageMonitoring_Model_Widget_Log_Abstract
 
         $log = $this->extractNewLogEntries($logIn, $this->getConfig(self::CONFIG_LAST_LOG_ENTRY));
         if (!$log) {
-            $log = $logIn;
+            return false;
         }
 
         $lastLog = new DateTime($this->getConfig(self::CONFIG_LAST_LOG_ENTRY));
