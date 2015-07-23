@@ -36,11 +36,11 @@
         <resources>
             <admin>
                 <children>
-                    <magemonitoring translate="label" module="magemonitoring">
-                        <title>Magento Monitoring</title>
-                    </magemonitoring>
                     <system>
                         <children>
+                            <magemonitoring translate="label" module="magemonitoring">
+                                <title>Magento Monitoring</title>
+                            </magemonitoring>
                             <config>
                                 <children>
                                     <magemonitoring translate="label" module="magemonitoring">
