@@ -87,7 +87,7 @@ Uninstallation
 - [Sylvain Rayé](https://github.com/diglin)
 - [Alexander Turiak](https://github.com/Zifius)
 - [Erik Dannenberg](https://github.com/edannenberg)
-- [Yaroslav Rogoza](https://github.com/Gribnik)
+- [Yaroslav Rogoza](https://github.com/rogyar)
 - [Nick Kravchuk](https://github.com/nickua)
 
 ### Special Thanks to [Shopwerf](shopwerft.com) for their contribution
