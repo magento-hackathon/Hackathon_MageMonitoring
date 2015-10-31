@@ -26,7 +26,7 @@
  * @package  FireGento_MageMonitoring
  * @author   FireGento Team <team@firegento.com>
  */
-class Hackathon_MageMonitoring_Adminhtml_MonitoringController extends Mage_Adminhtml_Controller_Action
+class Hackathon_MageMonitoring_Adminhtml_MageMonitoring_MonitoringController     extends Mage_Adminhtml_Controller_Action
 {
     /**
      * Index action

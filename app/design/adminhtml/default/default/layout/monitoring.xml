@@ -25,13 +25,13 @@
 */
 -->
 <layout>
-    <magemonitoring_monitoring_index>
+    <adminhtml_magemonitoring_monitoring_index>
         <update handle="monitoring_css_js" />
-    </magemonitoring_monitoring_index>
+    </adminhtml_magemonitoring_monitoring_index>
 
-    <magemonitoring_monitoring_config_tabs>
+    <adminhtml_magemonitoring_monitoring_config_tabs>
         <update handle="monitoring_css_js" />
-    </magemonitoring_monitoring_config_tabs>
+    </adminhtml_magemonitoring_monitoring_config_tabs>
 
     <monitoring_css_js>
         <reference name="head">
@@ -41,7 +41,7 @@
             <action method="addItem"><type>skin_js</type><script>monitoring/js/mh_widget.js</script></action>
             <action method="addJs"><script>chartjs/Chart.min.js</script></action>
             <action method="addJs"><script>modal/modalbox.js</script></action>
-            
+
             <!-- Merged from HealthCheck Extension -->
             <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.js</script></action>
             <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.noconflict.js</script></action>
