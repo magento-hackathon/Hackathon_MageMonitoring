@@ -262,4 +262,14 @@ class FireGento_MageMonitoring_Adminhtml_WidgetAjaxController extends Mage_Admin
 
         Mage::getConfig()->reinit();
     }
+
+    /**
+     * Permission check
+     *
+     * @return mixed
+     */
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('system/magemonitoring');
+    }
 }
