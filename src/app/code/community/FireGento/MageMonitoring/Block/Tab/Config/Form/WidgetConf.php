@@ -119,7 +119,7 @@ class FireGento_MageMonitoring_Block_Tab_Config_Form_WidgetConf extends Mage_Adm
                 }
                 $fieldset->addField($k, $c['type'], $fieldParams);
             }
-            $postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/saveWidgetConf', $widget);
+            $postUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/magemonitoring_widgetAjax/saveWidgetConf', $widget);
             $this->setChild('form_after',
                 $this->getLayout()->createBlock('adminhtml/widget_button')->setData(array(
                 'label'     => Mage::helper('magemonitoring')->__('Save'),

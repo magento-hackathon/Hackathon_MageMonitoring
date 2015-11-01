@@ -48,7 +48,7 @@ class FireGento_MageMonitoring_Block_Widget_Button extends Mage_Adminhtml_Block_
             $widgetId = $widget->getConfigId();
             $tabId = $widget->getTabId();
             $widgetName = $widget->getName();
-            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/widgetAjax/execCallback', $widget);
+            $callbackUrl = Mage::helper('magemonitoring')->getWidgetUrl('*/magemonitoring_widgetAjax/execCallback', $widget);
             $refreshUrl = 'null';
             // check if refresh flag is set
             if (isset($urlParams['refreshAfter']) && $urlParams['refreshAfter']) {
