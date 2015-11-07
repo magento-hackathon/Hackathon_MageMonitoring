@@ -46,9 +46,9 @@
             <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.js</script></action>
             <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.noconflict.js</script></action>
             <action method="addItem"><type>skin_js</type><script>monitoring/js/globalize.min.js</script></action>
-            <action method="addItem"><type>skin_js</type><script>monitoring/js/dx.chartjs.js</script></action>
             <action method="addItem"><type>skin_js</type><script>monitoring/js/jquery.jsontotable.js</script></action>
             <action method="addItem"><type>skin_js</type><script>monitoring/js/healthcheck.js</script></action>
+            <action method="addItem" ifconfig="magemonitoring/chartjsDisabled"><type>skin_js</type><script>monitoring/js/dx.chartjs.js</script></action>
             <action method="addItem"><type>skin_css</type><script>monitoring/css/healthcheck.css</script></action>
         </reference>
     </monitoring_css_js>

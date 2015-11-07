@@ -620,4 +620,14 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
     {
         return constant('self::'.$typestring);
     }
+
+    /**
+     * To prevent issue if merge files feature is enabled.
+     *
+     * @return bool
+     */
+    public function chartjsDisabled()
+    {
+        return !Mage::getStoreConfigFlag('dev/js/merge_files');
+    }
 }
