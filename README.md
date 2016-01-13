@@ -90,4 +90,4 @@ Uninstallation
 - [Yaroslav Rogoza](https://github.com/rogyar)
 - [Nick Kravchuk](https://github.com/nickua)
 
-### Special Thanks to [Shopwerf](shopwerft.com) for their contribution
+### Special Thanks to [Shopwerft](http://www.shopwerft.com) for their contribution
