@@ -138,7 +138,7 @@ abstract class Hackathon_MageMonitoring_Model_Widget_System_Abstract
     {
         if (is_null($this->_mageInfo)) {
             $this->_mageInfo['version'] = Mage::getVersion() .
-                (method_exists(Mage, 'getEdition') ? (' ' . Mage::getEdition() . ' Edition') : '');
+                (method_exists('Mage', 'getEdition') ? (' ' . Mage::getEdition() . ' Edition') : '');
             $statInfo = $this->getMagentoStatInfo();
             if (!is_null($statInfo)) {
                 $this->_mageInfo = array_merge($this->_mageInfo, $statInfo);
