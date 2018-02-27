@@ -573,7 +573,11 @@ class Hackathon_MageMonitoring_Helper_Data extends Mage_Core_Helper_Data
                 $id = $widget->getConfigId();
             }
         } elseif (class_implements($widget, 'Hackathon_MageMonitoring_Model_WatchDog')) {
-            $id = $widget->getDogId();
+            if ($scope === 'global') {
+                $id = $widget->getId(); // class name for global params as db key
+            } else {
+                $id = $widget->getDogId();
+            }
         } else {
             throw new Exception("Passed class does not implement Widget or WatchDog interface.");
         }
